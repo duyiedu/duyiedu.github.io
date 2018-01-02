@@ -181,7 +181,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Startseite
+            Home
           </a>
         </li>
       
@@ -191,7 +191,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archiv
+            Archives
           </a>
         </li>
       
@@ -257,7 +257,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-02T15:12:01+08:00">
                 2018-01-02
@@ -348,14 +348,14 @@
 <p>这个属性则是设置我们的鼠标<span style="color: #ff0000;">移入</span>到这个元素中的时候，<span style="color: #ff0000;">鼠标</span>会变成什么样子。它的值有很多很多，我们同样可以到css88上去查看。不过一般常用的是<span style="color: #0000ff;">cursor: pointer;</span>这一条属性，它会让我们鼠标移入这个元素的时候，鼠标变成可以点击的小手的状态。</p>
 <p>现在我们就可以来<span style="color: #ff0000;">模拟一下a标签</span>的样式了。</p>
 <p><span style="color: #0000ff;">&lt;p&gt;www.baidu.com&lt;/p&gt;</span></p>
-<div class="code-pretty-container"><pre class="prettyprint linenums lang-CSS prettyprinted" style=""><br><br>1.  <span class="pln">p </span><span class="pun">{</span><br>2.  <span class="pln">&nbsp;</span><br>3.  <span class="pln">&nbsp; &nbsp; &nbsp; color</span><span class="pun">:</span><span class="pln"> rgb</span><span class="pun">(</span><span class="lit">0</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0</span><span class="pun">,</span><span class="pln"> </span><span class="lit">238</span><span class="pun">);</span><br>4.  <span class="pln">&nbsp;</span><br>5.  <span class="pln">&nbsp; &nbsp; &nbsp; text</span><span class="pun">-</span><span class="pln">decoration</span><span class="pun">:</span><span class="pln"> underline</span><span class="pun">;</span><br>6.  <span class="pln">&nbsp;</span><br>7.  <span class="pln">&nbsp; &nbsp; &nbsp; cursor</span><span class="pun">:</span><span class="pln"> pointer</span><span class="pun">;</span><br>8.  <span class="pln">&nbsp;</span><br>9.  <span class="pun">}</span></pre><div class="code-pretty-toolbar"><span class="title">CSS</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-CSS prettyprinted" style=""><br>1.  <span class="pln">p </span><span class="pun">{</span><br>2.  <span class="pln">&nbsp;</span><br>3.  <span class="pln">&nbsp; &nbsp; &nbsp; color</span><span class="pun">:</span><span class="pln"> rgb</span><span class="pun">(</span><span class="lit">0</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0</span><span class="pun">,</span><span class="pln"> </span><span class="lit">238</span><span class="pun">);</span><br>4.  <span class="pln">&nbsp;</span><br>5.  <span class="pln">&nbsp; &nbsp; &nbsp; text</span><span class="pun">-</span><span class="pln">decoration</span><span class="pun">:</span><span class="pln"> underline</span><span class="pun">;</span><br>6.  <span class="pln">&nbsp;</span><br>7.  <span class="pln">&nbsp; &nbsp; &nbsp; cursor</span><span class="pun">:</span><span class="pln"> pointer</span><span class="pun">;</span><br>8.  <span class="pln">&nbsp;</span><br>9.  <span class="pun">}</span></pre><div class="code-pretty-toolbar"><span class="title">CSS</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
 
 <p>这个时候www.baidu.com的样式和我们直接用a标签写一个www.baidu.com的样式基本是一模一样的。</p>
 <h3 id="伪类"><a href="#伪类" class="headerlink" title="伪类"></a><span style="color: #ff0000;">伪类</span></h3><p>下面介绍一下伪类。</p>
 <p>我们可以通过在标签名后面添加伪类来达到一些效果。</p>
 <p>• <span style="color: #ff0000;">hover伪类</span></p>
 <p>这个伪类可以让我们设置当<span style="color: #ff0000;">鼠标移入元素</span>的时候会改变元素的样式。</p>
-<div class="code-pretty-container"><pre class="prettyprint linenums lang-CSS prettyprinted" style=""><br><br>1.  <span class="pln">a</span><span class="pun">:</span><span class="pln">hover </span><span class="pun">{</span><br>2.  <span class="pln">&nbsp;</span><br>3.  <span class="pln">&nbsp; &nbsp; &nbsp;font</span><span class="pun">-</span><span class="pln">size</span><span class="pun">:</span><span class="pln"> </span><span class="lit">20px</span><span class="pun">;</span><br>4.  <span class="pln">&nbsp;</span><br>5.  <span class="pln">&nbsp; &nbsp; &nbsp;color</span><span class="pun">:</span><span class="pln"> </span><span class="com">#424242;</span><br>6.  <span class="pln">&nbsp;</span><br>7.  <span class="pun">}</span></pre><div class="code-pretty-toolbar"><span class="title">CSS</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-CSS prettyprinted" style=""><br>1.  <span class="pln">a</span><span class="pun">:</span><span class="pln">hover </span><span class="pun">{</span><br>2.  <span class="pln">&nbsp;</span><br>3.  <span class="pln">&nbsp; &nbsp; &nbsp;font</span><span class="pun">-</span><span class="pln">size</span><span class="pun">:</span><span class="pln"> </span><span class="lit">20px</span><span class="pun">;</span><br>4.  <span class="pln">&nbsp;</span><br>5.  <span class="pln">&nbsp; &nbsp; &nbsp;color</span><span class="pun">:</span><span class="pln"> </span><span class="com">#424242;</span><br>6.  <span class="pln">&nbsp;</span><br>7.  <span class="pun">}</span></pre><div class="code-pretty-toolbar"><span class="title">CSS</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
 
 <p><span style="color: #ff0000;">hover: 当鼠标以移入时候的动作和样式</span>。</p>
 <p>给a标签设置这样一个伪类之后，我们就可让鼠标移入a标签之后，文字放大改变颜色了。</p>
@@ -462,7 +462,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-02T13:10:12+08:00">
                 2018-01-02
@@ -701,7 +701,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-02T13:06:21+08:00">
                 2018-01-02
@@ -968,7 +968,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-02T12:52:02+08:00">
                 2018-01-02
@@ -1025,7 +1025,7 @@
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/01/02/htmlOne/#more" rel="contents">
-              Weiterlesen &raquo;
+              Read more &raquo;
             </a>
           </div>
           <!--/noindex-->
@@ -1104,7 +1104,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-12-24T12:46:45+08:00">
                 2017-12-24
@@ -1223,7 +1223,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-12-24T12:45:11+08:00">
                 2017-12-24
@@ -1356,7 +1356,7 @@
                 <a href="/archives/">
               
                   <span class="site-state-item-count">6</span>
-                  <span class="site-state-item-name">Artikel</span>
+                  <span class="site-state-item-name">posts</span>
                 </a>
               </div>
             
@@ -1408,7 +1408,7 @@
 </div>
 
 
-  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
 
 
 
