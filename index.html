@@ -228,6 +228,569 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/02/CssSix/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/01/02/CssSix/" itemprop="url">Web前端的知识之旅哟——css背景图片和其他</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-02T15:33:58+08:00">
+                2018-01-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="溢出打点"><a href="#溢出打点" class="headerlink" title="溢出打点"></a><span style="color: #ff0000;">溢出打点</span></h3><p>我们首先来介绍几个属性构成的文字溢出打点的功能。溢出打点就是当文字超过我们所规定的范围之后，后面的全部文字就会变成“…”的形式来出现。</p>
+<p>• <strong><span style="color: #ff0000;">单行文字溢出打点</span></strong></p>
+<p>单行文字的溢出打点需要三个属性来配合使用。</p>
+<p><span style="color: #0000ff;"> &lt;div&gt;</span></p>
+<p><span style="color: #0000ff;">&nbsp; &nbsp; &nbsp; 单行文字溢出测试单行文字溢出测试单行文字溢出测试单行文字溢出测试单行文字溢出测试单行文字溢出测试单行文字溢出测试单行文字溢出测试</span></p>
+<p><span style="color: #0000ff;"> &lt;/div&gt;</span></p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-CSS prettyprinted" style=""><br>1.  <span class="pln">div </span><span class="pun">{</span><br>2.  <span class="pln">&nbsp; &nbsp; &nbsp; width</span><span class="pun">:</span><span class="pln"> </span><span class="lit">300px</span><span class="pun">;</span><br>3.  <span class="pln">&nbsp; &nbsp; &nbsp; height</span><span class="pun">:</span><span class="pln"> </span><span class="lit">20px</span><span class="pun">;</span><br>4.  <span class="pln">&nbsp; &nbsp; &nbsp; background</span><span class="pun">-</span><span class="pln">color</span><span class="pun">:</span><span class="pln"> red</span><span class="pun">;</span><br>5.  <span class="pln">&nbsp; &nbsp; &nbsp; color</span><span class="pun">:</span><span class="pln"> black</span><span class="pun">;</span><br>6.  <span class="pun">}</span></pre><div class="code-pretty-toolbar"><span class="title">CSS</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>本来的效果是这样的：</p>
+<p><img src="http://www.flyingliu.com/wp-content/uploads/2016/09/yichu-300x84.png" alt="yichu"></p>
+<p>我们现在给div增加属性：</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-CSS prettyprinted" style=""><br>1.  <span class="pln">div </span><span class="pun">{</span><br>2.  <span class="pln">&nbsp; &nbsp; &nbsp; width</span><span class="pun">:</span><span class="pln"> </span><span class="lit">300px</span><span class="pun">;</span><br>3.  <span class="pln">&nbsp; &nbsp; &nbsp; height</span><span class="pun">:</span><span class="pln"> </span><span class="lit">20px</span><span class="pun">;</span><br>4.  <span class="pln">&nbsp; &nbsp; &nbsp; background</span><span class="pun">-</span><span class="pln">color</span><span class="pun">:</span><span class="pln"> red</span><span class="pun">;</span><br>5.  <span class="pln">&nbsp; &nbsp; &nbsp; color</span><span class="pun">:</span><span class="pln"> black</span><span class="pun">;</span><br>6.  <span class="pln">&nbsp; &nbsp; &nbsp; overflow</span><span class="pun">:</span><span class="pln"> hidden</span><span class="pun">;</span><br>7.  <span class="pln">&nbsp; &nbsp; &nbsp; white</span><span class="pun">-</span><span class="pln">space</span><span class="pun">:</span><span class="pln"> nowrap</span><span class="pun">;</span><br>8.  <span class="pln">&nbsp; &nbsp; &nbsp; text</span><span class="pun">-</span><span class="pln">overflow</span><span class="pun">:</span><span class="pln"> ellipsis</span><span class="pun">;</span><br>9.  <span class="pun">}</span></pre><div class="code-pretty-toolbar"><span class="title">CSS</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>现在的效果就变成了我们想要的溢出打点的样子：</p>
+<p><img src="http://www.flyingliu.com/wp-content/uploads/2016/09/yichu-1-300x29.png" alt="yichu"></p>
+<p>现在介绍一下这三个属性的意思。</p>
+<p>1.<span style="color: #ff0000;">overflow:hidden;<span style="color: #000000;">实现的是让文字溢出容器的部分隐藏起来，方便后面的打点功能。</span></span></p>
+<p>2.<strong><span style="color: #ff0000;">white-space:nowrap;</span></strong><span style="color: #ff0000;"><span style="color: #000000;">让文字不换行。文字的默认状态是换行的，当到达容器壁之后自动换到下一行</span></span><img src="file:///C:\Users\Nick\AppData\Roaming\Tencent\Users\343009306\QQ\WinTemp\RichOle\REX8`JDXT42K{Y}Q_BLO{QR.png" alt="">，这个属性让文字一直在一行显示，即使到了容器壁也不换行。</p>
+<p>3.<strong><span style="color: #ff0000;">text-overflow:ellipsis;</span></strong>文字溢出之后，怎么处理。这里的处理方式是以点状显示。</p>
+<p>这样三条属性配合起来使用，就可以达成单行文字溢出打点的功能了。</p>
+<p>• <strong><span style="color: #ff0000;">多行文字溢出打点</span></strong></p>
+<p><img src="file:///C:\Users\Nick\AppData\Roaming\Tencent\Users\343009306\QQ\WinTemp\RichOle\REX8`JDXT42K{Y}Q_BLO{QR.png" alt="">其实现在虽然有属性可以达到多行文字溢出打点的功能，但是兼容性十分不好，除了移动端的网页——因为移动端的浏览器一般版本都比较高——之外，pc端的网页一般都是用其他的方式来实现。像百度就是通过计算文字的宽高，然后在最后手写“…”来实现的多行文字溢出打点效果。</p>
+<p>而如果我们想要以属性的方式来完成溢出打点的功能的话，就要用到以下的属性了：</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-CSS prettyprinted" style=""><br>1.  <span class="pln">white</span><span class="pun">-</span><span class="pln">space</span><span class="pun">:</span><span class="pln"> normal</span><span class="pun">;</span><br>2.  <span class="pun">-</span><span class="pln">webkit</span><span class="pun">-</span><span class="pln">line</span><span class="pun">-</span><span class="pln">clamp</span><span class="pun">:</span><span class="pln"> </span><span class="lit">3</span><span class="pun">;</span><br>3.  <span class="pln">text</span><span class="pun">-</span><span class="pln">overflow</span><span class="pun">:</span><span class="pln"> ellipsis</span><span class="pun">;</span><br>4.  <span class="pln">display</span><span class="pun">:</span><span class="pln"> </span><span class="pun">-</span><span class="pln">webkit</span><span class="pun">-</span><span class="pln">box</span><span class="pun">;</span><br>5.  <span class="pun">-</span><span class="pln">webkit</span><span class="pun">-</span><span class="pln">box</span><span class="pun">-</span><span class="pln">orient</span><span class="pun">:</span><span class="pln"> vertical</span><span class="pun">;</span></pre><div class="code-pretty-toolbar"><span class="title">CSS</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>这里的<strong><span style="color: #ff0000;">-webkit-</span></strong><span style="color: #ff0000;"><span style="color: #000000;">前缀的意思是兼容webkit内核的浏览器，现在还有很多浏览器不支持line-clamp这个属性，只有webkit的较高的版本勉强支持。</span></span></p>
+<p><img src="http://www.flyingliu.com/wp-content/uploads/2016/09/zhichi.png" alt="zhichi"></p>
+<p>box-orient也是非常勉强的，因此这个功能虽然存在，但是由于兼容性的问题，很少有公司会使用。</p>
+<p>• <span style="color: #ff0000;">line-clamp</span>属性的意思是让文字显示几行。</p>
+<p>display: -webkit-box;是css3.0里面的一个属性，这里暂时不过多介绍，大家了解这一种打点方式即可。</p>
+<h3 id="背景图片属性"><a href="#背景图片属性" class="headerlink" title="背景图片属性"></a><span style="color: #ff0000;">背景图片属性</span></h3><p><span style="color: #000000;">我们知道&lt;img&gt;标签可以来展示图片，但是如果我们想要在图片上面写字的话，这个标签就不好用了，这个时候就需要用到一个属性叫做<strong><span style="color: #ff0000;">background-image背景图片</span></strong>属性。</span></p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-CSS prettyprinted" style=""><br><br>1.  <span class="pln">background</span><span class="pun">-</span><span class="pln">image</span><span class="pun">:</span><span class="pln"> url</span><span class="pun">();</span></pre><div class="code-pretty-toolbar"><span class="title">CSS</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>url里面放本地绝对地址或者本地相对地址或者网上的链接都可以，这样我们就可以给一个元素设置背景图片了，然后元素里面正常写文字就可以。</p>
+<p>还有一些其他的属性专门用来修饰背景图片的样式的：</p>
+<p>•&nbsp;<strong><span style="color: #ff0000;">background-size属性</span></strong></p>
+<p>这个属性可以让我们设置背景图片的大小。</p>
+<p>它的值有很多种书写方式：</p>
+<p>1.<span style="color: #ff0000;">cover</span>覆盖</p>
+<p>这个属性值可以让浏览器以一张图片尽可能填充满我们的容器，当图片大的时候会截掉多余的部分。</p>
+<p>它的填充机制是：先找图片宽或者高的其中的一个，固定这一个宽或者高变成容器的宽或者高之后，让另一边等比例的放大或者缩小，当这个另一边可以填充满容器的时候，就把多余的部分裁掉，然后采用这一种方式，如果这种方式填充不满的话，如果刚才固定的宽，那么这一次就固定高度，让宽度变化。这两种方式里面一定会有一种方式是可以使用的。</p>
+<p>2.<span style="color: #ff0000;">contain</span>包含</p>
+<p>这个属性值是让浏览器尽可能展示出来图片的全部信息。如果还剩余很多空间的话，那么就填充相同的图片。</p>
+<p>它的填充机制和cover是一样的，不过它固定一条边之后，是让另外一条边可以全部显示，而不是可以填充满容器。</p>
+<p>3.设置x y <strong><span style="color: #ff0000;">像素值</span></strong></p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-CSS prettyprinted" style=""><br><br>1.  <span class="pln">background</span><span class="pun">-</span><span class="pln">size</span><span class="pun">:</span><span class="lit">50px</span><span class="pln"> </span><span class="lit">50px</span><span class="pun">;</span></pre><div class="code-pretty-toolbar"><span class="title">CSS</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>这样会让浏览器强行把图片压缩成50*50的比例大小。</p>
+<p>4.<strong><span style="color: #ff0000;">百分数</span></strong></p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-CSS prettyprinted" style=""><br><br>1.  <span class="pln">background</span><span class="pun">-</span><span class="pln">size</span><span class="pun">:</span><span class="pln"> </span><span class="lit">50</span><span class="pun">%</span><span class="pln"> </span><span class="lit">50</span><span class="pun">%;</span></pre><div class="code-pretty-toolbar"><span class="title">CSS</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>这样会让图片占容器宽高的50%——记住，<span style="color: #ff0000;">子级元素的百分比相对的数值是父级里面的这个属性的值</span>，比如父级的高度是100px，那么子级的50%就是50px。</p>
+<p>•<strong><span style="color: #ff0000;"> background-repear属性</span></strong></p>
+<p>这个属性可以设置背景图片是否可以重复显示，<span style="color: #ff0000;">默认是重复的repeat</span>。也就说默认状态下，容器空余很多的时候，就会有相同的图片来填充容器剩余空间。</p>
+<p>而值为<strong><span style="color: #ff0000;">no-repeat</span></strong>的时候，不论容器剩余多少空间，都不会进行图片复制填充了</p>
+<p>•<strong><span style="color: #ff0000;">&nbsp;background-size属性</span></strong></p>
+<p>这个属性可以设置<strong><span style="color: #ff0000;">背景图片开始的位置</span></strong><span style="color: #ff0000;"><span style="color: #000000;">，它的值同样有很多种：</span></span></p>
+<p>1.<strong><span style="color: #ff0000;">像素</span></strong></p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-CSS prettyprinted" style=""><br><br>1.  <span class="pln">background</span><span class="pun">-</span><span class="pln">position</span><span class="pun">:</span><span class="pln"> </span><span class="lit">50px</span><span class="pln"> </span><span class="lit">50px</span><span class="pun">;</span></pre><div class="code-pretty-toolbar"><span class="title">CSS</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>这样背景图片就会从容器的x轴50px y轴50px的位置开始显示。</p>
+<p>2.<strong><span style="color: #ff0000;">百分比</span></strong></p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-CSS prettyprinted" style=""><br><br>1.  <span class="pln">background</span><span class="pun">-</span><span class="pln">size</span><span class="pun">:</span><span class="lit">50</span><span class="pun">%</span><span class="pln"> </span><span class="lit">50</span><span class="pun">%;</span></pre><div class="code-pretty-toolbar"><span class="title">CSS</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>百分比<strong><span style="color: #ff0000;">一定要把两个值都写上</span></strong>！</p>
+<p>值得注意的是：百分比的基准点是图片的中心点，当时50% 50%的时候，图片刚好会在容器的正中央显示。像素的基准点是图片的左上角的点。</p>
+<p>•<strong><span style="color: #ff0000;">&nbsp;</span></strong><span style="color: #ff0000;">有一点比较抽象的定义需要记住：图片是用来展示图片信息的，如果这个图片不是用来展示这个图片的内容而是用来修饰一些东西，比如网站的logo，这起到类似艺术字的作用的图片，的时候，一般是用作背景图片的</span>。</p>
+<h3 id="如何让背景图片出不来的时候显示文字"><a href="#如何让背景图片出不来的时候显示文字" class="headerlink" title="如何让背景图片出不来的时候显示文字"></a><strong><span style="color: #ff0000;">如何让背景图片出不来的时候显示文字</span></strong></h3><p>有的时候我们的网页会被用户禁止加载图片和css样式，如果我们没有给背景图片设置任何信息的话，那么用户就会完全不知道这个空白的地方是什么东西，所以我们要让图片加载不出来的时候能够有文字展示出来，告诉用户这里是什么东西。</p>
+<p>我们有两种方法可以实现这种效果：</p>
+<p>1.利用<strong><span style="color: #ff0000;">text-indent</span></strong>属性</p>
+<p>我们利用首行缩进，然后配合让<span style="color: #ff0000;">white-space:nowrap和overflow:hidden</span>;让元素内部的文字在有css的时候，会被缩进到元素外面并且被隐藏起来。当css不能加载的时候，文字不会被缩进，所以可以展示出来。</p>
+<p>这是比较传统的做法。</p>
+<p>2.<span style="color: #ff0000;">背景图片放到<strong>padding</strong>里面，高度强制为0</span></p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-CSS prettyprinted" style=""><br><br>1.  <span class="pln">padding</span><span class="pun">-</span><span class="pln">top</span><span class="pun">:</span><span class="pln"> </span><span class="lit">100px</span></pre><div class="code-pretty-toolbar"><span class="title">CSS</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>要知道background-image是可以放到padding里面的，我们利用padding-top撑起来元素的内容区，然后元素本身的高度为0，这样当有css样式的时候，我们配合overflow:hidden一起使用，就可以让文字隐藏，没有css样式的时候，文字就会正常显示出来。</p>
+<p>这种方式现在用的更多一些。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/02/CssFive/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/01/02/CssFive/" itemprop="url">Web前端的知识之旅哟——浮动模型与伪元素</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-02T15:27:55+08:00">
+                2018-01-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="浮动模型"><a href="#浮动模型" class="headerlink" title="浮动模型"></a><span style="color: #ff0000;">浮动模型</span></h2><p>在最开始，我们首先写一个二级结构：</p>
+<p><span style="color: #0000ff;">&lt;div class=”wrapper”&gt;</span></p>
+<p><span style="color: #0000ff;"> &lt;div class=”content”&gt;1&lt;/div&gt;</span></p>
+<p><span style="color: #0000ff;"> &lt;div class=”content”&gt;2&lt;/div&gt;</span></p>
+<p><span style="color: #0000ff;"> &lt;div class=”content”&gt;3&lt;/div&gt;</span></p>
+<p><span style="color: #0000ff;"> &lt;/div&gt;</span></p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-CSS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="pun">.</span><span class="pln">wrapper </span><span class="pun">{</span><br>3.  <span class="pln">&nbsp; &nbsp; &nbsp; width</span><span class="pun">:</span><span class="lit">400px</span><span class="pun">;</span><br>4.  <span class="pln">&nbsp; &nbsp; &nbsp; height</span><span class="pun">:</span><span class="pln"> </span><span class="lit">100px</span><span class="pun">;</span><br>5.  <span class="pln">&nbsp; &nbsp; &nbsp; border</span><span class="pun">:</span><span class="pln"> </span><span class="lit">1px</span><span class="pln"> solid red</span><span class="pun">;</span><br>6.  <span class="pun">}</span><br>7.  <span class="pun">.</span><span class="pln">content </span><span class="pun">{</span><br>8.  <span class="pln">&nbsp; &nbsp; &nbsp; width</span><span class="pun">:</span><span class="pln"> </span><span class="lit">100px</span><span class="pun">;</span><br>9.  <span class="pln">&nbsp; &nbsp; &nbsp; height</span><span class="pun">:</span><span class="pln"> </span><span class="lit">100px</span><span class="pun">;</span><br>10.  <span class="pln">&nbsp; &nbsp; &nbsp; &nbsp;background</span><span class="pun">-</span><span class="pln">color</span><span class="pun">:</span><span class="pln"> black</span><span class="pun">;</span><br>11.  <span class="pln">&nbsp; &nbsp; &nbsp; color</span><span class="pun">:</span><span class="pln"> white</span><span class="pun">;</span><br>12.  <span class="pun">}</span></pre><div class="code-pretty-toolbar"><span class="title">CSS</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>我们现在在浏览器上能看到的应该是这个样子的：</p>
+<p><img src="http://www.flyingliu.com/wp-content/uploads/2016/09/float-300x222.png" alt="float"></p>
+<p>那么我们现在给content加上一个特殊的属性：<strong><span style="color: #ff0000;">float</span></strong>，看看现在的页面上呈现的布局是什么样子的？</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-CSS prettyprinted" style=""><br><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="pun">.</span><span class="pln">content </span><span class="pun">{</span><br>3.  <span class="pln">&nbsp; &nbsp; &nbsp; width</span><span class="pun">:</span><span class="pln"> </span><span class="lit">100px</span><span class="pun">;</span><br>4.  <span class="pln">&nbsp; &nbsp; &nbsp; height</span><span class="pun">:</span><span class="pln"> </span><span class="lit">100px</span><span class="pun">;</span><br>5.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="kwd">float</span><span class="pun">:</span><span class="pln"> left</span><span class="pun">;</span><br>6.  <span class="pln">&nbsp; &nbsp; &nbsp; background</span><span class="pun">-</span><span class="pln">color</span><span class="pun">:</span><span class="pln"> black</span><span class="pun">;</span><br>7.  <span class="pln">&nbsp; &nbsp; &nbsp; color</span><span class="pun">:</span><span class="pln"> white</span><span class="pun">;</span><br>8.  <span class="pun">}</span></pre><div class="code-pretty-toolbar"><span class="title">CSS</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>是不是页面变成了这个样子的？</p>
+<p><img src="http://www.flyingliu.com/wp-content/uploads/2016/09/float2-300x80.png" alt="float2"></p>
+<p>这就是我们这个<span style="color: #ff0000;">float属性</span>的效果哟~</p>
+<p>那么我们下面来正式介绍一下float属性吧</p>
+<h3 id="float浮动属性"><a href="#float浮动属性" class="headerlink" title="float浮动属性"></a><span style="color: #ff0000;">float浮动属性</span></h3><p>float属性可以让元素像站队列一样<span style="color: #ff0000;">浮动</span>起来，它会让本来占满整行的元素<span style="color: #ff0000;">只按照内容和设置的大小来在父级里面进行站队排列</span>，当这一行剩余的空间不足以再放下一个元素的时候，元素就会<span style="color: #ff0000;">自动换行</span>，到下一行去进行浮动排列。当容器不够大的时候，虽然内容会超出容器的范围，但是<span style="color: #ff0000;">超出之后仍然是按照相同的队形来进行站队</span>。</p>
+<p><img src="http://www.flyingliu.com/wp-content/uploads/2016/09/float3-300x224.png" alt="float3"></p>
+<p>浮动起来的元素会像absolute的元素<span style="color: #ff0000;">脱离文档流</span>，但是<span style="color: #ff0000;">不会脱离文字流</span>，这是什么意思呢？</p>
+<p>我们来举一个例子：</p>
+<p><span style="color: #0000ff;">&lt;div class=”top”&gt;&lt;/div&gt;</span></p>
+<p><span style="color: #0000ff;">&lt;div class=”bottom”&gt;我是文字，我能看到文字流哟~&lt;/div&gt;</span></p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-CSS prettyprinted" style=""><br>1.  <span class="pun">.</span><span class="pln">top </span><span class="pun">{</span><br>2.  <span class="pln">&nbsp; &nbsp; &nbsp; width</span><span class="pun">:</span><span class="pln"> </span><span class="lit">100px</span><span class="pun">;</span><br>3.  <span class="pln">&nbsp; &nbsp; &nbsp; height</span><span class="pun">:</span><span class="pln"> </span><span class="lit">100px</span><span class="pun">;</span><br>4.  <span class="pln">&nbsp; &nbsp; &nbsp; background</span><span class="pun">-</span><span class="pln">color</span><span class="pun">:</span><span class="pln"> red</span><span class="pun">;</span><br>5.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="kwd">float</span><span class="pun">:</span><span class="pln">left</span><span class="pun">;</span><br>6.  <span class="pun">}</span><br>7.  <span class="pun">.</span><span class="pln">bottom </span><span class="pun">{</span><br>8.  <span class="pln">&nbsp; &nbsp; &nbsp; width</span><span class="pun">:</span><span class="pln"> </span><span class="lit">200px</span><span class="pun">;</span><br>9.  <span class="pln">&nbsp; &nbsp; &nbsp; height</span><span class="pun">:</span><span class="pln"> </span><span class="lit">200px</span><span class="pun">;</span><br>10.  <span class="pln">&nbsp; &nbsp; &nbsp; background</span><span class="pun">-</span><span class="pln">color</span><span class="pun">:</span><span class="pln"> black</span><span class="pun">;</span><br>11.  <span class="pln">&nbsp; &nbsp; &nbsp; color</span><span class="pun">:</span><span class="pln"> white</span><span class="pun">;</span><br>12.  <span class="pun">}</span></pre><div class="code-pretty-toolbar"><span class="title">CSS</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>现在我们可以看到，在页面上呈现出来的效果是这个样子的：</p>
+<p><img src="http://www.flyingliu.com/wp-content/uploads/2016/09/float4.png" alt="float4"></p>
+<p>• <span style="color: #000000;">脱离文档流的意思就是<span style="color: #ff0000;">正常的元素看不到它了</span>，这一点很类似absolute属性，不脱离文字流的意思则是<span style="color: #ff0000;">display属性是inline或者inline-block的元素还是可以看到它的</span>，<span style="color: #ff0000;">文字本身是inline属性的</span></span>。</p>
+<p>接下来，我们讲.bottom这个div的display改成inline-block;之后再看一下效果。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-CSS prettyprinted" style=""><br>1.  <span class="pun">.</span><span class="pln">bottom </span><span class="pun">{</span><br>2.  <span class="pln">&nbsp; &nbsp; &nbsp; width</span><span class="pun">:</span><span class="pln"> </span><span class="lit">200px</span><span class="pun">;</span><br>3.  <span class="pln">&nbsp; &nbsp; &nbsp; height</span><span class="pun">:</span><span class="pln"> </span><span class="lit">200px</span><span class="pun">;</span><br>4.  <span class="pln">&nbsp; &nbsp; &nbsp; background</span><span class="pun">-</span><span class="pln">color</span><span class="pun">:</span><span class="pln"> black</span><span class="pun">;</span><br>5.  <span class="pln">&nbsp; &nbsp; &nbsp; color</span><span class="pun">:</span><span class="pln"> white</span><span class="pun">;</span><br>6.  <span class="pln">&nbsp; &nbsp; &nbsp; display</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">inline</span><span class="pun">-</span><span class="pln">block</span><span class="pun">;</span><br>7.  <span class="pun">}</span></pre><div class="code-pretty-toolbar"><span class="title">CSS</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>我们发现下面的黑色的方块并没有移动到下一行，而是紧跟着红色浮动方块进行了排列，但是我们并没有给黑色方块也设置浮动效果啊？</p>
+<p><img src="http://www.flyingliu.com/wp-content/uploads/2016/09/float5-300x203.png" alt="float5"></p>
+<!--StartFragment -->
+<div><img src="file:///C:\Users\Nick\AppData\Roaming\Tencent\Users\343009306\QQ\WinTemp\RichOle\G8P9TMO@}O~H3]AT`H]CG`8.png" alt="">这是因为，<span style="color: #ff0000;">float属性会自动将这个元素的<strong>display</strong>给改成<strong>inline-block</strong>的</span>，也就是说，不论你给display加上什么值，只要有float属性，那么这个元素就是inline-block属性的，这也就是为什么红色浮动方块没有独占一行的原因了。</div>
+
+<p><span style="color: #ff0000;"><span style="color: #000000;">•</span> float属性只有两个值：<strong>left</strong>和<strong>right</strong><span style="color: #000000;">，默认的状态是没有值none</span></span>。</p>
+<p>• float：right的效果就是从右边开始排列，刚好和left是相反的效果。</p>
+<p><strong><span style="color: #ff0000;">那么我们来总结一下，float属性到底是干嘛的呢？</span></strong></p>
+<p>1.对元素进行布局。</p>
+<p>2.像absolute一样，让元素浮动起来，产生自己独有的<strong><span style="color: #ff0000;">浮动流</span></strong>。</p>
+<p>浮动流有两个效果：</p>
+<p>①&nbsp;脱离标准的文档流，但不会脱离文字流 ，正常的元素看不到它，但是有文字属性inline或者文字本身可以看到它。</p>
+<p>②&nbsp;在内部会把改元素变换成inline-block属性的元素。</p>
+<p><strong><span style="color: #ff0000;">那么我们什么时候使用浮动属性呢？</span></strong></p>
+<p>• 开发中，一般是进行<span style="color: #ff0000;">网状布局</span>的时候使用float属性。当我们不知道容器里面会盛放多少个子元素，但是这些子元素又是按照一样的格式进行排列，我们设置浮动来进行流式布局。</p>
+<p><img src="http://www.flyingliu.com/wp-content/uploads/2016/09/taobao-1.png" alt="taobao"></p>
+<p>• 浮动属性还可以让我们实现报纸那样文字包围在图片四周的效果：</p>
+<p><img src="http://www.flyingliu.com/wp-content/uploads/2016/09/baozhi-300x112.png" alt="baozhi"></p>
+<p><strong><span style="color: #ff0000;">想到一点小常识</span></strong></p>
+<p>• 首先要记住，行级元素里面不能放块级元素。</p>
+<p>• a标签里面不能再放a标签了。</p>
+<p>• p标签内部不能放div标签，一旦写这种结构了：</p>
+<p><span style="color: #0000ff;"> &lt;p&gt;</span></p>
+<p><span style="color: #0000ff;">&nbsp; &nbsp; &nbsp; &lt;div&gt;&lt;/div&gt;</span></p>
+<p><span style="color: #0000ff;"> &lt;/p&gt;</span></p>
+<p>浏览器会自动将这种结构给转换成：</p>
+<p><span style="color: #0000ff;">&lt;p&gt;&lt;/p&gt;</span></p>
+<p><span style="color: #0000ff;">&lt;div&gt;&lt;/div&gt;</span></p>
+<p>当然，p标签里面也不要放ul标签，也不要再放一个p标签哟~</p>
+<h3 id="如何清除浮动流呢"><a href="#如何清除浮动流呢" class="headerlink" title="如何清除浮动流呢"></a><span style="color: #ff0000;">如何清除浮动流呢</span></h3><p>我们说了，既然元素浮动起来之后，<span style="color: #ff0000;">正常的元素就看不到它了</span>，那么包裹它的<span style="color: #ff0000;">父级自然也看不到它了</span>，我们想让父级根据里面浮动的子元素来自适应宽高，如果不清除浮动效果的话，就会变成这个样子：</p>
+<p><img src="http://www.flyingliu.com/wp-content/uploads/2016/09/float6.png" alt="float6"></p>
+<p>父级只剩下一条线了！</p>
+<p>因此清除浮动是我们必须要做的事情。</p>
+<p><span style="color: #000000;">那么怎么来清除浮动呢？</span></p>
+<p>1.一个野路子，我们在父级里面的内容区最后<strong><span style="color: #ff0000;">加一个p标签</span></strong>。</p>
+<p><span style="color: #0000ff;">&lt;div class=”wrapper”&gt;</span></p>
+<p><span style="color: #0000ff;">&nbsp; &nbsp; &nbsp; &lt;div class=”content”&gt;1&lt;/div&gt;</span></p>
+<p><span style="color: #0000ff;">&nbsp; &nbsp; &nbsp; &lt;div class=”content”&gt;2&lt;/div&gt;</span></p>
+<p><span style="color: #0000ff;">&nbsp; &nbsp; &nbsp; &lt;div class=”content”&gt;3&lt;/div&gt;</span></p>
+<p><span style="color: #0000ff;">&nbsp; &nbsp; &nbsp; &lt;div class=”content”&gt;4&lt;/div&gt;</span></p>
+<p><span style="color: #0000ff;">&nbsp; &nbsp; &nbsp; &lt;p class=”clear”&gt;&lt;/p&gt;</span></p>
+<p><span style="color: #0000ff;"> &lt;/div&gt;</span></p>
+<p>我们给这个p标签增加清除浮动的样式：</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-CSS prettyprinted" style=""><br>1.  <span class="pun">.</span><span class="pln">clear </span><span class="pun">{</span><br>2.  <span class="pln">&nbsp; &nbsp; &nbsp; clear</span><span class="pun">:</span><span class="pln"> both</span><span class="pun">;</span><span class="com">// clear属性专门用来清除浮动的，虽然有还有left和right值，但是我们只要清除浮动一般都写both值。</span><br>3.  <span class="pun">}</span></pre><div class="code-pretty-toolbar"><span class="title">CSS</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>现在我们看一下页面效果，父级的wrapper已经正常包裹住了子元素。</p>
+<p>但是实际上，<span style="color: #ff0000;">并不是父级清除了浮动流</span>，而是被p撑开了，p.clear标签能看到上面浮动的元素，wrapper能看到不浮动的p标签，因此就把p标签包裹进去了，仅此而已。</p>
+<p>我们要知道，html是做<strong><span style="color: #ff0000;">结构规划</span></strong>的，这个p标签作为<strong><span style="color: #ff0000;">功能标签</span></strong>出现了，这种代码在html里面是不允许出现的，所以我们要尽可能避免这种情况，因此<strong><span style="color: #ff0000;">这种方法不适用</span></strong>。</p>
+<p>2.<strong><span style="color: #ff0000;">添加伪元素</span></strong><span style="color: #ff0000;"><span style="color: #000000;"> &lt;— 我们使用这种方式</span></span></p>
+<p>首先我们要介绍一下伪元素。</p>
+<p>伪元素是一种不能单独存在的元素，它必须要依附于其他正式的元素标签上使用，单独写是没有任何意义的。伪元素最常用的一共有两个：after和before。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-CSS prettyprinted" style=""><br>1.  <span class="pln">span</span><span class="pun">::</span><span class="pln">before</span><span class="pun">{}</span><br>2.  <span class="pln">&nbsp;</span><br>3.  <span class="pln">span</span><span class="pun">::</span><span class="pln">after</span><span class="pun">{}</span></pre><div class="code-pretty-toolbar"><span class="title">CSS</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>• 虽然一个冒号浏览器也能识别，但是规范写法是两个冒号哟~</p>
+<p>我们现在举一个例子来介绍一下这两个伪元素的用法：</p>
+<p><span style="color: #0000ff;">&lt;span&gt;举个例子&lt;/span&gt;</span></p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-CSS prettyprinted" style=""><br>1.  <span class="pln">span </span><span class="pun">{</span><br>2.  <span class="pln">&nbsp; &nbsp; &nbsp; background</span><span class="pun">-</span><span class="pln">color</span><span class="pun">:</span><span class="pln"> yellow</span><span class="pun">;</span><br>3.  <span class="pun">}</span><br>4.  <span class="pln">span</span><span class="pun">::</span><span class="pln">before </span><span class="pun">{</span><br>5.  <span class="pln">&nbsp; &nbsp; &nbsp; content</span><span class="pun">:</span><span class="pln"> </span><span class="str">‘现在我们来’</span><span class="pun">;</span><br>6.  <span class="pln">&nbsp; &nbsp; &nbsp; background</span><span class="pun">-</span><span class="pln">color</span><span class="pun">:</span><span class="pln"> red</span><span class="pun">;</span><br>7.  <span class="pun">}</span><br>8.  <span class="pln">span</span><span class="pun">::</span><span class="pln">after </span><span class="pun">{</span><br>9.  <span class="pln">&nbsp; &nbsp; &nbsp; content</span><span class="pun">:</span><span class="str">‘，这就是效果’</span><span class="pun">;</span><br>10.  <span class="pln">&nbsp; &nbsp; &nbsp; background</span><span class="pun">-</span><span class="pln">color</span><span class="pun">:</span><span class="pln"> black</span><span class="pun">;</span><br>11.  <span class="pln">&nbsp; &nbsp; &nbsp; color</span><span class="pun">:</span><span class="pln"> white</span><span class="pun">;</span><br>12.  <span class="pun">}</span></pre><div class="code-pretty-toolbar"><span class="title">CSS</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p><img src="http://www.flyingliu.com/wp-content/uploads/2016/09/after-300x36.png" alt="after"></p>
+<p>当我们不想改变html结构，有想要增添一些东西的时候，伪元素after和before就非常的实用，看到这个例子大家也就明白了它们的用处了。</p>
+<p>•<span style="color: #ff0000;"> 不过要注意的是，写伪元素，即使内容是空的，也要加上content这个属性: <strong>content:”;</strong></span></p>
+<p>• 既然是伪元素，那么自然也属于元素了，我们可以<span style="color: #ff0000;">改变伪元素的display为block</span>，从而可以改变宽高等块级元素才有的样式。</p>
+<p>那么了解了伪元素之后，我们根据第一种方式，<span style="color: #ff0000;">为父级元素添加一个after伪元素</span>，让这个伪元素专门实现<span style="color: #ff0000;">清除浮动</span>的功能即可：</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-CSS prettyprinted" style=""><br>1.  <span class="pun">.</span><span class="pln">wrapper</span><span class="pun">::</span><span class="pln">after </span><span class="pun">{</span><br>2.  <span class="pln">&nbsp; &nbsp; &nbsp; content</span><span class="pun">:</span><span class="pln"> </span><span class="str">‘’</span><span class="pun">;</span><br>3.  <span class="pln">&nbsp; &nbsp; &nbsp; clear</span><span class="pun">:</span><span class="pln">both</span><span class="pun">;</span><br>4.  <span class="pln">&nbsp; &nbsp; &nbsp; display</span><span class="pun">:</span><span class="pln"> block</span><span class="pun">;</span><span class="pln"> </span><span class="com">//&nbsp;能清除浮动的元素，必须是块级元素！！</span><br>5.  <span class="pun">}</span></pre><div class="code-pretty-toolbar"><span class="title">CSS</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p><span style="color: #ff0000;">我们通常使用的清除浮动的方法，就是这一种</span>。</p>
+<p>那么现在问题来了，ie6、ie7并没有伪元素这种东西，怎么办？</p>
+<p>• 前面我们介绍了bfc，这里我们介绍ie6ie7独有的一个东西——hasLayout。只要触发了hasLayout就和触发bfc有差不多的作用，能够触发这个东西的属性有很多，其中最无害的属于zoom属性了。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-CSS prettyprinted" style=""><br>1.  <span class="pun">.</span><span class="pln">wrapper </span><span class="pun">{</span><br>2.  <span class="pln">&nbsp; &nbsp; &nbsp; zoom</span><span class="pun">:</span><span class="lit">1</span><span class="com">//视口同比例放大还是缩小，1就是不变</span><br>3.  <span class="pun">}</span></pre><div class="code-pretty-toolbar"><span class="title">CSS</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>当我们写上这个元素的时候，ie6ie7也就可以清除浮动了。</p>
+<p>不过我们其他的浏览器并不需要zoom这个属性，这个属性只是为了<strong><span style="color: #ff0000;">ie6和ie7</span></strong>准备的，所以这个时候我们需要一点点css hack，我们在zoom前面加一个<span style="color: #ff0000;"><em></em></span>号， **<span style="color: #ff0000;">zoom: 1;</span> <strong><span style="color: #ff0000;">这个符号只有ie6和ie7能够识别，其他的浏览器都不识别</span>，这样就可以让只有ie6和ie7去读这一行属性，其他浏览器直接忽略。顺便一提属性前面加上’</strong><span style="color: #ff0000;">_</span>**‘之后，就只有ie6可以识别了。<span style="color: #ff0000;">_zoom: 1;</span></p>
+<p>3<strong><span style="color: #ff0000;">.触发bfc</span></strong>的方式来清除浮动</p>
+<p>有很多的属性都可以触发bfc：</p>
+<p>① 给.wrapper添加overflow:hidden; 可以让父级包裹住浮动子元素。</p>
+<p>② 给.wrapper添加display: inline-block; 可以让父级彻底包裹住浮动子元素。</p>
+<p>③ 给.wrapper添加position:absolute; 可以让父级彻底包裹住浮动子元素。</p>
+<p>这三种方式虽然都可以清除浮动，但是都会改变样式，不符合开发规范，因此我们也<span style="color: #ff0000;">基本都不使用</span>。</p>
+<h3 id="导航栏的小应用"><a href="#导航栏的小应用" class="headerlink" title="导航栏的小应用"></a><span style="color: #ff0000;">导航栏的小应用</span></h3><p>浮动模型最常见的作用就是制作导航栏，代码其实也很简单：</p>
+<p><span style="color: #0000ff;">&lt;ul&gt;</span></p>
+<p><span style="color: #0000ff;">&nbsp; &nbsp; &nbsp; &lt;li&gt;&lt;a href=””&gt;毛衣&lt;/a&gt;&lt;/li&gt;</span></p>
+<p><span style="color: #0000ff;">&nbsp; &nbsp; &nbsp; &lt;li&gt;&lt;a href=””&gt;牛仔裤&lt;/a&gt;&lt;/li&gt;</span></p>
+<p><span style="color: #0000ff;">&nbsp; &nbsp; &nbsp; &lt;li&gt;&lt;a href=””&gt;风衣&lt;/a&gt;&lt;/li&gt;</span></p>
+<p><span style="color: #0000ff;">&nbsp; &nbsp; &nbsp; &lt;li&gt;&lt;a href=””&gt;卫衣&lt;/a&gt;&lt;/li&gt;</span></p>
+<p><span style="color: #0000ff;">&nbsp; &nbsp; &nbsp; &lt;li&gt;&lt;a href=””&gt;毛裤&lt;/a&gt;&lt;/li&gt;</span></p>
+<p><span style="color: #0000ff;"> &lt;/ul&gt;</span></p>
+<p><span style="color: #0000ff;">&lt;style&gt;</span></p>
+<p><span style="color: #0000ff;"> &lt;/style&gt;</span></p>
+<p>这样我们就大致实现了一个淘宝上面的导航的效果。</p>
+<p><span style="color: #ff0000;">• 最后，我们学习了浮动模型之后，也可以用这种方式实现三栏布局哟~</span></p>
+<p><span style="color: #0000ff;">&lt;div class=”left”&gt;&lt;/div&gt;</span></p>
+<p><span style="color: #0000ff;"> &lt;div class=”right”&gt;&lt;/div&gt;</span></p>
+<p><span style="color: #0000ff;"> &lt;div class=”mid”&gt;&lt;/div&gt;</span></p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-CSS prettyprinted" style=""><br>1.  <span class="pun">.</span><span class="pln">left </span><span class="pun">{</span><br>2.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="kwd">float</span><span class="pun">:</span><span class="pln"> left</span><span class="pun">;</span><br>3.  <span class="pln">&nbsp; &nbsp; &nbsp; width</span><span class="pun">:</span><span class="pln"> </span><span class="lit">100px</span><span class="pun">;</span><br>4.  <span class="pln">&nbsp; &nbsp; &nbsp; height</span><span class="pun">:</span><span class="pln"> </span><span class="lit">100px</span><span class="pun">;</span><br>5.  <span class="pln">&nbsp; &nbsp; &nbsp; background</span><span class="pun">-</span><span class="pln">color</span><span class="pun">:</span><span class="pln"> orange</span><span class="pun">;</span><br>6.  <span class="pun">}</span><br>7.  <span class="pun">.</span><span class="pln">right </span><span class="pun">{</span><br>8.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="kwd">float</span><span class="pun">:</span><span class="pln"> right</span><span class="pun">;</span><br>9.  <span class="pln">&nbsp; &nbsp; &nbsp; width</span><span class="pun">:</span><span class="pln"> </span><span class="lit">100px</span><span class="pun">;</span><br>10.  <span class="pln">&nbsp; &nbsp; &nbsp; height</span><span class="pun">:</span><span class="pln"> </span><span class="lit">100px</span><span class="pun">;</span><br>11.  <span class="pln">&nbsp; &nbsp; &nbsp; background</span><span class="pun">-</span><span class="pln">color</span><span class="pun">:</span><span class="pln"> red</span><span class="pun">;</span><br>12.  <span class="pun">}</span><br>13.  <span class="pun">.</span><span class="pln">mid </span><span class="pun">{</span><br>14.  <span class="pln">&nbsp; &nbsp; &nbsp; height</span><span class="pun">:</span><span class="pln"> </span><span class="lit">100px</span><span class="pun">;</span><br>15.  <span class="pln">&nbsp; &nbsp; &nbsp; margin</span><span class="pun">-</span><span class="pln">left</span><span class="pun">:</span><span class="pln"> </span><span class="lit">100px</span><span class="pun">;</span><br>16.  <span class="pln">&nbsp; &nbsp; &nbsp; margin</span><span class="pun">-</span><span class="pln">right</span><span class="pun">:</span><span class="pln"> </span><span class="lit">100px</span><span class="pun">;</span><br>17.  <span class="pln">&nbsp; &nbsp; &nbsp; background</span><span class="pun">-</span><span class="pln">color</span><span class="pun">:</span><span class="pln"> blue</span><span class="pun">;</span><br>18.  <span class="pun">}</span></pre><div class="code-pretty-toolbar"><span class="title">CSS</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>不过依然要记住把mid放在后面写！</p>
+<p>这次的知识点就总结到这里哟~</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/02/CssFour/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/01/02/CssFour/" itemprop="url">Web前端的知识之旅哟——定位与层模型</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-02T15:23:42+08:00">
+                2018-01-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <div class="articleCon post_content"><br>                    <h1 style="text-align: center;"><span style="color: #ff0000;">层模型</span></h1><br><p>css中元素的层次模型主要是由<strong><span style="color: #ff0000;">position</span></strong>这个属性来决定的。</p><br><p>position属性：position的意思是定位，同样这个属性的作用就是<strong><span style="color: #ff0000;">给元素施加定位</span></strong>。它一共有四个值，分别是<strong><span style="color: #ff0000;">static、absolute、relative、fixed</span></strong>。</p><br><h3><span style="color: #ff0000;">static</span></h3><br><p>• static是<span style="color: #ff0000;">默认</span>的属性，当我们没有写position属性的时候，元素默认的定位就是static定位。</p><br><h3><span style="color: #ff0000;">absolute</span></h3><br><p>• absolute是<strong><span style="color: #ff0000;">绝对定位</span></strong>的意思，它会使元素<strong><span style="color: #ff0000;">脱离本来的位置</span></strong>再进行定位，它会使元素像立交桥一样出现空间上的分层，当元素脱离原来的位置之后，其他的元素就会看不到这个元素。同时，<span style="color: #ff0000;">absolute也可以<strong>触发bfc</strong></span>。</p><br><p>• 同时，当我们改变定位之后，这个元素就有四个属性可以使用了，分别是<span style="color: #ff0000;">left、right、top、bottom</span>。这四个属性分别可以设置当前元素距离左边、右边、上边和下边的距离为多少，但是四个属性很少一起出现，一般都是两两一对出现，其中left和top是一对，right和bottom是一对。</p><br><div class="code-pretty-container"><pre class="prettyprint linenums lang-CSS prettyprinted" style=""><ol class="linenums"><li class="L0"><span class="pln">div </span><span class="pun">{</span></li><li class="L1"><span class="pln">&nbsp;</span></li><li class="L2"><span class="pln">&nbsp; &nbsp; &nbsp; width</span><span class="pun">:</span><span class="pln"> </span><span class="lit">100px</span><span class="pun">;</span></li><li class="L3"><span class="pln">&nbsp;</span></li><li class="L4"><span class="pln">&nbsp; &nbsp; &nbsp; height</span><span class="pun">:</span><span class="lit">100px</span><span class="pun">;</span></li><li class="L5"><span class="pln">&nbsp;</span></li><li class="L6"><span class="pln">&nbsp; &nbsp; &nbsp; position</span><span class="pun">:</span><span class="pln"> absolute</span><span class="pun">;</span></li><li class="L7"><span class="pln">&nbsp;</span></li><li class="L8"><span class="pln">&nbsp; &nbsp; &nbsp; left</span><span class="pun">:</span><span class="pln"> </span><span class="lit">100px</span><span class="pun">;</span></li><li class="L9"><span class="pln">&nbsp;</span></li><li class="L0"><span class="pln">&nbsp; &nbsp; &nbsp; top</span><span class="pun">:</span><span class="pln"> </span><span class="lit">100px</span><span class="pun">;</span></li><li class="L1"><span class="pln">&nbsp;</span></li><li class="L2"><span class="pun">}</span></li></ol></pre><div class="code-pretty-toolbar"><span class="title">CSS</span><a href="javascript:void(0);" title="复制代码" class="tool clipboard" target="_blank" rel="noopener"><i class="fa fa-files-o"></i></a><a href="javascript:void(0);" title="查看纯文本代码" class="tool view-source" target="_blank" rel="noopener"><i class="fa fa-code"></i></a><a href="javascript:void(0);" title="返回代码高亮" class="tool back-to-pretty" target="_blank" rel="noopener"><i class="fa fa-undo"></i></a><span class="msg"></span></div></div><br><p>这个div就会脱离原来的位置，然后距离浏览器上边框和左边框分别100px的距离。</p><br><p>• 最后一点，absolute的参照物是<span style="color: #ff0000;">距离它最近的有定位（除了static）的父级<span style="color: #000000;">，当每一个父级都没有定位的时候，元素会相对于<span style="color: #ff0000;">浏览器边框</span>进行定位</span></span>。</p><br><h3><span style="color: #ff0000;">relative</span></h3><br><p>• relative是<strong><span style="color: #ff0000;">相对定位</span></strong>的意思，它会让元素保留原来的位置再进行定位，后面的元素可以看到它本来的位置。</p><br><p>• 当position改成relative之后，left、top、right、bottom进行的定位就会变成<strong><span style="color: #ff0000;">相对于自身的位置</span></strong>进行移动了。</p><br><p>• relative的<strong><span style="color: #ff0000;">参照物是元素自身</span></strong>。</p><br><p>• 当我们仅仅给元素设置position:relative;并没有设置left、right、top、bottom属性的时候，元素的定位是没有发生任何改变的，因为这个特性，一般在开发中，<strong><span style="color: #ff0000;">relative都是用作设置参照物的</span></strong>，一个absolute元素要相对于那个元素进行移动，就给那个元素设置relative的定位就可以了。</p><br><p><strong><span style="color: #ff0000;">我们通过例子来看一下absolute和relative的区别。</span></strong></p><br><p>我们现在有这样一个结构：</p><br><p><span style="color: #0000ff;">&lt;div class=”wrapper”&gt;</span><br><br><span style="color: #0000ff;">&nbsp; &nbsp; &nbsp; &lt;div class=”box”&gt;</span><br><br><span style="color: #0000ff;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=”content”&gt;&lt;/div&gt;</span><br><br><span style="color: #0000ff;">&nbsp; &nbsp; &nbsp; &lt;/div&gt;</span><br><br><span style="color: #0000ff;"> &lt;/div&gt;</span></p><br><div class="code-pretty-container"><pre class="prettyprint linenums lang-CSS prettyprinted" style=""><ol class="linenums"><li class="L0"><span class="pun">.</span><span class="pln">wrapper </span><span class="pun">{</span><span class="pln"> </span></li><li class="L1"><span class="pln">&nbsp; &nbsp; &nbsp; width</span><span class="pun">:</span><span class="pln"> </span><span class="lit">200px</span><span class="pun">;</span></li><li class="L2"><span class="pln">&nbsp; &nbsp; &nbsp; height</span><span class="pun">:</span><span class="pln"> </span><span class="lit">200px</span><span class="pun">;</span></li><li class="L3"><span class="pln">&nbsp; &nbsp; &nbsp; background</span><span class="pun">-</span><span class="pln">color</span><span class="pun">:</span><span class="pln"> orange</span><span class="pun">;</span></li><li class="L4"><span class="pln">&nbsp; &nbsp; &nbsp; margin</span><span class="pun">-</span><span class="pln">top</span><span class="pun">:</span><span class="pln"> </span><span class="lit">100px</span><span class="pun">;</span></li><li class="L5"><span class="pln">&nbsp; &nbsp; &nbsp; margin</span><span class="pun">-</span><span class="pln">left</span><span class="pun">:</span><span class="pln"> </span><span class="lit">100px</span><span class="pun">;</span></li><li class="L6"><span class="pun">}</span></li><li class="L7"><span class="pun">.</span><span class="pln">box</span><span class="pun">{</span></li><li class="L8"><span class="pln">&nbsp; &nbsp; &nbsp; width</span><span class="pun">:</span><span class="lit">100px</span><span class="pun">;</span></li><li class="L9"><span class="pln">&nbsp; &nbsp; &nbsp; height</span><span class="pun">:</span><span class="pln"> </span><span class="lit">100px</span><span class="pun">;</span></li><li class="L0"><span class="pln">&nbsp; &nbsp; &nbsp; background</span><span class="pun">-</span><span class="pln">color</span><span class="pun">:</span><span class="pln"> black</span><span class="pun">;</span></li><li class="L1"><span class="pln">&nbsp; &nbsp; &nbsp; margin</span><span class="pun">-</span><span class="pln">left</span><span class="pun">:</span><span class="lit">100px</span><span class="pun">;</span></li><li class="L2"><span class="pun">}</span></li><li class="L3"><span class="pun">.</span><span class="pln">content</span><span class="pun">{</span></li><li class="L4"><span class="pln">&nbsp; &nbsp; &nbsp; width</span><span class="pun">:</span><span class="pln"> </span><span class="lit">50px</span><span class="pun">;</span></li><li class="L5"><span class="pln">&nbsp; &nbsp; &nbsp; height</span><span class="pun">:</span><span class="pln"> </span><span class="lit">50px</span><span class="pun">;</span></li><li class="L6"><span class="pln">&nbsp; &nbsp; &nbsp; background</span><span class="pun">-</span><span class="pln">color</span><span class="pun">:</span><span class="pln"> yellow</span><span class="pun">;</span></li><li class="L7"><span class="pun">}</span></li></ol></pre><div class="code-pretty-toolbar"><span class="title">CSS</span><a href="javascript:void(0);" title="复制代码" class="tool clipboard" target="_blank" rel="noopener"><i class="fa fa-files-o"></i></a><a href="javascript:void(0);" title="查看纯文本代码" class="tool view-source" target="_blank" rel="noopener"><i class="fa fa-code"></i></a><a href="javascript:void(0);" title="返回代码高亮" class="tool back-to-pretty" target="_blank" rel="noopener"><i class="fa fa-undo"></i></a><span class="msg"></span></div></div><br><p>这个时候时候我们在浏览器中看到的样式是这个样子的：</p><br><p><img class="alignnone wp-image-105 size-medium" src="http://www.flyingliu.com/wp-content/uploads/2016/09/absolute-300x292.png" alt="absolute" width="300" height="292" srcset="http://www.flyingliu.com/wp-content/uploads/2016/09/absolute-300x292.png 300w, http://www.flyingliu.com/wp-content/uploads/2016/09/absolute.png 310w" sizes="(max-width: 300px) 100vw, 300px"></p><br><p>现在我们给content加上定位的样式。</p><br><div class="code-pretty-container"><pre class="prettyprint linenums lang-CSS prettyprinted" style=""><ol class="linenums"><li class="L0"><span class="pun">.</span><span class="pln">content</span><span class="pun">{</span></li><li class="L1"><span class="pln">&nbsp; &nbsp; &nbsp; position</span><span class="pun">:</span><span class="pln">absolute</span><span class="pun">;</span></li><li class="L2"><span class="pln">&nbsp; &nbsp; &nbsp; left</span><span class="pun">:</span><span class="pln"> </span><span class="lit">50px</span><span class="pun">;</span></li><li class="L3"><span class="pln">&nbsp; &nbsp; &nbsp; width</span><span class="pun">:</span><span class="pln"> </span><span class="lit">50px</span><span class="pun">;</span></li><li class="L4"><span class="pln">&nbsp; &nbsp; &nbsp; height</span><span class="pun">:</span><span class="pln"> </span><span class="lit">50px</span><span class="pun">;</span></li><li class="L5"><span class="pln">&nbsp; &nbsp; &nbsp; background</span><span class="pun">-</span><span class="pln">color</span><span class="pun">:</span><span class="pln"> yellow</span><span class="pun">;</span></li><li class="L6"><span class="pun">}</span></li></ol></pre><div class="code-pretty-toolbar"><span class="title">CSS</span><a href="javascript:void(0);" title="复制代码" class="tool clipboard" target="_blank" rel="noopener"><i class="fa fa-files-o"></i></a><a href="javascript:void(0);" title="查看纯文本代码" class="tool view-source" target="_blank" rel="noopener"><i class="fa fa-code"></i></a><a href="javascript:void(0);" title="返回代码高亮" class="tool back-to-pretty" target="_blank" rel="noopener"><i class="fa fa-undo"></i></a><span class="msg"></span></div></div><br><p>这个时候浏览器中的样式就会发生改变，content那个黄色的小方块会跑到橘黄色的方块外面：</p><br><p><img class="alignnone size-medium wp-image-106" src="http://www.flyingliu.com/wp-content/uploads/2016/09/absolute2-300x292.png" alt="absolute2" width="300" height="292" srcset="http://www.flyingliu.com/wp-content/uploads/2016/09/absolute2-300x292.png 300w, http://www.flyingliu.com/wp-content/uploads/2016/09/absolute2.png 308w" sizes="(max-width: 300px) 100vw, 300px"></p><br><p>这是因为，当我们给content设置position:absolute;之后，浏览器在渲染的时候，会先向上找到box这个div，看看这个div有没有定位，因为没有，所以继续向上找wrapper，依然没有，再向上找body，还是没有，所以最后就是相<span style="color: #ff0000;">对于浏览器边框定位</span>，这个时候content的left属性就是相对于浏览器边框左边有50px的距离的意思。</p><br><p>现在我们把content的定位换成relative，浏览器中的结果变成了这个样子：</p><br><p><img class="alignnone size-medium wp-image-107" src="http://www.flyingliu.com/wp-content/uploads/2016/09/abso3-300x291.png" alt="abso3" width="300" height="291" srcset="http://www.flyingliu.com/wp-content/uploads/2016/09/abso3-300x291.png 300w, http://www.flyingliu.com/wp-content/uploads/2016/09/abso3.png 320w" sizes="(max-width: 300px) 100vw, 300px"></p><br><p>本来content黄色小方块在黑色方块的左上角，然后relative相对与自身的位置进行定位，这个时候的left属性的意思就是相对于本来在黑色左上角的那个位置向右移动了50px的距离，也就是现在这个黄色小方块所在的位置。</p><br><p>因此，总结一下absolute和relative的特点如下：</p><br><p><span style="color: #ff0000;"><span style="color: #000000;">•</span> <strong>absolute</strong>：</span></p><br><p><span style="color: #ff0000;">1.脱离原来位置进行定位</span></p><br><p><span style="color: #ff0000;">2.相对于最近的有定位的父级进行定位，如果没有那么相对于浏览器边框定位。</span></p><br><p><span style="color: #ff0000;">• <strong>relative</strong>：</span></p><br><p><span style="color: #ff0000;">1.保留原来位置定位</span></p><br><p><span style="color: #ff0000;">2.相对于最近的有定位的父级进行定位</span></p><br><p><span style="color: #ff0000;">一般被用来设置参照物</span></p><br><h3><span style="color: #ff0000;">fixed</span></h3><br><p>fixed定位是<strong><span style="color: #ff0000;">相对于视口</span></strong>的定位，我们在网页上都见过左右两边不随着滚轮滚动而改变位置的<span style="color: #ff0000;">广告栏</span>，这种广告栏就是用fixed定位的。</p><br><p><span style="color: #0000ff;">&lt;div class=”fixed”&gt;&lt;/div&gt;</span></p><br><div class="code-pretty-container"><pre class="prettyprint linenums lang-CSS prettyprinted" style=""><ol class="linenums"><li class="L0"><span class="pun">.</span><span class="kwd">fixed</span><span class="pln"> </span><span class="pun">{</span></li><li class="L1"><span class="pln">&nbsp; &nbsp; &nbsp; position</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">fixed</span><span class="pun">;</span></li><li class="L2"><span class="pln">&nbsp; &nbsp; &nbsp; right</span><span class="pun">:</span><span class="pln"> </span><span class="lit">0px</span><span class="pun">;</span></li><li class="L3"><span class="pln">&nbsp; &nbsp; &nbsp; top</span><span class="pun">:</span><span class="pln"> </span><span class="lit">200px</span><span class="pun">;</span></li><li class="L4"><span class="pln">&nbsp; &nbsp; &nbsp; height</span><span class="pun">:</span><span class="pln"> </span><span class="lit">200px</span><span class="pun">;</span></li><li class="L5"><span class="pln">&nbsp; &nbsp; &nbsp; width</span><span class="pun">:</span><span class="pln"> </span><span class="lit">50px</span><span class="pun">;</span></li><li class="L6"><span class="pln">&nbsp; &nbsp; &nbsp; background</span><span class="pun">-</span><span class="pln">color</span><span class="pun">:</span><span class="pln"> red</span><span class="pun">;</span></li><li class="L7"><span class="pun">}</span></li></ol></pre><div class="code-pretty-toolbar"><span class="title">CSS</span><a href="javascript:void(0);" title="复制代码" class="tool clipboard" target="_blank" rel="noopener"><i class="fa fa-files-o"></i></a><a href="javascript:void(0);" title="查看纯文本代码" class="tool view-source" target="_blank" rel="noopener"><i class="fa fa-code"></i></a><a href="javascript:void(0);" title="返回代码高亮" class="tool back-to-pretty" target="_blank" rel="noopener"><i class="fa fa-undo"></i></a><span class="msg"></span></div></div><br><p>这段代码中，div.fixed这个元素就是一直在视口的右边，不随着我们滚动而改变相对于视口的位置。</p><br><h3><span style="color: #ff0000;">最后提一点</span></h3><br><p>• 值得注意的是，当我们写这样一段代码的时候：</p><br><p><span style="color: #0000ff;">&lt;div class=”demo”&gt;&lt;/div&gt;</span></p><br><div class="code-pretty-container"><pre class="prettyprint linenums lang-CSS prettyprinted" style=""><ol class="linenums"><li class="L0"><span class="pun">.</span><span class="pln">demo</span><span class="pun">{</span></li><li class="L1"><span class="pln">&nbsp; &nbsp; &nbsp; position</span><span class="pun">:</span><span class="pln"> absolute</span><span class="pun">;</span></li><li class="L2"><span class="pln">&nbsp; &nbsp; &nbsp; margin</span><span class="pun">-</span><span class="pln">top</span><span class="pun">:</span><span class="pln"> </span><span class="lit">200px</span><span class="pun">;</span></li><li class="L3"><span class="pln">&nbsp; &nbsp; &nbsp; height</span><span class="pun">:</span><span class="pln"> </span><span class="lit">200px</span><span class="pun">;</span></li><li class="L4"><span class="pln">&nbsp; &nbsp; &nbsp; width</span><span class="pun">:</span><span class="pln"> </span><span class="lit">50px</span><span class="pun">;</span></li><li class="L5"><span class="pln">&nbsp; &nbsp; &nbsp; background</span><span class="pun">-</span><span class="pln">color</span><span class="pun">:</span><span class="pln"> red</span><span class="pun">;</span></li><li class="L6"><span class="pun">}</span></li></ol></pre><div class="code-pretty-toolbar"><span class="title">CSS</span><a href="javascript:void(0);" title="复制代码" class="tool clipboard" target="_blank" rel="noopener"><i class="fa fa-files-o"></i></a><a href="javascript:void(0);" title="查看纯文本代码" class="tool view-source" target="_blank" rel="noopener"><i class="fa fa-code"></i></a><a href="javascript:void(0);" title="返回代码高亮" class="tool back-to-pretty" target="_blank" rel="noopener"><i class="fa fa-undo"></i></a><span class="msg"></span></div></div><br><p>我们把absolute换成relative之后，会发现整个div会向上移动一小段距离，这是为什么呢？</p><br><p>答案其实就在上一篇的文章里，<span style="color: #ff0000;">margin合并</span>问题——body标签本身有8px的margin，而四个方向的margin自然包括了margin-bottom，我们为div.demo设置了margin-top，就会导致margin合并的问题发生，当position是relative的时候，并没有触发bfc，所以中间的距离会取二者的最大值，也就是200px，当position是absolute的时候，因为触发了bfc效果，从而消除掉margin合并的bug，因此中间的距离是200+8=208px。</p><br><h3><span style="color: #ff0000;">一点小应用</span></h3><br><p>1.我们学习了定位之后，就可以实现前面文章提到的<span style="color: #ff0000;">元素水平垂直居中</span>的效果了哟~</p><br><p>只要我们给一个div加上下面的样式：</p><br><div class="code-pretty-container"><pre class="prettyprint linenums lang-CSS prettyprinted" style=""><ol class="linenums"><li class="L0"><span class="pln">div </span><span class="pun">{</span></li><li class="L1"><span class="pln">&nbsp; &nbsp; &nbsp; width</span><span class="pun">:</span><span class="pln"> </span><span class="lit">100px</span><span class="pun">;</span></li><li class="L2"><span class="pln">&nbsp; &nbsp; &nbsp; height</span><span class="pun">:</span><span class="pln"> </span><span class="lit">100px</span><span class="pun">;</span></li><li class="L3"><span class="pln">&nbsp; &nbsp; &nbsp; position</span><span class="pun">:</span><span class="pln"> absolute</span><span class="pun">;</span></li><li class="L4"><span class="pln">&nbsp; &nbsp; &nbsp; left</span><span class="pun">:</span><span class="pln"> </span><span class="lit">50</span><span class="pun">%;</span></li><li class="L5"><span class="pln">&nbsp; &nbsp; &nbsp; top</span><span class="pun">:</span><span class="pln"> </span><span class="lit">50</span><span class="pun">%;</span></li><li class="L6"><span class="pln">&nbsp; &nbsp; &nbsp; margin</span><span class="pun">-</span><span class="pln">left</span><span class="pun">:</span><span class="pln"> </span><span class="pun">-</span><span class="lit">50px</span><span class="pun">;</span></li><li class="L7"><span class="pln">&nbsp; &nbsp; &nbsp; margin</span><span class="pun">-</span><span class="pln">top</span><span class="pun">:</span><span class="pln"> </span><span class="pun">-</span><span class="lit">50px</span><span class="pun">;</span></li><li class="L8"><span class="pln">&nbsp; &nbsp; &nbsp; background</span><span class="pun">-</span><span class="pln">color</span><span class="pun">:</span><span class="pln"> red</span><span class="pun">;</span></li><li class="L9"><span class="pun">}</span></li></ol></pre><div class="code-pretty-toolbar"><span class="title">CSS</span><a href="javascript:void(0);" title="复制代码" class="tool clipboard" target="_blank" rel="noopener"><i class="fa fa-files-o"></i></a><a href="javascript:void(0);" title="查看纯文本代码" class="tool view-source" target="_blank" rel="noopener"><i class="fa fa-code"></i></a><a href="javascript:void(0);" title="返回代码高亮" class="tool back-to-pretty" target="_blank" rel="noopener"><i class="fa fa-undo"></i></a><span class="msg"></span></div></div><br><p>这个div就会在<span style="color: #ff0000;">有定位的父级</span>里面是<span style="color: #ff0000;">水平垂直居中</span>了哟~</p><br><p>2.我们还可以实现多栏布局了！</p><br><p>首先我们写三个div，分别起类名为left、mid、right，然后分别加上如下的样式：</p><br><p><span style="color: #0000ff;">&lt;div class=”left”&gt;&lt;/div&gt;</span><br><br><span style="color: #0000ff;"> &lt;div class=”right”&gt;&lt;/div&gt;</span><br><br><span style="color: #ff0000;"> &lt;div class=”mid”&gt;&lt;/div&gt;</span></p><br><div class="code-pretty-container"><pre class="prettyprint linenums lang-CSS prettyprinted" style=""><ol class="linenums"><li class="L0"><span class="pun">*</span><span class="pln"> </span><span class="pun">{</span></li><li class="L1"><span class="pln">&nbsp; &nbsp; &nbsp; margin</span><span class="pun">:</span><span class="pln"> </span><span class="lit">0px</span><span class="pun">;</span></li><li class="L2"><span class="pln">&nbsp; &nbsp; &nbsp; padding</span><span class="pun">:</span><span class="pln"> </span><span class="lit">0px</span><span class="pun">;</span></li><li class="L3"><span class="pun">}</span></li><li class="L4"><span class="pln">div </span><span class="pun">{</span></li><li class="L5"><span class="pln">&nbsp; &nbsp; &nbsp; height</span><span class="pun">:</span><span class="pln"> </span><span class="lit">100px</span><span class="pun">;</span></li><li class="L6"><span class="pun">}</span></li><li class="L7"><span class="pun">.</span><span class="pln">left </span><span class="pun">{</span></li><li class="L8"><span class="pln">&nbsp; &nbsp; &nbsp; position</span><span class="pun">:</span><span class="pln"> absolute</span><span class="pun">;</span></li><li class="L9"><span class="pln">&nbsp; &nbsp; &nbsp; left</span><span class="pun">:</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span></li><li class="L0"><span class="pln">&nbsp; &nbsp; &nbsp; width</span><span class="pun">:</span><span class="pln"> </span><span class="lit">100px</span><span class="pun">;</span></li><li class="L1"><span class="pln">&nbsp; &nbsp; &nbsp; background</span><span class="pun">-</span><span class="pln">color</span><span class="pun">:</span><span class="pln"> yellow</span><span class="pun">;</span></li><li class="L2"><span class="pun">}</span></li><li class="L3"><span class="pun">.</span><span class="pln">right </span><span class="pun">{</span></li><li class="L4"><span class="pln">&nbsp; &nbsp; &nbsp; position</span><span class="pun">:</span><span class="pln"> absolute</span><span class="pun">;</span></li><li class="L5"><span class="pln">&nbsp; &nbsp; &nbsp; right</span><span class="pun">:</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span></li><li class="L6"><span class="pln">&nbsp; &nbsp; &nbsp; width</span><span class="pun">:</span><span class="pln"> </span><span class="lit">100px</span><span class="pun">;</span></li><li class="L7"><span class="pln">&nbsp; &nbsp; &nbsp; background</span><span class="pun">-</span><span class="pln">color</span><span class="pun">:</span><span class="pln"> </span><span class="com">#ffc;</span></li><li class="L8"><span class="pun">}</span></li><li class="L9"><span class="pun">.</span><span class="pln">mid </span><span class="pun">{</span></li><li class="L0"><span class="pln">&nbsp; &nbsp; &nbsp; margin</span><span class="pun">-</span><span class="pln">left</span><span class="pun">:</span><span class="pln"> </span><span class="lit">100px</span><span class="pun">;</span></li><li class="L1"><span class="pln">&nbsp; &nbsp; &nbsp; margin</span><span class="pun">-</span><span class="pln">right</span><span class="pun">:</span><span class="pln"> </span><span class="lit">100px</span><span class="pun">;</span></li><li class="L2"><span class="pln">&nbsp; &nbsp; &nbsp; background</span><span class="pun">-</span><span class="pln">color</span><span class="pun">:</span><span class="pln"> </span><span class="com">#fcc;</span></li><li class="L3"><span class="pun">}</span></li></ol></pre><div class="code-pretty-toolbar"><span class="title">CSS</span><a href="javascript:void(0);" title="复制代码" class="tool clipboard" target="_blank" rel="noopener"><i class="fa fa-files-o"></i></a><a href="javascript:void(0);" title="查看纯文本代码" class="tool view-source" target="_blank" rel="noopener"><i class="fa fa-code"></i></a><a href="javascript:void(0);" title="返回代码高亮" class="tool back-to-pretty" target="_blank" rel="noopener"><i class="fa fa-undo"></i></a><span class="msg"></span></div></div><br><p>我们首先固定左侧和右侧的两个div，然后让中间的div分别给左侧和右侧留出一个固定宽度的margin之后，让自身自适应屏幕的大小即可实现三栏布局效果。</p><br><p>• 要注意的是，div.mid记得<span style="color: #ff0000;">写在后面</span>，如果写在最前面的话，因为div是block块级元素会独占一行，这样就会把左侧和右侧的div给挤到下一行了。当然我们给.left和.right都加上<strong><span style="color: #ff0000;">top:0px;</span></strong>之后，这个问题也就不用考虑了。</p><br><p>这次的层模型总结就到这里了，希望对大家有帮助哟~</p><br>                </div>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/02/CssThree/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -247,7 +810,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/01/02/CssThree/" itemprop="url">CssThree</a></h1>
+                <a class="post-title-link" href="/2018/01/02/CssThree/" itemprop="url">Web前端的知识之旅哟——margin合并与塌陷BUG及解法</a></h1>
         
 
         <div class="post-meta">
@@ -419,7 +982,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/01/02/CssTwo/" itemprop="url">Web前端的知识之旅哟——简单的文字样式和盒模型(四)</a></h1>
+                <a class="post-title-link" href="/2018/01/02/CssTwo/" itemprop="url">Web前端的知识之旅哟——简单的文字样式和盒模型</a></h1>
         
 
         <div class="post-meta">
@@ -624,7 +1187,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/01/02/CssOne/" itemprop="url">Web前端的知识之旅哟——初识css与css选择器(三)</a></h1>
+                <a class="post-title-link" href="/2018/01/02/CssOne/" itemprop="url">Web前端的知识之旅哟——初识css与css选择器</a></h1>
         
 
         <div class="post-meta">
@@ -863,7 +1426,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/01/02/htmlTwo/" itemprop="url">Web前端的知识之旅哟——html中的标签(二)</a></h1>
+                <a class="post-title-link" href="/2018/01/02/htmlTwo/" itemprop="url">Web前端的知识之旅哟——html中的标签</a></h1>
         
 
         <div class="post-meta">
@@ -1130,7 +1693,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/01/02/htmlOne/" itemprop="url">Web前端的知识之旅哟——初识html(一)</a></h1>
+                <a class="post-title-link" href="/2018/01/02/htmlOne/" itemprop="url">Web前端的知识之旅哟——初识html</a></h1>
         
 
         <div class="post-meta">
@@ -1527,7 +2090,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

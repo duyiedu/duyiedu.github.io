@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="层模型css中元素的层次模型主要是由position这个属性来决定的。position属性：position的意思是定位，同样这个属性的作用就是给元素施加定位。它一共有四个值，分别是static、absolute、relative、fixed。static• static是默认的属性，当我们没有写position属性的时候，元素默认的定位就是static定位">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Web前端的知识之旅哟——定位与层模型">
+<meta property="og:url" content="http://yoursite.com/2018/01/02/CssFour/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="层模型css中元素的层次模型主要是由position这个属性来决定的。position属性：position的意思是定位，同样这个属性的作用就是给元素施加定位。它一共有四个值，分别是static、absolute、relative、fixed。static• static是默认的属性，当我们没有写position属性的时候，元素默认的定位就是static定位">
+<meta property="og:image" content="http://www.flyingliu.com/wp-content/uploads/2016/09/absolute-300x292.png">
+<meta property="og:image" content="http://www.flyingliu.com/wp-content/uploads/2016/09/absolute2-300x292.png">
+<meta property="og:image" content="http://www.flyingliu.com/wp-content/uploads/2016/09/abso3-300x291.png">
+<meta property="og:updated_time" content="2018-01-02T07:32:30.278Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Web前端的知识之旅哟——定位与层模型">
+<meta name="twitter:description" content="层模型css中元素的层次模型主要是由position这个属性来决定的。position属性：position的意思是定位，同样这个属性的作用就是给元素施加定位。它一共有四个值，分别是static、absolute、relative、fixed。static• static是默认的属性，当我们没有写position属性的时候，元素默认的定位就是static定位">
+<meta name="twitter:image" content="http://www.flyingliu.com/wp-content/uploads/2016/09/absolute-300x292.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/01/02/CssFour/"/>
+
+
+
+
+
+  <title>Web前端的知识之旅哟——定位与层模型 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/02/CssFour/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Web前端的知识之旅哟——定位与层模型</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-02T15:23:42+08:00">
+                2018-01-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <div class="articleCon post_content"><br>                    <h1 style="text-align: center;"><span style="color: #ff0000;">层模型</span></h1><br><p>css中元素的层次模型主要是由<strong><span style="color: #ff0000;">position</span></strong>这个属性来决定的。</p><br><p>position属性：position的意思是定位，同样这个属性的作用就是<strong><span style="color: #ff0000;">给元素施加定位</span></strong>。它一共有四个值，分别是<strong><span style="color: #ff0000;">static、absolute、relative、fixed</span></strong>。</p><br><h3><span style="color: #ff0000;">static</span></h3><br><p>• static是<span style="color: #ff0000;">默认</span>的属性，当我们没有写position属性的时候，元素默认的定位就是static定位。</p><br><h3><span style="color: #ff0000;">absolute</span></h3><br><p>• absolute是<strong><span style="color: #ff0000;">绝对定位</span></strong>的意思，它会使元素<strong><span style="color: #ff0000;">脱离本来的位置</span></strong>再进行定位，它会使元素像立交桥一样出现空间上的分层，当元素脱离原来的位置之后，其他的元素就会看不到这个元素。同时，<span style="color: #ff0000;">absolute也可以<strong>触发bfc</strong></span>。</p><br><p>• 同时，当我们改变定位之后，这个元素就有四个属性可以使用了，分别是<span style="color: #ff0000;">left、right、top、bottom</span>。这四个属性分别可以设置当前元素距离左边、右边、上边和下边的距离为多少，但是四个属性很少一起出现，一般都是两两一对出现，其中left和top是一对，right和bottom是一对。</p><br><div class="code-pretty-container"><pre class="prettyprint linenums lang-CSS prettyprinted" style=""><ol class="linenums"><li class="L0"><span class="pln">div </span><span class="pun">{</span></li><li class="L1"><span class="pln">&nbsp;</span></li><li class="L2"><span class="pln">&nbsp; &nbsp; &nbsp; width</span><span class="pun">:</span><span class="pln"> </span><span class="lit">100px</span><span class="pun">;</span></li><li class="L3"><span class="pln">&nbsp;</span></li><li class="L4"><span class="pln">&nbsp; &nbsp; &nbsp; height</span><span class="pun">:</span><span class="lit">100px</span><span class="pun">;</span></li><li class="L5"><span class="pln">&nbsp;</span></li><li class="L6"><span class="pln">&nbsp; &nbsp; &nbsp; position</span><span class="pun">:</span><span class="pln"> absolute</span><span class="pun">;</span></li><li class="L7"><span class="pln">&nbsp;</span></li><li class="L8"><span class="pln">&nbsp; &nbsp; &nbsp; left</span><span class="pun">:</span><span class="pln"> </span><span class="lit">100px</span><span class="pun">;</span></li><li class="L9"><span class="pln">&nbsp;</span></li><li class="L0"><span class="pln">&nbsp; &nbsp; &nbsp; top</span><span class="pun">:</span><span class="pln"> </span><span class="lit">100px</span><span class="pun">;</span></li><li class="L1"><span class="pln">&nbsp;</span></li><li class="L2"><span class="pun">}</span></li></ol></pre><div class="code-pretty-toolbar"><span class="title">CSS</span><a href="javascript:void(0);" title="复制代码" class="tool clipboard" target="_blank" rel="noopener"><i class="fa fa-files-o"></i></a><a href="javascript:void(0);" title="查看纯文本代码" class="tool view-source" target="_blank" rel="noopener"><i class="fa fa-code"></i></a><a href="javascript:void(0);" title="返回代码高亮" class="tool back-to-pretty" target="_blank" rel="noopener"><i class="fa fa-undo"></i></a><span class="msg"></span></div></div><br><p>这个div就会脱离原来的位置，然后距离浏览器上边框和左边框分别100px的距离。</p><br><p>• 最后一点，absolute的参照物是<span style="color: #ff0000;">距离它最近的有定位（除了static）的父级<span style="color: #000000;">，当每一个父级都没有定位的时候，元素会相对于<span style="color: #ff0000;">浏览器边框</span>进行定位</span></span>。</p><br><h3><span style="color: #ff0000;">relative</span></h3><br><p>• relative是<strong><span style="color: #ff0000;">相对定位</span></strong>的意思，它会让元素保留原来的位置再进行定位，后面的元素可以看到它本来的位置。</p><br><p>• 当position改成relative之后，left、top、right、bottom进行的定位就会变成<strong><span style="color: #ff0000;">相对于自身的位置</span></strong>进行移动了。</p><br><p>• relative的<strong><span style="color: #ff0000;">参照物是元素自身</span></strong>。</p><br><p>• 当我们仅仅给元素设置position:relative;并没有设置left、right、top、bottom属性的时候，元素的定位是没有发生任何改变的，因为这个特性，一般在开发中，<strong><span style="color: #ff0000;">relative都是用作设置参照物的</span></strong>，一个absolute元素要相对于那个元素进行移动，就给那个元素设置relative的定位就可以了。</p><br><p><strong><span style="color: #ff0000;">我们通过例子来看一下absolute和relative的区别。</span></strong></p><br><p>我们现在有这样一个结构：</p><br><p><span style="color: #0000ff;">&lt;div class=”wrapper”&gt;</span><br><br><span style="color: #0000ff;">&nbsp; &nbsp; &nbsp; &lt;div class=”box”&gt;</span><br><br><span style="color: #0000ff;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &lt;div class=”content”&gt;&lt;/div&gt;</span><br><br><span style="color: #0000ff;">&nbsp; &nbsp; &nbsp; &lt;/div&gt;</span><br><br><span style="color: #0000ff;"> &lt;/div&gt;</span></p><br><div class="code-pretty-container"><pre class="prettyprint linenums lang-CSS prettyprinted" style=""><ol class="linenums"><li class="L0"><span class="pun">.</span><span class="pln">wrapper </span><span class="pun">{</span><span class="pln"> </span></li><li class="L1"><span class="pln">&nbsp; &nbsp; &nbsp; width</span><span class="pun">:</span><span class="pln"> </span><span class="lit">200px</span><span class="pun">;</span></li><li class="L2"><span class="pln">&nbsp; &nbsp; &nbsp; height</span><span class="pun">:</span><span class="pln"> </span><span class="lit">200px</span><span class="pun">;</span></li><li class="L3"><span class="pln">&nbsp; &nbsp; &nbsp; background</span><span class="pun">-</span><span class="pln">color</span><span class="pun">:</span><span class="pln"> orange</span><span class="pun">;</span></li><li class="L4"><span class="pln">&nbsp; &nbsp; &nbsp; margin</span><span class="pun">-</span><span class="pln">top</span><span class="pun">:</span><span class="pln"> </span><span class="lit">100px</span><span class="pun">;</span></li><li class="L5"><span class="pln">&nbsp; &nbsp; &nbsp; margin</span><span class="pun">-</span><span class="pln">left</span><span class="pun">:</span><span class="pln"> </span><span class="lit">100px</span><span class="pun">;</span></li><li class="L6"><span class="pun">}</span></li><li class="L7"><span class="pun">.</span><span class="pln">box</span><span class="pun">{</span></li><li class="L8"><span class="pln">&nbsp; &nbsp; &nbsp; width</span><span class="pun">:</span><span class="lit">100px</span><span class="pun">;</span></li><li class="L9"><span class="pln">&nbsp; &nbsp; &nbsp; height</span><span class="pun">:</span><span class="pln"> </span><span class="lit">100px</span><span class="pun">;</span></li><li class="L0"><span class="pln">&nbsp; &nbsp; &nbsp; background</span><span class="pun">-</span><span class="pln">color</span><span class="pun">:</span><span class="pln"> black</span><span class="pun">;</span></li><li class="L1"><span class="pln">&nbsp; &nbsp; &nbsp; margin</span><span class="pun">-</span><span class="pln">left</span><span class="pun">:</span><span class="lit">100px</span><span class="pun">;</span></li><li class="L2"><span class="pun">}</span></li><li class="L3"><span class="pun">.</span><span class="pln">content</span><span class="pun">{</span></li><li class="L4"><span class="pln">&nbsp; &nbsp; &nbsp; width</span><span class="pun">:</span><span class="pln"> </span><span class="lit">50px</span><span class="pun">;</span></li><li class="L5"><span class="pln">&nbsp; &nbsp; &nbsp; height</span><span class="pun">:</span><span class="pln"> </span><span class="lit">50px</span><span class="pun">;</span></li><li class="L6"><span class="pln">&nbsp; &nbsp; &nbsp; background</span><span class="pun">-</span><span class="pln">color</span><span class="pun">:</span><span class="pln"> yellow</span><span class="pun">;</span></li><li class="L7"><span class="pun">}</span></li></ol></pre><div class="code-pretty-toolbar"><span class="title">CSS</span><a href="javascript:void(0);" title="复制代码" class="tool clipboard" target="_blank" rel="noopener"><i class="fa fa-files-o"></i></a><a href="javascript:void(0);" title="查看纯文本代码" class="tool view-source" target="_blank" rel="noopener"><i class="fa fa-code"></i></a><a href="javascript:void(0);" title="返回代码高亮" class="tool back-to-pretty" target="_blank" rel="noopener"><i class="fa fa-undo"></i></a><span class="msg"></span></div></div><br><p>这个时候时候我们在浏览器中看到的样式是这个样子的：</p><br><p><img class="alignnone wp-image-105 size-medium" src="http://www.flyingliu.com/wp-content/uploads/2016/09/absolute-300x292.png" alt="absolute" width="300" height="292" srcset="http://www.flyingliu.com/wp-content/uploads/2016/09/absolute-300x292.png 300w, http://www.flyingliu.com/wp-content/uploads/2016/09/absolute.png 310w" sizes="(max-width: 300px) 100vw, 300px"></p><br><p>现在我们给content加上定位的样式。</p><br><div class="code-pretty-container"><pre class="prettyprint linenums lang-CSS prettyprinted" style=""><ol class="linenums"><li class="L0"><span class="pun">.</span><span class="pln">content</span><span class="pun">{</span></li><li class="L1"><span class="pln">&nbsp; &nbsp; &nbsp; position</span><span class="pun">:</span><span class="pln">absolute</span><span class="pun">;</span></li><li class="L2"><span class="pln">&nbsp; &nbsp; &nbsp; left</span><span class="pun">:</span><span class="pln"> </span><span class="lit">50px</span><span class="pun">;</span></li><li class="L3"><span class="pln">&nbsp; &nbsp; &nbsp; width</span><span class="pun">:</span><span class="pln"> </span><span class="lit">50px</span><span class="pun">;</span></li><li class="L4"><span class="pln">&nbsp; &nbsp; &nbsp; height</span><span class="pun">:</span><span class="pln"> </span><span class="lit">50px</span><span class="pun">;</span></li><li class="L5"><span class="pln">&nbsp; &nbsp; &nbsp; background</span><span class="pun">-</span><span class="pln">color</span><span class="pun">:</span><span class="pln"> yellow</span><span class="pun">;</span></li><li class="L6"><span class="pun">}</span></li></ol></pre><div class="code-pretty-toolbar"><span class="title">CSS</span><a href="javascript:void(0);" title="复制代码" class="tool clipboard" target="_blank" rel="noopener"><i class="fa fa-files-o"></i></a><a href="javascript:void(0);" title="查看纯文本代码" class="tool view-source" target="_blank" rel="noopener"><i class="fa fa-code"></i></a><a href="javascript:void(0);" title="返回代码高亮" class="tool back-to-pretty" target="_blank" rel="noopener"><i class="fa fa-undo"></i></a><span class="msg"></span></div></div><br><p>这个时候浏览器中的样式就会发生改变，content那个黄色的小方块会跑到橘黄色的方块外面：</p><br><p><img class="alignnone size-medium wp-image-106" src="http://www.flyingliu.com/wp-content/uploads/2016/09/absolute2-300x292.png" alt="absolute2" width="300" height="292" srcset="http://www.flyingliu.com/wp-content/uploads/2016/09/absolute2-300x292.png 300w, http://www.flyingliu.com/wp-content/uploads/2016/09/absolute2.png 308w" sizes="(max-width: 300px) 100vw, 300px"></p><br><p>这是因为，当我们给content设置position:absolute;之后，浏览器在渲染的时候，会先向上找到box这个div，看看这个div有没有定位，因为没有，所以继续向上找wrapper，依然没有，再向上找body，还是没有，所以最后就是相<span style="color: #ff0000;">对于浏览器边框定位</span>，这个时候content的left属性就是相对于浏览器边框左边有50px的距离的意思。</p><br><p>现在我们把content的定位换成relative，浏览器中的结果变成了这个样子：</p><br><p><img class="alignnone size-medium wp-image-107" src="http://www.flyingliu.com/wp-content/uploads/2016/09/abso3-300x291.png" alt="abso3" width="300" height="291" srcset="http://www.flyingliu.com/wp-content/uploads/2016/09/abso3-300x291.png 300w, http://www.flyingliu.com/wp-content/uploads/2016/09/abso3.png 320w" sizes="(max-width: 300px) 100vw, 300px"></p><br><p>本来content黄色小方块在黑色方块的左上角，然后relative相对与自身的位置进行定位，这个时候的left属性的意思就是相对于本来在黑色左上角的那个位置向右移动了50px的距离，也就是现在这个黄色小方块所在的位置。</p><br><p>因此，总结一下absolute和relative的特点如下：</p><br><p><span style="color: #ff0000;"><span style="color: #000000;">•</span> <strong>absolute</strong>：</span></p><br><p><span style="color: #ff0000;">1.脱离原来位置进行定位</span></p><br><p><span style="color: #ff0000;">2.相对于最近的有定位的父级进行定位，如果没有那么相对于浏览器边框定位。</span></p><br><p><span style="color: #ff0000;">• <strong>relative</strong>：</span></p><br><p><span style="color: #ff0000;">1.保留原来位置定位</span></p><br><p><span style="color: #ff0000;">2.相对于最近的有定位的父级进行定位</span></p><br><p><span style="color: #ff0000;">一般被用来设置参照物</span></p><br><h3><span style="color: #ff0000;">fixed</span></h3><br><p>fixed定位是<strong><span style="color: #ff0000;">相对于视口</span></strong>的定位，我们在网页上都见过左右两边不随着滚轮滚动而改变位置的<span style="color: #ff0000;">广告栏</span>，这种广告栏就是用fixed定位的。</p><br><p><span style="color: #0000ff;">&lt;div class=”fixed”&gt;&lt;/div&gt;</span></p><br><div class="code-pretty-container"><pre class="prettyprint linenums lang-CSS prettyprinted" style=""><ol class="linenums"><li class="L0"><span class="pun">.</span><span class="kwd">fixed</span><span class="pln"> </span><span class="pun">{</span></li><li class="L1"><span class="pln">&nbsp; &nbsp; &nbsp; position</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">fixed</span><span class="pun">;</span></li><li class="L2"><span class="pln">&nbsp; &nbsp; &nbsp; right</span><span class="pun">:</span><span class="pln"> </span><span class="lit">0px</span><span class="pun">;</span></li><li class="L3"><span class="pln">&nbsp; &nbsp; &nbsp; top</span><span class="pun">:</span><span class="pln"> </span><span class="lit">200px</span><span class="pun">;</span></li><li class="L4"><span class="pln">&nbsp; &nbsp; &nbsp; height</span><span class="pun">:</span><span class="pln"> </span><span class="lit">200px</span><span class="pun">;</span></li><li class="L5"><span class="pln">&nbsp; &nbsp; &nbsp; width</span><span class="pun">:</span><span class="pln"> </span><span class="lit">50px</span><span class="pun">;</span></li><li class="L6"><span class="pln">&nbsp; &nbsp; &nbsp; background</span><span class="pun">-</span><span class="pln">color</span><span class="pun">:</span><span class="pln"> red</span><span class="pun">;</span></li><li class="L7"><span class="pun">}</span></li></ol></pre><div class="code-pretty-toolbar"><span class="title">CSS</span><a href="javascript:void(0);" title="复制代码" class="tool clipboard" target="_blank" rel="noopener"><i class="fa fa-files-o"></i></a><a href="javascript:void(0);" title="查看纯文本代码" class="tool view-source" target="_blank" rel="noopener"><i class="fa fa-code"></i></a><a href="javascript:void(0);" title="返回代码高亮" class="tool back-to-pretty" target="_blank" rel="noopener"><i class="fa fa-undo"></i></a><span class="msg"></span></div></div><br><p>这段代码中，div.fixed这个元素就是一直在视口的右边，不随着我们滚动而改变相对于视口的位置。</p><br><h3><span style="color: #ff0000;">最后提一点</span></h3><br><p>• 值得注意的是，当我们写这样一段代码的时候：</p><br><p><span style="color: #0000ff;">&lt;div class=”demo”&gt;&lt;/div&gt;</span></p><br><div class="code-pretty-container"><pre class="prettyprint linenums lang-CSS prettyprinted" style=""><ol class="linenums"><li class="L0"><span class="pun">.</span><span class="pln">demo</span><span class="pun">{</span></li><li class="L1"><span class="pln">&nbsp; &nbsp; &nbsp; position</span><span class="pun">:</span><span class="pln"> absolute</span><span class="pun">;</span></li><li class="L2"><span class="pln">&nbsp; &nbsp; &nbsp; margin</span><span class="pun">-</span><span class="pln">top</span><span class="pun">:</span><span class="pln"> </span><span class="lit">200px</span><span class="pun">;</span></li><li class="L3"><span class="pln">&nbsp; &nbsp; &nbsp; height</span><span class="pun">:</span><span class="pln"> </span><span class="lit">200px</span><span class="pun">;</span></li><li class="L4"><span class="pln">&nbsp; &nbsp; &nbsp; width</span><span class="pun">:</span><span class="pln"> </span><span class="lit">50px</span><span class="pun">;</span></li><li class="L5"><span class="pln">&nbsp; &nbsp; &nbsp; background</span><span class="pun">-</span><span class="pln">color</span><span class="pun">:</span><span class="pln"> red</span><span class="pun">;</span></li><li class="L6"><span class="pun">}</span></li></ol></pre><div class="code-pretty-toolbar"><span class="title">CSS</span><a href="javascript:void(0);" title="复制代码" class="tool clipboard" target="_blank" rel="noopener"><i class="fa fa-files-o"></i></a><a href="javascript:void(0);" title="查看纯文本代码" class="tool view-source" target="_blank" rel="noopener"><i class="fa fa-code"></i></a><a href="javascript:void(0);" title="返回代码高亮" class="tool back-to-pretty" target="_blank" rel="noopener"><i class="fa fa-undo"></i></a><span class="msg"></span></div></div><br><p>我们把absolute换成relative之后，会发现整个div会向上移动一小段距离，这是为什么呢？</p><br><p>答案其实就在上一篇的文章里，<span style="color: #ff0000;">margin合并</span>问题——body标签本身有8px的margin，而四个方向的margin自然包括了margin-bottom，我们为div.demo设置了margin-top，就会导致margin合并的问题发生，当position是relative的时候，并没有触发bfc，所以中间的距离会取二者的最大值，也就是200px，当position是absolute的时候，因为触发了bfc效果，从而消除掉margin合并的bug，因此中间的距离是200+8=208px。</p><br><h3><span style="color: #ff0000;">一点小应用</span></h3><br><p>1.我们学习了定位之后，就可以实现前面文章提到的<span style="color: #ff0000;">元素水平垂直居中</span>的效果了哟~</p><br><p>只要我们给一个div加上下面的样式：</p><br><div class="code-pretty-container"><pre class="prettyprint linenums lang-CSS prettyprinted" style=""><ol class="linenums"><li class="L0"><span class="pln">div </span><span class="pun">{</span></li><li class="L1"><span class="pln">&nbsp; &nbsp; &nbsp; width</span><span class="pun">:</span><span class="pln"> </span><span class="lit">100px</span><span class="pun">;</span></li><li class="L2"><span class="pln">&nbsp; &nbsp; &nbsp; height</span><span class="pun">:</span><span class="pln"> </span><span class="lit">100px</span><span class="pun">;</span></li><li class="L3"><span class="pln">&nbsp; &nbsp; &nbsp; position</span><span class="pun">:</span><span class="pln"> absolute</span><span class="pun">;</span></li><li class="L4"><span class="pln">&nbsp; &nbsp; &nbsp; left</span><span class="pun">:</span><span class="pln"> </span><span class="lit">50</span><span class="pun">%;</span></li><li class="L5"><span class="pln">&nbsp; &nbsp; &nbsp; top</span><span class="pun">:</span><span class="pln"> </span><span class="lit">50</span><span class="pun">%;</span></li><li class="L6"><span class="pln">&nbsp; &nbsp; &nbsp; margin</span><span class="pun">-</span><span class="pln">left</span><span class="pun">:</span><span class="pln"> </span><span class="pun">-</span><span class="lit">50px</span><span class="pun">;</span></li><li class="L7"><span class="pln">&nbsp; &nbsp; &nbsp; margin</span><span class="pun">-</span><span class="pln">top</span><span class="pun">:</span><span class="pln"> </span><span class="pun">-</span><span class="lit">50px</span><span class="pun">;</span></li><li class="L8"><span class="pln">&nbsp; &nbsp; &nbsp; background</span><span class="pun">-</span><span class="pln">color</span><span class="pun">:</span><span class="pln"> red</span><span class="pun">;</span></li><li class="L9"><span class="pun">}</span></li></ol></pre><div class="code-pretty-toolbar"><span class="title">CSS</span><a href="javascript:void(0);" title="复制代码" class="tool clipboard" target="_blank" rel="noopener"><i class="fa fa-files-o"></i></a><a href="javascript:void(0);" title="查看纯文本代码" class="tool view-source" target="_blank" rel="noopener"><i class="fa fa-code"></i></a><a href="javascript:void(0);" title="返回代码高亮" class="tool back-to-pretty" target="_blank" rel="noopener"><i class="fa fa-undo"></i></a><span class="msg"></span></div></div><br><p>这个div就会在<span style="color: #ff0000;">有定位的父级</span>里面是<span style="color: #ff0000;">水平垂直居中</span>了哟~</p><br><p>2.我们还可以实现多栏布局了！</p><br><p>首先我们写三个div，分别起类名为left、mid、right，然后分别加上如下的样式：</p><br><p><span style="color: #0000ff;">&lt;div class=”left”&gt;&lt;/div&gt;</span><br><br><span style="color: #0000ff;"> &lt;div class=”right”&gt;&lt;/div&gt;</span><br><br><span style="color: #ff0000;"> &lt;div class=”mid”&gt;&lt;/div&gt;</span></p><br><div class="code-pretty-container"><pre class="prettyprint linenums lang-CSS prettyprinted" style=""><ol class="linenums"><li class="L0"><span class="pun">*</span><span class="pln"> </span><span class="pun">{</span></li><li class="L1"><span class="pln">&nbsp; &nbsp; &nbsp; margin</span><span class="pun">:</span><span class="pln"> </span><span class="lit">0px</span><span class="pun">;</span></li><li class="L2"><span class="pln">&nbsp; &nbsp; &nbsp; padding</span><span class="pun">:</span><span class="pln"> </span><span class="lit">0px</span><span class="pun">;</span></li><li class="L3"><span class="pun">}</span></li><li class="L4"><span class="pln">div </span><span class="pun">{</span></li><li class="L5"><span class="pln">&nbsp; &nbsp; &nbsp; height</span><span class="pun">:</span><span class="pln"> </span><span class="lit">100px</span><span class="pun">;</span></li><li class="L6"><span class="pun">}</span></li><li class="L7"><span class="pun">.</span><span class="pln">left </span><span class="pun">{</span></li><li class="L8"><span class="pln">&nbsp; &nbsp; &nbsp; position</span><span class="pun">:</span><span class="pln"> absolute</span><span class="pun">;</span></li><li class="L9"><span class="pln">&nbsp; &nbsp; &nbsp; left</span><span class="pun">:</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span></li><li class="L0"><span class="pln">&nbsp; &nbsp; &nbsp; width</span><span class="pun">:</span><span class="pln"> </span><span class="lit">100px</span><span class="pun">;</span></li><li class="L1"><span class="pln">&nbsp; &nbsp; &nbsp; background</span><span class="pun">-</span><span class="pln">color</span><span class="pun">:</span><span class="pln"> yellow</span><span class="pun">;</span></li><li class="L2"><span class="pun">}</span></li><li class="L3"><span class="pun">.</span><span class="pln">right </span><span class="pun">{</span></li><li class="L4"><span class="pln">&nbsp; &nbsp; &nbsp; position</span><span class="pun">:</span><span class="pln"> absolute</span><span class="pun">;</span></li><li class="L5"><span class="pln">&nbsp; &nbsp; &nbsp; right</span><span class="pun">:</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span></li><li class="L6"><span class="pln">&nbsp; &nbsp; &nbsp; width</span><span class="pun">:</span><span class="pln"> </span><span class="lit">100px</span><span class="pun">;</span></li><li class="L7"><span class="pln">&nbsp; &nbsp; &nbsp; background</span><span class="pun">-</span><span class="pln">color</span><span class="pun">:</span><span class="pln"> </span><span class="com">#ffc;</span></li><li class="L8"><span class="pun">}</span></li><li class="L9"><span class="pun">.</span><span class="pln">mid </span><span class="pun">{</span></li><li class="L0"><span class="pln">&nbsp; &nbsp; &nbsp; margin</span><span class="pun">-</span><span class="pln">left</span><span class="pun">:</span><span class="pln"> </span><span class="lit">100px</span><span class="pun">;</span></li><li class="L1"><span class="pln">&nbsp; &nbsp; &nbsp; margin</span><span class="pun">-</span><span class="pln">right</span><span class="pun">:</span><span class="pln"> </span><span class="lit">100px</span><span class="pun">;</span></li><li class="L2"><span class="pln">&nbsp; &nbsp; &nbsp; background</span><span class="pun">-</span><span class="pln">color</span><span class="pun">:</span><span class="pln"> </span><span class="com">#fcc;</span></li><li class="L3"><span class="pun">}</span></li></ol></pre><div class="code-pretty-toolbar"><span class="title">CSS</span><a href="javascript:void(0);" title="复制代码" class="tool clipboard" target="_blank" rel="noopener"><i class="fa fa-files-o"></i></a><a href="javascript:void(0);" title="查看纯文本代码" class="tool view-source" target="_blank" rel="noopener"><i class="fa fa-code"></i></a><a href="javascript:void(0);" title="返回代码高亮" class="tool back-to-pretty" target="_blank" rel="noopener"><i class="fa fa-undo"></i></a><span class="msg"></span></div></div><br><p>我们首先固定左侧和右侧的两个div，然后让中间的div分别给左侧和右侧留出一个固定宽度的margin之后，让自身自适应屏幕的大小即可实现三栏布局效果。</p><br><p>• 要注意的是，div.mid记得<span style="color: #ff0000;">写在后面</span>，如果写在最前面的话，因为div是block块级元素会独占一行，这样就会把左侧和右侧的div给挤到下一行了。当然我们给.left和.right都加上<strong><span style="color: #ff0000;">top:0px;</span></strong>之后，这个问题也就不用考虑了。</p><br><p>这次的层模型总结就到这里了，希望对大家有帮助哟~</p><br>                </div>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/02/CssThree/" rel="next" title="Web前端的知识之旅哟——margin合并与塌陷BUG及解法">
+                <i class="fa fa-chevron-left"></i> Web前端的知识之旅哟——margin合并与塌陷BUG及解法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/02/CssFive/" rel="prev" title="Web前端的知识之旅哟——浮动模型与伪元素">
+                Web前端的知识之旅哟——浮动模型与伪元素 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">层模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.0.1.</span> <span class="nav-text">static</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.0.2.</span> <span class="nav-text">absolute</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.0.3.</span> <span class="nav-text">relative</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.0.4.</span> <span class="nav-text">fixed</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.0.5.</span> <span class="nav-text">最后提一点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#undefined"><span class="nav-number">1.0.6.</span> <span class="nav-text">一点小应用</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

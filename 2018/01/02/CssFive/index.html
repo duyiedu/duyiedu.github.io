@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="浮动模型在最开始，我们首先写一个二级结构： &amp;lt;div class=”wrapper”&amp;gt;  &amp;lt;div class=”content”&amp;gt;1&amp;lt;/div&amp;gt;  &amp;lt;div class=”content”&amp;gt;2&amp;lt;/div&amp;gt;  &amp;lt;div class=”content”&amp;gt;3&amp;lt;/div&amp;gt;  &amp;lt;/div&amp;gt; 1.  &amp;nbsp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Web前端的知识之旅哟——浮动模型与伪元素">
+<meta property="og:url" content="http://yoursite.com/2018/01/02/CssFive/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="浮动模型在最开始，我们首先写一个二级结构： &amp;lt;div class=”wrapper”&amp;gt;  &amp;lt;div class=”content”&amp;gt;1&amp;lt;/div&amp;gt;  &amp;lt;div class=”content”&amp;gt;2&amp;lt;/div&amp;gt;  &amp;lt;div class=”content”&amp;gt;3&amp;lt;/div&amp;gt;  &amp;lt;/div&amp;gt; 1.  &amp;nbsp;">
+<meta property="og:image" content="http://www.flyingliu.com/wp-content/uploads/2016/09/float-300x222.png">
+<meta property="og:image" content="http://www.flyingliu.com/wp-content/uploads/2016/09/float2-300x80.png">
+<meta property="og:image" content="http://www.flyingliu.com/wp-content/uploads/2016/09/float3-300x224.png">
+<meta property="og:image" content="http://www.flyingliu.com/wp-content/uploads/2016/09/float4.png">
+<meta property="og:image" content="http://www.flyingliu.com/wp-content/uploads/2016/09/float5-300x203.png">
+<meta property="og:image" content="file:///C:/Users/Nick/AppData/Roaming/Tencent/Users/343009306/QQ/WinTemp/RichOle/G8P9TMO@%7DO~H3]AT%60H]CG%608.png">
+<meta property="og:image" content="http://www.flyingliu.com/wp-content/uploads/2016/09/taobao-1.png">
+<meta property="og:image" content="http://www.flyingliu.com/wp-content/uploads/2016/09/baozhi-300x112.png">
+<meta property="og:image" content="http://www.flyingliu.com/wp-content/uploads/2016/09/float6.png">
+<meta property="og:image" content="http://www.flyingliu.com/wp-content/uploads/2016/09/after-300x36.png">
+<meta property="og:updated_time" content="2018-01-02T07:32:24.718Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Web前端的知识之旅哟——浮动模型与伪元素">
+<meta name="twitter:description" content="浮动模型在最开始，我们首先写一个二级结构： &amp;lt;div class=”wrapper”&amp;gt;  &amp;lt;div class=”content”&amp;gt;1&amp;lt;/div&amp;gt;  &amp;lt;div class=”content”&amp;gt;2&amp;lt;/div&amp;gt;  &amp;lt;div class=”content”&amp;gt;3&amp;lt;/div&amp;gt;  &amp;lt;/div&amp;gt; 1.  &amp;nbsp;">
+<meta name="twitter:image" content="http://www.flyingliu.com/wp-content/uploads/2016/09/float-300x222.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/01/02/CssFive/"/>
+
+
+
+
+
+  <title>Web前端的知识之旅哟——浮动模型与伪元素 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/02/CssFive/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Web前端的知识之旅哟——浮动模型与伪元素</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-02T15:27:55+08:00">
+                2018-01-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="浮动模型"><a href="#浮动模型" class="headerlink" title="浮动模型"></a><span style="color: #ff0000;">浮动模型</span></h2><p>在最开始，我们首先写一个二级结构：</p>
+<p><span style="color: #0000ff;">&lt;div class=”wrapper”&gt;</span></p>
+<p><span style="color: #0000ff;"> &lt;div class=”content”&gt;1&lt;/div&gt;</span></p>
+<p><span style="color: #0000ff;"> &lt;div class=”content”&gt;2&lt;/div&gt;</span></p>
+<p><span style="color: #0000ff;"> &lt;div class=”content”&gt;3&lt;/div&gt;</span></p>
+<p><span style="color: #0000ff;"> &lt;/div&gt;</span></p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-CSS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="pun">.</span><span class="pln">wrapper </span><span class="pun">{</span><br>3.  <span class="pln">&nbsp; &nbsp; &nbsp; width</span><span class="pun">:</span><span class="lit">400px</span><span class="pun">;</span><br>4.  <span class="pln">&nbsp; &nbsp; &nbsp; height</span><span class="pun">:</span><span class="pln"> </span><span class="lit">100px</span><span class="pun">;</span><br>5.  <span class="pln">&nbsp; &nbsp; &nbsp; border</span><span class="pun">:</span><span class="pln"> </span><span class="lit">1px</span><span class="pln"> solid red</span><span class="pun">;</span><br>6.  <span class="pun">}</span><br>7.  <span class="pun">.</span><span class="pln">content </span><span class="pun">{</span><br>8.  <span class="pln">&nbsp; &nbsp; &nbsp; width</span><span class="pun">:</span><span class="pln"> </span><span class="lit">100px</span><span class="pun">;</span><br>9.  <span class="pln">&nbsp; &nbsp; &nbsp; height</span><span class="pun">:</span><span class="pln"> </span><span class="lit">100px</span><span class="pun">;</span><br>10.  <span class="pln">&nbsp; &nbsp; &nbsp; &nbsp;background</span><span class="pun">-</span><span class="pln">color</span><span class="pun">:</span><span class="pln"> black</span><span class="pun">;</span><br>11.  <span class="pln">&nbsp; &nbsp; &nbsp; color</span><span class="pun">:</span><span class="pln"> white</span><span class="pun">;</span><br>12.  <span class="pun">}</span></pre><div class="code-pretty-toolbar"><span class="title">CSS</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>我们现在在浏览器上能看到的应该是这个样子的：</p>
+<p><img src="http://www.flyingliu.com/wp-content/uploads/2016/09/float-300x222.png" alt="float"></p>
+<p>那么我们现在给content加上一个特殊的属性：<strong><span style="color: #ff0000;">float</span></strong>，看看现在的页面上呈现的布局是什么样子的？</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-CSS prettyprinted" style=""><br><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="pun">.</span><span class="pln">content </span><span class="pun">{</span><br>3.  <span class="pln">&nbsp; &nbsp; &nbsp; width</span><span class="pun">:</span><span class="pln"> </span><span class="lit">100px</span><span class="pun">;</span><br>4.  <span class="pln">&nbsp; &nbsp; &nbsp; height</span><span class="pun">:</span><span class="pln"> </span><span class="lit">100px</span><span class="pun">;</span><br>5.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="kwd">float</span><span class="pun">:</span><span class="pln"> left</span><span class="pun">;</span><br>6.  <span class="pln">&nbsp; &nbsp; &nbsp; background</span><span class="pun">-</span><span class="pln">color</span><span class="pun">:</span><span class="pln"> black</span><span class="pun">;</span><br>7.  <span class="pln">&nbsp; &nbsp; &nbsp; color</span><span class="pun">:</span><span class="pln"> white</span><span class="pun">;</span><br>8.  <span class="pun">}</span></pre><div class="code-pretty-toolbar"><span class="title">CSS</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>是不是页面变成了这个样子的？</p>
+<p><img src="http://www.flyingliu.com/wp-content/uploads/2016/09/float2-300x80.png" alt="float2"></p>
+<p>这就是我们这个<span style="color: #ff0000;">float属性</span>的效果哟~</p>
+<p>那么我们下面来正式介绍一下float属性吧</p>
+<h3 id="float浮动属性"><a href="#float浮动属性" class="headerlink" title="float浮动属性"></a><span style="color: #ff0000;">float浮动属性</span></h3><p>float属性可以让元素像站队列一样<span style="color: #ff0000;">浮动</span>起来，它会让本来占满整行的元素<span style="color: #ff0000;">只按照内容和设置的大小来在父级里面进行站队排列</span>，当这一行剩余的空间不足以再放下一个元素的时候，元素就会<span style="color: #ff0000;">自动换行</span>，到下一行去进行浮动排列。当容器不够大的时候，虽然内容会超出容器的范围，但是<span style="color: #ff0000;">超出之后仍然是按照相同的队形来进行站队</span>。</p>
+<p><img src="http://www.flyingliu.com/wp-content/uploads/2016/09/float3-300x224.png" alt="float3"></p>
+<p>浮动起来的元素会像absolute的元素<span style="color: #ff0000;">脱离文档流</span>，但是<span style="color: #ff0000;">不会脱离文字流</span>，这是什么意思呢？</p>
+<p>我们来举一个例子：</p>
+<p><span style="color: #0000ff;">&lt;div class=”top”&gt;&lt;/div&gt;</span></p>
+<p><span style="color: #0000ff;">&lt;div class=”bottom”&gt;我是文字，我能看到文字流哟~&lt;/div&gt;</span></p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-CSS prettyprinted" style=""><br>1.  <span class="pun">.</span><span class="pln">top </span><span class="pun">{</span><br>2.  <span class="pln">&nbsp; &nbsp; &nbsp; width</span><span class="pun">:</span><span class="pln"> </span><span class="lit">100px</span><span class="pun">;</span><br>3.  <span class="pln">&nbsp; &nbsp; &nbsp; height</span><span class="pun">:</span><span class="pln"> </span><span class="lit">100px</span><span class="pun">;</span><br>4.  <span class="pln">&nbsp; &nbsp; &nbsp; background</span><span class="pun">-</span><span class="pln">color</span><span class="pun">:</span><span class="pln"> red</span><span class="pun">;</span><br>5.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="kwd">float</span><span class="pun">:</span><span class="pln">left</span><span class="pun">;</span><br>6.  <span class="pun">}</span><br>7.  <span class="pun">.</span><span class="pln">bottom </span><span class="pun">{</span><br>8.  <span class="pln">&nbsp; &nbsp; &nbsp; width</span><span class="pun">:</span><span class="pln"> </span><span class="lit">200px</span><span class="pun">;</span><br>9.  <span class="pln">&nbsp; &nbsp; &nbsp; height</span><span class="pun">:</span><span class="pln"> </span><span class="lit">200px</span><span class="pun">;</span><br>10.  <span class="pln">&nbsp; &nbsp; &nbsp; background</span><span class="pun">-</span><span class="pln">color</span><span class="pun">:</span><span class="pln"> black</span><span class="pun">;</span><br>11.  <span class="pln">&nbsp; &nbsp; &nbsp; color</span><span class="pun">:</span><span class="pln"> white</span><span class="pun">;</span><br>12.  <span class="pun">}</span></pre><div class="code-pretty-toolbar"><span class="title">CSS</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>现在我们可以看到，在页面上呈现出来的效果是这个样子的：</p>
+<p><img src="http://www.flyingliu.com/wp-content/uploads/2016/09/float4.png" alt="float4"></p>
+<p>• <span style="color: #000000;">脱离文档流的意思就是<span style="color: #ff0000;">正常的元素看不到它了</span>，这一点很类似absolute属性，不脱离文字流的意思则是<span style="color: #ff0000;">display属性是inline或者inline-block的元素还是可以看到它的</span>，<span style="color: #ff0000;">文字本身是inline属性的</span></span>。</p>
+<p>接下来，我们讲.bottom这个div的display改成inline-block;之后再看一下效果。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-CSS prettyprinted" style=""><br>1.  <span class="pun">.</span><span class="pln">bottom </span><span class="pun">{</span><br>2.  <span class="pln">&nbsp; &nbsp; &nbsp; width</span><span class="pun">:</span><span class="pln"> </span><span class="lit">200px</span><span class="pun">;</span><br>3.  <span class="pln">&nbsp; &nbsp; &nbsp; height</span><span class="pun">:</span><span class="pln"> </span><span class="lit">200px</span><span class="pun">;</span><br>4.  <span class="pln">&nbsp; &nbsp; &nbsp; background</span><span class="pun">-</span><span class="pln">color</span><span class="pun">:</span><span class="pln"> black</span><span class="pun">;</span><br>5.  <span class="pln">&nbsp; &nbsp; &nbsp; color</span><span class="pun">:</span><span class="pln"> white</span><span class="pun">;</span><br>6.  <span class="pln">&nbsp; &nbsp; &nbsp; display</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">inline</span><span class="pun">-</span><span class="pln">block</span><span class="pun">;</span><br>7.  <span class="pun">}</span></pre><div class="code-pretty-toolbar"><span class="title">CSS</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>我们发现下面的黑色的方块并没有移动到下一行，而是紧跟着红色浮动方块进行了排列，但是我们并没有给黑色方块也设置浮动效果啊？</p>
+<p><img src="http://www.flyingliu.com/wp-content/uploads/2016/09/float5-300x203.png" alt="float5"></p>
+<!--StartFragment -->
+<div><img src="file:///C:\Users\Nick\AppData\Roaming\Tencent\Users\343009306\QQ\WinTemp\RichOle\G8P9TMO@}O~H3]AT`H]CG`8.png" alt="">这是因为，<span style="color: #ff0000;">float属性会自动将这个元素的<strong>display</strong>给改成<strong>inline-block</strong>的</span>，也就是说，不论你给display加上什么值，只要有float属性，那么这个元素就是inline-block属性的，这也就是为什么红色浮动方块没有独占一行的原因了。</div>
+
+<p><span style="color: #ff0000;"><span style="color: #000000;">•</span> float属性只有两个值：<strong>left</strong>和<strong>right</strong><span style="color: #000000;">，默认的状态是没有值none</span></span>。</p>
+<p>• float：right的效果就是从右边开始排列，刚好和left是相反的效果。</p>
+<p><strong><span style="color: #ff0000;">那么我们来总结一下，float属性到底是干嘛的呢？</span></strong></p>
+<p>1.对元素进行布局。</p>
+<p>2.像absolute一样，让元素浮动起来，产生自己独有的<strong><span style="color: #ff0000;">浮动流</span></strong>。</p>
+<p>浮动流有两个效果：</p>
+<p>①&nbsp;脱离标准的文档流，但不会脱离文字流 ，正常的元素看不到它，但是有文字属性inline或者文字本身可以看到它。</p>
+<p>②&nbsp;在内部会把改元素变换成inline-block属性的元素。</p>
+<p><strong><span style="color: #ff0000;">那么我们什么时候使用浮动属性呢？</span></strong></p>
+<p>• 开发中，一般是进行<span style="color: #ff0000;">网状布局</span>的时候使用float属性。当我们不知道容器里面会盛放多少个子元素，但是这些子元素又是按照一样的格式进行排列，我们设置浮动来进行流式布局。</p>
+<p><img src="http://www.flyingliu.com/wp-content/uploads/2016/09/taobao-1.png" alt="taobao"></p>
+<p>• 浮动属性还可以让我们实现报纸那样文字包围在图片四周的效果：</p>
+<p><img src="http://www.flyingliu.com/wp-content/uploads/2016/09/baozhi-300x112.png" alt="baozhi"></p>
+<p><strong><span style="color: #ff0000;">想到一点小常识</span></strong></p>
+<p>• 首先要记住，行级元素里面不能放块级元素。</p>
+<p>• a标签里面不能再放a标签了。</p>
+<p>• p标签内部不能放div标签，一旦写这种结构了：</p>
+<p><span style="color: #0000ff;"> &lt;p&gt;</span></p>
+<p><span style="color: #0000ff;">&nbsp; &nbsp; &nbsp; &lt;div&gt;&lt;/div&gt;</span></p>
+<p><span style="color: #0000ff;"> &lt;/p&gt;</span></p>
+<p>浏览器会自动将这种结构给转换成：</p>
+<p><span style="color: #0000ff;">&lt;p&gt;&lt;/p&gt;</span></p>
+<p><span style="color: #0000ff;">&lt;div&gt;&lt;/div&gt;</span></p>
+<p>当然，p标签里面也不要放ul标签，也不要再放一个p标签哟~</p>
+<h3 id="如何清除浮动流呢"><a href="#如何清除浮动流呢" class="headerlink" title="如何清除浮动流呢"></a><span style="color: #ff0000;">如何清除浮动流呢</span></h3><p>我们说了，既然元素浮动起来之后，<span style="color: #ff0000;">正常的元素就看不到它了</span>，那么包裹它的<span style="color: #ff0000;">父级自然也看不到它了</span>，我们想让父级根据里面浮动的子元素来自适应宽高，如果不清除浮动效果的话，就会变成这个样子：</p>
+<p><img src="http://www.flyingliu.com/wp-content/uploads/2016/09/float6.png" alt="float6"></p>
+<p>父级只剩下一条线了！</p>
+<p>因此清除浮动是我们必须要做的事情。</p>
+<p><span style="color: #000000;">那么怎么来清除浮动呢？</span></p>
+<p>1.一个野路子，我们在父级里面的内容区最后<strong><span style="color: #ff0000;">加一个p标签</span></strong>。</p>
+<p><span style="color: #0000ff;">&lt;div class=”wrapper”&gt;</span></p>
+<p><span style="color: #0000ff;">&nbsp; &nbsp; &nbsp; &lt;div class=”content”&gt;1&lt;/div&gt;</span></p>
+<p><span style="color: #0000ff;">&nbsp; &nbsp; &nbsp; &lt;div class=”content”&gt;2&lt;/div&gt;</span></p>
+<p><span style="color: #0000ff;">&nbsp; &nbsp; &nbsp; &lt;div class=”content”&gt;3&lt;/div&gt;</span></p>
+<p><span style="color: #0000ff;">&nbsp; &nbsp; &nbsp; &lt;div class=”content”&gt;4&lt;/div&gt;</span></p>
+<p><span style="color: #0000ff;">&nbsp; &nbsp; &nbsp; &lt;p class=”clear”&gt;&lt;/p&gt;</span></p>
+<p><span style="color: #0000ff;"> &lt;/div&gt;</span></p>
+<p>我们给这个p标签增加清除浮动的样式：</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-CSS prettyprinted" style=""><br>1.  <span class="pun">.</span><span class="pln">clear </span><span class="pun">{</span><br>2.  <span class="pln">&nbsp; &nbsp; &nbsp; clear</span><span class="pun">:</span><span class="pln"> both</span><span class="pun">;</span><span class="com">// clear属性专门用来清除浮动的，虽然有还有left和right值，但是我们只要清除浮动一般都写both值。</span><br>3.  <span class="pun">}</span></pre><div class="code-pretty-toolbar"><span class="title">CSS</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>现在我们看一下页面效果，父级的wrapper已经正常包裹住了子元素。</p>
+<p>但是实际上，<span style="color: #ff0000;">并不是父级清除了浮动流</span>，而是被p撑开了，p.clear标签能看到上面浮动的元素，wrapper能看到不浮动的p标签，因此就把p标签包裹进去了，仅此而已。</p>
+<p>我们要知道，html是做<strong><span style="color: #ff0000;">结构规划</span></strong>的，这个p标签作为<strong><span style="color: #ff0000;">功能标签</span></strong>出现了，这种代码在html里面是不允许出现的，所以我们要尽可能避免这种情况，因此<strong><span style="color: #ff0000;">这种方法不适用</span></strong>。</p>
+<p>2.<strong><span style="color: #ff0000;">添加伪元素</span></strong><span style="color: #ff0000;"><span style="color: #000000;"> &lt;— 我们使用这种方式</span></span></p>
+<p>首先我们要介绍一下伪元素。</p>
+<p>伪元素是一种不能单独存在的元素，它必须要依附于其他正式的元素标签上使用，单独写是没有任何意义的。伪元素最常用的一共有两个：after和before。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-CSS prettyprinted" style=""><br>1.  <span class="pln">span</span><span class="pun">::</span><span class="pln">before</span><span class="pun">{}</span><br>2.  <span class="pln">&nbsp;</span><br>3.  <span class="pln">span</span><span class="pun">::</span><span class="pln">after</span><span class="pun">{}</span></pre><div class="code-pretty-toolbar"><span class="title">CSS</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>• 虽然一个冒号浏览器也能识别，但是规范写法是两个冒号哟~</p>
+<p>我们现在举一个例子来介绍一下这两个伪元素的用法：</p>
+<p><span style="color: #0000ff;">&lt;span&gt;举个例子&lt;/span&gt;</span></p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-CSS prettyprinted" style=""><br>1.  <span class="pln">span </span><span class="pun">{</span><br>2.  <span class="pln">&nbsp; &nbsp; &nbsp; background</span><span class="pun">-</span><span class="pln">color</span><span class="pun">:</span><span class="pln"> yellow</span><span class="pun">;</span><br>3.  <span class="pun">}</span><br>4.  <span class="pln">span</span><span class="pun">::</span><span class="pln">before </span><span class="pun">{</span><br>5.  <span class="pln">&nbsp; &nbsp; &nbsp; content</span><span class="pun">:</span><span class="pln"> </span><span class="str">‘现在我们来’</span><span class="pun">;</span><br>6.  <span class="pln">&nbsp; &nbsp; &nbsp; background</span><span class="pun">-</span><span class="pln">color</span><span class="pun">:</span><span class="pln"> red</span><span class="pun">;</span><br>7.  <span class="pun">}</span><br>8.  <span class="pln">span</span><span class="pun">::</span><span class="pln">after </span><span class="pun">{</span><br>9.  <span class="pln">&nbsp; &nbsp; &nbsp; content</span><span class="pun">:</span><span class="str">‘，这就是效果’</span><span class="pun">;</span><br>10.  <span class="pln">&nbsp; &nbsp; &nbsp; background</span><span class="pun">-</span><span class="pln">color</span><span class="pun">:</span><span class="pln"> black</span><span class="pun">;</span><br>11.  <span class="pln">&nbsp; &nbsp; &nbsp; color</span><span class="pun">:</span><span class="pln"> white</span><span class="pun">;</span><br>12.  <span class="pun">}</span></pre><div class="code-pretty-toolbar"><span class="title">CSS</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p><img src="http://www.flyingliu.com/wp-content/uploads/2016/09/after-300x36.png" alt="after"></p>
+<p>当我们不想改变html结构，有想要增添一些东西的时候，伪元素after和before就非常的实用，看到这个例子大家也就明白了它们的用处了。</p>
+<p>•<span style="color: #ff0000;"> 不过要注意的是，写伪元素，即使内容是空的，也要加上content这个属性: <strong>content:”;</strong></span></p>
+<p>• 既然是伪元素，那么自然也属于元素了，我们可以<span style="color: #ff0000;">改变伪元素的display为block</span>，从而可以改变宽高等块级元素才有的样式。</p>
+<p>那么了解了伪元素之后，我们根据第一种方式，<span style="color: #ff0000;">为父级元素添加一个after伪元素</span>，让这个伪元素专门实现<span style="color: #ff0000;">清除浮动</span>的功能即可：</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-CSS prettyprinted" style=""><br>1.  <span class="pun">.</span><span class="pln">wrapper</span><span class="pun">::</span><span class="pln">after </span><span class="pun">{</span><br>2.  <span class="pln">&nbsp; &nbsp; &nbsp; content</span><span class="pun">:</span><span class="pln"> </span><span class="str">‘’</span><span class="pun">;</span><br>3.  <span class="pln">&nbsp; &nbsp; &nbsp; clear</span><span class="pun">:</span><span class="pln">both</span><span class="pun">;</span><br>4.  <span class="pln">&nbsp; &nbsp; &nbsp; display</span><span class="pun">:</span><span class="pln"> block</span><span class="pun">;</span><span class="pln"> </span><span class="com">//&nbsp;能清除浮动的元素，必须是块级元素！！</span><br>5.  <span class="pun">}</span></pre><div class="code-pretty-toolbar"><span class="title">CSS</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p><span style="color: #ff0000;">我们通常使用的清除浮动的方法，就是这一种</span>。</p>
+<p>那么现在问题来了，ie6、ie7并没有伪元素这种东西，怎么办？</p>
+<p>• 前面我们介绍了bfc，这里我们介绍ie6ie7独有的一个东西——hasLayout。只要触发了hasLayout就和触发bfc有差不多的作用，能够触发这个东西的属性有很多，其中最无害的属于zoom属性了。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-CSS prettyprinted" style=""><br>1.  <span class="pun">.</span><span class="pln">wrapper </span><span class="pun">{</span><br>2.  <span class="pln">&nbsp; &nbsp; &nbsp; zoom</span><span class="pun">:</span><span class="lit">1</span><span class="com">//视口同比例放大还是缩小，1就是不变</span><br>3.  <span class="pun">}</span></pre><div class="code-pretty-toolbar"><span class="title">CSS</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>当我们写上这个元素的时候，ie6ie7也就可以清除浮动了。</p>
+<p>不过我们其他的浏览器并不需要zoom这个属性，这个属性只是为了<strong><span style="color: #ff0000;">ie6和ie7</span></strong>准备的，所以这个时候我们需要一点点css hack，我们在zoom前面加一个<span style="color: #ff0000;"><em></em></span>号， **<span style="color: #ff0000;">zoom: 1;</span> <strong><span style="color: #ff0000;">这个符号只有ie6和ie7能够识别，其他的浏览器都不识别</span>，这样就可以让只有ie6和ie7去读这一行属性，其他浏览器直接忽略。顺便一提属性前面加上’</strong><span style="color: #ff0000;">_</span>**‘之后，就只有ie6可以识别了。<span style="color: #ff0000;">_zoom: 1;</span></p>
+<p>3<strong><span style="color: #ff0000;">.触发bfc</span></strong>的方式来清除浮动</p>
+<p>有很多的属性都可以触发bfc：</p>
+<p>① 给.wrapper添加overflow:hidden; 可以让父级包裹住浮动子元素。</p>
+<p>② 给.wrapper添加display: inline-block; 可以让父级彻底包裹住浮动子元素。</p>
+<p>③ 给.wrapper添加position:absolute; 可以让父级彻底包裹住浮动子元素。</p>
+<p>这三种方式虽然都可以清除浮动，但是都会改变样式，不符合开发规范，因此我们也<span style="color: #ff0000;">基本都不使用</span>。</p>
+<h3 id="导航栏的小应用"><a href="#导航栏的小应用" class="headerlink" title="导航栏的小应用"></a><span style="color: #ff0000;">导航栏的小应用</span></h3><p>浮动模型最常见的作用就是制作导航栏，代码其实也很简单：</p>
+<p><span style="color: #0000ff;">&lt;ul&gt;</span></p>
+<p><span style="color: #0000ff;">&nbsp; &nbsp; &nbsp; &lt;li&gt;&lt;a href=””&gt;毛衣&lt;/a&gt;&lt;/li&gt;</span></p>
+<p><span style="color: #0000ff;">&nbsp; &nbsp; &nbsp; &lt;li&gt;&lt;a href=””&gt;牛仔裤&lt;/a&gt;&lt;/li&gt;</span></p>
+<p><span style="color: #0000ff;">&nbsp; &nbsp; &nbsp; &lt;li&gt;&lt;a href=””&gt;风衣&lt;/a&gt;&lt;/li&gt;</span></p>
+<p><span style="color: #0000ff;">&nbsp; &nbsp; &nbsp; &lt;li&gt;&lt;a href=””&gt;卫衣&lt;/a&gt;&lt;/li&gt;</span></p>
+<p><span style="color: #0000ff;">&nbsp; &nbsp; &nbsp; &lt;li&gt;&lt;a href=””&gt;毛裤&lt;/a&gt;&lt;/li&gt;</span></p>
+<p><span style="color: #0000ff;"> &lt;/ul&gt;</span></p>
+<p><span style="color: #0000ff;">&lt;style&gt;</span></p>
+<p><span style="color: #0000ff;"> &lt;/style&gt;</span></p>
+<p>这样我们就大致实现了一个淘宝上面的导航的效果。</p>
+<p><span style="color: #ff0000;">• 最后，我们学习了浮动模型之后，也可以用这种方式实现三栏布局哟~</span></p>
+<p><span style="color: #0000ff;">&lt;div class=”left”&gt;&lt;/div&gt;</span></p>
+<p><span style="color: #0000ff;"> &lt;div class=”right”&gt;&lt;/div&gt;</span></p>
+<p><span style="color: #0000ff;"> &lt;div class=”mid”&gt;&lt;/div&gt;</span></p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-CSS prettyprinted" style=""><br>1.  <span class="pun">.</span><span class="pln">left </span><span class="pun">{</span><br>2.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="kwd">float</span><span class="pun">:</span><span class="pln"> left</span><span class="pun">;</span><br>3.  <span class="pln">&nbsp; &nbsp; &nbsp; width</span><span class="pun">:</span><span class="pln"> </span><span class="lit">100px</span><span class="pun">;</span><br>4.  <span class="pln">&nbsp; &nbsp; &nbsp; height</span><span class="pun">:</span><span class="pln"> </span><span class="lit">100px</span><span class="pun">;</span><br>5.  <span class="pln">&nbsp; &nbsp; &nbsp; background</span><span class="pun">-</span><span class="pln">color</span><span class="pun">:</span><span class="pln"> orange</span><span class="pun">;</span><br>6.  <span class="pun">}</span><br>7.  <span class="pun">.</span><span class="pln">right </span><span class="pun">{</span><br>8.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="kwd">float</span><span class="pun">:</span><span class="pln"> right</span><span class="pun">;</span><br>9.  <span class="pln">&nbsp; &nbsp; &nbsp; width</span><span class="pun">:</span><span class="pln"> </span><span class="lit">100px</span><span class="pun">;</span><br>10.  <span class="pln">&nbsp; &nbsp; &nbsp; height</span><span class="pun">:</span><span class="pln"> </span><span class="lit">100px</span><span class="pun">;</span><br>11.  <span class="pln">&nbsp; &nbsp; &nbsp; background</span><span class="pun">-</span><span class="pln">color</span><span class="pun">:</span><span class="pln"> red</span><span class="pun">;</span><br>12.  <span class="pun">}</span><br>13.  <span class="pun">.</span><span class="pln">mid </span><span class="pun">{</span><br>14.  <span class="pln">&nbsp; &nbsp; &nbsp; height</span><span class="pun">:</span><span class="pln"> </span><span class="lit">100px</span><span class="pun">;</span><br>15.  <span class="pln">&nbsp; &nbsp; &nbsp; margin</span><span class="pun">-</span><span class="pln">left</span><span class="pun">:</span><span class="pln"> </span><span class="lit">100px</span><span class="pun">;</span><br>16.  <span class="pln">&nbsp; &nbsp; &nbsp; margin</span><span class="pun">-</span><span class="pln">right</span><span class="pun">:</span><span class="pln"> </span><span class="lit">100px</span><span class="pun">;</span><br>17.  <span class="pln">&nbsp; &nbsp; &nbsp; background</span><span class="pun">-</span><span class="pln">color</span><span class="pun">:</span><span class="pln"> blue</span><span class="pun">;</span><br>18.  <span class="pun">}</span></pre><div class="code-pretty-toolbar"><span class="title">CSS</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>不过依然要记住把mid放在后面写！</p>
+<p>这次的知识点就总结到这里哟~</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/02/CssFour/" rel="next" title="Web前端的知识之旅哟——定位与层模型">
+                <i class="fa fa-chevron-left"></i> Web前端的知识之旅哟——定位与层模型
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/02/CssSix/" rel="prev" title="Web前端的知识之旅哟——css背景图片和其他">
+                Web前端的知识之旅哟——css背景图片和其他 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#浮动模型"><span class="nav-number">1.</span> <span class="nav-text">浮动模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#float浮动属性"><span class="nav-number">1.1.</span> <span class="nav-text">float浮动属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何清除浮动流呢"><span class="nav-number">1.2.</span> <span class="nav-text">如何清除浮动流呢</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#导航栏的小应用"><span class="nav-number">1.3.</span> <span class="nav-text">导航栏的小应用</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

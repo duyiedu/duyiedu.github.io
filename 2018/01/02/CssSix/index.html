@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="溢出打点我们首先来介绍几个属性构成的文字溢出打点的功能。溢出打点就是当文字超过我们所规定的范围之后，后面的全部文字就会变成“…”的形式来出现。 • 单行文字溢出打点 单行文字的溢出打点需要三个属性来配合使用。  &amp;lt;div&amp;gt; &amp;nbsp; &amp;nbsp; &amp;nbsp; 单行文字溢出测试单行文字溢出测试单行文字溢出测试单行文字溢出测试单行文字溢出测试单行文字溢出测试单行文字溢出测试单行文字溢">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Web前端的知识之旅哟——css背景图片和其他">
+<meta property="og:url" content="http://yoursite.com/2018/01/02/CssSix/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="溢出打点我们首先来介绍几个属性构成的文字溢出打点的功能。溢出打点就是当文字超过我们所规定的范围之后，后面的全部文字就会变成“…”的形式来出现。 • 单行文字溢出打点 单行文字的溢出打点需要三个属性来配合使用。  &amp;lt;div&amp;gt; &amp;nbsp; &amp;nbsp; &amp;nbsp; 单行文字溢出测试单行文字溢出测试单行文字溢出测试单行文字溢出测试单行文字溢出测试单行文字溢出测试单行文字溢出测试单行文字溢">
+<meta property="og:image" content="http://www.flyingliu.com/wp-content/uploads/2016/09/yichu-300x84.png">
+<meta property="og:image" content="http://www.flyingliu.com/wp-content/uploads/2016/09/yichu-1-300x29.png">
+<meta property="og:image" content="file:///C:/Users/Nick/AppData/Roaming/Tencent/Users/343009306/QQ/WinTemp/RichOle/REX8%60JDXT42K%7BY%7DQ_BLO%7BQR.png">
+<meta property="og:image" content="file:///C:/Users/Nick/AppData/Roaming/Tencent/Users/343009306/QQ/WinTemp/RichOle/REX8%60JDXT42K%7BY%7DQ_BLO%7BQR.png">
+<meta property="og:image" content="http://www.flyingliu.com/wp-content/uploads/2016/09/zhichi.png">
+<meta property="og:updated_time" content="2018-01-02T07:35:10.511Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Web前端的知识之旅哟——css背景图片和其他">
+<meta name="twitter:description" content="溢出打点我们首先来介绍几个属性构成的文字溢出打点的功能。溢出打点就是当文字超过我们所规定的范围之后，后面的全部文字就会变成“…”的形式来出现。 • 单行文字溢出打点 单行文字的溢出打点需要三个属性来配合使用。  &amp;lt;div&amp;gt; &amp;nbsp; &amp;nbsp; &amp;nbsp; 单行文字溢出测试单行文字溢出测试单行文字溢出测试单行文字溢出测试单行文字溢出测试单行文字溢出测试单行文字溢出测试单行文字溢">
+<meta name="twitter:image" content="http://www.flyingliu.com/wp-content/uploads/2016/09/yichu-300x84.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/01/02/CssSix/"/>
+
+
+
+
+
+  <title>Web前端的知识之旅哟——css背景图片和其他 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/02/CssSix/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Web前端的知识之旅哟——css背景图片和其他</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-02T15:33:58+08:00">
+                2018-01-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="溢出打点"><a href="#溢出打点" class="headerlink" title="溢出打点"></a><span style="color: #ff0000;">溢出打点</span></h3><p>我们首先来介绍几个属性构成的文字溢出打点的功能。溢出打点就是当文字超过我们所规定的范围之后，后面的全部文字就会变成“…”的形式来出现。</p>
+<p>• <strong><span style="color: #ff0000;">单行文字溢出打点</span></strong></p>
+<p>单行文字的溢出打点需要三个属性来配合使用。</p>
+<p><span style="color: #0000ff;"> &lt;div&gt;</span></p>
+<p><span style="color: #0000ff;">&nbsp; &nbsp; &nbsp; 单行文字溢出测试单行文字溢出测试单行文字溢出测试单行文字溢出测试单行文字溢出测试单行文字溢出测试单行文字溢出测试单行文字溢出测试</span></p>
+<p><span style="color: #0000ff;"> &lt;/div&gt;</span></p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-CSS prettyprinted" style=""><br>1.  <span class="pln">div </span><span class="pun">{</span><br>2.  <span class="pln">&nbsp; &nbsp; &nbsp; width</span><span class="pun">:</span><span class="pln"> </span><span class="lit">300px</span><span class="pun">;</span><br>3.  <span class="pln">&nbsp; &nbsp; &nbsp; height</span><span class="pun">:</span><span class="pln"> </span><span class="lit">20px</span><span class="pun">;</span><br>4.  <span class="pln">&nbsp; &nbsp; &nbsp; background</span><span class="pun">-</span><span class="pln">color</span><span class="pun">:</span><span class="pln"> red</span><span class="pun">;</span><br>5.  <span class="pln">&nbsp; &nbsp; &nbsp; color</span><span class="pun">:</span><span class="pln"> black</span><span class="pun">;</span><br>6.  <span class="pun">}</span></pre><div class="code-pretty-toolbar"><span class="title">CSS</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>本来的效果是这样的：</p>
+<p><img src="http://www.flyingliu.com/wp-content/uploads/2016/09/yichu-300x84.png" alt="yichu"></p>
+<p>我们现在给div增加属性：</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-CSS prettyprinted" style=""><br>1.  <span class="pln">div </span><span class="pun">{</span><br>2.  <span class="pln">&nbsp; &nbsp; &nbsp; width</span><span class="pun">:</span><span class="pln"> </span><span class="lit">300px</span><span class="pun">;</span><br>3.  <span class="pln">&nbsp; &nbsp; &nbsp; height</span><span class="pun">:</span><span class="pln"> </span><span class="lit">20px</span><span class="pun">;</span><br>4.  <span class="pln">&nbsp; &nbsp; &nbsp; background</span><span class="pun">-</span><span class="pln">color</span><span class="pun">:</span><span class="pln"> red</span><span class="pun">;</span><br>5.  <span class="pln">&nbsp; &nbsp; &nbsp; color</span><span class="pun">:</span><span class="pln"> black</span><span class="pun">;</span><br>6.  <span class="pln">&nbsp; &nbsp; &nbsp; overflow</span><span class="pun">:</span><span class="pln"> hidden</span><span class="pun">;</span><br>7.  <span class="pln">&nbsp; &nbsp; &nbsp; white</span><span class="pun">-</span><span class="pln">space</span><span class="pun">:</span><span class="pln"> nowrap</span><span class="pun">;</span><br>8.  <span class="pln">&nbsp; &nbsp; &nbsp; text</span><span class="pun">-</span><span class="pln">overflow</span><span class="pun">:</span><span class="pln"> ellipsis</span><span class="pun">;</span><br>9.  <span class="pun">}</span></pre><div class="code-pretty-toolbar"><span class="title">CSS</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>现在的效果就变成了我们想要的溢出打点的样子：</p>
+<p><img src="http://www.flyingliu.com/wp-content/uploads/2016/09/yichu-1-300x29.png" alt="yichu"></p>
+<p>现在介绍一下这三个属性的意思。</p>
+<p>1.<span style="color: #ff0000;">overflow:hidden;<span style="color: #000000;">实现的是让文字溢出容器的部分隐藏起来，方便后面的打点功能。</span></span></p>
+<p>2.<strong><span style="color: #ff0000;">white-space:nowrap;</span></strong><span style="color: #ff0000;"><span style="color: #000000;">让文字不换行。文字的默认状态是换行的，当到达容器壁之后自动换到下一行</span></span><img src="file:///C:\Users\Nick\AppData\Roaming\Tencent\Users\343009306\QQ\WinTemp\RichOle\REX8`JDXT42K{Y}Q_BLO{QR.png" alt="">，这个属性让文字一直在一行显示，即使到了容器壁也不换行。</p>
+<p>3.<strong><span style="color: #ff0000;">text-overflow:ellipsis;</span></strong>文字溢出之后，怎么处理。这里的处理方式是以点状显示。</p>
+<p>这样三条属性配合起来使用，就可以达成单行文字溢出打点的功能了。</p>
+<p>• <strong><span style="color: #ff0000;">多行文字溢出打点</span></strong></p>
+<p><img src="file:///C:\Users\Nick\AppData\Roaming\Tencent\Users\343009306\QQ\WinTemp\RichOle\REX8`JDXT42K{Y}Q_BLO{QR.png" alt="">其实现在虽然有属性可以达到多行文字溢出打点的功能，但是兼容性十分不好，除了移动端的网页——因为移动端的浏览器一般版本都比较高——之外，pc端的网页一般都是用其他的方式来实现。像百度就是通过计算文字的宽高，然后在最后手写“…”来实现的多行文字溢出打点效果。</p>
+<p>而如果我们想要以属性的方式来完成溢出打点的功能的话，就要用到以下的属性了：</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-CSS prettyprinted" style=""><br>1.  <span class="pln">white</span><span class="pun">-</span><span class="pln">space</span><span class="pun">:</span><span class="pln"> normal</span><span class="pun">;</span><br>2.  <span class="pun">-</span><span class="pln">webkit</span><span class="pun">-</span><span class="pln">line</span><span class="pun">-</span><span class="pln">clamp</span><span class="pun">:</span><span class="pln"> </span><span class="lit">3</span><span class="pun">;</span><br>3.  <span class="pln">text</span><span class="pun">-</span><span class="pln">overflow</span><span class="pun">:</span><span class="pln"> ellipsis</span><span class="pun">;</span><br>4.  <span class="pln">display</span><span class="pun">:</span><span class="pln"> </span><span class="pun">-</span><span class="pln">webkit</span><span class="pun">-</span><span class="pln">box</span><span class="pun">;</span><br>5.  <span class="pun">-</span><span class="pln">webkit</span><span class="pun">-</span><span class="pln">box</span><span class="pun">-</span><span class="pln">orient</span><span class="pun">:</span><span class="pln"> vertical</span><span class="pun">;</span></pre><div class="code-pretty-toolbar"><span class="title">CSS</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>这里的<strong><span style="color: #ff0000;">-webkit-</span></strong><span style="color: #ff0000;"><span style="color: #000000;">前缀的意思是兼容webkit内核的浏览器，现在还有很多浏览器不支持line-clamp这个属性，只有webkit的较高的版本勉强支持。</span></span></p>
+<p><img src="http://www.flyingliu.com/wp-content/uploads/2016/09/zhichi.png" alt="zhichi"></p>
+<p>box-orient也是非常勉强的，因此这个功能虽然存在，但是由于兼容性的问题，很少有公司会使用。</p>
+<p>• <span style="color: #ff0000;">line-clamp</span>属性的意思是让文字显示几行。</p>
+<p>display: -webkit-box;是css3.0里面的一个属性，这里暂时不过多介绍，大家了解这一种打点方式即可。</p>
+<h3 id="背景图片属性"><a href="#背景图片属性" class="headerlink" title="背景图片属性"></a><span style="color: #ff0000;">背景图片属性</span></h3><p><span style="color: #000000;">我们知道&lt;img&gt;标签可以来展示图片，但是如果我们想要在图片上面写字的话，这个标签就不好用了，这个时候就需要用到一个属性叫做<strong><span style="color: #ff0000;">background-image背景图片</span></strong>属性。</span></p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-CSS prettyprinted" style=""><br><br>1.  <span class="pln">background</span><span class="pun">-</span><span class="pln">image</span><span class="pun">:</span><span class="pln"> url</span><span class="pun">();</span></pre><div class="code-pretty-toolbar"><span class="title">CSS</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>url里面放本地绝对地址或者本地相对地址或者网上的链接都可以，这样我们就可以给一个元素设置背景图片了，然后元素里面正常写文字就可以。</p>
+<p>还有一些其他的属性专门用来修饰背景图片的样式的：</p>
+<p>•&nbsp;<strong><span style="color: #ff0000;">background-size属性</span></strong></p>
+<p>这个属性可以让我们设置背景图片的大小。</p>
+<p>它的值有很多种书写方式：</p>
+<p>1.<span style="color: #ff0000;">cover</span>覆盖</p>
+<p>这个属性值可以让浏览器以一张图片尽可能填充满我们的容器，当图片大的时候会截掉多余的部分。</p>
+<p>它的填充机制是：先找图片宽或者高的其中的一个，固定这一个宽或者高变成容器的宽或者高之后，让另一边等比例的放大或者缩小，当这个另一边可以填充满容器的时候，就把多余的部分裁掉，然后采用这一种方式，如果这种方式填充不满的话，如果刚才固定的宽，那么这一次就固定高度，让宽度变化。这两种方式里面一定会有一种方式是可以使用的。</p>
+<p>2.<span style="color: #ff0000;">contain</span>包含</p>
+<p>这个属性值是让浏览器尽可能展示出来图片的全部信息。如果还剩余很多空间的话，那么就填充相同的图片。</p>
+<p>它的填充机制和cover是一样的，不过它固定一条边之后，是让另外一条边可以全部显示，而不是可以填充满容器。</p>
+<p>3.设置x y <strong><span style="color: #ff0000;">像素值</span></strong></p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-CSS prettyprinted" style=""><br><br>1.  <span class="pln">background</span><span class="pun">-</span><span class="pln">size</span><span class="pun">:</span><span class="lit">50px</span><span class="pln"> </span><span class="lit">50px</span><span class="pun">;</span></pre><div class="code-pretty-toolbar"><span class="title">CSS</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>这样会让浏览器强行把图片压缩成50*50的比例大小。</p>
+<p>4.<strong><span style="color: #ff0000;">百分数</span></strong></p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-CSS prettyprinted" style=""><br><br>1.  <span class="pln">background</span><span class="pun">-</span><span class="pln">size</span><span class="pun">:</span><span class="pln"> </span><span class="lit">50</span><span class="pun">%</span><span class="pln"> </span><span class="lit">50</span><span class="pun">%;</span></pre><div class="code-pretty-toolbar"><span class="title">CSS</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>这样会让图片占容器宽高的50%——记住，<span style="color: #ff0000;">子级元素的百分比相对的数值是父级里面的这个属性的值</span>，比如父级的高度是100px，那么子级的50%就是50px。</p>
+<p>•<strong><span style="color: #ff0000;"> background-repear属性</span></strong></p>
+<p>这个属性可以设置背景图片是否可以重复显示，<span style="color: #ff0000;">默认是重复的repeat</span>。也就说默认状态下，容器空余很多的时候，就会有相同的图片来填充容器剩余空间。</p>
+<p>而值为<strong><span style="color: #ff0000;">no-repeat</span></strong>的时候，不论容器剩余多少空间，都不会进行图片复制填充了</p>
+<p>•<strong><span style="color: #ff0000;">&nbsp;background-size属性</span></strong></p>
+<p>这个属性可以设置<strong><span style="color: #ff0000;">背景图片开始的位置</span></strong><span style="color: #ff0000;"><span style="color: #000000;">，它的值同样有很多种：</span></span></p>
+<p>1.<strong><span style="color: #ff0000;">像素</span></strong></p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-CSS prettyprinted" style=""><br><br>1.  <span class="pln">background</span><span class="pun">-</span><span class="pln">position</span><span class="pun">:</span><span class="pln"> </span><span class="lit">50px</span><span class="pln"> </span><span class="lit">50px</span><span class="pun">;</span></pre><div class="code-pretty-toolbar"><span class="title">CSS</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>这样背景图片就会从容器的x轴50px y轴50px的位置开始显示。</p>
+<p>2.<strong><span style="color: #ff0000;">百分比</span></strong></p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-CSS prettyprinted" style=""><br><br>1.  <span class="pln">background</span><span class="pun">-</span><span class="pln">size</span><span class="pun">:</span><span class="lit">50</span><span class="pun">%</span><span class="pln"> </span><span class="lit">50</span><span class="pun">%;</span></pre><div class="code-pretty-toolbar"><span class="title">CSS</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>百分比<strong><span style="color: #ff0000;">一定要把两个值都写上</span></strong>！</p>
+<p>值得注意的是：百分比的基准点是图片的中心点，当时50% 50%的时候，图片刚好会在容器的正中央显示。像素的基准点是图片的左上角的点。</p>
+<p>•<strong><span style="color: #ff0000;">&nbsp;</span></strong><span style="color: #ff0000;">有一点比较抽象的定义需要记住：图片是用来展示图片信息的，如果这个图片不是用来展示这个图片的内容而是用来修饰一些东西，比如网站的logo，这起到类似艺术字的作用的图片，的时候，一般是用作背景图片的</span>。</p>
+<h3 id="如何让背景图片出不来的时候显示文字"><a href="#如何让背景图片出不来的时候显示文字" class="headerlink" title="如何让背景图片出不来的时候显示文字"></a><strong><span style="color: #ff0000;">如何让背景图片出不来的时候显示文字</span></strong></h3><p>有的时候我们的网页会被用户禁止加载图片和css样式，如果我们没有给背景图片设置任何信息的话，那么用户就会完全不知道这个空白的地方是什么东西，所以我们要让图片加载不出来的时候能够有文字展示出来，告诉用户这里是什么东西。</p>
+<p>我们有两种方法可以实现这种效果：</p>
+<p>1.利用<strong><span style="color: #ff0000;">text-indent</span></strong>属性</p>
+<p>我们利用首行缩进，然后配合让<span style="color: #ff0000;">white-space:nowrap和overflow:hidden</span>;让元素内部的文字在有css的时候，会被缩进到元素外面并且被隐藏起来。当css不能加载的时候，文字不会被缩进，所以可以展示出来。</p>
+<p>这是比较传统的做法。</p>
+<p>2.<span style="color: #ff0000;">背景图片放到<strong>padding</strong>里面，高度强制为0</span></p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-CSS prettyprinted" style=""><br><br>1.  <span class="pln">padding</span><span class="pun">-</span><span class="pln">top</span><span class="pun">:</span><span class="pln"> </span><span class="lit">100px</span></pre><div class="code-pretty-toolbar"><span class="title">CSS</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>要知道background-image是可以放到padding里面的，我们利用padding-top撑起来元素的内容区，然后元素本身的高度为0，这样当有css样式的时候，我们配合overflow:hidden一起使用，就可以让文字隐藏，没有css样式的时候，文字就会正常显示出来。</p>
+<p>这种方式现在用的更多一些。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/02/CssFive/" rel="next" title="Web前端的知识之旅哟——浮动模型与伪元素">
+                <i class="fa fa-chevron-left"></i> Web前端的知识之旅哟——浮动模型与伪元素
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#溢出打点"><span class="nav-number">1.</span> <span class="nav-text">溢出打点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#背景图片属性"><span class="nav-number">2.</span> <span class="nav-text">背景图片属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何让背景图片出不来的时候显示文字"><span class="nav-number">3.</span> <span class="nav-text">如何让背景图片出不来的时候显示文字</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
