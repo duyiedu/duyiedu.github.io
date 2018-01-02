@@ -85,7 +85,7 @@
 <meta property="og:url" content="http://yoursite.com/2018/01/02/CssTwo/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="上一篇文章简单的介绍了一下css的引入方式，这一篇打算介绍一些基础的样式和盒子模型。 • 其实我们css有很多很多的样式，我们不可能一一记住每一个样式的值，其实我们只需要记住一些常用的样式的意思，然后去http://www.css88.com这个网站去查询样式的具体的值就可以了，当然查询一些样式的作用也是可以的~ 一些简单的文字样式• 首先我们介绍一下样式的构成，样式都是由属性名和属性值构成的，名">
-<meta property="og:updated_time" content="2018-01-02T07:17:31.671Z">
+<meta property="og:updated_time" content="2018-01-02T07:20:16.255Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Web前端的知识之旅哟——简单的文字样式和盒模型(四)">
 <meta name="twitter:description" content="上一篇文章简单的介绍了一下css的引入方式，这一篇打算介绍一些基础的样式和盒子模型。 • 其实我们css有很多很多的样式，我们不可能一一记住每一个样式的值，其实我们只需要记住一些常用的样式的意思，然后去http://www.css88.com这个网站去查询样式的具体的值就可以了，当然查询一些样式的作用也是可以的~ 一些简单的文字样式• 首先我们介绍一下样式的构成，样式都是由属性名和属性值构成的，名">
@@ -302,7 +302,7 @@
 <p>• 其实我们css有很多很多的样式，我们不可能一一记住每一个样式的值，其实我们只需要记住一些常用的样式的意思，然后去<span style="color: #ff0000;"><a href="http://www.css88.com" target="_blank" rel="noopener">http://www.css88.com</a></span>这个网站去查询样式的具体的值就可以了，当然查询一些样式的作用也是可以的~</p>
 <h3 id="一些简单的文字样式"><a href="#一些简单的文字样式" class="headerlink" title="一些简单的文字样式"></a><span style="color: #ff0000;">一些简单的文字样式</span></h3><p>• 首先我们介绍一下样式的构成，样式都是由<span style="color: #ff0000;">属性名和属性值</span>构成的，名和值之间用<span style="color: #ff0000;">:(冒号)</span>分隔，属性和属性之间用<span style="color: #ff0000;">;(分号)</span>分隔。</p>
 <p>我们首先来写几个样式。</p>
-<div class="code-pretty-container"><pre class="prettyprint linenums lang-CSS prettyprinted" style=""><br><br>1.  <span class="pln">p </span><span class="pun">{</span><br>2.  <span class="pln">&nbsp;</span><br>3.  <span class="pln">&nbsp; &nbsp; &nbsp;font</span><span class="pun">-</span><span class="pln">size</span><span class="pun">:</span><span class="lit">20px</span><span class="pun">;</span><br>4.  <span class="pln">&nbsp;</span><br>5.  <span class="pln">&nbsp; &nbsp; &nbsp;font</span><span class="pun">-</span><span class="pln">weight</span><span class="pun">:</span><span class="pln"> bold</span><span class="pun">;</span><br>6.  <span class="pln">&nbsp;</span><br>7.  <span class="pln">&nbsp; &nbsp; &nbsp;font</span><span class="pun">-</span><span class="pln">family</span><span class="pun">:</span><span class="pln"> arial</span><span class="pun">;</span><br>8.  <span class="pln">&nbsp;</span><br>9.  <span class="pln">&nbsp; &nbsp; &nbsp;font</span><span class="pun">-</span><span class="pln">style</span><span class="pun">:</span><span class="pln"> italic</span><span class="pun">;</span><br>10.  <span class="pln">&nbsp;</span><br>11.  <span class="pln">&nbsp; &nbsp; &nbsp;color</span><span class="pun">:</span><span class="pln"> red</span><span class="pun">;</span><br>12.  <span class="pln">&nbsp;</span><br>13.  <span class="pun">}</span></pre><div class="code-pretty-toolbar"><span class="title">CSS</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-CSS prettyprinted" style=""><br>1.  <span class="pln">p </span><span class="pun">{</span><br>2.  <span class="pln">&nbsp;</span><br>3.  <span class="pln">&nbsp; &nbsp; &nbsp;font</span><span class="pun">-</span><span class="pln">size</span><span class="pun">:</span><span class="lit">20px</span><span class="pun">;</span><br>4.  <span class="pln">&nbsp;</span><br>5.  <span class="pln">&nbsp; &nbsp; &nbsp;font</span><span class="pun">-</span><span class="pln">weight</span><span class="pun">:</span><span class="pln"> bold</span><span class="pun">;</span><br>6.  <span class="pln">&nbsp;</span><br>7.  <span class="pln">&nbsp; &nbsp; &nbsp;font</span><span class="pun">-</span><span class="pln">family</span><span class="pun">:</span><span class="pln"> arial</span><span class="pun">;</span><br>8.  <span class="pln">&nbsp;</span><br>9.  <span class="pln">&nbsp; &nbsp; &nbsp;font</span><span class="pun">-</span><span class="pln">style</span><span class="pun">:</span><span class="pln"> italic</span><span class="pun">;</span><br>10.  <span class="pln">&nbsp;</span><br>11.  <span class="pln">&nbsp; &nbsp; &nbsp;color</span><span class="pun">:</span><span class="pln"> red</span><span class="pun">;</span><br>12.  <span class="pln">&nbsp;</span><br>13.  <span class="pun">}</span></pre><div class="code-pretty-toolbar"><span class="title">CSS</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
 
 <p>那么我们来分别介绍一下这几条样式：</p>
 <p>• <strong><span style="color: #ff0000;">font-size属性</span></strong></p>
@@ -381,7 +381,7 @@
 <p>只需要鼠标在页面上右键审查元素或者查看，或者是按住F12（windows系统的）就可以打开，这个时候找到我们所要查看样式的元素就可以了。</p>
 <p>• 这个时候我们会发现，<span style="color: #ff0000;">body元素</span>竟然有一个<span style="color: #ff0000;">默认的8px的margin</span>！同时我们还发现<span style="color: #ff0000;">p标签</span>默认的也有一些margin，这对于我们是非常不利的，因为这些样式都是在我们意料之外的样式，可能对我们的布局造成影响，那么我们怎么去掉这些默认样式呢？</p>
 <p>• *，通配符选择器的作用就体现出来了。我们在开发中一般将通配符选择器用来初始化样式。因为通配符的优先级最低，只有0点，我们在后面如果想要加样式，随便一个样式设定都会高于通配符选择器，但是如果没有设置的话，浏览器就会默认样式为我们设置的初始化样式。一般初始化的样式有以下几种：</p>
-<div class="code-pretty-container"><pre class="prettyprint linenums lang-CSS prettyprinted" style=""><br><br>1.  <span class="pun">*</span><span class="pln"> </span><span class="pun">{</span><br>2.  <span class="pln">&nbsp; &nbsp; &nbsp;margin</span><span class="pun">:</span><span class="pln"> </span><span class="lit">0px</span><span class="pun">;</span><br>3.  <span class="pln">&nbsp; &nbsp; &nbsp;padding</span><span class="pun">:</span><span class="pln"> </span><span class="lit">0px</span><span class="pun">;</span><br>4.  <span class="pln">&nbsp; &nbsp; &nbsp;list</span><span class="pun">-</span><span class="pln">style</span><span class="pun">:</span><span class="pln"> none</span><span class="pun">;</span><br>5.  <span class="pln">&nbsp; &nbsp; &nbsp;text</span><span class="pun">-</span><span class="pln">decoration</span><span class="pun">:</span><span class="pln"> none</span><span class="pun">;</span><br>6.  <span class="pln">&nbsp; &nbsp; &nbsp;color</span><span class="pun">:</span><span class="pln"> </span><span class="com">#424242;</span><br>7.  <span class="pun">}</span></pre><div class="code-pretty-toolbar"><span class="title">CSS</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-CSS prettyprinted" style=""><br>1.  <span class="pun">*</span><span class="pln"> </span><span class="pun">{</span><br>2.  <span class="pln">&nbsp; &nbsp; &nbsp;margin</span><span class="pun">:</span><span class="pln"> </span><span class="lit">0px</span><span class="pun">;</span><br>3.  <span class="pln">&nbsp; &nbsp; &nbsp;padding</span><span class="pun">:</span><span class="pln"> </span><span class="lit">0px</span><span class="pun">;</span><br>4.  <span class="pln">&nbsp; &nbsp; &nbsp;list</span><span class="pun">-</span><span class="pln">style</span><span class="pun">:</span><span class="pln"> none</span><span class="pun">;</span><br>5.  <span class="pln">&nbsp; &nbsp; &nbsp;text</span><span class="pun">-</span><span class="pln">decoration</span><span class="pun">:</span><span class="pln"> none</span><span class="pun">;</span><br>6.  <span class="pln">&nbsp; &nbsp; &nbsp;color</span><span class="pun">:</span><span class="pln"> </span><span class="com">#424242;</span><br>7.  <span class="pun">}</span></pre><div class="code-pretty-toolbar"><span class="title">CSS</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
 
 <p>那么今天总结的东西就这些哟~希望对大家有所帮助。</p>
 
@@ -417,6 +417,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/02/CssThree/" rel="prev" title="CssThree">
+                CssThree <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -493,7 +497,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

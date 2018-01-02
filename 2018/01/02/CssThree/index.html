@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="其实css也不是极其完善的，其中也存在着或多或少的bug，有些我们可能从来不会遇到，有些我们可能会经常遇到，这次介绍的两个bug是属于cssbug中的很经典的两个bug——margin合并与margin塌陷问题。 margin合并现象• 我们现在写两个span标签，并且给它们两个分别加上margin-right和margin-left的样式。  &amp;lt;span class=”left”&amp;gt;l">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CssThree">
+<meta property="og:url" content="http://yoursite.com/2018/01/02/CssThree/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="其实css也不是极其完善的，其中也存在着或多或少的bug，有些我们可能从来不会遇到，有些我们可能会经常遇到，这次介绍的两个bug是属于cssbug中的很经典的两个bug——margin合并与margin塌陷问题。 margin合并现象• 我们现在写两个span标签，并且给它们两个分别加上margin-right和margin-left的样式。  &amp;lt;span class=”left”&amp;gt;l">
+<meta property="og:image" content="http://www.flyingliu.com/wp-content/uploads/2016/09/margin.png">
+<meta property="og:image" content="http://www.flyingliu.com/wp-content/uploads/2016/09/margin-2.png">
+<meta property="og:updated_time" content="2018-01-02T07:22:13.449Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CssThree">
+<meta name="twitter:description" content="其实css也不是极其完善的，其中也存在着或多或少的bug，有些我们可能从来不会遇到，有些我们可能会经常遇到，这次介绍的两个bug是属于cssbug中的很经典的两个bug——margin合并与margin塌陷问题。 margin合并现象• 我们现在写两个span标签，并且给它们两个分别加上margin-right和margin-left的样式。  &amp;lt;span class=”left”&amp;gt;l">
+<meta name="twitter:image" content="http://www.flyingliu.com/wp-content/uploads/2016/09/margin.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/01/02/CssThree/"/>
+
+
+
+
+
+  <title>CssThree | Hexo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/02/CssThree/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">CssThree</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-02T15:21:17+08:00">
+                2018-01-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>其实css也不是极其完善的，其中也存在着或多或少的bug，有些我们可能从来不会遇到，有些我们可能会经常遇到，这次介绍的两个bug是属于cssbug中的很经典的两个bug——margin合并与margin塌陷问题。</p>
+<h3 id="margin合并现象"><a href="#margin合并现象" class="headerlink" title="margin合并现象"></a><span style="color: #ff0000;">margin合并现象</span></h3><p>• 我们现在写两个span标签，并且给它们两个分别加上margin-right和margin-left的样式。</p>
+<p><span style="color: #0000ff;"> &lt;span class=”left”&gt;left&lt;/span&gt;</span></p>
+<p><span style="color: #0000ff;"> &lt;span class=”right”&gt;right&lt;/span&gt;</span></p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-CSS prettyprinted" style=""><br>1.  <span class="pun">.</span><span class="pln">left </span><span class="pun">{</span><br>2.  <span class="pln">&nbsp; &nbsp; &nbsp; margin</span><span class="pun">-</span><span class="pln">right</span><span class="pun">:</span><span class="pln"> </span><span class="lit">10px</span><span class="pun">;</span><br>3.  <span class="pln">&nbsp; &nbsp; &nbsp; background</span><span class="pun">-</span><span class="pln">color</span><span class="pun">:</span><span class="pln"> red</span><span class="pun">;</span><br>4.  <span class="pun">}</span><br>5.  <span class="pun">.</span><span class="pln">right </span><span class="pun">{</span><br>6.  <span class="pln">&nbsp; &nbsp; &nbsp; margin</span><span class="pun">-</span><span class="pln">left</span><span class="pun">:</span><span class="pln"> </span><span class="lit">10px</span><span class="pun">;</span><br>7.  <span class="pln">&nbsp; &nbsp; &nbsp; background</span><span class="pun">-</span><span class="pln">color</span><span class="pun">:</span><span class="pln"> yellow</span><span class="pun">;</span><br>8.  <span class="pun">}</span></pre><div class="code-pretty-toolbar"><span class="title">CSS</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>我们会发现，这两个span之间的距离正是我们所想的那样是20px的宽度，但是我们现在再写两个div，然后分别给它们加上<span style="color: #ff0000;">margin-bottom</span>和<span style="color: #ff0000;">margin-top</span>的样式，我们再来看看效果。</p>
+<p><span style="color: #0000ff;">&lt;div class=”top”&gt;top&lt;/div&gt;</span></p>
+<p><span style="color: #0000ff;"> &lt;div class=”bottom”&gt;bottom&lt;/div&gt;</span></p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-CSS prettyprinted" style=""><br>1.  <span class="pun">.</span><span class="pln">top </span><span class="pun">{</span><br>2.  <span class="pln">&nbsp; &nbsp; &nbsp; margin</span><span class="pun">-</span><span class="pln">bottom</span><span class="pun">:</span><span class="pln"> </span><span class="lit">10px</span><span class="pun">;</span><br>3.  <span class="pln">&nbsp; &nbsp; &nbsp; background</span><span class="pun">-</span><span class="pln">color</span><span class="pun">:</span><span class="pln"> red</span><span class="pun">;</span><br>4.  <span class="pun">}</span><br>5.  <span class="pun">.</span><span class="pln">bottom </span><span class="pun">{</span><br>6.  <span class="pln">&nbsp; &nbsp; &nbsp; margin</span><span class="pun">-</span><span class="pln">top</span><span class="pun">:</span><span class="pln"> </span><span class="lit">10px</span><span class="pun">;</span><br>7.  <span class="pln">&nbsp; &nbsp; &nbsp; background</span><span class="pun">-</span><span class="pln">color</span><span class="pun">:</span><span class="pln"> yellow</span><span class="pun">;</span><br>8.  <span class="pun">}</span></pre><div class="code-pretty-toolbar"><span class="title">CSS</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>这次我们惊奇的发现，<strong><span style="color: #ff0000;">这两个div上下之间的距离，并不是我们所想的那样是相加的20px，而是只有10px</span></strong>！</p>
+<p>这个现象就是标题所说的<span style="color: #ff0000;">margin上下合并现象</span>。</p>
+<p>我们尝试改变每一个div的margin-top或者margin-bottom的值，最后发现：二者上下之间的距离是取得两个数值之中的<strong><span style="color: #ff0000;">最大值</span></strong>。</p>
+<p>如果div.top的margin-bottom是100px，div.bottom的margin-top是50px的话，那么二者之间的距离就是100px。</p>
+<h3 id="margin塌陷现象"><a href="#margin塌陷现象" class="headerlink" title="margin塌陷现象"></a><span style="color: #ff0000;">margin塌陷现象</span></h3><p></p>
+<p>• &nbsp;当我们给这样一个结构的两个div分别设置margin-top的时候，这个bug就会出现了。</p>
+<p><span style="color: #0000ff;">&lt;div class=”wrapper”&gt;</span></p>
+<p><span style="color: #0000ff;">&nbsp; &nbsp; &nbsp; &lt;div class=”content”&gt;&lt;/div&gt;</span></p>
+<p><span style="color: #0000ff;"> &lt;/div&gt;</span></p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-CSS prettyprinted" style=""><br>1.  <span class="pun">.</span><span class="pln">wrapper </span><span class="pun">{</span><br>2.  <span class="pln">width</span><span class="pun">:</span><span class="pln"> </span><span class="lit">100px</span><span class="pun">;</span><br>3.  <span class="pln">height</span><span class="pun">:</span><span class="pln"> </span><span class="lit">100px</span><span class="pun">;</span><br>4.  <span class="pln">margin</span><span class="pun">-</span><span class="pln">top</span><span class="pun">:</span><span class="pln"> </span><span class="lit">100px</span><span class="pun">;</span><br>5.  <span class="pln">margin</span><span class="pun">-</span><span class="pln">left</span><span class="pun">:</span><span class="pln"> </span><span class="lit">100px</span><span class="pun">;</span><br>6.  <span class="pln">background</span><span class="pun">-</span><span class="pln">color</span><span class="pun">:</span><span class="pln"> yellow</span><span class="pun">;</span><br>7.  <span class="pun">}</span><br>8.  <span class="pln">&nbsp;</span><br>9.  <span class="pun">.</span><span class="pln">content </span><span class="pun">{</span><br>10.  <span class="pln">&nbsp; &nbsp; &nbsp; width</span><span class="pun">:</span><span class="pln"> </span><span class="lit">50px</span><span class="pun">;</span><br>11.  <span class="pln">&nbsp; &nbsp; &nbsp; height</span><span class="pun">:</span><span class="pln"> </span><span class="lit">50px</span><span class="pun">;</span><br>12.  <span class="pln">&nbsp; &nbsp; &nbsp; margin</span><span class="pun">-</span><span class="pln">top</span><span class="pun">:</span><span class="pln"> </span><span class="lit">50px</span><span class="pun">;</span><br>13.  <span class="pln">&nbsp; &nbsp; &nbsp; margin</span><span class="pun">-</span><span class="pln">left</span><span class="pun">:</span><span class="pln"> </span><span class="lit">50px</span><span class="pun">;</span><br>14.  <span class="pln">&nbsp; &nbsp; &nbsp; background</span><span class="pun">-</span><span class="pln">color</span><span class="pun">:</span><span class="pln"> red</span><span class="pun">;</span><br>15.  <span class="pun">}</span></pre><div class="code-pretty-toolbar"><span class="title">CSS</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>我们写这段代码的原意是想要一个100<em>100大小的父级div，然后里面有一个50</em>50大小的子级div，然后让这个div在父级div的右下角，同时父级div距离浏览器的边框有100px的距离。</p>
+<p><img src="http://www.flyingliu.com/wp-content/uploads/2016/09/margin.png" alt="margin"></p>
+<p>当我们运行这段代码的时候，我们会发现，实际的结果是这个样子的：</p>
+<p><img src="http://www.flyingliu.com/wp-content/uploads/2016/09/margin-2.png" alt="margin-2"></p>
+<p>子级div的margin-left生效了但是好像margin-top并没有生效？</p>
+<p>其实并不是，margin-top也生效了，但是这里的margin-top的效果并不是我们所想的那样距离父级div的距离是50px，而是子级的div距离浏览器边框的距离是50px，由于本身父级div有一个margin-top的值，所以就导致了我们子级的margin-top的效果并没有显现出来，我们再改变一下子级div的margin-top的值，改成200px，我们又会惊奇的发现，子级div不仅没有距离父级div有了一段距离，<strong><span style="color: #ff0000;">反而带动了父级div一起向下移动了</span></strong>！这就是margin塌陷现象。</p>
+<h3 id="那么对于这两个问题我们要怎么解决呢？"><a href="#那么对于这两个问题我们要怎么解决呢？" class="headerlink" title="那么对于这两个问题我们要怎么解决呢？"></a><span style="color: #ff0000;">那么对于这两个问题我们要怎么解决呢？</span></h3><p><span style="color: #ff0000;"><strong>margin塌陷的解法</strong></span></p>
+<p>解法一共有两种：</p>
+<p>1.利用<span style="color: #ff0000;"><strong>border</strong></span>来<strong><span style="color: #ff0000;">触发</span><span style="color: #ff0000;">bfc</span></strong>的效果。</p>
+<p>2.利用<strong><span style="color: #ff0000;">overflow</span></strong><span style="color: #ff0000;"><span style="color: #000000;">属性</span></span><span style="color: #000000;">来</span><strong><span style="color: #ff0000;">触发bfc</span></strong><span style="color: #ff0000;"><span style="color: #000000;">的效果</span></span>。</p>
+<p>• <span style="color: #ff0000;">那么什么是bfc呢？</span></p>
+<p>bfc全称是block format context——块级格式化上下文，我们有一些css语法会触发bfc，从而带来的效果是我们触发bfc的元素的渲染规则和普通元素的渲染规则变得不一样，从而可以解决塌陷问题。</p>
+<p>margin塌陷的问题很容易让我们联想到，子级div之所以没有相对父级移动，是因为它看不到父级的边界，只能看到浏览器的边界，这样我们给父级加一个子级能看到的边界，这个问题是不是就解决了？</p>
+<p>所以我们在父级div.wrapper里面添加一个属性：<span style="color: #0000ff;">border-top: 1px solid red;<span style="color: #000000;">现在我们再来看一下效果，发现果然content和wrapper解除了绑定，子级div能看到父级的边界了。但是这样就会改变父级div的样式，不符合开发要求，<span style="color: #ff0000;">因此这种方法虽然可以解决问题但是是<strong>完全无法使用</strong>的</span>。</span></span></p>
+<p>• <span style="color: #ff0000;">什么又是overflow呢？</span></p>
+<p>overflow是一个css属性，它可以设置当内容区超过了当前元素的区域的时候，我们采取怎样的处理方式，这个属性也可以触发bfc。</p>
+<p>现在我们可以在父级div.wrapper里面加一条属性：<span style="color: #0000ff;">overflow:hidden;<span style="color: #000000;">这条属性的意思是溢出隐藏。</span></span><span style="color: #000000;">现在我们可以发现，在外观没有改变的同时，子级div和父级div解除了绑定，也可能正常移动了！<span style="color: #ff0000;">因此我们一般采用这种方式来解决margin塌陷的问题</span>。</span></p>
+<p>虽然overflow:hidden;的方式可以采用，但是也不是没有缺点的，一旦我们用过js代码改变了子级div的位置，就会有导致子级一部分内容因为溢出被隐藏的风险。</p>
+<p><span style="color: #ff0000;"><strong>margin合并的解法</strong></span></p>
+<p>了解了margin塌陷的解法之后，我们就很容易可以理解margin合并的解法了。</p>
+<p>我们给每一个div分别加上一个父级包裹层，然后给父级包裹层都加上<span style="color: #ff0000;">overflow:hidden;</span></p>
+<p><span style="color: #0000ff;">&lt;div class=”wrapper”&gt;</span></p>
+<p><span style="color: #0000ff;">&nbsp; &nbsp; &nbsp; &lt;div class=”top”&gt;top&lt;/div&gt;</span></p>
+<p><span style="color: #0000ff;"> &lt;/div&gt;</span></p>
+<p><span style="color: #0000ff;"> &lt;div class=”wrapper”&gt;</span></p>
+<p><span style="color: #0000ff;">&nbsp; &nbsp; &nbsp; &lt;div class=”bottom”&gt;bottom&lt;/div&gt;</span></p>
+<p><span style="color: #0000ff;"> &lt;/div&gt;</span></p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-CSS prettyprinted" style=""><br>1.  <span class="pun">.</span><span class="pln">wrapper</span><span class="pun">{</span><br>2.  <span class="pln">&nbsp; &nbsp; &nbsp; overflow</span><span class="pun">:</span><span class="pln"> hidden</span><span class="pun">;</span><br>3.  <span class="pun">}</span><br>4.  <span class="pun">.</span><span class="pln">top </span><span class="pun">{</span><br>5.  <span class="pln">&nbsp; &nbsp; &nbsp; margin</span><span class="pun">-</span><span class="pln">bottom</span><span class="pun">:</span><span class="pln"> </span><span class="lit">100px</span><span class="pun">;</span><br>6.  <span class="pln">&nbsp; &nbsp; &nbsp; background</span><span class="pun">-</span><span class="pln">color</span><span class="pun">:</span><span class="pln"> red</span><span class="pun">;</span><br>7.  <span class="pun">}</span><br>8.  <span class="pun">.</span><span class="pln">bottom </span><span class="pun">{</span><br>9.  <span class="pln">&nbsp; &nbsp; &nbsp; margin</span><span class="pun">-</span><span class="pln">top</span><span class="pun">:</span><span class="pln"> </span><span class="lit">100px</span><span class="pun">;</span><br>10.  <span class="pln">&nbsp; &nbsp; &nbsp; background</span><span class="pun">-</span><span class="pln">color</span><span class="pun">:</span><span class="pln"> red</span><span class="pun">;</span><br>11.  <span class="pun">}</span></pre><div class="code-pretty-toolbar"><span class="title">CSS</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>这样通过父级div来触发bfc就可以解决margin合并的问题了。</p>
+<p>那么今天的东西就这么多，希望对大家有所帮助哟~</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/02/CssTwo/" rel="next" title="Web前端的知识之旅哟——简单的文字样式和盒模型(四)">
+                <i class="fa fa-chevron-left"></i> Web前端的知识之旅哟——简单的文字样式和盒模型(四)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#margin合并现象"><span class="nav-number">1.</span> <span class="nav-text">margin合并现象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#margin塌陷现象"><span class="nav-number">2.</span> <span class="nav-text">margin塌陷现象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#那么对于这两个问题我们要怎么解决呢？"><span class="nav-number">3.</span> <span class="nav-text">那么对于这两个问题我们要怎么解决呢？</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
