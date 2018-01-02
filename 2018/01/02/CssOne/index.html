@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="前面总结完了html部分的基础内容之后，我总结了一下一下css部分的内容，希望对大家有所帮助~ 初识CSS• css的全称为cascading style sheet 层叠样式表，它的主要作用是为我们的html标签添加各种各样的样式和修饰效果。 • 这里我总结的css属于css2.0的知识点，css3.0的知识我打算在后面的文章里面总结。 • 其实html+css部分的知识点总共站前端的知识总量的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Web前端的知识之旅哟——初识css与css选择器(三)">
+<meta property="og:url" content="http://yoursite.com/2018/01/02/CssOne/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="前面总结完了html部分的基础内容之后，我总结了一下一下css部分的内容，希望对大家有所帮助~ 初识CSS• css的全称为cascading style sheet 层叠样式表，它的主要作用是为我们的html标签添加各种各样的样式和修饰效果。 • 这里我总结的css属于css2.0的知识点，css3.0的知识我打算在后面的文章里面总结。 • 其实html+css部分的知识点总共站前端的知识总量的">
+<meta property="og:updated_time" content="2018-01-02T05:11:07.853Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Web前端的知识之旅哟——初识css与css选择器(三)">
+<meta name="twitter:description" content="前面总结完了html部分的基础内容之后，我总结了一下一下css部分的内容，希望对大家有所帮助~ 初识CSS• css的全称为cascading style sheet 层叠样式表，它的主要作用是为我们的html标签添加各种各样的样式和修饰效果。 • 这里我总结的css属于css2.0的知识点，css3.0的知识我打算在后面的文章里面总结。 • 其实html+css部分的知识点总共站前端的知识总量的">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/01/02/CssOne/"/>
+
+
+
+
+
+  <title>Web前端的知识之旅哟——初识css与css选择器(三) | Hexo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/02/CssOne/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Web前端的知识之旅哟——初识css与css选择器(三)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-02T13:10:12+08:00">
+                2018-01-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>前面总结完了html部分的基础内容之后，我总结了一下一下css部分的内容，希望对大家有所帮助~</p>
+<h3 id="初识CSS"><a href="#初识CSS" class="headerlink" title="初识CSS"></a><span style="color: #ff0000;">初识CSS</span></h3><p>• css的全称为<span style="color: #ff0000;">cascading style sheet</span> <span style="color: #ff0000;">层叠样式表</span>，它的主要作用是为我们的html标签添加各种各样的样式和修饰效果。</p>
+<p>• 这里我总结的css属于<span style="color: #ff0000;">css2.0</span>的知识点，css3.0的知识我打算在后面的文章里面总结。</p>
+<p>• 其实html+css部分的知识点总共站前端的知识总量的1%-2%，但是却占了<span style="color: #ff0000;">20%-30%</span>的重要度，所以我们一定不能轻视html和css。(这是针对最近网上有很多人学习前端忽视html和css说的…)</p>
+<h4 id="首先我们要介绍一下，html页面如何引入我们的css样式"><a href="#首先我们要介绍一下，html页面如何引入我们的css样式" class="headerlink" title="首先我们要介绍一下，html页面如何引入我们的css样式"></a><span style="color: #ff0000;">首先我们要介绍一下，html页面如何引入我们的css样式</span></h4><p>css的引入方式一共有<span style="color: #ff0000;">4种</span>：</p>
+<p>1<span style="color: #ff0000;">.行间样式</span> 直接在html 的标签里面写style属性 前面两篇里面的更改标签的样式都是用的这一种方式</p>
+<p>2<span style="color: #ff0000;">.页面级css</span> 在head标签里面添加一个style标签</p>
+<p>&lt;style type=”text/css”&gt;&lt;/style&gt;</p>
+<p>这里的style标签的type要不不写，不然就要写正确，只要书写错误，这个样式就不会生效。</p>
+<p>3.<span style="color: #ff0000;">外部css文件</span> &lt;—我们选择这种方式</p>
+<p>我们在外面创建一个<span style="color: #ff0000;">.css</span>后缀的文件，然后在html里面引入这个外部的css文件即可。</p>
+<p>在head标签里面加上一个link标签。</p>
+<p><span style="color: #ff0000;">&lt;link rel=”stylesheet” href=””&gt;</span></p>
+<p>• link标签里面的href属性上写我们建立的css文件的地址，最好用相对地址的形式。</p>
+<p><strong><span style="color: #ff0000;">我们为什么要选择这种加载方式？</span></strong></p>
+<p><span style="color: #000000;">因为link加载不会阻塞html的加载，html和css属于<span style="color: #ff0000;">异步加载</span></span></p>
+<p>4.import方式引入(<span style="color: #ff0000;">已经弃用</span>)</p>
+<p>在head标签里面写一个style标签，在第一行写上<span style="color: #ff0000;">@import url();<span style="color: #000000;">url里面写上css文件的地址，可以加引号也可以不加引号。</span></span></p>
+<p>这种引入方式有几种缺点导致它现在被<span style="color: #ff0000;">废弃使用</span>：</p>
+<p>1.<span style="color: #ff0000;">必须写在第一行</span>，若有多个则一起写在最前面。</p>
+<p>2.<span style="color: #ff0000;">ie6</span>的环境下，只能使用最多<span style="color: #ff0000;">31次</span>，这个数字据说是阿里的开发人员一点一点测试出来的。</p>
+<p>3.程序读到import的时候，会忽略掉import，等到html里面的所有内容包括图片在内的所有资源全都加载完之后才加载import的css文件，也就是说，import引入的css文件和html的加载是<span style="color: #ff0000;">同步</span>进行的。</p>
+<p>• 这里有一点不得不说明的是，<span style="color: #ff0000;">link标签引入和style标签修改样式二者之间并没有什么优先级</span>，谁写在前面谁就先执行，写在后面的css文件会覆盖掉前面的css文件。有时候会<span style="color: #ff0000;">因为网速问题</span>，link写在上面，但是link还没有加载进来，所以先运行了后面的style，这种问题是网速导致的，并不是二者本身拥有优先级的问题。</p>
+<h3 id="介绍完了如何引入css文件之后，我们再来介绍一下css选择器的知识"><a href="#介绍完了如何引入css文件之后，我们再来介绍一下css选择器的知识" class="headerlink" title="介绍完了如何引入css文件之后，我们再来介绍一下css选择器的知识"></a><span style="color: #ff0000;">介绍完了如何引入css文件之后，我们再来介绍一下css选择器的知识</span></h3><p>• css选择器的作用是让我们找到我们想要修改样式的元素，然后为其修改样式。</p>
+<p>我们的选择方式有很多种：</p>
+<p>1<span style="color: #ff0000;">.id选择器</span></p>
+<p>我们给元素添加一个id属性，这个id是唯一标识，一个元素只能有一个id，一个id也只能给一个元素。然后我们在css文件中，通过#id {}的方式，就可以选择到我们添加id的那个元素了。</p>
+<p><span style="color: #0000ff;"> &lt;div id=”demo”&gt;&lt;/div&gt;</span></p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-CSS prettyprinted" style=""><br><br>1.  <span class="com">#demo {</span><br>2.  <span class="pln">&nbsp;</span><br>3.  <span class="pln">&nbsp; &nbsp; &nbsp; &nbsp; background</span><span class="pun">-</span><span class="pln">color</span><span class="pun">:</span><span class="pln"> red</span><span class="pun">;</span><br>4.  <span class="pln">&nbsp;</span><br>5.  <span class="pln">&nbsp; &nbsp; &nbsp; &nbsp; width</span><span class="pun">:</span><span class="pln"> </span><span class="lit">100px</span><span class="pun">;</span><br>6.  <span class="pln">&nbsp;</span><br>7.  <span class="pln">&nbsp; &nbsp; &nbsp; &nbsp; height</span><span class="pun">:</span><span class="pln"> </span><span class="lit">100px</span><br>8.  <span class="pln">&nbsp;</span><br>9.  <span class="pun">}(这些</span><span class="pln">css</span><span class="pun">样式是写在</span><span class="pln">css</span><span class="pun">文件中的)</span></pre><div class="code-pretty-toolbar"><span class="title">CSS</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>2<span style="color: #ff0000;">.class类选择器</span></p>
+<p>在元素的属性中写一个叫做class的属性，这个属性是为这个元素添加一个类名，每一个元素可以有多个类名，同一个类名也可以赋给很多个元素。然后我们在css文件中，通过.class {} 的方式来选择出添加了类名的元素。</p>
+<p><span style="color: #0000ff;">&lt;div class=”demo”&gt;&lt;/div&gt;</span></p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-CSS prettyprinted" style=""><br><br>1.  <span class="pun">.</span><span class="pln">demo </span><span class="pun">{</span><br>2.  <span class="pln">&nbsp;</span><br>3.  <span class="pln">&nbsp; &nbsp; &nbsp; &nbsp; background</span><span class="pun">-</span><span class="pln">color</span><span class="pun">:</span><span class="pln"> red</span><span class="pun">;</span><br>4.  <span class="pln">&nbsp;</span><br>5.  <span class="pln">&nbsp; &nbsp; &nbsp; &nbsp; width</span><span class="pun">:</span><span class="pln"> </span><span class="lit">100px</span><span class="pun">;</span><br>6.  <span class="pln">&nbsp;</span><br>7.  <span class="pln">&nbsp; &nbsp; &nbsp; &nbsp; height</span><span class="pun">:</span><span class="pln"> </span><span class="lit">100px</span><br>8.  <span class="pln">&nbsp;</span><br>9.  <span class="pun">}(这些</span><span class="pln">css</span><span class="pun">样式是写在</span><span class="pln">css</span><span class="pun">文件中的)</span></pre><div class="code-pretty-toolbar"><span class="title">CSS</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>3.<span style="color: #ff0000;">标签选择器</span></p>
+<p>div{} &nbsp;只要是div的标签就会被选择出来。</p>
+<p>• 这里有一个很重要的<span style="color: #ff0000;">编程思想</span>：<strong><span style="color: #ff0000;">我们先写css在写html，是我们自己在创造标签，而如果我们现在html再写css的话，是我们在添加样式</span></strong>。比如：我们在em加上font-weight: bold;的样式，这样我们就创造了一个加粗斜体的标签。</p>
+<p>4.通配符选择器 <em>{} 所有的标签都会被选择出来加上样式，body标签页包含在内。所以如果</em>{background-color: red}的话，那么整个页面都会变红，因为我们同时给body元素也添加了背景颜色。</p>
+<p>• 我们在单独的样式后面加上<span style="color: #ff0000;"> !important</span>之后，这个样式就会被赋予<span style="color: #ff0000;">最高级的优先级</span>，在没有特殊情况下，后面怎么添加样式都不会覆盖或者修改这个样式。比如：background-color: red !important;没有特殊情况的话后面怎么加样式都是红色的。</p>
+<p>5.<span style="color: #ff0000;">属性选择器</span></p>
+<p>[id] {} 这样有id属性的标签就都会被选择出来。</p>
+<p>我经过测试发现：</p>
+<p>优先级<span style="color: #ff0000;"> !important &gt; 行间样式 &gt; id &gt; class|属性 &gt; 标签 &gt; *&nbsp;</span></p>
+<p>但是我们不必背这些东西，我们只需要记住他们每一种<span style="color: #ff0000;">选择器的权重值</span>就可以了。</p>
+<table border="1px" cellpadding="3px" cellspacing="0px" style="color:red"><br><tbody><tr align="center"><br><td>CSS选择器</td><br><td>权重值</td><br></tr><br><tr align="center"><br><td>!important</td><br><td>无穷大</td><br></tr><br><tr align="center"><br><td>行间样式</td><br><td>1000</td><br></tr><br><tr align="center"><br><td>id</td><br><td>100</td><br></tr><br><tr align="center"><br><td>class、属性、伪类</td><br><td>10</td><br></tr><br><tr align="center"><br><td>标签、伪元素</td><br><td>1</td><br></tr><br><tr align="center"><br><td>通配符</td><br><td>0</td><br></tr><br></tbody></table>
+
+<p>• 值得一提的是，在数学中无穷大+1依然是无穷大，但是在css选择器的权重值里面，<span style="color: #ff0000;">无穷大+1 &gt; 无穷大</span>。</p>
+<h3 id="有了权重值-nbsp-我们就可以了解父子选择器了"><a href="#有了权重值-nbsp-我们就可以了解父子选择器了" class="headerlink" title="有了权重值 &nbsp;我们就可以了解父子选择器了"></a><span style="color: #ff0000;">有了权重值 &nbsp;我们就可以了解父子选择器了</span></h3><p>6.<span style="color: #ff0000;">父子选择器 &nbsp;（派生选择器）</span></p>
+<p>div p {}</p>
+<p>给div下面的p加样式 这时候的p的<span style="color: #ff0000;">权重值是加和的结果</span>。</p>
+<p>• 在实际开发中，我们因为要注意浏览器寻找时候的耗能，一般父子选择器<strong><span style="color: #ff0000;">不超过4层</span></strong>。</p>
+<p>.wrapper .box .content .name &nbsp;一般不超过像这样的四层。</p>
+<p>7.<span style="color: #ff0000;">直接子元素选择器</span></p>
+<p><span style="color: #ff0000;">div&gt;strong </span></p>
+<p>div<span style="color: #ff0000;">直接子元素</span>里面的strong，div的子元素里面的不是div的直接子元素的strong就不符合要求。</p>
+<p><span style="color: #0000ff;">&lt;div&gt;</span></p>
+<p><span style="color: #0000ff;"> &lt;strong&gt;&lt;/strong&gt;</span></p>
+<p><span style="color: #0000ff;">&lt;/div&gt;</span></p>
+<p><span style="color: #00ff00;">√</span></p>
+<p><span style="color: #0000ff;">&lt;div&gt;</span></p>
+<p><span style="color: #0000ff;"> &lt;em&gt;</span></p>
+<p><span style="color: #0000ff;"> &lt;strong&gt;&lt;/strong&gt;</span></p>
+<p><span style="color: #0000ff;"> &lt;/em&gt;</span></p>
+<p><span style="color: #0000ff;">&lt;/div&gt;</span></p>
+<p><span style="color: #ff0000;">×</span></p>
+<p><span style="color: #ff0000;">id和class也是可以使用父子选择器的哟~</span></p>
+<p>8.<span style="color: #ff0000;">并列选择器</span></p>
+<p><span style="color: #0000ff;">&lt;p class=”select”&gt;&lt;/p&gt;</span></p>
+<p><span style="color: #0000ff;">&lt;div class=”select”&gt;&lt;/div&gt;</span></p>
+<p>怎么选择出类名是select的div呢？</p>
+<p>我们可以使用<span style="color: #ff0000;">div.select {}</span> 来选择出来</p>
+<p>这种方式是只有div和.select同时作用在一个标签上的时候才会被选择出来，书写的时候标签名放在前面，其他的放在后面。</p>
+<p>9.<span style="color: #ff0000;">分组选择器</span></p>
+<p><span style="color: #0000ff;"> &lt;p&gt;&lt;/p&gt;</span></p>
+<p><span style="color: #0000ff;"> &lt;strong&gt;&lt;/strong&gt;</span></p>
+<p><span style="color: #0000ff;"> &lt;em&gt;&lt;/em&gt;</span></p>
+<p><span style="color: #0000ff;"> &lt;div&gt;&lt;/div&gt;</span></p>
+<p>我们要想同时给四种标签都加上color: red的样式，不可能把四个标签都写一遍样式，因此要用分组选择器。</p>
+<p><span style="color: #ff0000;">div, p, em, strong {}</span> 这样的写法，我们可以把前面写的所有的标签都选择出来加上样式，中间是用逗号连接的。这个样子四种标签就全都被选择出来并且都加上了统一的样式。</p>
+<h3 id="最后有一个很重要的问题，那就是父子选择器的时候浏览器是怎么检索的？"><a href="#最后有一个很重要的问题，那就是父子选择器的时候浏览器是怎么检索的？" class="headerlink" title="最后有一个很重要的问题，那就是父子选择器的时候浏览器是怎么检索的？"></a><span style="color: #ff0000;">最后有一个很重要的问题，那就是父子选择器的时候浏览器是怎么检索的？</span></h3><p>div p strong em span 这样的选择器，浏览器是怎么找的？是从左往右，还是从右往左？</p>
+<p><span style="color: #ff0000;"><strong>答案是从右往左哟~</strong></span></p>
+<p>这是为什么呢？</p>
+<p>• 因为如果是从左往右寻找的话，每找到一个父级标签，都要把它下面的所有标签都遍历一遍，看看有没有我们下一个标签，上面那个选择器中，浏览器会先找到div这个标签，然后把div下面所有的子元素都遍历一遍后，找到strong这个标签，然后再把strong这个标签下面的所有元素遍历一遍，找到em这个标签，以此类推，这样是十分消耗性能并且速度非常慢的。</p>
+<p>• 而如果是从右往左的话，那么浏览器只需要先找到span标签，然后从span这个节点向上寻找，只要找到em就可以停止寻找，以此类推，不必遍历所有的节点，而且需要遍历的点非常的少，这样的好处显而易见，速度非常快，而且不耗性能。</p>
+<h3 id="最后有一些需要说"><a href="#最后有一些需要说" class="headerlink" title="最后有一些需要说"></a><span style="color: #ff0000;">最后有一些需要说</span></h3><p>• 我们一般<span style="color: #ff0000;">不给标签加id</span>，而是通过<span style="color: #ff0000;">添加class类名</span>来选择的，因为id代表唯一标示，我们一般用id来做标记，后台的php会提取出来id，然后换成他们的标记，因此可能会导致我们的选择器选择不出来我们想要的标签。</p>
+<p>• 我们写类名的时候，一定要注意<span style="color: #ff0000;">语义化</span>，要符合<span style="color: #ff0000;">语义化标准</span>，要用英文单词去命名，而不是用看不懂的abc之类的类名。</p>
+<p>希望以上的知识会对大家有所帮助哟~</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/02/htmlTwo/" rel="next" title="Web前端的知识之旅哟——html中的标签(二)">
+                <i class="fa fa-chevron-left"></i> Web前端的知识之旅哟——html中的标签(二)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#初识CSS"><span class="nav-number">1.</span> <span class="nav-text">初识CSS</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#首先我们要介绍一下，html页面如何引入我们的css样式"><span class="nav-number">1.1.</span> <span class="nav-text">首先我们要介绍一下，html页面如何引入我们的css样式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#介绍完了如何引入css文件之后，我们再来介绍一下css选择器的知识"><span class="nav-number">2.</span> <span class="nav-text">介绍完了如何引入css文件之后，我们再来介绍一下css选择器的知识</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#有了权重值-nbsp-我们就可以了解父子选择器了"><span class="nav-number">3.</span> <span class="nav-text">有了权重值  我们就可以了解父子选择器了</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最后有一个很重要的问题，那就是父子选择器的时候浏览器是怎么检索的？"><span class="nav-number">4.</span> <span class="nav-text">最后有一个很重要的问题，那就是父子选择器的时候浏览器是怎么检索的？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最后有一些需要说"><span class="nav-number">5.</span> <span class="nav-text">最后有一些需要说</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
