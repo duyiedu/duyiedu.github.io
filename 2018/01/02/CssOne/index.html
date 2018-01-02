@@ -85,7 +85,7 @@
 <meta property="og:url" content="http://yoursite.com/2018/01/02/CssOne/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="前面总结完了html部分的基础内容之后，我总结了一下一下css部分的内容，希望对大家有所帮助~ 初识CSS• css的全称为cascading style sheet 层叠样式表，它的主要作用是为我们的html标签添加各种各样的样式和修饰效果。 • 这里我总结的css属于css2.0的知识点，css3.0的知识我打算在后面的文章里面总结。 • 其实html+css部分的知识点总共站前端的知识总量的">
-<meta property="og:updated_time" content="2018-01-02T05:16:18.831Z">
+<meta property="og:updated_time" content="2018-01-02T05:26:03.465Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Web前端的知识之旅哟——初识css与css选择器(三)">
 <meta name="twitter:description" content="前面总结完了html部分的基础内容之后，我总结了一下一下css部分的内容，希望对大家有所帮助~ 初识CSS• css的全称为cascading style sheet 层叠样式表，它的主要作用是为我们的html标签添加各种各样的样式和修饰效果。 • 这里我总结的css属于css2.0的知识点，css3.0的知识我打算在后面的文章里面总结。 • 其实html+css部分的知识点总共站前端的知识总量的">
@@ -343,27 +343,8 @@
 <p>我经过测试发现：</p>
 <p>优先级<span style="color: #ff0000;"> !important &gt; 行间样式 &gt; id &gt; class|属性 &gt; 标签 &gt; *&nbsp;</span></p>
 <p>但是我们不必背这些东西，我们只需要记住他们每一种<span style="color: #ff0000;">选择器的权重值</span>就可以了。<table border="1px" cellpadding="3px" cellspacing="0px" style="color:red"></table></p>
-<p><tbody><tr align="center"></tr></tbody></p>
-<p><td>CSS选择器</td></p>
-<p><td>权重值</td><br></p>
-<p><tr align="center"></tr></p>
-<p><td>!important</td></p>
-<p><td>无穷大</td><br></p>
-<p><tr align="center"></tr></p>
-<p><td>行间样式</td></p>
-<p><td>1000</td><br></p>
-<p><tr align="center"></tr></p>
-<p><td>id</td></p>
-<p><td>100</td><br></p>
-<p><tr align="center"></tr></p>
-<p><td>class、属性、伪类</td></p>
-<p><td>10</td><br></p>
-<p><tr align="center"></tr></p>
-<p><td>标签、伪元素</td></p>
-<p><td>1</td><br></p>
-<p><tr align="center"></tr></p>
-<p><td>通配符</td></p>
-<p><td>0</td><br><br></p>
+<table><br><tbody><br><tr align="center"><br><td>CSS选择器</td><br><td>权重值</td><br></tr><br><tr align="center"><br><td>!important</td><br><td>无穷大</td><br></tr><br><tr align="center"><br><td>行间样式</td><br><td>1000</td><br></tr><br><tr align="center"><br><td>id</td><br><td>100</td><br></tr><br><tr align="center"><br><td>class、属性、伪类</td><br><td>10</td><br></tr><br><tr align="center"><br><td>标签、伪元素</td><br><td>1</td><br></tr><br><tr align="center"><br><td>通配符</td><br><td>0</td><br></tr><br></tbody><br></table>
+
 <p>• 值得一提的是，在数学中无穷大+1依然是无穷大，但是在css选择器的权重值里面，<span style="color: #ff0000;">无穷大+1 &gt; 无穷大</span>。</p>
 <h3 id="有了权重值-nbsp-我们就可以了解父子选择器了"><a href="#有了权重值-nbsp-我们就可以了解父子选择器了" class="headerlink" title="有了权重值 &nbsp;我们就可以了解父子选择器了"></a><span style="color: #ff0000;">有了权重值 &nbsp;我们就可以了解父子选择器了</span></h3><p>6.<span style="color: #ff0000;">父子选择器 &nbsp;（派生选择器）</span></p>
 <p>div p {}</p>
