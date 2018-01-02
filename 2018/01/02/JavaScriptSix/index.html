@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="写完预编译之后才发现忘记写关于函数和闭包部分的知识点了……所以这里补上。 函数部分我们的函数声明有两种方式： 1.var demo = function () {} 函数表达式 2.function demo () {} 函数声明 3.var demo = function xxx() {} 命名函数表达式 其实第一种和第三种相比较，第一种叫做匿名函数表达式，但是平时我们基本都使用第一种，很少使用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Web前端的知识之旅哟——(补之前遗漏的)函数与作用域与闭包">
+<meta property="og:url" content="http://yoursite.com/2018/01/02/JavaScriptSix/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="写完预编译之后才发现忘记写关于函数和闭包部分的知识点了……所以这里补上。 函数部分我们的函数声明有两种方式： 1.var demo = function () {} 函数表达式 2.function demo () {} 函数声明 3.var demo = function xxx() {} 命名函数表达式 其实第一种和第三种相比较，第一种叫做匿名函数表达式，但是平时我们基本都使用第一种，很少使用">
+<meta property="og:updated_time" content="2018-01-02T08:59:45.038Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Web前端的知识之旅哟——(补之前遗漏的)函数与作用域与闭包">
+<meta name="twitter:description" content="写完预编译之后才发现忘记写关于函数和闭包部分的知识点了……所以这里补上。 函数部分我们的函数声明有两种方式： 1.var demo = function () {} 函数表达式 2.function demo () {} 函数声明 3.var demo = function xxx() {} 命名函数表达式 其实第一种和第三种相比较，第一种叫做匿名函数表达式，但是平时我们基本都使用第一种，很少使用">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/01/02/JavaScriptSix/"/>
+
+
+
+
+
+  <title>Web前端的知识之旅哟——(补之前遗漏的)函数与作用域与闭包 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/02/JavaScriptSix/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Web前端的知识之旅哟——(补之前遗漏的)函数与作用域与闭包</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-02T16:52:43+08:00">
+                2018-01-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>写完预编译之后才发现忘记写关于函数和闭包部分的知识点了……所以这里补上。</p>
+<h3 id="函数部分"><a href="#函数部分" class="headerlink" title="函数部分"></a><span style="color: #ff0000;">函数部分</span></h3><p>我们的函数声明有两种方式：</p>
+<p>1.<span style="color: #ff0000;">var demo = function () {} 函数表达式</span></p>
+<p>2.<span style="color: #ff0000;">function demo () {} 函数声明</span></p>
+<p>3.var demo = function xxx() {} 命名函数表达式</p>
+<p>其实第一种和第三种相比较，第一种叫做匿名函数表达式，但是平时我们基本都使用第一种，很少使用第三种，因此第一种我们就简称为函数表达式了。</p>
+<p>• 每一个函数里面都有一个类似数组的<span style="color: #ff0000;">类数组属性arguments</span>，这个属性里面存的就是<span style="color: #ff0000;">实参</span>。</p>
+<p>arguments[0]就可以查看我们传递的第一个实参了。</p>
+<p>函数有一个<span style="color: #ff0000;">length属性</span>，这个length储存的是<span style="color: #ff0000;">形参的数量</span>。</p>
+<p>• 每一个函数都会有一个return，如果不写的话函数会自动加上一个return;</p>
+<p>return的功能有两个：</p>
+<p>1.返回这个函数的<span style="color: #ff0000;">执行结果</span>。</p>
+<p>2<span style="color: #ff0000;"><span style="color: #000000;">.</span>终止函数的执行</span>。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="kwd">function</span><span class="pln"> test </span><span class="pun">(</span><span class="pln">a</span><span class="pun">,</span><span class="pln"> b</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><br>3.  <span class="pln">&nbsp; &nbsp;console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">a </span><span class="pun">+</span><span class="pln"> b</span><span class="pun">);</span><br>4.  <span class="pln">&nbsp; &nbsp;</span><span class="kwd">return</span><span class="pln"> </span><span class="pun">;</span><br>5.  <span class="pln">&nbsp; &nbsp;console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">‘hello’</span><span class="pun">);</span><br>6.  <span class="pun">}</span><br>7.  <span class="pln">test</span><span class="pun">(</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">2</span><span class="pun">);</span><span class="pln"> </span><span class="com">// 3 没有打印hello</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<h3 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a><span style="color: #ff0000;">作用域</span></h3><p>定义：变量（变量作用域又称为上下文）和函数生效（能被访问）的区域。</p>
+<p><strong><span style="color: #ff0000;">javascript的函数，是可以产生作用域的</span></strong>！！</p>
+<p>es5中的作用域大概只有全局作用域和函数作用域两种，es6中新添加了块级作用域。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="kwd">var</span><span class="pln"> demo </span><span class="pun">=</span><span class="pln"> </span><span class="lit">123</span><span class="pun">;</span><span class="pln"> </span><span class="com">//全局变量</span><br>3.  <span class="kwd">function</span><span class="pln"> test </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><br>4.  <span class="pln">&nbsp;  </span><span class="kwd">var</span><span class="pln"> demo </span><span class="pun">=</span><span class="pln"> </span><span class="lit">234</span><span class="pun">;</span><span class="com">// 局部变量</span><br>5.  <span class="pln">&nbsp;  console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">demo</span><span class="pun">);</span><br>6.  <span class="pln">&nbsp;  </span><span class="kwd">var</span><span class="pln"> demo1 </span><span class="pun">=</span><span class="pln"> </span><span class="str">‘hello’</span><span class="pun">;</span><br>7.  <span class="pun">}</span><br>8.  <span class="pln">test</span><span class="pun">();</span><span class="com">//234 &nbsp;就近打印局部变量，没有局部变量的时候才会打印全局的。</span><br>9.  <span class="pln">console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">demo1</span><span class="pun">);</span><span class="pln"> </span><span class="com">// 报错 我们的全局作用域无法访问函数的局部作用域</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>这个函数作用域就好像一个屋子，我们在屋子里面能够用屋子外面的东西，但是外面却不能闯进屋子里面使用屋子里面的东西。</p>
+<p>• 有一点要注意的是，如果在函数作用域里面声明变量没有用var的话，那么就声明了一个全局变量。</p>
+<p>• 同时，两个不同作用域（除了全局作用域）之间是不能互相访问的。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="kwd">function</span><span class="pln"> demo1 </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><br>3.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="kwd">var</span><span class="pln"> str1 </span><span class="pun">=</span><span class="pln"> </span><span class="str">‘abc’</span><span class="pun">;</span><br>4.  <span class="pun">}</span><br>5.  <span class="kwd">function</span><span class="pln"> demo2 </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><br>6.  <span class="pln">&nbsp; &nbsp; &nbsp; console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">str1</span><span class="pun">);</span><br>7.  <span class="pun">}</span><br>8.  <span class="pln">demo2</span><span class="pun">();</span><span class="pln"> </span><span class="com">// 报错</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<h3 id="作用域链"><a href="#作用域链" class="headerlink" title="作用域链"></a><span style="color: #ff0000;">作用域链</span></h3><p>既然函数存在函数作用域，函数又可以嵌套，那么作用域之间自然就会产生嵌套关系，这个时候就产生了作用域链。</p>
+<p>当代码在一个环境中执行时，会创建变量对象的一个作用域链（scope chain）来保证对执行环境<span style="color: #ff0000;"><strong>有权</strong></span>访问的变量和函数的<span style="color: #ff0000;"><strong>有序</strong></span>访问。作用域第一个对象始终是当前执行代码所在环境的变量对象。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="kwd">function</span><span class="pln"> demo </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><br>3.  <span class="pln">    </span><span class="kwd">var</span><span class="pln"> demo_a </span><span class="pun">=</span><span class="pln"> </span><span class="lit">1</span><span class="pun">;</span><br>4.  <span class="pln">    </span><span class="kwd">function</span><span class="pln"> test </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><br>5.  <span class="pln">        </span><span class="kwd">var</span><span class="pln"> demo_a </span><span class="pun">=</span><span class="pln"> </span><span class="lit">2</span><span class="pun">;</span><br>6.  <span class="pln">        console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">demo_a</span><span class="pun">);</span><br>7.  <span class="pln">    </span><span class="pun">}</span><br>8.  <span class="pln">    test</span><span class="pun">();</span><br>9.  <span class="pun">}</span><br>10.  <span class="pln">demo</span><span class="pun">();</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p><span style="color: #000000;">在这个例子中，demo1运行的时候，首先创建了一个demo的作用域，但是window本身还有一个全局作用域，这就让demo产生了一个作用域链。本着对执行环境的有权和有序访问，每个函数的自身的作用域总是在作用域链的最顶层，下一层是这个函数的父级函数的作用域，再下面是父级的父级的作用域，直到全局作用域。</span></p>
+<p>因此这个例子中的test函数执行时候打印的demo_a是它本身的作用域中的demo_a，而不是demo函数作用域下的demo_a，如果test函数作用域中没有demo_a这个变量的话，系统才会沿着作用域链向下找到demo作用域中的demo_a变量。</p>
+<h3 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a><span style="color: #ff0000;">闭包</span></h3><p>闭包是一个非常非常重要的知识点，我在网上看到过许多的定义，但是都有点繁琐，这里的知识点是我简单化的总结的。</p>
+<p>什么是闭包？</p>
+<p>我的理解是，<strong><span style="color: #ff0000;">闭包就是能够读取其他函数内部变量的函数</span></strong>。</p>
+<p>我们前面提到过，不同作用域之间不能够互相访问，但是我们如果在一个<span style="color: #ff0000;">函数内部再定义一个函数</span>，并且这个<span style="color: #ff0000;">内部函数与外部函数的变量有关联</span>，那么我们就可以通过<span style="color: #ff0000;">返回这个内部的函数</span>，然后<span style="color: #ff0000;">来访问外部函数里面的变量</span>。</p>
+<p>所以，在本质上，闭包就是将函数内部和函数外部连接起来的一座桥梁。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="kwd">function</span><span class="pln"> a </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><br>3.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="kwd">var</span><span class="pln"> demo1 </span><span class="pun">=</span><span class="pln"> </span><span class="lit">123</span><span class="pun">;</span><br>4.  <span class="pln">&nbsp; &nbsp; &nbsp; add </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><br>5.  <span class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; demo1</span><span class="pun">++;</span><br>6.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="pun">}</span><br>7.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="kwd">return</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><br>8.  <span class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">demo1</span><span class="pun">);</span><br>9.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="pun">};</span><br>10.  <span class="pun">}</span><br>11.  <span class="kwd">var</span><span class="pln"> demo </span><span class="pun">=</span><span class="pln"> a</span><span class="pun">();</span><br>12.  <span class="pln">demo</span><span class="pun">();</span><span class="pln"> </span><span class="com">// 123</span><br>13.  <span class="pln">add</span><span class="pun">();</span><br>14.  <span class="pln">demo</span><span class="pun">();</span><span class="pln"> </span><span class="com">// 124</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>当函数执行完之后，函数的执行上下文就会被销毁，自然我们就无法访问里面的变量了，但是我们这个函数返回了一个<span style="color: #ff0000;">依赖于这个函数的新函数，也就是说这个没有被销毁的新函数的作用域链中还存在着对原本函数的作用域的引用</span>，就导致我们原本的函数的上下文不会被销毁，我们<span style="color: #ff0000;">称返回的这个新函数是原本函数的闭包函数</span>。</p>
+<p>在上面的例子中，a函数内部有一个全局的函数add和一个局部变量demo1，我们这个把返回函数给了一个全局变量demo进入到了内存中，但是由于这个返回的新函数依赖于本来的a函数，这就导致本来的a函数的上下文不会被销毁。</p>
+<p>这里我们的打印函数一共运行了两次，都能打印出来值，说明a函数的demo1变量在函数执行完之后并没有被销毁而是存到了内存中。</p>
+<p>其次，add的值是一个匿名函数，而这个匿名函数本身也是一个闭包，所以add相当于是一个setter叠加器，可以在函数外部对函数内部的局部变量进行操作。</p>
+<p><strong><span style="color: #ff0000;">使用闭包的注意点</span></strong></p>
+<p>1.由于闭包会使得函数中的变量都被保存在内存中，<span style="color: #ff0000;">内存消耗很大</span>，所以不能滥用闭包，否则会造成网页的性能问题，在IE中可能导致<span style="color: #ff0000;">内存泄露</span>。</p>
+<p>解决方法是，<span style="color: #ff0000;">在退出函数之前，将不使用的局部变量全部删除</span>。</p>
+<p>2.闭包会在父函数外部，改变父函数内部变量的值。所以，如果你把<span style="color: #ff0000;">父函数当作对象</span>使用，把<span style="color: #ff0000;">闭包当作它的公用方法</span>，把<span style="color: #ff0000;">内部变量当作它的私有属性</span>，这时一定要小心，<strong><span style="color: #ff0000;">不要随便改变父函数内部变量的值</span></strong>。</p>
+<p>这里我们再总结一下什么是闭包：</p>
+<p>当<span style="color: #ff0000;">内部函数</span>在定义它的作用域的<span style="color: #ff0000;">外部被引用</span>时,就<span style="color: #ff0000;">创建了该内部函数的闭包</span> ,如果<span style="color: #ff0000;">内部函数引用了位于外部函数的变量</span>,当外部函数调用完毕后,这些变量在内存不会被释放,因为闭包需要它们。</p>
+<p>当我们能理解下面这个代码的时候，差不多就理解了闭包了：</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="kwd">var</span><span class="pln"> name </span><span class="pun">=</span><span class="pln"> </span><span class="str">‘global’</span><span class="pun">;</span><br>3.  <span class="kwd">var</span><span class="pln"> obj </span><span class="pun">=</span><span class="pln"> </span><span class="pun">{</span><br>4.  <span class="pln">&nbsp; &nbsp; &nbsp; name</span><span class="pun">:</span><span class="pln"> </span><span class="str">‘obj’</span><span class="pun">,</span><br>5.  <span class="pln">&nbsp; &nbsp; &nbsp; getName</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><br>6.  <span class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="kwd">return</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><br>7.  <span class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="kwd">this</span><span class="pun">.</span><span class="pln">name</span><span class="pun">);</span><br>8.  <span class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="pun">}</span><br>9.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="pun">}</span><br>10.  <span class="pun">}</span><br>11.  <span class="pln">obj</span><span class="pun">.</span><span class="pln">getName</span><span class="pun">()();</span><span class="pln"> </span><span class="com">// global </span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>累加器的例子：</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="kwd">function</span><span class="pln"> a </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><br>3.  <span class="pln">&nbsp; &nbsp; &nbsp; &nbsp;</span><span class="kwd">var</span><span class="pln"> num </span><span class="pun">=</span><span class="pln"> </span><span class="lit">1</span><span class="pun">;</span><br>4.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="kwd">function</span><span class="pln"> addNum </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><br>5.  <span class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; num</span><span class="pun">++;</span><br>6.  <span class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">num</span><span class="pun">);</span><br>7.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="pun">}</span><br>8.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="kwd">return</span><span class="pln"> addNum</span><span class="pun">;</span><br>9.  <span class="pun">}</span><br>10.  <span class="kwd">var</span><span class="pln"> demo </span><span class="pun">=</span><span class="pln"> a</span><span class="pun">();</span><br>11.  <span class="pln">demo</span><span class="pun">();</span><span class="pln"> </span><span class="com">// 2</span><br>12.  <span class="pln">demo</span><span class="pun">();</span><span class="pln"> </span><span class="com">// 3</span><br>13.  <span class="kwd">var</span><span class="pln"> demo1 </span><span class="pun">=</span><span class="pln"> a</span><span class="pun">();</span><br>14.  <span class="pln">demo1</span><span class="pun">();</span><span class="pln"> </span><span class="com">// 2</span><br>15.  <span class="pln">demo1</span><span class="pun">();</span><span class="pln"> </span><span class="com">// 3</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<h3 id="立即执行函数"><a href="#立即执行函数" class="headerlink" title="立即执行函数"></a><span style="color: #ff0000;">立即执行函数</span></h3><p>立即执行函数是解闭包的一个重要方法。但是注意<span style="color: #ff0000;">闭包是没有办法解除的</span>，我们只能通过另一个新闭包来消除上一个闭包的影响。</p>
+<p>定义：立即执行函数不需要被定义，直接执行，执行完毕之后直接释放。</p>
+<p>经常被用作初始化。</p>
+<p>立即执行函数的写法：</p>
+<p>1.<span style="color: #ff0000;">(function (a) {})(num);</span></p>
+<p>2.<strong><span style="color: #ff0000;">(function (a) {} (num))</span></strong></p>
+<p>传递的参数是a，a的实参值是num，num是我们在外面定义的变量。</p>
+<p>这两种写法功能完全一样，但是标准一点的写法是第二种。</p>
+<p>• 这里有一个小知识点：<span style="color: #ff0000;">函数声明不能被执行，但是函数表达式可以被执行</span>。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="kwd">function</span><span class="pln"> test</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{}</span><span class="pln"> </span><span class="pun">();</span><span class="com">// 错误</span><br>3.  <span class="kwd">var</span><span class="pln"> test </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{}</span><span class="pln"> </span><span class="pun">();</span><span class="com">// 这个是可以被执行的</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>第一种加一个括号变成立即执行函数就可以执行了。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="pun">(</span><span class="kwd">function</span><span class="pln"> </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{}</span><span class="pln"> </span><span class="pun">());</span><span class="pln"> &nbsp;</span><span class="com">// 正确</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>因为这种写法不是函数声明，所以不需要函数名字，因此就成为了立即执行函数。</p>
+<p><strong><span style="color: #ff0000;">立即执行函数的应用</span></strong></p>
+<p>现在我们有一个要求：我们现在有一个函数returnB，这个函数内部有一个数组arr，这个arr每一个值存的是一个函数并且函数的作用是输出相对应的数组下标值。</p>
+<p>我们一开始的写法可能是这个样子的：</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="kwd">function</span><span class="pln"> returnB</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><br>3.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="kwd">var</span><span class="pln"> arr </span><span class="pun">=</span><span class="pln"> </span><span class="pun">[];</span><br>4.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="kwd">for</span><span class="pln"> </span><span class="pun">(</span><span class="kwd">var</span><span class="pln"> i </span><span class="pun">=</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span><span class="pln"> i </span><span class="pun">&lt;</span><span class="pln"> </span><span class="lit">10</span><span class="pun">;</span><span class="pln"> i </span><span class="pun">++)</span><span class="pln"> </span><span class="pun">{</span><br>5.  <span class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; arr</span><span class="pun">[</span><span class="pln">i</span><span class="pun">]</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><br>6.  <span class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">i</span><span class="pun">);</span><br>7.  <span class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="pun">}</span><br>8.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="pun">}</span><br>9.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="kwd">return</span><span class="pln"> arr</span><span class="pun">;</span><br>10.  <span class="pun">}</span><br>11.  <span class="kwd">var</span><span class="pln"> save </span><span class="pun">=</span><span class="pln"> returnB</span><span class="pun">();</span><br>12.  <span class="kwd">for</span><span class="pln"> </span><span class="pun">(</span><span class="kwd">var</span><span class="pln"> i </span><span class="pun">=</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span><span class="pln"> i </span><span class="pun">&lt;</span><span class="pln"> </span><span class="lit">10</span><span class="pun">;</span><span class="pln"> i </span><span class="pun">++)</span><span class="pln"> </span><span class="pun">{</span><br>13.  <span class="pln">&nbsp; &nbsp; &nbsp; save</span><span class="pun"><a href=""></a></span><span class="pln">i</span><span class="pun">;</span><br>14.  <span class="pun">}</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>但是最后会输出10个10，并不是我们所想的0-9。</p>
+<p>这是因为我们打印i的这一行代码所在的函数的自身作用域中不存在i这个变量，而在它的父级函数returnB中才有i这个变量，这个打印函数是一个闭包函数，而且这arr[0]-arr[9]这10个值都是这一个闭包函数。因此当for循环执行完i变成10之后，我们开始后面的依次触发每一个save[i]函数的时候，函数寻找的i是作用域链中的第二层作用域，也就是父级函数returnB的作用域，而在这个作用域中的i都已经变成10了。</p>
+<p>这个时候10个打印函数都<span style="color: #ff0000;">共用一个i值</span>。</p>
+<p>那么如何更改可以让它输出0-9呢？这里就需要利用我们的立即执行函数来产生新的闭包以<span style="color: #ff0000;">消除我们共用一个闭包值</span>导致的问题。（注意不是消除闭包）</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="kwd">function</span><span class="pln"> returnB</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><br>3.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="kwd">var</span><span class="pln"> arr </span><span class="pun">=</span><span class="pln"> </span><span class="pun">[];</span><br>4.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="kwd">for</span><span class="pln"> </span><span class="pun">(</span><span class="kwd">var</span><span class="pln"> i </span><span class="pun">=</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span><span class="pln"> i </span><span class="pun">&lt;</span><span class="pln"> </span><span class="lit">10</span><span class="pun">;</span><span class="pln"> i </span><span class="pun">++)</span><span class="pln"> </span><span class="pun">{</span><br>5.  <span class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="pun">(</span><span class="kwd">function</span><span class="pln"> </span><span class="pun">(</span><span class="pln">n</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><br>6.  <span class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;arr</span><span class="pun">[</span><span class="pln">n</span><span class="pun">]</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><br>7.  <span class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">n</span><span class="pun">)</span><br>8.  <span class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="pun">};</span><br>9.  <span class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="pun">}(</span><span class="pln">i</span><span class="pun">))</span><br>10.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="pun">}</span><br>11.  <span class="kwd">return</span><span class="pln"> arr</span><span class="pun">;</span><br>12.  <span class="pun">}</span><br>13.  <span class="kwd">var</span><span class="pln"> save </span><span class="pun">=</span><span class="pln"> returnB</span><span class="pun">();</span><br>14.  <span class="pln">console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">save</span><span class="pun">);</span><br>15.  <span class="kwd">for</span><span class="pln"> </span><span class="pun">(</span><span class="kwd">var</span><span class="pln"> i </span><span class="pun">=</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span><span class="pln"> i </span><span class="pun">&lt;</span><span class="pln"> save</span><span class="pun">.</span><span class="pln">length</span><span class="pun">;</span><span class="pln"> i </span><span class="pun">++)</span><span class="pln"> </span><span class="pun">{</span><br>16.  <span class="pln">&nbsp; &nbsp; &nbsp; save</span><span class="pun"><a href=""></a></span><span class="pln">i</span><span class="pun">;</span><br>17.  <span class="pun">}</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>我们立即执行函数执行之后，会产生一个新的作用域，我们把i的具体的0-9这10个数分别作为参数传了进去，也就是说每一个作用域里面的的n都是不一样的。里层的打印函数因为没有n值，所以要向上找立即执行函数的作用域里面的n值。这样最后就会产生10个闭包，因为每一个立即执行函数都是一个新作用域。每一个闭包都是利用刚才立即执行函数的变量n，而每一个立即执行函数的变量n都是不同的，这样就解决了刚才共用闭包导致都打印10的问题了。</p>
+<p>今天的闭包和立即执行函数其实很重要的哟~希望对大家能有所帮助！</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/02/JavaScriptFive/" rel="next" title="Web前端的知识之旅哟——原型与原型链">
+                <i class="fa fa-chevron-left"></i> Web前端的知识之旅哟——原型与原型链
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/02/JavaScriptSeven/" rel="prev" title="Web前端的知识之旅哟——继承">
+                Web前端的知识之旅哟——继承 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-name">Artikel</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#函数部分"><span class="nav-number">1.</span> <span class="nav-text">函数部分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#作用域"><span class="nav-number">2.</span> <span class="nav-text">作用域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#作用域链"><span class="nav-number">3.</span> <span class="nav-text">作用域链</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#闭包"><span class="nav-number">4.</span> <span class="nav-text">闭包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#立即执行函数"><span class="nav-number">5.</span> <span class="nav-text">立即执行函数</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

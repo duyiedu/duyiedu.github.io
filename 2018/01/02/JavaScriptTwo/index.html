@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="我们在前面的运算符的部分提过了这个类型转换，这篇文章就主要介绍一下什么是类型转换。 &amp;nbsp;显示类型转换类型转换，自然是把数据的类型改变了，那么我们怎么才能知道数据的类型是否发生了改变呢？ 我们有一个操作符typeof可以检测数据的类型。 1.  console.log(typeof(123)); // numberJavaScript; “复制代码”); “查看纯文本代码”); “返回代码高">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Web前端的知识之旅哟——类型转换">
+<meta property="og:url" content="http://yoursite.com/2018/01/02/JavaScriptTwo/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="我们在前面的运算符的部分提过了这个类型转换，这篇文章就主要介绍一下什么是类型转换。 &amp;nbsp;显示类型转换类型转换，自然是把数据的类型改变了，那么我们怎么才能知道数据的类型是否发生了改变呢？ 我们有一个操作符typeof可以检测数据的类型。 1.  console.log(typeof(123)); // numberJavaScript; “复制代码”); “查看纯文本代码”); “返回代码高">
+<meta property="og:updated_time" content="2018-01-02T08:33:05.400Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Web前端的知识之旅哟——类型转换">
+<meta name="twitter:description" content="我们在前面的运算符的部分提过了这个类型转换，这篇文章就主要介绍一下什么是类型转换。 &amp;nbsp;显示类型转换类型转换，自然是把数据的类型改变了，那么我们怎么才能知道数据的类型是否发生了改变呢？ 我们有一个操作符typeof可以检测数据的类型。 1.  console.log(typeof(123)); // numberJavaScript; “复制代码”); “查看纯文本代码”); “返回代码高">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/01/02/JavaScriptTwo/"/>
+
+
+
+
+
+  <title>Web前端的知识之旅哟——类型转换 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/02/JavaScriptTwo/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Web前端的知识之旅哟——类型转换</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-02T16:08:43+08:00">
+                2018-01-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>我们在前面的运算符的部分提过了这个类型转换，这篇文章就主要介绍一下什么是类型转换。</p>
+<h3 id="nbsp-显示类型转换"><a href="#nbsp-显示类型转换" class="headerlink" title="&nbsp;显示类型转换"></a><span style="color: #ff0000;">&nbsp;显示类型转换</span></h3><p>类型转换，自然是把数据的类型改变了，那么我们怎么才能知道数据的类型是否发生了改变呢？</p>
+<p>我们有一个操作符<strong><span style="color: #ff0000;">typeof</span></strong>可以检测数据的类型。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br><br>1.  <span class="pln">console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="kwd">typeof</span><span class="pun">(</span><span class="lit">123</span><span class="pun">));</span><span class="pln"> </span><span class="com">// number</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>typeof能返回的类型一共只有6种：</p>
+<p><strong><span style="color: #ff0000;">numner、string、boolean、undefined、object、function</span></strong></p>
+<p>• <span style="color: #ff0000;">数组和null</span>类型的都属于<span style="color: #ff0000;">object</span>。其实null并不是一种对象，只是因为历史遗留性的问题，null通常用来作为对象占位符，所以被浏览器归到了object里面了。</p>
+<p>• <span style="color: #ff0000;">NaN</span>属于<span style="color: #ff0000;">number</span>类型。虽然是非数，但是非数也是数字的一种。</p>
+<p>• 同时，typeof返回的结果其实是一种字符串，我们可以用typeof来测试。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br><br>1.  <span class="pln">console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln"> </span><span class="kwd">typeof</span><span class="pun">(</span><span class="kwd">typeof</span><span class="pun">(</span><span class="pln">a</span><span class="pun">)));</span><span class="pln"> </span><span class="com">// string</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>1.<strong><span style="color: #ff0000;">Number(mix)</span></strong></p>
+<p>这个方法是可以把其他类型的数据转换成<span style="color: #ff0000;">数字类型</span>的数据<span style="color: #0000ff;">。</span></p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="kwd">var</span><span class="pln"> demo </span><span class="pun">=</span><span class="pln"> </span><span class="typ">Number</span><span class="pun">(</span><span class="str">‘123’</span><span class="pun">);</span><br>2.  <span class="pln">demo </span><span class="com">// number123</span><br>3.  <span class="pln">demo </span><span class="pun">=</span><span class="pln"> </span><span class="typ">Number</span><span class="pun">(</span><span class="kwd">true</span><span class="pun">)</span><br>4.  <span class="pln">demo </span><span class="com">// 1</span><br>5.  <span class="pln">demo </span><span class="pun">=</span><span class="pln"> </span><span class="typ">Number</span><span class="pun">(</span><span class="kwd">undefined</span><span class="pun">)</span><br>6.  <span class="pln">demo </span><span class="com">// NaN</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>2.<strong><span style="color: #ff0000;">parseInt(string, radix)</span></strong></p>
+<p>这个方法是将字符串转换成整型类型数字的。其中第二个参数radix基底是可以选择的参数。</p>
+<p>当radix为空的时候，这个函数的作用仅仅是将字符串转换成数字。</p>
+<p>当参数string里面既包括数字字符串又包括其他字符串的时候，它会将看到其他字符串就停止了，不会继续转换后面的数字型字符串了。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">parseInt</span><span class="pun">(</span><span class="str">‘123abc345’</span><span class="pun">)</span><span class="pln"> </span><span class="com">// 123</span><br>2.  <span class="pln">parseInt</span><span class="pun">(</span><span class="str">‘abc123’</span><span class="pun">)</span><span class="pln"> </span><span class="com">// NaN</span><br>3.  <span class="pln">parseInt</span><span class="pun">(</span><span class="str">‘123’</span><span class="pun">)</span><span class="pln"> </span><span class="com">// 123</span><br>4.  <span class="pln">parseInt</span><span class="pun">(</span><span class="str">‘abc’</span><span class="pun">)</span><span class="pln"> </span><span class="com">// NaN</span><br>5.  <span class="pln">parseInt</span><span class="pun">(</span><span class="kwd">true</span><span class="pun">)</span><span class="pln"> </span><span class="com">// NaN</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>当<span style="color: #ff0000;">radix不为空</span>的时候，这个函数可以用来作为进制转换，第二个参数的作用则是，我们把第一个参数的数字<span style="color: #ff0000;">当成几进制</span>的数字来<span style="color: #ff0000;">转换成十进制</span>。</p>
+<p>• radix参数的范围是<strong><span style="color: #ff0000;">2-36</span></strong>。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br><br>1.  <span class="kwd">var</span><span class="pln"> demo </span><span class="pun">=</span><span class="pln"> </span><span class="lit">10</span><span class="pun">;</span><br>2.  <span class="pln">parseInt</span><span class="pun">(</span><span class="pln">demo</span><span class="pun">,</span><span class="pln"> </span><span class="lit">16</span><span class="pun">)</span><span class="pln"> </span><span class="com">// 16</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>将十六进制的‘10’转换成十进制的16。</p>
+<p>3.<strong><span style="color: #ff0000;">parseFloat(radix)</span></strong></p>
+<p>这个方法和parseInt方法类似，是将字符串转换成浮点类型的数字，同样是碰到第一个非数字型字符停止，但是由于浮点型数据有小数点，所以它会识别第一个小数点以及后面的数字，但是第二个小数点就无法识别了。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">parseFloat</span><span class="pun">(</span><span class="str">‘123.2.3’</span><span class="pun">)</span><span class="pln"> </span><span class="com">// 123.2</span><br>2.  <span class="pln">parseFloat</span><span class="pun">(</span><span class="str">‘123.2abc’</span><span class="pun">)</span><span class="pln"> </span><span class="com">// 123.2</span><br>3.  <span class="pln">parseFloat</span><span class="pun">(</span><span class="str">‘123.abc’</span><span class="pun">)</span><span class="pln"> </span><span class="com">// 123</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>4.<strong><span style="color: #ff0000;">toString(radix)</span></strong></p>
+<p>这个方法和前面的都一点不同，它是<strong><span style="color: #ff0000;">对象上的方法</span></strong>，任何数据类型都可以使用，转换成字符串类型，涉及到包装类的一些知识。</p>
+<p>同样radix基底是可选参数，当为空的时候，仅仅代表将数据转化成字符串。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br><br>1.  <span class="kwd">var</span><span class="pln"> demo </span><span class="pun">=</span><span class="pln"> </span><span class="lit">123</span><span class="pun">;</span><br>2.  <span class="kwd">typeof</span><span class="pln"> demo</span><span class="pun">.</span><span class="pln">toString</span><span class="pun">();</span><span class="pln"> </span><span class="com">// string &nbsp; 123</span><br>3.  <span class="kwd">typeof</span><span class="pln"> </span><span class="kwd">true</span><span class="pun">.</span><span class="pln">toString</span><span class="pun">()</span><span class="pln"> </span><span class="com">// string true</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>当写了radix基底的时候，则代表我们要将这个数字<span style="color: #ff0000;">转化成几进制的数字型字符串</span>。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="kwd">var</span><span class="pln"> demo </span><span class="pun">=</span><span class="pln"> </span><span class="lit">10</span><span class="pun">;</span><br>2.  <span class="pln">demo</span><span class="pun">.</span><span class="pln">toString</span><span class="pun">(</span><span class="lit">16</span><span class="pun">)</span><span class="pln"> </span><span class="com">// A</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>• <span style="color: #ff0000;">undefiend和null没有toString方法</span>。</p>
+<p>5.<strong><span style="color: #ff0000;">String(mix)</span></strong></p>
+<p>和Number类似，把任何类型转换成字符串类型。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="kwd">typeof</span><span class="pun">(</span><span class="typ">String</span><span class="pun">(</span><span class="lit">123</span><span class="pun">));</span><span class="pln"> </span><span class="com">// string</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>6.<strong><span style="color: #ff0000;">Boolean(mix)</span></strong></p>
+<p>和Number类似，把任何类型转换成布尔类型。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="typ">Boolean</span><span class="pun">(</span><span class="lit">0</span><span class="pun">);</span><span class="pln"> </span><span class="com">// false</span><br>2.  <span class="typ">Boolean</span><span class="pun">(</span><span class="kwd">undefined</span><span class="pun">);</span><span class="pln"> </span><span class="com">// false</span><br>3.  <span class="typ">Boolean</span><span class="pun">(</span><span class="kwd">null</span><span class="pun">);</span><span class="pln"> </span><span class="com">// false</span><br>4.  <span class="typ">Boolean</span><span class="pun">(</span><span class="str">‘’</span><span class="pun">);</span><span class="pln"> </span><span class="com">// false</span><br>5.  <span class="typ">Boolean</span><span class="pun">(</span><span class="kwd">NaN</span><span class="pun">);</span><span class="pln"> </span><span class="com">// false</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<h3 id="隐式类型转换"><a href="#隐式类型转换" class="headerlink" title="隐式类型转换"></a><span style="color: #ff0000;">隐式类型转换</span></h3><p><span style="color: #000000;">1.<strong><span style="color: #ff0000;">isNaN()</span></strong></span></p>
+<p>这个方法可以检测数据是不是非数类型。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">isNaN</span><span class="pun">(</span><span class="kwd">NaN</span><span class="pun">);</span><span class="pln"> </span><span class="com">// true</span><br>2.  <span class="pln">isNaN</span><span class="pun">(</span><span class="str">‘abc’</span><span class="pun">);</span><span class="pln"> </span><span class="com">// true</span><br>3.  <span class="pln">isNaN</span><span class="pun">(</span><span class="lit">123</span><span class="pun">);</span><span class="pln"> </span><span class="com">// false</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>这中间隐含了一个隐式转换，它会先将你传的参数调用一下<span style="color: #ff0000;">Number</span>方法之后，再看看结果是不是NaN，不过这个方法可以检测NaN本身。</p>
+<p>2.<strong><span style="color: #ff0000;">算术运算符</span></strong></p>
+<p>在前面介绍算术运算符的时候，我们就提到了类型转换。</p>
+<p>• ++就是现将数据调用一遍Number之后，再自加一。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="kwd">var</span><span class="pln"> demo </span><span class="pun">=</span><span class="pln"> </span><span class="str">‘abc’</span><span class="pun">;</span><br>2.  <span class="pln">demo </span><span class="pun">++;</span><span class="pln"> </span><span class="com">//NaN</span><br>3.  <span class="pln">demo </span><span class="pun">=</span><span class="pln"> </span><span class="str">‘123’</span><span class="pun">;</span><br>4.  <span class="pun">++</span><span class="pln">demo</span><span class="pun">;</span><span class="pln"> </span><span class="com">//124</span><br>5.  <span class="pln">demo </span><span class="pun">=</span><span class="pln"> </span><span class="str">‘123’</span><span class="pun">;</span><br>6.  <span class="pln">demo</span><span class="pun">++;</span><span class="pln"> &nbsp;</span><span class="com">//123</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>放在后面写++，虽然是执行完之后才加一，但是<span style="color: #ff0000;">执行之前就会调用Number进行类型转换</span>。</p>
+<p><strong>&nbsp;• </strong>同样一目运算符也可以进行类型转换。</p>
+<p>+、-、*、/在执行之前都会<span style="color: #ff0000;">先进行类型转换</span>，都转换成数字类型的在进行运算。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="kwd">var</span><span class="pln"> num </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">false</span><span class="pun">;</span><br>2.  <span class="pun">+</span><span class="pln">num</span><span class="pun">;</span><span class="pln"> </span><span class="com">// 0</span><br>3.  <span class="kwd">var</span><span class="pln"> demo </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">true</span><span class="pun">;</span><br>4.  <span class="pun">-</span><span class="pln">demo</span><span class="pun">;</span><span class="pln"> </span><span class="com">// -1</span><br>5.  <span class="kwd">var</span><span class="pln"> demo </span><span class="pun">=</span><span class="pln"> </span><span class="str">‘abc’</span><span class="pun">;</span><br>6.  <span class="pun">+</span><span class="pln">demo</span><span class="pun">;</span><span class="pln"> </span><span class="com">// NaN</span><br>7.  <span class="pln">&nbsp;</span><span class="lit">1</span><span class="pln"> </span><span class="pun"><em></em></span><span class="pln"> </span><span class="str">‘2’</span><span class="pun">;</span><span class="pln"> </span><span class="com">// 2</span><br>8.  <span class="kwd">true</span><span class="pln"> </span><span class="pun"></span><span class="pln"> </span><span class="kwd">false</span><span class="pun">;</span><span class="pln"> </span><span class="com">// 0</span><br>9.  <span class="kwd">false</span><span class="pln"> </span><span class="pun">/</span><span class="pln"> </span><span class="kwd">false</span><span class="pun">;</span><span class="pln"> </span><span class="com">// NaN</span><br>10.  <span class="kwd">true</span><span class="pln"> </span><span class="pun">/</span><span class="pln"> </span><span class="kwd">false</span><span class="pun">;</span><span class="pln"> </span><span class="com">//infinity无穷大</span><br>11.  <span class="pun">-</span><span class="kwd">true</span><span class="pln"> </span><span class="pun">/</span><span class="pln"> </span><span class="kwd">false</span><span class="pun">;</span><span class="pln"> </span><span class="com">//-infinity</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>•<strong><span style="color: #ff0000;"> 逻辑运算符也会隐式调用类型转换</span></strong></p>
+<p>&amp;&amp;和||都是先把表达式调用Boolean，换成布尔值再进行判断，看看是true还是false，不过返回的结果还是本身表达式的结果。</p>
+<p>！取反操作符返回的结果也是调用Boolean方法之后的结果。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br><br>1.  <span class="pun">!</span><span class="str">‘abc’</span><span class="pun">;</span><span class="pln"> </span><span class="com">// false</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>• 当然也有<strong><span style="color: #ff0000;">不发生类型转换</span></strong>的比较运算符</p>
+<p><span style="color: #ff0000;">===严格等于</span></p>
+<p><span style="color: #ff0000;"> !==严格不等于</span></p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="str">‘123’</span><span class="pln"> </span><span class="pun">===</span><span class="pln"> </span><span class="lit">123</span><span class="pun">;</span><span class="pln"> </span><span class="com">// false;</span><br>2.  <span class="kwd">true</span><span class="pln"> </span><span class="pun">===</span><span class="pln"> </span><span class="str">‘true’</span><span class="pun">;</span><span class="pln"> </span><span class="com">// false</span><br>3.  <span class="lit">1</span><span class="pln"> </span><span class="pun">!==</span><span class="pln"> </span><span class="str">‘1’</span><span class="pun">;</span><span class="pln"> </span><span class="com">// true</span><br>4.  <span class="lit">1</span><span class="pln"> </span><span class="pun">!==</span><span class="pln"> </span><span class="lit">1</span><span class="pun">;</span><span class="pln"> </span><span class="com">// false</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/02/JavaScriptOne/" rel="next" title="Web前端的知识之旅哟——初识JavaScript">
+                <i class="fa fa-chevron-left"></i> Web前端的知识之旅哟——初识JavaScript
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/02/JavaScriptThree/" rel="prev" title="Web前端的知识之旅哟——预编译">
+                Web前端的知识之旅哟——预编译 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-name">Artikel</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#nbsp-显示类型转换"><span class="nav-number">1.</span> <span class="nav-text"> 显示类型转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#隐式类型转换"><span class="nav-number">2.</span> <span class="nav-text">隐式类型转换</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

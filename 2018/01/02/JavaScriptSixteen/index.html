@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="查看滚动条的滚动距离js中有两套方法可以查看当前滚动条的滚动距离。 第一套是这样的： window.pageXOffset/window.pageYOffset 这个方法可以查看滚动条的横轴和纵轴的滚动距离，但是很遗憾的是IE8以及以下的版本不兼容。 因此针对于IE，我们就需要有第二套方法： document.body.scrollLeft/doucment.body.scrollTop docu">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Web前端的知识之旅哟——滚动条与元素尺寸">
+<meta property="og:url" content="http://yoursite.com/2018/01/02/JavaScriptSixteen/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="查看滚动条的滚动距离js中有两套方法可以查看当前滚动条的滚动距离。 第一套是这样的： window.pageXOffset/window.pageYOffset 这个方法可以查看滚动条的横轴和纵轴的滚动距离，但是很遗憾的是IE8以及以下的版本不兼容。 因此针对于IE，我们就需要有第二套方法： document.body.scrollLeft/doucment.body.scrollTop docu">
+<meta property="og:updated_time" content="2018-01-02T09:47:10.290Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Web前端的知识之旅哟——滚动条与元素尺寸">
+<meta name="twitter:description" content="查看滚动条的滚动距离js中有两套方法可以查看当前滚动条的滚动距离。 第一套是这样的： window.pageXOffset/window.pageYOffset 这个方法可以查看滚动条的横轴和纵轴的滚动距离，但是很遗憾的是IE8以及以下的版本不兼容。 因此针对于IE，我们就需要有第二套方法： document.body.scrollLeft/doucment.body.scrollTop docu">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/01/02/JavaScriptSixteen/"/>
+
+
+
+
+
+  <title>Web前端的知识之旅哟——滚动条与元素尺寸 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/02/JavaScriptSixteen/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Web前端的知识之旅哟——滚动条与元素尺寸</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-02T17:44:16+08:00">
+                2018-01-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="查看滚动条的滚动距离"><a href="#查看滚动条的滚动距离" class="headerlink" title="查看滚动条的滚动距离"></a><span style="color: #ff0000;">查看滚动条的滚动距离</span></h3><p>js中有两套方法可以查看当前滚动条的滚动距离。</p>
+<p>第一套是这样的：</p>
+<p><span style="color: #ff0000;">window.pageXOffset/window.pageYOffset</span></p>
+<p>这个方法可以查看滚动条的横轴和纵轴的滚动距离，但是很遗憾的是<span style="color: #ff0000;">IE8以及以下的版本不兼容</span>。</p>
+<p>因此针对于IE，我们就需要有第二套方法：</p>
+<p><span style="color: #ff0000;">document.body.scrollLeft/doucment.body.scrollTop</span></p>
+<p><span style="color: #ff0000;">document.documentElement.scrollLeft/document.documentElement.scrollTop</span></p>
+<p>虽然IE可以使用这两个方法，但是这两个方法不仅仅是IE才可以使用。</p>
+<p>这里要说明的是，<span style="color: #ff0000;">这两种方法要一起使用</span>，因为浏览器的兼容性问题，有的浏览器是document.body有值，有的是document.documentElement有值，<span style="color: #ff0000;">但是所有的浏览器都只有一个有值，不会两个都有或者一个都没有</span>，而且这里的没有值不代表是null，而是0，因此我们使用的时候一般都是两个一起使用。</p>
+<p>针对兼容性的问题，我们现在就可以封装一个函数，求滚动条滚动距离的方法。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="kwd">function</span><span class="pln"> getScrollOffset</span><span class="pun">(){</span><br>2.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="kwd">if</span><span class="pun">(</span><span class="pln">window</span><span class="pun">.</span><span class="pln">pageXOffset</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><br>3.  <span class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="kwd">return</span><span class="pln"> </span><span class="pun">{</span><br>4.  <span class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; x</span><span class="pun">:</span><span class="pln"> window</span><span class="pun">.</span><span class="pln">pageXOffset</span><span class="pun">,</span><br>5.  <span class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; y</span><span class="pun">:</span><span class="pln"> window</span><span class="pun">.</span><span class="pln">pageYOffset</span><br>6.  <span class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="pun">}</span><br>7.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="pun">}</span><br>8.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="kwd">return</span><span class="pln"> </span><span class="pun">{</span><br>9.  <span class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; x</span><span class="pun">:</span><span class="pln"> document</span><span class="pun">.</span><span class="pln">body</span><span class="pun">.</span><span class="pln">scollTop </span><span class="pun">+</span><span class="pln"> document</span><span class="pun">.</span><span class="pln">documentElement</span><span class="pun">.</span><span class="pln">scrollTop</span><span class="pun">,</span><br>10.  <span class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; y</span><span class="pun">:</span><span class="pln"> document</span><span class="pun">.</span><span class="pln">body</span><span class="pun">.</span><span class="pln">scrollLeft </span><span class="pun">+</span><span class="pln"> document</span><span class="pun">.</span><span class="pln">documentELement</span><span class="pun">.</span><span class="pln">scrollLeft</span><span class="pun">;</span><br>11.  <span class="pun">}</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>当浏览器不是IE的时候，可以直接使用window.pageXOffset和window.pageYOffset的方法，当没有这两个的时候，我们才需要来计算。</p>
+<h3 id="查看视口的尺寸"><a href="#查看视口的尺寸" class="headerlink" title="查看视口的尺寸"></a><span style="color: #ff0000;">查看视口的尺寸</span></h3><p>视口就是我们的可视区，因为我们改变浏览器的大小的时候会改变可视区的大小，那么我们如何来查看当前浏览器的可视区大小？</p>
+<p>这里我们依然有两套方法：</p>
+<p>第一套是<span style="color: #ff0000;">window.innerHeight/window.innerWidth;</span></p>
+<p>这个方法可以直接获取到当前可视区的宽高，但是依然很遗憾的是<span style="color: #ff0000;">IE8以及以下的版本不兼容</span>。</p>
+<p>这个时候就需要第二套方法了：</p>
+<p>在标准模式下，<span style="color: #ff0000;">doucment.documentElement.clientWidth/document.documentElement.clientHeight</span></p>
+<p>在任何浏览器都兼容。</p>
+<p>在怪异模式（混杂模式）下，</p>
+<p><span style="color: #ff0000;">document.body.clientWidth/document.body.clientHeight</span></p>
+<p>才能查看视口大小，而不能使用上面标准模式下的方法。</p>
+<p>• 什么是怪异模式和标准模式呢？</p>
+<p>浏览器的渲染模式有两种：<span style="color: #ff0000;">标准模式和怪异模式</span>。我们常用的是标准模式，怪异模式是防止浏览器升级版本过高对后面版本你的代码不兼容，让浏览器可以向后兼容其他低版本的代码的法规则，比如IE6的怪异模式下可以兼容IE5个IE4的语法。</p>
+<p>• &nbsp;我们如何变成怪异模式呢？</p>
+<p>其实很简单，只需要把我们html代码的第一行的<strong><span style="color: #ff0000;">&lt;!DOCTYPE HTML&gt;</span></strong>去掉就可以变成怪异模式了，而加上这一行代码就可以变成标准模式。</p>
+<p>• 如何判断怪异模式还是标准模式？</p>
+<p>document上中有一个方法叫做<span style="color: #ff0000;">compatMode</span>，当浏览器处于怪异模式的时候会返回字符串“<span style="color: #ff0000;">BackCompat</span>”，在标准模式下可以返回“<span style="color: #ff0000;">CSS1Compat</span>”，通过这个方法我们就可以判断了。</p>
+<p>知道了什么是标准模式和怪异模式以及如何判断的情况下，我们就可以封装一个兼容性的函数，返回浏览器的视口大小。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="pln">&nbsp; </span><span class="kwd">function</span><span class="pln"> getViewportOffset </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><br>3.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="kwd">if</span><span class="pun">(</span><span class="pln">window</span><span class="pun">.</span><span class="pln">innerWidth</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><br>4.  <span class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="kwd">return</span><span class="pln"> </span><span class="pun">{</span><br>5.  <span class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; w</span><span class="pun">:</span><span class="pln"> window</span><span class="pun">.</span><span class="pln">innerWidth</span><span class="pun">,</span><br>6.  <span class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; h</span><span class="pun">:</span><span class="pln"> window</span><span class="pun">.</span><span class="pln">innerHeight</span><br>7.  <span class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="pun">}</span><br>8.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="pun">}</span><br>9.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="kwd">if</span><span class="pun">(</span><span class="pln">document</span><span class="pun">.</span><span class="pln">compatMode </span><span class="pun">==</span><span class="pln"> </span><span class="str">‘CSS1Compat’</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><br>10.  <span class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="kwd">return</span><span class="pln"> </span><span class="pun">{</span><br>11.  <span class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; w</span><span class="pun">:</span><span class="pln"> document</span><span class="pun">.</span><span class="pln">documentElement</span><span class="pun">.</span><span class="pln">clientWidth</span><span class="pun">,</span><br>12.  <span class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; h</span><span class="pun">:</span><span class="pln"> document</span><span class="pun">.</span><span class="pln">documentElement</span><span class="pun">.</span><span class="pln">clientHeight</span><br>13.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="pun">}</span><span class="kwd">else</span><span class="pln"> </span><span class="pun">{</span><br>14.  <span class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="kwd">return</span><span class="pln"> </span><span class="pun">{</span><br>15.  <span class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; w</span><span class="pun">:</span><span class="pln"> document</span><span class="pun">.</span><span class="pln">body</span><span class="pun">.</span><span class="pln">clientWidth</span><span class="pun">,</span><br>16.  <span class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; h</span><span class="pun">:</span><span class="pln"> document</span><span class="pun">.</span><span class="pln">body</span><span class="pun">.</span><span class="pln">clientHeight</span><br>17.  <span class="pln">&nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; </span><span class="pun">}</span><br>18.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="pun">}</span><br>19.  <span class="pun">}</span><span class="pln">&nbsp; </span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>&nbsp;</p>
+<h3 id="查看元素的几何尺寸"><a href="#查看元素的几何尺寸" class="headerlink" title="查看元素的几何尺寸"></a><span style="color: #ff0000;">查看元素的几何尺寸</span></h3><p><strong><span style="color: #ff0000;">domEle.getBoundingClientRect()</span></strong></p>
+<p>在获取的dom元素上，有一个getBoundingClientRect方法，这个方法可以获取到元素的宽高和左上点的位置以及有下点的位置（width、height、top、left、right、bottom），注意这里的宽高是指除去了margin的盒子模型的宽高。</p>
+<p>但是<span style="color: #ff0000;">老版本的IE浏览器没有实现width和height</span>，那么我们在老版本的IE计算宽高的时候就需要用<span style="color: #ff0000;">bottom-top</span>和<span style="color: #ff0000;">right-left</span>来计算宽高值了。</p>
+<p>还有一点需要注意的是，这里的宽高也不是实时更新的，数据只是一个<span style="color: #ff0000;">副本</span>。</p>
+<p>我们依然可以封装一个函数，可以返回元素的宽高。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="typ">Element</span><span class="pun">.</span><span class="pln">getElementOffset</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><br>3.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="kwd">var</span><span class="pln"> objData </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">this</span><span class="pun">.</span><span class="pln">getBoundingClientRect</span><span class="pun">();</span><br>4.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="kwd">if</span><span class="pun">(</span><span class="pln">objData</span><span class="pun">.</span><span class="pln">width</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><br>5.  <span class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="kwd">return</span><span class="pln"> </span><span class="pun">{</span><br>6.  <span class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; w</span><span class="pun">:</span><span class="pln"> objData</span><span class="pun">.</span><span class="pln">width</span><span class="pun">,</span><br>7.  <span class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; h</span><span class="pun">:</span><span class="pln"> objData</span><span class="pun">.</span><span class="pln">height</span><br>8.  <span class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="pun">}</span><br>9.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="pun">}</span><span class="kwd">else</span><span class="pln"> </span><span class="pun">{</span><br>10.  <span class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="kwd">return</span><span class="pln"> </span><span class="pun">{</span><br>11.  <span class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; w</span><span class="pun">:</span><span class="pln"> objData</span><span class="pun">.</span><span class="pln">right </span><span class="pun">-</span><span class="pln"> objData</span><span class="pun">.</span><span class="pln">left</span><span class="pun">,</span><br>12.  <span class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; h</span><span class="pun">:</span><span class="pln"> objData</span><span class="pun">.</span><span class="pln">bottom </span><span class="pun">-</span><span class="pln"> objData</span><span class="pun">.</span><span class="pln">top</span><br>13.  <span class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="pun">}</span><br>14.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="pun">}</span><br>15.  <span class="pun">}</span><br>16.  <span class="pln">&nbsp;</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>&nbsp;</p>
+<p><strong><span style="color: #ff0000;">滚动条滚动</span></strong></p>
+<p>让滚动条滚动的方法有三个：<strong><span style="color: #ff0000;">scroll、scrollTo、scrollBy</span></strong>。</p>
+<p>这三个方法都有两个参数，分别是x值和y值。前两个方法的作用一模一样，都是让滚动条滚动到（x，y）的位置，但是最后一个scrollBy有一些区别，它是<span style="color: #ff0000;">让滚动条相对于上一个位置滚动多少距离</span>。</p>
+<p>我们可以简单的用这个方法来实现一个自动阅读的功能：</p>
+<p><span style="color: #0000ff;">setInterval(function () {</span></p>
+<p><span style="color: #0000ff;">&nbsp; &nbsp; &nbsp; scrollBy(0, 10);</span></p>
+<p><span style="color: #0000ff;">},50);</span></p>
+<p><strong><span style="color: #ff0000;">另一个查看元素尺寸的方法</span></strong></p>
+<p><strong><span style="color: #ff0000;">dom.offsetWidth/dom.offsetHeight</span></strong></p>
+<p>虽然前面有一个ele.getBoundingClientRect()方法，但是由于这个方法名字是在太长了，因此用的并不是非常多，相比较而言，这两个dom元素的属性用的更多一些。</p>
+<p>这里获取的宽高值和上面的一样，都是除去margin后的盒子模型的宽高。</p>
+<p><strong><span style="color: #ff0000;">查看元素的位置</span></strong></p>
+<p>dom.offsetLeft/dom.offsetTop</p>
+<p>这两个值分别是元素距离左侧和上侧的距离，这里的值是<span style="color: #ff0000;">相对于有定位的父级</span>而言的，如果没有有定位的父级的话，才是相对于文档的坐标。</p>
+<p>那么现在就来了一个问题：如何找到有定位的父级呢？</p>
+<p>domEle上面还有一个属性是offsetParent，这个属性可以查看到元素的有定位的父级，如果没有的话就会返回body，而body的offsetParent则是null。</p>
+<p>我们利用上面的信息，可以来封装一个函数，求元素的相对于文档的坐标。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="typ">Element</span><span class="pun">.</span><span class="pln">prototype</span><span class="pun">.</span><span class="pln">getPosition </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">(){</span><br>3.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(!</span><span class="kwd">this</span><span class="pun">.</span><span class="pln">offsetParent</span><span class="pun">){</span><br>4.  <span class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="kwd">return</span><span class="pln"> </span><span class="pun">{</span><br>5.  <span class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="str">“w”</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">this</span><span class="pun">.</span><span class="pln">offsetLeft</span><span class="pun">,</span><br>6.  <span class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="str">“h”</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">this</span><span class="pun">.</span><span class="pln">offsetTop</span><br>7.  <span class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="pun">}</span><br>8.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="pun">}</span><br>9.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="kwd">var</span><span class="pln"> width </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">this</span><span class="pun">.</span><span class="pln">offsetLeft</span><span class="pun">,</span><br>10.  <span class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; height </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">this</span><span class="pun">.</span><span class="pln">offsetTop</span><span class="pun">,</span><br>11.  <span class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ele </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">this</span><span class="pun">.</span><span class="pln">offsetParent</span><span class="pun">;</span><br>12.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="kwd">while</span><span class="pln"> </span><span class="pun">(</span><span class="pln">ele</span><span class="pun">.</span><span class="pln">offsetParent</span><span class="pun">){</span><br>13.  <span class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; width </span><span class="pun">+=</span><span class="pln"> </span><span class="kwd">this</span><span class="pun">.</span><span class="pln">offsetParent</span><span class="pun">.</span><span class="pln">offsetLeft</span><span class="pun">;</span><br>14.  <span class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; height </span><span class="pun">+=</span><span class="pln"> </span><span class="kwd">this</span><span class="pun">.</span><span class="pln">offsetParent</span><span class="pun">.</span><span class="pln">offsetTop</span><span class="pun">;</span><br>15.  <span class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ele </span><span class="pun">=</span><span class="pln"> ele</span><span class="pun">.</span><span class="pln">offsetParent</span><span class="pun">;</span><br>16.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="pun">}</span><br>17.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="kwd">return</span><span class="pln"> </span><span class="pun">{</span><br>18.  <span class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="str">“w”</span><span class="pun">:</span><span class="pln"> width</span><span class="pun">,</span><br>19.  <span class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="str">“h”</span><span class="pun">:</span><span class="pln"> height</span><br>20.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="pun">}</span><br>21.  <span class="pun">}</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>&nbsp;</p>
+<p>那么今天要介绍的关于获取dom元素的尺寸以及滚动条相关的知识就这些哟~</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/02/JavaScriptFivteen/" rel="next" title="Web前端的知识之旅哟——日期对象与定时器">
+                <i class="fa fa-chevron-left"></i> Web前端的知识之旅哟——日期对象与定时器
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/02/JavaScriptSeventeen/" rel="prev" title="Web前端的知识之旅哟——脚本化CSS">
+                Web前端的知识之旅哟——脚本化CSS <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-name">Artikel</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#查看滚动条的滚动距离"><span class="nav-number">1.</span> <span class="nav-text">查看滚动条的滚动距离</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看视口的尺寸"><span class="nav-number">2.</span> <span class="nav-text">查看视口的尺寸</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看元素的几何尺寸"><span class="nav-number">3.</span> <span class="nav-text">查看元素的几何尺寸</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

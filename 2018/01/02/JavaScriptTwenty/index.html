@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="鼠标事件鼠标事件有很多：click、mousedown、mousemove、mouseup、contextmenu、mouseover、mouseout。这些方法的语义化都很好，大家看名字基本都懂是什么意思。 其中，contextmenu是右键出现菜单事件，并不是右键事件。 click是一个完整的点击事件，包括mousedown和mouseup。 mouseover和mouseout是一组事件，对">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Web前端的知识之旅哟—— 鼠标事件与键盘事件">
+<meta property="og:url" content="http://yoursite.com/2018/01/02/JavaScriptTwenty/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="鼠标事件鼠标事件有很多：click、mousedown、mousemove、mouseup、contextmenu、mouseover、mouseout。这些方法的语义化都很好，大家看名字基本都懂是什么意思。 其中，contextmenu是右键出现菜单事件，并不是右键事件。 click是一个完整的点击事件，包括mousedown和mouseup。 mouseover和mouseout是一组事件，对">
+<meta property="og:updated_time" content="2018-01-02T09:52:04.940Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Web前端的知识之旅哟—— 鼠标事件与键盘事件">
+<meta name="twitter:description" content="鼠标事件鼠标事件有很多：click、mousedown、mousemove、mouseup、contextmenu、mouseover、mouseout。这些方法的语义化都很好，大家看名字基本都懂是什么意思。 其中，contextmenu是右键出现菜单事件，并不是右键事件。 click是一个完整的点击事件，包括mousedown和mouseup。 mouseover和mouseout是一组事件，对">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/01/02/JavaScriptTwenty/"/>
+
+
+
+
+
+  <title>Web前端的知识之旅哟—— 鼠标事件与键盘事件 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/02/JavaScriptTwenty/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Web前端的知识之旅哟—— 鼠标事件与键盘事件</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-02T17:45:18+08:00">
+                2018-01-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="鼠标事件"><a href="#鼠标事件" class="headerlink" title="鼠标事件"></a><span style="color: #ff0000;">鼠标事件</span></h3><p>鼠标事件有很多：click、mousedown、mousemove、mouseup、contextmenu、mouseover、mouseout。这些方法的语义化都很好，大家看名字基本都懂是什么意思。</p>
+<p>其中，contextmenu是右键出现菜单事件，并不是右键事件。</p>
+<p>click是一个完整的点击事件，包括mousedown和mouseup。</p>
+<p>mouseover和mouseout是一组事件，对应于鼠标的移入移出事件。</p>
+<p>• 所有的鼠标事件都有clientX和clientY，代表的是鼠标点击的位置，我们可以通过e.clientX和e.clentY来查看。</p>
+<p>• 左键点击的顺序是：mousedown、mouseup、click</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="kwd">var</span><span class="pln"> firstTime</span><span class="pun">,</span><br>3.  <span class="pln">      lastTime</span><span class="pun">,</span><br>4.  <span class="pln">      flag </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">false</span><span class="pun">;</span><br>5.  <span class="pln">document</span><span class="pun">.</span><span class="pln">onclick </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">(</span><span class="pln">e</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><br>6.  <span class="pln">    console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">‘click’</span><span class="pun">);</span><br>7.  <span class="pun">}</span><br>8.  <span class="pln">document</span><span class="pun">.</span><span class="pln">onmousedown </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">(</span><span class="pln">e</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><br>9.  <span class="pln">    console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">‘mousedown’</span><span class="pun">);</span><br>10.  <span class="pun">}</span><br>11.  <span class="pln">document</span><span class="pun">.</span><span class="pln">onmouseup </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">(</span><span class="pln">e</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><br>12.  <span class="pln">    console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">‘mouseup’</span><span class="pun">);</span><br>13.  <span class="pun">}</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>输出的结果是mousedown、mouseup、click。</p>
+<p>• 当我们同时绑定了click事件和mousedown事件后，如何解决mousedown和click的冲突问题？</p>
+<p>其实方法很简单，我们可以通过按下鼠标的事件来判断是执行click还是mousedown事件。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="kwd">var</span><span class="pln"> firstTime</span><span class="pun">,</span><br>3.  <span class="pln">      lastTime</span><span class="pun">,</span><br>4.  <span class="pln">      flag </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">false</span><span class="pun">;</span><br>5.  <span class="pln">document</span><span class="pun">.</span><span class="pln">onclick </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">(</span><span class="pln">e</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><br>6.  <span class="pln">    </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">flag</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><br>7.  <span class="pln">        console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">‘click’</span><span class="pun">);</span><br>8.  <span class="pln">    </span><span class="pun">}</span><span class="kwd">else</span><span class="pln"> </span><span class="pun">{</span><br>9.  <span class="pln">        console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">‘mousedown’</span><span class="pun">);</span><br>10.  <span class="pln">    </span><span class="pun">}</span><br>11.  <span class="pun">}</span><br>12.  <span class="pln">document</span><span class="pun">.</span><span class="pln">onmousedown </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">(</span><span class="pln">e</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><br>13.  <span class="pln">    firstTime </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Date</span><span class="pun">().</span><span class="pln">getTime</span><span class="pun">();</span><br>14.  <span class="pun">}</span><br>15.  <span class="pln">document</span><span class="pun">.</span><span class="pln">onmouseup </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">(</span><span class="pln">e</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><br>16.  <span class="pln">    lastTime </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Date</span><span class="pun">().</span><span class="pln">getTime</span><span class="pun">();</span><br>17.  <span class="pln">    </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">lastTime </span><span class="pun">-</span><span class="pln"> firstTime </span><span class="pun">&lt;</span><span class="pln"> </span><span class="lit">200</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><br>18.  <span class="pln">        flag </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">true</span><span class="pun">;</span><br>19.  <span class="pln">    </span><span class="pun">}</span><span class="kwd">else</span><span class="pln"> </span><span class="pun">{</span><br>20.  <span class="pln">        flag </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">false</span><span class="pun">;</span><br>21.  <span class="pln">    </span><span class="pun">}</span><br>22.  <span class="pun">}</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>• 如何判断鼠标点击的是左键还是右键？</p>
+<p>click事件永远都是左键，有左键和右键的区别的是mousedown事件。</p>
+<p>再mousedown的事件对象中有一个属性叫做button，这个属性的值是0的时候代表我们按下的是左键，1的时候代表按下的中键，2的时候代表按下的是右键。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="pln">document</span><span class="pun">.</span><span class="pln">onmousedown </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">(</span><span class="pln">e</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><br>3.  <span class="pln">    </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">e</span><span class="pun">.</span><span class="pln">button </span><span class="pun">==</span><span class="pln"> </span><span class="lit">0</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><br>4.  <span class="pln">        console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">‘left’</span><span class="pun">);</span><br>5.  <span class="pln">    </span><span class="pun">}</span><span class="kwd">else</span><span class="pln"> </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">e</span><span class="pun">.</span><span class="pln">button </span><span class="pun">==</span><span class="pln"> </span><span class="lit">1</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><br>6.  <span class="pln">        console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">‘mid’</span><span class="pun">);</span><br>7.  <span class="pln">    </span><span class="pun">}</span><span class="kwd">else</span><span class="pln"> </span><span class="pun">{</span><br>8.  <span class="pln">        console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">‘right’</span><span class="pun">);</span><br>9.  <span class="pln">    </span><span class="pun">}</span><br>10.  <span class="pun">}</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>这里我们就可以重新回顾一下拖拽事件了：</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="kwd">var</span><span class="pln"> div </span><span class="pun">=</span><span class="pln"> document</span><span class="pun">.</span><span class="pln">getElementsByTagName</span><span class="pun">(</span><span class="str">‘div’</span><span class="pun">)[</span><span class="lit">0</span><span class="pun">]</span><br>3.  <span class="kwd">function</span><span class="pln"> drag</span><span class="pun">(</span><span class="pln">elem</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><br>4.  <span class="pln">    </span><span class="kwd">var</span><span class="pln"> disX</span><span class="pun">,</span><br>5.  <span class="pln">        dixY</span><span class="pun">;</span><br>6.  <span class="pln">    addEvent</span><span class="pun">(</span><span class="pln">elem</span><span class="pun">,</span><span class="pln"> </span><span class="str">‘mousedown’</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">(</span><span class="pln">e</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><br>7.  <span class="pln">        </span><span class="kwd">var</span><span class="pln"> </span><span class="kwd">event</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> e </span><span class="pun">||</span><span class="pln"> window</span><span class="pun">.</span><span class="kwd">event</span><span class="pun">;</span><br>8.  <span class="pln">        disX </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">event</span><span class="pun">.</span><span class="pln">clientX </span><span class="pun">-</span><span class="pln"> parseInt</span><span class="pun">(</span><span class="pln">getStyle</span><span class="pun">(</span><span class="pln">elem</span><span class="pun">,</span><span class="pln"> </span><span class="str">‘left’</span><span class="pun">));</span><br>9.  <span class="pln">        disY </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">event</span><span class="pun">.</span><span class="pln">clientY </span><span class="pun">-</span><span class="pln"> parseInt</span><span class="pun">(</span><span class="pln">getStyle</span><span class="pun">(</span><span class="pln">elem</span><span class="pun">,</span><span class="pln"> </span><span class="str">‘top’</span><span class="pun">));</span><br>10.  <span class="pln">&nbsp;</span><br>11.  <span class="pln">        addEvent</span><span class="pun">(</span><span class="pln">document</span><span class="pun">,</span><span class="pln"> </span><span class="str">‘mousemove’</span><span class="pun">,</span><span class="pln"> mouseMove</span><span class="pun">);</span><br>12.  <span class="pln">        addEvent</span><span class="pun">(</span><span class="pln">document</span><span class="pun">,</span><span class="pln"> </span><span class="str">‘mouseup’</span><span class="pun">,</span><span class="pln"> mouseUp</span><span class="pun">);</span><br>13.  <span class="pln">        stopBubble</span><span class="pun">(</span><span class="pln">e</span><span class="pun">);</span><br>14.  <span class="pln">        cancelHandler</span><span class="pun">(</span><span class="pln">e</span><span class="pun">);</span><br>15.  <span class="pln">    </span><span class="pun">});</span><br>16.  <span class="pln">&nbsp;</span><br>17.  <span class="pln">    </span><span class="kwd">function</span><span class="pln"> mouseMove</span><span class="pun">(</span><span class="pln">e</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><br>18.  <span class="pln">        </span><span class="kwd">var</span><span class="pln"> </span><span class="kwd">event</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> e </span><span class="pun">||</span><span class="pln"> window</span><span class="pun">.</span><span class="kwd">event</span><span class="pun">;</span><br>19.  <span class="pln">        elem</span><span class="pun">.</span><span class="pln">style</span><span class="pun">.</span><span class="pln">left </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">event</span><span class="pun">.</span><span class="pln">clientX </span><span class="pun">-</span><span class="pln"> disX </span><span class="pun">+</span><span class="pln"> </span><span class="str">‘px’</span><span class="pun">;</span><br>20.  <span class="pln">        elem</span><span class="pun">.</span><span class="pln">style</span><span class="pun">.</span><span class="pln">top </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">event</span><span class="pun">.</span><span class="pln">clientY </span><span class="pun">-</span><span class="pln"> disY </span><span class="pun">+</span><span class="pln"> </span><span class="str">‘px’</span><span class="pun">;</span><br>21.  <span class="pln">    </span><span class="pun">}</span><br>22.  <span class="pln">    </span><span class="kwd">function</span><span class="pln"> mouseUp </span><span class="pun">(</span><span class="pln">e</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><br>23.  <span class="pln">        removeEvent</span><span class="pun">(</span><span class="pln">document</span><span class="pun">,</span><span class="pln"> </span><span class="str">‘mousemove’</span><span class="pun">,</span><span class="pln"> mouseMove</span><span class="pun">);</span><br>24.  <span class="pln">        removeEvent</span><span class="pun">(</span><span class="pln">document</span><span class="pun">,</span><span class="pln"> </span><span class="str">‘mouseup’</span><span class="pun">,</span><span class="pln"> arguments</span><span class="pun">.</span><span class="pln">callee</span><span class="pun">);</span><br>25.  <span class="pln">    </span><span class="pun">}</span><br>26.  <span class="pun">}</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>这里我们为了不因为鼠标移动过快导致移出div，我们将mouseover事件绑定到了document上。</p>
+<p>• 针对鼠标帧频过快的问题，IE中有一个也可以说是另一种事件捕获的方法——domEle.setCapture()。</p>
+<p>调用这个方法之后，页面后续的所有操作就会全部都归于这个domEle上，比如div有一个拖拽事件，不过mousemove绑定在div上，只要调用了这个方法，当鼠标拖拽过程中鼠标移出了div，这个时候有效的鼠标移动就变成了document上的mousemove事件了，但是它还是归于了div上，因此div还是可以跟着鼠标移动。</p>
+<p>同时还有一个domEle.releaseCapture()方法可以来释放这个捕获行为。</p>
+<h3 id="键盘事件"><a href="#键盘事件" class="headerlink" title="键盘事件"></a><span style="color: #ff0000;">键盘事件</span></h3><p>键盘事件主要有三个：keydown、keypress、keyup。</p>
+<p>触发顺序分别是keydown、keypress、keyup。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="pln">document</span><span class="pun">.</span><span class="pln">onkeydown </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">(</span><span class="pln">e</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><br>3.  <span class="pln">    console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">‘keydown’</span><span class="pun">);</span><br>4.  <span class="pun">}</span><br>5.  <span class="pln">document</span><span class="pun">.</span><span class="pln">onkeypress </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">(</span><span class="pln">e</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><br>6.  <span class="pln">    console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">‘keypress’</span><span class="pun">);</span><br>7.  <span class="pun">}</span><br>8.  <span class="pln">document</span><span class="pun">.</span><span class="pln">onkeyup </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">(</span><span class="pln">e</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><br>9.  <span class="pln">    console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">‘keyup’</span><span class="pun">);</span><br>10.  <span class="pun">}</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>输出的结果是keydown、keypress、keyup。</p>
+<p>keydown和keypress可以响应连续操作，我们一直按着键盘就会一直触发事件。</p>
+<p>keypress的范围和keydown有所区别：</p>
+<p>keydown可以响应任意键盘按键，keypress只能响应字符类按键，也就是有ASCII码的字符的按键，像字母数字回车空格之类的。</p>
+<p>事件对象的属性方面：</p>
+<p>只有keypress有charCode属性，这个属性代表的我们输入的这个字符的ASCII码，配合SHIFT之类的按键可以直接获取大写字母等。</p>
+<p>keyCode和which每个方法都有，表示的是这个键的唯一标示，可以告诉浏览器我们按下的是键盘上的哪一个键，比如空格是32，32就代表空格。不过我们一般都用which，keyCode用的较少。</p>
+<p>• String上有一个方法叫做fromCharCode，可以接受一个Unicode值（包含ASCII值），然后返回对应的字符串，我们可以配合这个方法和charCode来直接获取输入的字符。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="pln">document</span><span class="pun">.</span><span class="pln">onkeypress </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">(</span><span class="pln">e</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><br>3.  <span class="pln">    console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="typ">String</span><span class="pun">.</span><span class="pln">fromCharCode</span><span class="pun">(</span><span class="pln">e</span><span class="pun">.</span><span class="pln">charCode</span><span class="pun">));</span><br>4.  <span class="pun">}</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<h3 id="窗体操作类（window上的事件）"><a href="#窗体操作类（window上的事件）" class="headerlink" title="窗体操作类（window上的事件）"></a><span style="color: #ff0000;">窗体操作类（window上的事件）</span></h3><p><strong><span style="color: #ff0000;">load事件</span></strong></p>
+<p>这个事件window.onload和在body标签上写onload是一样的效果，作用是等页面中所有的东西都下载完成再执行里面的代码。</p>
+<p><strong><span style="color: #ff0000;">scroll事件</span></strong></p>
+<p>这个方法是监听滚轮滚动的事件，我们可以用这个事件来写一个兼容版的fix定位。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="kwd">function</span><span class="pln"> beFixed</span><span class="pun">(</span><span class="pln">ele</span><span class="pun">){</span><br>3.  <span class="pln">    </span><span class="kwd">var</span><span class="pln"> initPosX </span><span class="pun">=</span><span class="pln"> ele</span><span class="pun">.</span><span class="pln">getPosition</span><span class="pun">().</span><span class="pln">w</span><span class="pun">,</span><br>4.  <span class="pln">        initPosY </span><span class="pun">=</span><span class="pln"> ele</span><span class="pun">.</span><span class="pln">getPosition</span><span class="pun">().</span><span class="pln">h</span><span class="pun">;</span><br>5.  <span class="pln">    addEvent</span><span class="pun">(</span><span class="pln">window</span><span class="pun">,</span><span class="pln"> </span><span class="str">‘scroll’</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">function</span><span class="pun">(</span><span class="pln">e</span><span class="pun">){</span><br>6.  <span class="pln">        ele</span><span class="pun">.</span><span class="pln">style</span><span class="pun">.</span><span class="pln">top </span><span class="pun">=</span><span class="pln">  initPosY </span><span class="pun">+</span><span class="pln"> getScrollOffset</span><span class="pun">().</span><span class="pln">h </span><span class="pun">+</span><span class="pln"> </span><span class="str">‘px’</span><span class="pun">;</span><br>7.  <span class="pln">        ele</span><span class="pun">.</span><span class="pln">style</span><span class="pun">.</span><span class="pln">left </span><span class="pun">=</span><span class="pln">  initPosX </span><span class="pun">+</span><span class="pln"> getScrollOffset</span><span class="pun">().</span><span class="pln">w </span><span class="pun">+</span><span class="pln"> </span><span class="str">‘px’</span><span class="pun">;</span><br>8.  <span class="pln">    </span><span class="pun">})</span><br>9.  <span class="pun">}</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/02/JavaScriptNineteen/" rel="next" title="Web前端的知识之旅哟—— 事件处理模型与事件委托">
+                <i class="fa fa-chevron-left"></i> Web前端的知识之旅哟—— 事件处理模型与事件委托
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/02/JavaScriptTwenty1/" rel="prev" title="Web前端的知识之旅哟—— 异步加载JS">
+                Web前端的知识之旅哟—— 异步加载JS <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-name">Artikel</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#鼠标事件"><span class="nav-number">1.</span> <span class="nav-text">鼠标事件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#键盘事件"><span class="nav-number">2.</span> <span class="nav-text">键盘事件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#窗体操作类（window上的事件）"><span class="nav-number">3.</span> <span class="nav-text">窗体操作类（window上的事件）</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

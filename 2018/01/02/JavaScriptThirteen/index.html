@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="上一篇文章介绍了如何用DOM来查看元素，这一篇就把剩下的增删改操作介绍一下。 增加操作1.创建元素节点 createElement 我们可以通过document.createElement(‘div’);这个方法来创建一个元素，里面的参数填写我们要创建的标签名称，像div、p、span等等。 1.  var div = document.createElement(‘div’);JavaScrip">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Web前端的知识之旅哟——DOM的基本操作续">
+<meta property="og:url" content="http://yoursite.com/2018/01/02/JavaScriptThirteen/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="上一篇文章介绍了如何用DOM来查看元素，这一篇就把剩下的增删改操作介绍一下。 增加操作1.创建元素节点 createElement 我们可以通过document.createElement(‘div’);这个方法来创建一个元素，里面的参数填写我们要创建的标签名称，像div、p、span等等。 1.  var div = document.createElement(‘div’);JavaScrip">
+<meta property="og:updated_time" content="2018-01-02T09:12:47.753Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Web前端的知识之旅哟——DOM的基本操作续">
+<meta name="twitter:description" content="上一篇文章介绍了如何用DOM来查看元素，这一篇就把剩下的增删改操作介绍一下。 增加操作1.创建元素节点 createElement 我们可以通过document.createElement(‘div’);这个方法来创建一个元素，里面的参数填写我们要创建的标签名称，像div、p、span等等。 1.  var div = document.createElement(‘div’);JavaScrip">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/01/02/JavaScriptThirteen/"/>
+
+
+
+
+
+  <title>Web前端的知识之旅哟——DOM的基本操作续 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/02/JavaScriptThirteen/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Web前端的知识之旅哟——DOM的基本操作续</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-02T16:54:05+08:00">
+                2018-01-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>上一篇文章介绍了如何用DOM来查看元素，这一篇就把剩下的增删改操作介绍一下。</p>
+<h3 id="增加操作"><a href="#增加操作" class="headerlink" title="增加操作"></a><strong><span style="color: #ff0000;">增加操作</span></strong></h3><p>1.<strong><span style="color: #ff0000;">创建元素节点 createElement</span></strong></p>
+<p>我们可以通过document.createElement(‘div’);这个方法来创建一个元素，里面的参数填写我们要创建的<strong><span style="color: #ff0000;">标签名称</span></strong>，像div、p、span等等。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="kwd">var</span><span class="pln"> div </span><span class="pun">=</span><span class="pln"> document</span><span class="pun">.</span><span class="pln">createElement</span><span class="pun">(</span><span class="str">‘div’</span><span class="pun">);</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>这样我们先创建一个div。</p>
+<p>2.<strong><span style="color: #ff0000;">创建文本节点 document.createTextNode</span></strong></p>
+<p>我们可以通过document.createTextNode(‘abcd’)方法来创建一个文本节点，里面的参数填写我们的文本内容。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="kwd">var</span><span class="pln"> text </span><span class="pun">=</span><span class="pln"> document</span><span class="pun">.</span><span class="pln">createTextNode</span><span class="pun">(</span><span class="str">‘hello’</span><span class="pun">);</span><span class="pln"> &nbsp; </span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>这里我们再创建一个文本节点。</p>
+<p>3.<strong><span style="color: #ff0000;">创建注释节点 document.createComment</span></strong></p>
+<p>我们可以通过document.createComment(‘comment’);方法来创建一个注释节点，参数写我们要写的注释内容。虽然我从来没用过…但是还是要介绍这个方法。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="kwd">var</span><span class="pln"> comment </span><span class="pun">=</span><span class="pln">&nbsp;document</span><span class="pun">.</span><span class="pln">createComment</span><span class="pun">(</span><span class="str">‘comment’</span><span class="pun">);</span><span class="pln"> &nbsp; </span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>这里我们再创建一个注释文本节点。</p>
+<p>4.<strong><span style="color: #ff0000;">创建文档碎片 document.createDocumentFragment</span></strong></p>
+<p>这个方法可以创建一个文档碎片，我们在后面讲的有关提高性能的部分会用到这个方法。</p>
+<h3 id="插入操作"><a href="#插入操作" class="headerlink" title="插入操作"></a><span style="color: #ff0000;">插入操作</span></h3><p>1.<strong><span style="color: #ff0000;">appendChild(child);</span></strong></p>
+<p>这个是父级调用的方法，它会将child元素插入到父级里面，而且是放到逻辑后面的位置上。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">div</span><span class="pun">.</span><span class="pln">appendChild</span><span class="pun">(</span><span class="pln">text</span><span class="pun">);</span><br>2.  <span class="pln">div</span><span class="pun">.</span><span class="pln">appendChild</span><span class="pun">(</span><span class="pln">comment</span><span class="pun">);</span><span class="pln"> &nbsp; </span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>这样div里面就会有一行文本一行注释。</p>
+<p>这里如果是我们创建的元素，那么appendChild就是把新元素插入进去，但是如果是DOM里面已经存在的元素，那么appendChild就是把这个已经存在的元素给剪切掉，然后放到新的位置上。</p>
+<p>2.<strong><span style="color: #ff0000;">insertBefore(a, b);</span></strong></p>
+<p>这个依然是父节点调用的方法，它的意思是将a插入到b前面的位置上，其中b要求是这个父级的子节点。这个方法可以记作为 insert a before b;</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="kwd">var</span><span class="pln"> span </span><span class="pun">=</span><span class="pln"> document</span><span class="pun">.</span><span class="pln">createElement</span><span class="pun">(</span><span class="str">‘span’</span><span class="pun">);</span><br>2.  <span class="pln">div</span><span class="pun">.</span><span class="pln">insertBefore</span><span class="pun">(</span><span class="pln">span</span><span class="pun">,</span><span class="pln"> comment</span><span class="pun">);</span><span class="pln"> &nbsp; </span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>这样我们就把一个span元素插入到了刚才的注释文本前面。</p>
+<h3 id="删除操作"><a href="#删除操作" class="headerlink" title="删除操作"></a><span style="color: #ff0000;">删除操作</span></h3><p><strong><span style="color: #ff0000;">removeChild</span></strong></p>
+<p>这个方法依然是父级调用的，参数就是要删除的子节点，其实实际上是<strong><span style="color: #ff0000;">剪切</span></strong>，这个方法会把我们删除掉的元素给<strong><span style="color: #ff0000;">返回</span></strong>，我们可以用一个变量去保存这个被删除的元素。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="kwd">var</span><span class="pln"> div </span><span class="pun">=</span><span class="pln"> document</span><span class="pun">.</span><span class="pln">body</span><span class="pun">.</span><span class="pln">remove</span><span class="pun">(</span><span class="pln">div</span><span class="pun">);</span><span class="pln"> &nbsp; </span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>这样我们的div变量就可以保存刚才被删除的div这个元素。</p>
+<h3 id="替换操作"><a href="#替换操作" class="headerlink" title="替换操作"></a><span style="color: #ff0000;">替换操作</span></h3><p><strong><span style="color: #ff0000;">replaceChild(new, origin)</span></strong></p>
+<p>这个方法同样是父级调用，用新的元素new来替换原来的origin元素，原来的被替换掉的元素可以被返回，我们可以像删除操作那样用一个变量来保存。</p>
+<p>现在我们就可以通过以上这些方法来动态创建一棵DOM树了哟~</p>
+<p>下面介绍一些Element节点的属性和方法。</p>
+<p><strong><span style="color: #ff0000;">属性</span></strong></p>
+<p>1.<strong><span style="color: #ff0000;">innerHTML</span></strong></p>
+<p>这个属性可以用字面意思来理解，元素里面的<strong><span style="color: #ff0000;">HTML结构</span></strong>。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">div</span><span class="pun">.</span><span class="pln">innerHML </span><span class="pun">=</span><span class="pln"> </span><span class="str">‘&lt;div&gt;123&lt;/div&gt;’</span><span class="pun">;</span><span class="pln"> &nbsp; </span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>我们可以直接通过这个属性来改变元素内部的结构和内容，不过注意它会直接删除掉以前的所有结构，如果以前内容还有其他的节点的话，使用的时候就要小心了。</p>
+<p>2.<span style="color: #ff0000;"><strong>innerText/textContent</strong></span></p>
+<p>innerText老版本的<span style="color: #ff0000;">火狐浏览器</span>不兼容，textContent老版本的<span style="color: #ff0000;">IE浏览器</span>不兼容。</p>
+<p>这个属性可以直接调出来元素内部的文本信息，若果这个元素还有很多的子元素的话，那么会把子元素里面的文本信息一起返回。</p>
+<p>不过需要注意的是，如果我们要改写innerText或者textContent的话，它会像innerHTML一样，<span style="color: #ff0000;">先把内部的所有html结构先删除掉</span>，然后再写入text文本，因此里面有html结构的时候写入也要小心。</p>
+<p>• 这里提一下，如果我们有很多字符串要添加到一个元素的内部的话，虽然用innerHTML或者innerText方法，但是却不是用innerHML += str的方法，因为+=操作符的效率极低，当字符串很多的时候会非常非常消耗性能。</p>
+<p>遇到这种情况我们一般是用数组的join方法将字符串全部连接成一个字符串，然后一次性写入innerHTML。</p>
+<p><strong><span style="color: #ff0000;">方法</span></strong></p>
+<p>1.<strong><span style="color: #ff0000;">ele.setAttribute();</span></strong></p>
+<p>这个方法可以设置元素的属性（特性），比如class、id等一些行间属性。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">div</span><span class="pun">.</span><span class="pln">setAttribute</span><span class="pun">(</span><span class="str">‘id’</span><span class="pun">,</span><span class="pln"> </span><span class="str">‘demo’</span><span class="pun">);</span><span class="pln"> &nbsp; </span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>这个操作就可以给div这个元素设置一个叫做demo的id。</p>
+<p>2.<strong><span style="color: #ff0000;">ele.getAttribute();</span></strong></p>
+<p>这个方法是获取元素的行间属性。</p>
+<p>• 同样这里需要提一下，每个元素自带的行间属性都有自己特殊的功能，而我们通过自己给他们设置的属性并没有任何功能，因此我们可以来赋予他们功能和用处。</p>
+<p>• 还有一点，我们在后面改变元素的样式的时候，通常不是直接修改他的css样式，而是事先写好它应该变成的样式，然后装进一个class里面，<span style="color: #ff0000;">我们直接修改他的类名而不是css样式</span>。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/02/JavaScriptTwelve/" rel="next" title="Web前端的知识之旅哟——DOM的基础练习代码">
+                <i class="fa fa-chevron-left"></i> Web前端的知识之旅哟——DOM的基础练习代码
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/02/JavaScriptFourteen/" rel="prev" title="Web前端的知识之旅哟——DOM的基本操作练习代码">
+                Web前端的知识之旅哟——DOM的基本操作练习代码 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-name">Artikel</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#增加操作"><span class="nav-number">1.</span> <span class="nav-text">增加操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#插入操作"><span class="nav-number">2.</span> <span class="nav-text">插入操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除操作"><span class="nav-number">3.</span> <span class="nav-text">删除操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#替换操作"><span class="nav-number">4.</span> <span class="nav-text">替换操作</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

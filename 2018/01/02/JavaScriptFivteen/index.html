@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="日期对象日期对象的方法在w3c上其实有介绍： http://www.w3school.com.cn/jsref/jsref_obj_date.asp 这里只是大体的提一下： 日期对象也是javascript的内置对象之一，我们可以直接使用。 var date = new Date(); 在文档中我们也可以看到它的方法很多，但是常用的其实并没有那么多。 |Date()|返回当日的日期和时间。||ge">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Web前端的知识之旅哟——日期对象与定时器">
+<meta property="og:url" content="http://yoursite.com/2018/01/02/JavaScriptFivteen/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="日期对象日期对象的方法在w3c上其实有介绍： http://www.w3school.com.cn/jsref/jsref_obj_date.asp 这里只是大体的提一下： 日期对象也是javascript的内置对象之一，我们可以直接使用。 var date = new Date(); 在文档中我们也可以看到它的方法很多，但是常用的其实并没有那么多。 |Date()|返回当日的日期和时间。||ge">
+<meta property="og:updated_time" content="2018-01-02T09:21:12.350Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Web前端的知识之旅哟——日期对象与定时器">
+<meta name="twitter:description" content="日期对象日期对象的方法在w3c上其实有介绍： http://www.w3school.com.cn/jsref/jsref_obj_date.asp 这里只是大体的提一下： 日期对象也是javascript的内置对象之一，我们可以直接使用。 var date = new Date(); 在文档中我们也可以看到它的方法很多，但是常用的其实并没有那么多。 |Date()|返回当日的日期和时间。||ge">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/01/02/JavaScriptFivteen/"/>
+
+
+
+
+
+  <title>Web前端的知识之旅哟——日期对象与定时器 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/02/JavaScriptFivteen/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Web前端的知识之旅哟——日期对象与定时器</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-02T16:54:34+08:00">
+                2018-01-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="日期对象"><a href="#日期对象" class="headerlink" title="日期对象"></a><span style="color: #ff0000;">日期对象</span></h3><p>日期对象的方法在w3c上其实有介绍：</p>
+<p><a href="http://www.w3school.com.cn/jsref/jsref_obj_date.asp" target="_blank" rel="noopener">http://www.w3school.com.cn/jsref/jsref_obj_date.asp</a></p>
+<p>这里只是大体的提一下：</p>
+<p>日期对象也是javascript的内置对象之一，我们可以直接使用。</p>
+<p><span style="color: #0000ff;">var date = new Date();</span></p>
+<p>在文档中我们也可以看到它的方法很多，但是常用的其实并没有那么多。</p>
+<p>|<a href="http://www.w3school.com.cn/jsref/jsref_Date.asp" target="_blank" rel="noopener">Date()</a>|返回当日的日期和时间。|<br>|<a href="http://www.w3school.com.cn/jsref/jsref_getDate.asp" target="_blank" rel="noopener">getDate()</a>|从 Date 对象返回一个月中的某一天 (1 ~ 31)。|<br>|<a href="http://www.w3school.com.cn/jsref/jsref_getDay.asp" target="_blank" rel="noopener">getDay()</a>|从 Date 对象返回一周中的某一天 (0 ~ 6)。|<br>|<a href="http://www.w3school.com.cn/jsref/jsref_getMonth.asp" target="_blank" rel="noopener">getMonth()</a>|从 Date 对象返回月份 (0 ~ 11)。|<br>|<a href="http://www.w3school.com.cn/jsref/jsref_getFullYear.asp" target="_blank" rel="noopener">getFullYear()</a>|从 Date 对象以四位数字返回年份。|<br>|<a href="http://www.w3school.com.cn/jsref/jsref_getYear.asp" target="_blank" rel="noopener">getYear()</a>|<span class="deprecated">请使用 getFullYear() 方法代替。</span>|<br>|<a href="http://www.w3school.com.cn/jsref/jsref_getHours.asp" target="_blank" rel="noopener">getHours()</a>|返回 Date 对象的小时 (0 ~ 23)。|<br>|<a href="http://www.w3school.com.cn/jsref/jsref_getMinutes.asp" target="_blank" rel="noopener">getMinutes()</a>|返回 Date 对象的分钟 (0 ~ 59)。|<br>|<a href="http://www.w3school.com.cn/jsref/jsref_getSeconds.asp" target="_blank" rel="noopener">getSeconds()</a>|返回 Date 对象的秒数 (0 ~ 59)。|<br>|<a href="http://www.w3school.com.cn/jsref/jsref_getMilliseconds.asp" target="_blank" rel="noopener">getMilliseconds()</a>|返回 Date 对象的毫秒(0 ~ 999)。|<br>|<a href="http://www.w3school.com.cn/jsref/jsref_getTime.asp" target="_blank" rel="noopener">getTime()</a>|返回距1970年1月1日凌晨的毫秒数|<br>|<a href="http://www.w3school.com.cn/jsref/jsref_setDate.asp" target="_blank" rel="noopener">setDate()</a>|设置 Date 对象中月的某一天 (1 ~ 31)。|<br>|<a href="http://www.w3school.com.cn/jsref/jsref_setMonth.asp" target="_blank" rel="noopener">setMonth()</a>|设置 Date 对象中月份 (0 ~ 11)。|<br>|<a href="http://www.w3school.com.cn/jsref/jsref_setFullYear.asp" target="_blank" rel="noopener">setFullYear()</a>|设置 Date 对象中的年份（四位数字）。|<br>|<a href="http://www.w3school.com.cn/jsref/jsref_setYear.asp" target="_blank" rel="noopener">setYear()</a>|<span class="deprecated">请使用 setFullYear() 方法代替。</span>|<br>|<a href="http://www.w3school.com.cn/jsref/jsref_setHours.asp" target="_blank" rel="noopener">setHours()</a>|设置 Date 对象中的小时 (0 ~ 23)。|<br>|<a href="http://www.w3school.com.cn/jsref/jsref_setMinutes.asp" target="_blank" rel="noopener">setMinutes()</a>|设置 Date 对象中的分钟 (0 ~ 59)。|<br>|<a href="http://www.w3school.com.cn/jsref/jsref_setSeconds.asp" target="_blank" rel="noopener">setSeconds()</a>|设置 Date 对象中的秒钟 (0 ~ 59)。|<br>|<a href="http://www.w3school.com.cn/jsref/jsref_setMilliseconds.asp" target="_blank" rel="noopener">setMilliseconds()</a>|设置 Date 对象中的毫秒 (0 ~ 999)。|<br>|<a href="http://www.w3school.com.cn/jsref/jsref_setTime.asp" target="_blank" rel="noopener">setTime()</a>|以毫秒设置 Date 对象。|</p>
+<p>这两组方法用的较多，其中值得注意的是，getMonths方法返回的是<span style="color: #ff0000;">0-11</span>，我们要获取当前月份的时候记得加一。</p>
+<p>另外一点getTime方法返回从1970年1月1日到现在的毫秒数，这个时间我们称之为<span style="color: #ff0000;">时间戳</span>。</p>
+<p>个人感觉日期对象并没有什么值得特别说明的地方…</p>
+<h3 id="JS定时器"><a href="#JS定时器" class="headerlink" title="JS定时器"></a><span style="color: #ff0000;">JS定时器</span></h3><p>定时器是这篇文章的重点部分。</p>
+<p>在javascript中，与定时器有关的方法是：</p>
+<p><span style="color: #ff0000;">setInterval、clearInterval</span></p>
+<p>以及</p>
+<p><span style="color: #ff0000;">setTimeout、clearTimeout</span></p>
+<p>这些方法都是定义在window对象上面的，因此我们写window.setInterval和解setInterval的意思是一样的，前面的window可以省略掉。</p>
+<p>setInterval这个定时器的功能是每过一段时间，就把我们想要执行的函数放到js的<strong><span style="color: #ff0000;">执行队列</span></strong>中等待执行。因为执行队列不一定是空的，需要等执行队列中的所有任务都执行完之后才会执行我们的函数，因此这个函数执行的时间也会有细微的差别。</p>
+<p>这个方法的语法是：</p>
+<p>window.setInterval(function () {}, 1000);</p>
+<p>第一个参数是我们要执行的函数，第二个参数是每过多长时间把函数放入执行队列。</p>
+<p>这里要说明的是，第一个参数的那个函数，不能带有参数。其次，<strong><span style="color: #ff0000;">里面的this默认指向window</span></strong>，因为前面提到过，谁调用方法，方法里面的this就指向谁，setInterval其实前面省略了window，因此里面的this默认一定指向window，不论这个setInterval是否是一个对象的方法。</p>
+<p>setInterval其实很消耗内存，这个定时器一旦执行，就不会终止，因此需要我们的内核一直监听这个函数。</p>
+<p>这个时候我们就需要一个方法来清除定时器了：clearInterval。</p>
+<p>定时器其实会返回一个标记，我们可以通过定时器的这个标记来清除掉相对应的定时器。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br><br>1.  <span class="kwd">var</span><span class="pln"> i </span><span class="pun">=</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span><br>2.  <span class="kwd">var</span><span class="pln"> timer </span><span class="pun">=</span><span class="pln"> setInterval</span><span class="pun">(</span><span class="kwd">function</span><span class="pln"> </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><br>3.  <span class="pln">&nbsp; &nbsp; &nbsp; i</span><span class="pun">++;</span><br>4.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="kwd">if</span><span class="pun">(</span><span class="pln">i </span><span class="pun">===</span><span class="pln"> </span><span class="lit">10</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><br>5.  <span class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; clearInterval</span><span class="pun">(</span><span class="pln">timer</span><span class="pun">);</span><br>6.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="pun">}</span><br>7.  <span class="pun">},</span><span class="pln"> </span><span class="lit">100</span><span class="pun">);</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>实际上，如果我们打印这个timer来看的话，它就是一个数字1，我们再开一个定时器，返回的就是2，也就是说，这个标记就是定时器的序号数，我们直接clearInterval(1);其实也可以清除掉第一个定时器，不过这里还是用标记来清除较好。</p>
+<p>因此这里有一点需要特别强调：<strong><span style="color: #ff0000;">凡是写定时器，一定要清除定时器！</span></strong></p>
+<p>还有一点需要注意的是，<span style="color: #ff0000;">定时器是先等待再执行</span>。</p>
+<p>有时候我们只需要这个函数延迟一段时间执行，并不需要专门开启一个定时器，这个时候就需要用到setTimeout了。</p>
+<p>setTimeout是延迟执行的意思，语法和用法和setInterval一样，只是这个方法只是把函数延迟一段时间之后执行一次而已。</p>
+<p>同时它也有clearTimeout，当我们不想让这个函数执行了，提前把它clear掉就可以了。</p>
+<p>其实setInterval和setTimeout的第一个参数不一定非要是一个函数，它也可以是一串字符型的js代码。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">setInterval</span><span class="pun">(</span><span class="str">“console.log(1);”</span><span class="pun">,</span><span class="pln"> </span><span class="lit">100</span><span class="pun">);</span><span class="pln">&nbsp; &nbsp; </span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>这段代码同样可以执行，定时器每100ms给我们打印一个1。</p>
+<p>通过这个特性，我们不一定要把函数写在定时器里面，<span style="color: #ff0000;">大部分时间我们都是在外部把函数定义好了，然后直接把函数名传进去就可以了</span>。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="kwd">function</span><span class="pln"> test </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{}</span><br>2.  <span class="pln">setInterval</span><span class="pun">(</span><span class="pln">test</span><span class="pun">,</span><span class="pln"> </span><span class="lit">1000</span><span class="pun">);</span><span class="pln">&nbsp; &nbsp; </span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>那么这一次的知识点就这么多哟~</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/02/JavaScriptFourteen/" rel="next" title="Web前端的知识之旅哟——DOM的基本操作练习代码">
+                <i class="fa fa-chevron-left"></i> Web前端的知识之旅哟——DOM的基本操作练习代码
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/02/JavaScriptSixteen/" rel="prev" title="Web前端的知识之旅哟——滚动条与元素尺寸">
+                Web前端的知识之旅哟——滚动条与元素尺寸 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-name">Artikel</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#日期对象"><span class="nav-number">1.</span> <span class="nav-text">日期对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JS定时器"><span class="nav-number">2.</span> <span class="nav-text">JS定时器</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

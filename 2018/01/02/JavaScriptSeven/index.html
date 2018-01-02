@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="this的一些问题前面我们知道函数内部的this默认的指向是全局对象window，那么我们有什么办法可以改变this的指向吗？ 现在我们就可以使用call/apply来改变this指向。 call/apply 作用：改变this指向。 区别：后面传的参数形式不同。 我们现在写一个函数 1.  function person () {2.  &amp;nbsp; &amp;nbsp; &amp;nbsp; this.nam">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Web前端的知识之旅哟——继承">
+<meta property="og:url" content="http://yoursite.com/2018/01/02/JavaScriptSeven/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="this的一些问题前面我们知道函数内部的this默认的指向是全局对象window，那么我们有什么办法可以改变this的指向吗？ 现在我们就可以使用call/apply来改变this指向。 call/apply 作用：改变this指向。 区别：后面传的参数形式不同。 我们现在写一个函数 1.  function person () {2.  &amp;nbsp; &amp;nbsp; &amp;nbsp; this.nam">
+<meta property="og:updated_time" content="2018-01-02T09:02:11.482Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Web前端的知识之旅哟——继承">
+<meta name="twitter:description" content="this的一些问题前面我们知道函数内部的this默认的指向是全局对象window，那么我们有什么办法可以改变this的指向吗？ 现在我们就可以使用call/apply来改变this指向。 call/apply 作用：改变this指向。 区别：后面传的参数形式不同。 我们现在写一个函数 1.  function person () {2.  &amp;nbsp; &amp;nbsp; &amp;nbsp; this.nam">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/01/02/JavaScriptSeven/"/>
+
+
+
+
+
+  <title>Web前端的知识之旅哟——继承 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/02/JavaScriptSeven/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Web前端的知识之旅哟——继承</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-02T16:52:50+08:00">
+                2018-01-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="this的一些问题"><a href="#this的一些问题" class="headerlink" title="this的一些问题"></a><span style="color: #ff0000;">this的一些问题</span></h3><p>前面我们知道函数内部的this默认的指向是全局对象window，那么我们有什么办法可以改变this的指向吗？</p>
+<p>现在我们就可以使用<span style="color: #ff0000;">call/apply</span>来<span style="color: #ff0000;">改变this指向</span>。</p>
+<p><strong><span style="color: #ff0000;">call/apply</span></strong></p>
+<p>作用：<strong><span style="color: #ff0000;">改变this指向<span style="color: #000000;">。</span></span></strong></p>
+<p>区别：后面传的<span style="color: #ff0000;">参数形式不同</span>。</p>
+<p>我们现在写一个函数</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="kwd">function</span><span class="pln"> person </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><br>2.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="kwd">this</span><span class="pun">.</span><span class="pln">name </span><span class="pun">=</span><span class="pln"> </span><span class="str">‘scarlett’</span><span class="pun">;</span><br>3.  <span class="pln">&nbsp; &nbsp; &nbsp; console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="kwd">this</span><span class="pun">);</span><br>4.  <span class="pun">}</span><br>5.  <span class="pln">person</span><span class="pun">();</span><span class="pln"> </span><span class="com">// window</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>这个时候this指向window，name属性自然也就是window上面的全局属性。</p>
+<p>现在我们来尝试使用一下call，看看有什么效果。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="kwd">var</span><span class="pln"> obj </span><span class="pun">=</span><span class="pln"> </span><span class="pun">{};</span><br>2.  <span class="pln">person</span><span class="pun">.</span><span class="pln">call</span><span class="pun">(</span><span class="pln">obj</span><span class="pun">);</span><span class="pln"> </span><span class="com">//&nbsp;Object {name: “scarlett”}</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>我们可以看到，当使用了call方法之后，person函数内部的this就指向了我们传递的这个对象。现在这个函数就可以为obj来赋属性值了。</p>
+<p>如果这个函数还有参数的话，我们只要把实参的值写在call后面并且用逗号间隔开就可以了。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="kwd">function</span><span class="pln"> person</span><span class="pun">(</span><span class="pln">name</span><span class="pun">,</span><span class="pln"> age</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><br>2.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="kwd">this</span><span class="pun">.</span><span class="pln">name </span><span class="pun">=</span><span class="pln"> name</span><span class="pun">;</span><br>3.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="kwd">this</span><span class="pun">.</span><span class="pln">age </span><span class="pun">=</span><span class="pln"> age</span><span class="pun">;</span><br>4.  <span class="pun">}</span><br>5.  <span class="kwd">var</span><span class="pln"> obj </span><span class="pun">=</span><span class="pln"> </span><span class="pun">{};</span><br>6.  <span class="pln">person</span><span class="pun">.</span><span class="pln">call</span><span class="pun">(</span><span class="pln">obj</span><span class="pun">,</span><span class="pln"> </span><span class="str">‘scarlett’</span><span class="pun">,</span><span class="pln"> </span><span class="lit">18</span><span class="pun">);</span><br>7.  <span class="pln">console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">obj</span><span class="pun">.</span><span class="pln">name</span><span class="pun">);</span><span class="pln"> </span><span class="com">// scarlett</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>apply和call基本没有区别，唯一的区别是call后面的<span style="color: #ff0000;">参数是一个一个传的</span>，而apply后面的参数是放进一个<span style="color: #ff0000;">数组</span>里面然后传进去的。</p>
+<p>还是上面那个例子，如果用apply来传递实参的话，将是下面这种形式。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">person</span><span class="pun">.</span><span class="pln">apply</span><span class="pun">(</span><span class="pln">obj</span><span class="pun">,</span><span class="pln"> </span><span class="pun">[</span><span class="str">‘scarett’</span><span class="pun">,</span><span class="pln"> </span><span class="lit">17</span><span class="pun">]);</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<h3 id="继承"><a href="#继承" class="headerlink" title="继承"></a><span style="color: #ff0000;">继承</span></h3><p>继承是这篇文章的重点部分。</p>
+<p>首先介绍一下继承发展史。</p>
+<p>第一阶段：<span style="color: #ff0000;">传统形式</span>。</p>
+<p>这个阶段使用的继承方式就是我们上一篇文章介绍的那一种原型链式的继承。</p>
+<p>但是这种继承有一个缺点就是它会继承过多没有用的属性，造成大量的浪费。</p>
+<p>第二阶段：<span style="color: #ff0000;">借用构造函数</span>。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="kwd">function</span><span class="pln"> </span><span class="typ">Foo</span><span class="pun">(</span><span class="pln">name</span><span class="pun">,</span><span class="pln"> age</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><br>2.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="kwd">this</span><span class="pun">.</span><span class="pln">name </span><span class="pun">=</span><span class="pln"> name</span><span class="pun">;</span><br>3.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="kwd">this</span><span class="pun">.</span><span class="pln">age </span><span class="pun">=</span><span class="pln"> age</span><span class="pun">;</span><br>4.  <span class="pun">}</span><br>5.  <span class="kwd">function</span><span class="pln"> </span><span class="typ">Son</span><span class="pun">(</span><span class="pln">name</span><span class="pun">,</span><span class="pln"> age</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><br>6.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="typ">Foo</span><span class="pun">.</span><span class="pln">call</span><span class="pun">(</span><span class="kwd">this</span><span class="pun">,</span><span class="pln"> name</span><span class="pun">,</span><span class="pln"> age</span><span class="pun">);</span><br>7.  <span class="pun">}</span><br>8.  <span class="kwd">var</span><span class="pln"> son </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Son</span><span class="pun">(</span><span class="str">‘son’</span><span class="pun">,</span><span class="pln"> </span><span class="lit">123</span><span class="pun">);</span><br>9.  <span class="pln">console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">son</span><span class="pun">.</span><span class="pln">name</span><span class="pun">);</span><span class="pln"> </span><span class="com">// son</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>这种方式就是利用了call和apply可以改变this指向的特点，通过构造函数来间接的构造子对象。</p>
+<p>但是这种方式有两个缺点：</p>
+<p>1.严格来说，这种方式<span style="color: #ff0000;">不属于继承</span>，也<span style="color: #ff0000;">访问不了原型的原型</span>。</p>
+<p>2.每次构造一个对象都要走<span style="color: #ff0000;">两个</span>构造函数，效率很低。</p>
+<p>第三阶段：<span style="color: #ff0000;">共享原型</span>。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="typ">Son</span><span class="pun">.</span><span class="pln">prototype </span><span class="pun">=</span><span class="pln"> </span><span class="typ">Foo</span><span class="pun">.</span><span class="pln">prototype</span><span class="pun">;</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>这种方式就是让父子构造函数的原型都一样，虽然这种方法让子构造函数可以访问原型链，也不用走两个构造函数了，但是缺点也很明显：<span style="color: #ff0000;">没办法改变子类的原型</span>，一改就两个一起改了。</p>
+<p>第四阶段：<strong><span style="color: #ff0000;">圣杯模式</span></strong>。</p>
+<p>这个阶段也是最终阶段，当然也是我们目前使用的方式。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="kwd">function</span><span class="pln"> inherit </span><span class="pun">(</span><span class="pln">C</span><span class="pun">,</span><span class="pln"> P</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><br>2.  <span class="pln">&nbsp; &nbsp; </span><span class="kwd">function</span><span class="pln"> F </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{}</span><br>3.  <span class="pln">&nbsp; &nbsp; F</span><span class="pun">.</span><span class="pln">prototype </span><span class="pun">=</span><span class="pln"> P</span><span class="pun">.</span><span class="pln">prototype</span><span class="pun">;</span><br>4.  <span class="pln">&nbsp; &nbsp; C</span><span class="pun">.</span><span class="pln">prototype </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> F</span><span class="pun">();</span><br>5.  <span class="pun">}</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>这里我们利用了一个中间函数F来沟通P和C的原型，这样我们改变C的原型的时候只会影响F而不会影响P，而F这里并没有任何的用处。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="kwd">function</span><span class="pln"> </span><span class="typ">Child</span><span class="pln"> </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{}</span><br>2.  <span class="kwd">function</span><span class="pln"> </span><span class="typ">Parent</span><span class="pln"> </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{}</span><br>3.  <span class="typ">Parent</span><span class="pun">.</span><span class="pln">prototype</span><span class="pun">.</span><span class="pln">name </span><span class="pun">=</span><span class="pln"> </span><span class="str">‘scarlett’</span><span class="pun">;</span><br>4.  <span class="pln">inherit</span><span class="pun">(</span><span class="typ">Child</span><span class="pun">,</span><span class="pln"> </span><span class="typ">Parent</span><span class="pun">);</span><br>5.  <span class="pln">console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Child</span><span class="pun">().</span><span class="pln">name</span><span class="pun">);</span><span class="pln"> </span><span class="com">//scarlett</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>但是现在我们还存在一个问题，当我们想查看Child构造出来的对象的构造函数的时候，它并不打印Child函数而是Parent函数。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Child</span><span class="pun">().</span><span class="pln">constructor</span><span class="pun">);</span><span class="pln"> </span><span class="com">//function Parent () {}</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>所以我们前面的工作还不完善，还需要记录子类的构造函数。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">C</span><span class="pun">.</span><span class="pln">prototype</span><span class="pun">.</span><span class="pln">constructor </span><span class="pun">=</span><span class="pln"> C</span><span class="pun">;</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>同时我们为了保存一下它的父类，也用一个uber来记录一下父类。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">C</span><span class="pun">.</span><span class="pln">prototype</span><span class="pun">.</span><span class="pln">uber </span><span class="pun">=</span><span class="pln"> P</span><span class="pun">;</span><span class="pln"> </span><span class="com">// 因为super是保留字我们不能使用，所以用了一个uber</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>所以我们最终的形式就变成了这个样子：</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="kwd">function</span><span class="pln"> inherit</span><span class="pun">(</span><span class="pln">C</span><span class="pun">,</span><span class="pln">P</span><span class="pun">){</span><br>2.  <span class="kwd">function</span><span class="pln"> F </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{}</span><br>3.  <span class="pln">&nbsp; &nbsp; &nbsp; F</span><span class="pun">.</span><span class="pln">prototype </span><span class="pun">=</span><span class="pln"> P</span><span class="pun">.</span><span class="pln">prototype</span><span class="pun">;</span><br>4.  <span class="pln">&nbsp; &nbsp; &nbsp; C</span><span class="pun">.</span><span class="pln">prototype </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> F</span><span class="pun">();</span><br>5.  <span class="pln">&nbsp; &nbsp; &nbsp; C</span><span class="pun">.</span><span class="pln">prototype</span><span class="pun">.</span><span class="pln">constructor </span><span class="pun">=</span><span class="pln"> C</span><span class="pun">;</span><br>6.  <span class="pln">&nbsp; &nbsp; &nbsp; C</span><span class="pun">.</span><span class="pln">prototype</span><span class="pun">.</span><span class="pln">uber </span><span class="pun">=</span><span class="pln"> P</span><span class="pun">;</span><br>7.  <span class="pun">}</span><br>8.  <span class="pln">console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Child</span><span class="pun">().</span><span class="pln">constructor</span><span class="pun">);</span><span class="com">// Child</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>不过，这种写法虽然成功了，但是还是有一点点小瑕疵，这里面的F函数只是起到一个搭桥的功能，并没有什么实质性的作用，那么我们能不能舍弃掉这个东西呢？</p>
+<p>虽然真的舍弃掉是不可能的，但是我们可以通过一定的方法来规避这个函数，让他不出现在我们的继承函数中。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="kwd">var</span><span class="pln"> inherit </span><span class="pun">=</span><span class="pln"> </span><span class="pun">(</span><span class="kwd">function</span><span class="pln"> </span><span class="pun">(){</span><br>2.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="kwd">var</span><span class="pln"> F </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">function</span><span class="pun">(){};</span><br>3.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="kwd">return</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">(</span><span class="pln">C</span><span class="pun">,</span><span class="pln">P</span><span class="pun">){</span><br>4.  <span class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; F</span><span class="pun">.</span><span class="pln">prototype </span><span class="pun">=</span><span class="pln"> P</span><span class="pun">.</span><span class="pln">prototype</span><span class="pun">;</span><br>5.  <span class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; C</span><span class="pun">.</span><span class="pln">prototype </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> F</span><span class="pun">();</span><br>6.  <span class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; C</span><span class="pun">.</span><span class="pln">prototype</span><span class="pun">.</span><span class="pln">constructor </span><span class="pun">=</span><span class="pln"> C</span><span class="pun">;</span><br>7.  <span class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; C</span><span class="pun">.</span><span class="pln">prototype</span><span class="pun">.</span><span class="pln">uber </span><span class="pun">=</span><span class="pln"> P</span><span class="pun">;</span><br>8.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="pun">}</span><br>9.  <span class="pun">}());</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>这样通过立即执行函数和闭包，我们既可以使用F函数，又可以不让它出现在我们的真正的继承函数中（即返回的那个函数）。</p>
+<p>这种方法很重要，希望大家都记这一种方法！</p>
+<p>&nbsp;</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/02/JavaScriptSix/" rel="next" title="Web前端的知识之旅哟——(补之前遗漏的)函数与作用域与闭包">
+                <i class="fa fa-chevron-left"></i> Web前端的知识之旅哟——(补之前遗漏的)函数与作用域与闭包
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/02/JavaScriptEight/" rel="prev" title="Web前端的知识之旅哟——对象的枚举与this">
+                Web前端的知识之旅哟——对象的枚举与this <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-name">Artikel</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#this的一些问题"><span class="nav-number">1.</span> <span class="nav-text">this的一些问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#继承"><span class="nav-number">2.</span> <span class="nav-text">继承</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

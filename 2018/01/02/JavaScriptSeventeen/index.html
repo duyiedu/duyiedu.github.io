@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="这篇文章主要介绍几种查看css样式的方法。 读写css属性每一个dom元素都有一个属性style，dom.style里面存放的这个元素的行间样式，我们可以通过这个属性来读写元素的行间样式。 注意： 1.我们碰到float这样的关键字属性的时候，前面要加一个css前缀。 float—&amp;gt;cssFloat 2.复合属性必须拆解 border: 1px solid red; 这种属性是不允许出现的，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Web前端的知识之旅哟——脚本化CSS">
+<meta property="og:url" content="http://yoursite.com/2018/01/02/JavaScriptSeventeen/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="这篇文章主要介绍几种查看css样式的方法。 读写css属性每一个dom元素都有一个属性style，dom.style里面存放的这个元素的行间样式，我们可以通过这个属性来读写元素的行间样式。 注意： 1.我们碰到float这样的关键字属性的时候，前面要加一个css前缀。 float—&amp;gt;cssFloat 2.复合属性必须拆解 border: 1px solid red; 这种属性是不允许出现的，">
+<meta property="og:updated_time" content="2018-01-02T09:48:15.466Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Web前端的知识之旅哟——脚本化CSS">
+<meta name="twitter:description" content="这篇文章主要介绍几种查看css样式的方法。 读写css属性每一个dom元素都有一个属性style，dom.style里面存放的这个元素的行间样式，我们可以通过这个属性来读写元素的行间样式。 注意： 1.我们碰到float这样的关键字属性的时候，前面要加一个css前缀。 float—&amp;gt;cssFloat 2.复合属性必须拆解 border: 1px solid red; 这种属性是不允许出现的，">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/01/02/JavaScriptSeventeen/"/>
+
+
+
+
+
+  <title>Web前端的知识之旅哟——脚本化CSS | Hexo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/02/JavaScriptSeventeen/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Web前端的知识之旅哟——脚本化CSS</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-02T17:44:22+08:00">
+                2018-01-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>这篇文章主要介绍几种查看css样式的方法。</p>
+<h3 id="读写css属性"><a href="#读写css属性" class="headerlink" title="读写css属性"></a><span style="color: #ff0000;">读写css属性</span></h3><p>每一个dom元素都有一个属性<span style="color: #ff0000;">style</span>，dom.style里面存放的这个元素的<strong><span style="color: #ff0000;">行间样式</span></strong>，我们可以通过这个属性来读写元素的行间样式。</p>
+<p>注意：</p>
+<p>1.我们碰到float这样的关键字属性的时候，前面要加一个<span style="color: #ff0000;">css</span>前缀。</p>
+<p><span style="color: #ff0000;">float—&gt;cssFloat</span></p>
+<p>2.复合属性必须拆解</p>
+<p>border: 1px solid red;</p>
+<p>这种属性是<span style="color: #ff0000;">不允许出现</span>的，只能写border-width、border-color、border-style。</p>
+<p>3.当css中的样式是用“-”连接起来的时候，我们要变成<span style="color: #ff0000;">小驼峰式</span>写法。</p>
+<p>background-color —&gt; backgroundColor;</p>
+<p>这个属性<span style="color: #ff0000;">只能读写行间样式</span>，我们<span style="color: #ff0000;">写在css的样式是不能获取</span>的，因此我们通过这个属性加样式的时候要<span style="color: #ff0000;">注意权重值问题</span>。</p>
+<p>同时，我们在js中写样式只能往行间写，永远也写不到css文件里面。</p>
+<h3 id="查询计算样式"><a href="#查询计算样式" class="headerlink" title="查询计算样式"></a><span style="color: #ff0000;">查询计算样式</span></h3><p>window上面有一个方法叫做<span style="color: #ff0000;">getComputedStyle</span>可以来获取元素的计算样式，也就是css样式。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">window</span><span class="pun">.</span><span class="pln">getComputedStyle</span><span class="pun">(</span><span class="pln">ele</span><span class="pun">.</span><span class="pln"> </span><span class="kwd">null</span><span class="pun">);</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>这里的样式是<strong><span style="color: #ff0000;">取优先级最高的</span></strong>，不只是行间样式，所有的只要是表现出来的样式都可以获取出来。</p>
+<p>同时，返回的计算样式的值都是<span style="color: #ff0000;">绝对值</span>，没有相对单位。</p>
+<p>我们写的background-color: red会返回rgb(255,0,0)，em单位或者百分比的单位都会化成具体的像素值返回。</p>
+<p>这个方法有两个参数，第一个参数是我们要获取的元素。</p>
+<p>第二个参数是一个字符串，代表我们是否要获取这个元素上面的某一个伪元素，如果不的话，就填写null，否则就填写要获取的这个元素的哪一个伪元素。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-CSS prettyprinted" style=""><br>1.  <span class="pln">div</span><span class="pun">:</span><span class="pln">after</span><span class="pun">{</span><br>2.  <span class="pln">      width</span><span class="pun">:</span><span class="pln"> </span><span class="lit">100px</span><span class="pun">;</span><br>3.  <span class="pln">      height</span><span class="pun">;</span><span class="pln"> </span><span class="lit">100px</span><span class="pun">;</span><br>4.  <span class="pln">      background</span><span class="pun">-</span><span class="pln">color</span><span class="pun">:</span><span class="pln"> red</span><span class="pun">;</span><br>5.  <span class="pun">}</span><br>6.  <span class="pln">window</span><span class="pun">.</span><span class="pln">getComputedStyle</span><span class="pun">(</span><span class="pln">div</span><span class="pun">,</span><span class="pln"> </span><span class="str">‘after’</span><span class="pun">).</span><span class="pln">width</span><span class="pun">;</span><span class="pln"> </span><span class="com">// 100px</span></pre><div class="code-pretty-toolbar"><span class="title">CSS</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>但是很遗憾的是<span style="color: #ff0000;">IE8以及以下的版本不兼容</span>这个方法。</p>
+<p>IE8有一个特殊的样式<span style="color: #ff0000;">currentStyle</span>。</p>
+<p>dom.currentStyle也会返回一个样式表，和上面的基本一样，唯一的区别在于返回的计算样式的值不是经过转换的绝对值，而是我们写什么值就会返回什么值。</p>
+<p>现在有了这些方法和属性，我们就可以封装一个兼容性的获取样式的函数了。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="kwd">function</span><span class="pln"> getStyle</span><span class="pun">(</span><span class="pln">obj</span><span class="pun">,</span><span class="pln"> prop</span><span class="pun">,</span><span class="pln"> fake</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><br>2.  <span class="pln">    </span><span class="kwd">var</span><span class="pln"> fake </span><span class="pun">=</span><span class="pln"> fake </span><span class="pun">||</span><span class="pln"> </span><span class="kwd">null</span><span class="pun">;</span><br>3.  <span class="pln">    </span><span class="kwd">if</span><span class="pun">(</span><span class="pln">obj</span><span class="pun">.</span><span class="pln">currentStyle</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><br>4.  <span class="pln">        </span><span class="kwd">return</span><span class="pln"> obj</span><span class="pun">.</span><span class="pln">currentStyle</span><span class="pun">[</span><span class="pln">prop</span><span class="pun">];</span><br>5.  <span class="pln">    </span><span class="pun">}</span><span class="kwd">else</span><span class="pln"> </span><span class="pun">{</span><br>6.  <span class="pln">        </span><span class="kwd">return</span><span class="pln"> window</span><span class="pun">.</span><span class="pln">getComputedStyle</span><span class="pun">(</span><span class="pln">obj</span><span class="pun">,</span><span class="pln"> fake</span><span class="pun">)[</span><span class="pln">prop</span><span class="pun">];</span><br>7.  <span class="pln">    </span><span class="pun">}</span><br>8.  <span class="pun">}</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>• <span style="color: #ff0000;">脚本化样式表</span></p>
+<p>在document上有一个属性叫做styleSheets，这个属性储存了一个html文档所有的css样式表的集合，我们可以来操作style标签，不过在实际中基本是用不到的，所以这里就不过多介绍了。</p>
+<p>最后我们可以写一个<strong><span style="color: #ff0000;">让小方块运动的函数</span></strong>：</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-CSS/JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="pln">div</span><span class="com">#demo {</span><br>3.  <span class="pln">    width</span><span class="pun">:</span><span class="pln"> </span><span class="lit">100px</span><span class="pun">;</span><br>4.  <span class="pln">    height</span><span class="pun">:</span><span class="pln"> </span><span class="lit">100</span><span class="pun">;</span><br>5.  <span class="pln">    position</span><span class="pun">:</span><span class="pln"> absolute</span><span class="pun">;</span><br>6.  <span class="pln">    left</span><span class="pun">:</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span><br>7.  <span class="pln">    top</span><span class="pun">:</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span><br>8.  <span class="pun">}</span><br>9.  <span class="pln">&nbsp;</span><br>10.  <span class="pln">&nbsp;</span><br>11.  <span class="kwd">var</span><span class="pln"> div </span><span class="pun">=</span><span class="pln"> document</span><span class="pun">.</span><span class="pln">getElementById</span><span class="pun">(</span><span class="str">‘demo’</span><span class="pun">);</span><br>12.  <span class="kwd">var</span><span class="pln"> timer </span><span class="pun">=</span><span class="pln"> window</span><span class="pun">.</span><span class="pln">setInterval</span><span class="pun">(</span><span class="kwd">function</span><span class="pln"> </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><br>13.  <span class="pln">    div</span><span class="pun">.</span><span class="pln">style</span><span class="pun">.</span><span class="pln">left </span><span class="pun">=</span><span class="pln"> parseInt</span><span class="pun">(</span><span class="pln">getStyle</span><span class="pun">(</span><span class="pln">div</span><span class="pun">,</span><span class="pln"> </span><span class="str">‘left’</span><span class="pun">))</span><span class="pln"> </span><span class="pun">+</span><span class="pln"> </span><span class="lit">1</span><span class="pln"> </span><span class="pun">+</span><span class="pln"> </span><span class="str">‘px’</span><span class="pun">;</span><br>14.  <span class="pln">    ifparseInt</span><span class="pun">((</span><span class="pln">getStyle</span><span class="pun">(</span><span class="pln">div</span><span class="pun">,</span><span class="pln"> </span><span class="str">‘left’</span><span class="pun">))</span><span class="pln"> </span><span class="pun">&gt;</span><span class="pln"> </span><span class="lit">1000</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><br>15.  <span class="pln">           clearInterval</span><span class="pun">(</span><span class="pln">timer</span><span class="pun">);</span><br>16.  <span class="pln">    </span><span class="pun">}</span><br>17.  <span class="pun">},</span><span class="pln"> </span><span class="lit">10</span><span class="pun">);</span></pre><div class="code-pretty-toolbar"><span class="title">CSS/JS</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/02/JavaScriptSixteen/" rel="next" title="Web前端的知识之旅哟——滚动条与元素尺寸">
+                <i class="fa fa-chevron-left"></i> Web前端的知识之旅哟——滚动条与元素尺寸
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/02/JavaScriptEightteen/" rel="prev" title="JWeb前端的知识之旅哟—— 事件的绑定与解除">
+                JWeb前端的知识之旅哟—— 事件的绑定与解除 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-name">Artikel</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#读写css属性"><span class="nav-number">1.</span> <span class="nav-text">读写css属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查询计算样式"><span class="nav-number">2.</span> <span class="nav-text">查询计算样式</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="命名空间在进入正文之前，我们先提一下命名空间的概念。 由于我们的一个项目是很多人开发的，每个人都有一套自己的变量，为了防止人和人之间变量的互相干扰，我们经常把自己的变量都放到相对应的模块里面，模块和模块之间是没有关系的，这样就算变量名相同也不会互相干扰。我们经常用对象来实现这种模块的作用。 1.  var spacename = {2.  &amp;nbsp; &amp;nbsp; &amp;nbsp; departme">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Web前端的知识之旅哟——对象的枚举与this">
+<meta property="og:url" content="http://yoursite.com/2018/01/02/JavaScriptEight/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="命名空间在进入正文之前，我们先提一下命名空间的概念。 由于我们的一个项目是很多人开发的，每个人都有一套自己的变量，为了防止人和人之间变量的互相干扰，我们经常把自己的变量都放到相对应的模块里面，模块和模块之间是没有关系的，这样就算变量名相同也不会互相干扰。我们经常用对象来实现这种模块的作用。 1.  var spacename = {2.  &amp;nbsp; &amp;nbsp; &amp;nbsp; departme">
+<meta property="og:updated_time" content="2018-01-02T09:03:19.387Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Web前端的知识之旅哟——对象的枚举与this">
+<meta name="twitter:description" content="命名空间在进入正文之前，我们先提一下命名空间的概念。 由于我们的一个项目是很多人开发的，每个人都有一套自己的变量，为了防止人和人之间变量的互相干扰，我们经常把自己的变量都放到相对应的模块里面，模块和模块之间是没有关系的，这样就算变量名相同也不会互相干扰。我们经常用对象来实现这种模块的作用。 1.  var spacename = {2.  &amp;nbsp; &amp;nbsp; &amp;nbsp; departme">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/01/02/JavaScriptEight/"/>
+
+
+
+
+
+  <title>Web前端的知识之旅哟——对象的枚举与this | Hexo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/02/JavaScriptEight/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Web前端的知识之旅哟——对象的枚举与this</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-02T16:52:58+08:00">
+                2018-01-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="命名空间"><a href="#命名空间" class="headerlink" title="命名空间"></a><span style="color: #ff0000;">命名空间</span></h3><p>在进入正文之前，我们先提一下<span style="color: #ff0000;">命名空间</span>的概念。</p>
+<p>由于我们的一个项目是很多人开发的，每个人都有一套自己的变量，为了防止人和人之间变量的互相干扰，我们经常把自己的变量都放到相对应的模块里面，模块和模块之间是没有关系的，这样就算变量名相同也不会互相干扰。我们经常用对象来实现这种模块的作用。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="kwd">var</span><span class="pln"> spacename </span><span class="pun">=</span><span class="pln"> </span><span class="pun">{</span><br>2.  <span class="pln">&nbsp; &nbsp; &nbsp; department1</span><span class="pun">:</span><span class="pln"> </span><span class="pun">{</span><br>3.  <span class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;person1</span><span class="pun">:</span><span class="pln"> </span><span class="pun">{},</span><br>4.  <span class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;person2</span><span class="pun">:</span><span class="pln"> </span><span class="pun">{},</span><br>5.  <span class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="pun">……</span><br>6.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="pun">},</span><br>7.  <span class="pln">&nbsp; &nbsp; &nbsp; department2</span><span class="pun">:</span><span class="pln"> </span><span class="pun">{</span><br>8.  <span class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;person1</span><span class="pun">:</span><span class="pln"> </span><span class="pun">{},</span><br>9.  <span class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;person2</span><span class="pun">:</span><span class="pln"> </span><span class="pun">{},</span><br>10.  <span class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span><span class="pun">……</span><br>11.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="pun">}</span><br>12.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="pun">……</span><br>13.  <span class="pun">}</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<h3 id="对象的枚举"><a href="#对象的枚举" class="headerlink" title="对象的枚举"></a><strong><span style="color: #ff0000;">对象的枚举</span></strong></h3><p>在介绍对象的枚举方法之前，我们要理解一个概念。</p>
+<p>查看对象属性我们知道可以用obj.name这样的点操作符来查看，但是我们还有一种其他的方式：</p>
+<p><strong><span style="color: #ff0000;">obj[‘name’]</span></strong></p>
+<p>这种方法类似数组的查看，但其实事实是数组模仿了对象的查看方式。</p>
+<p>这种方法是在系统底层里面的查看对象属性的写法，我们常用的点操作符obj.name在系统底层其实也<span style="color: #ff0000;">转化</span>成了obj[‘name’]这种形式。</p>
+<p>下面来介绍一下对象的枚举方法：</p>
+<p><strong><span style="color: #ff0000;">for-in操作符</span></strong></p>
+<p>我们知道要枚举一个数组的所有元素，只要用一个for循环从头到尾遍历一遍就可以了。</p>
+<p>但是对象并不能用for循环来遍历属性，所以这里我们就要使用for-in操作了。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="kwd">var</span><span class="pln"> obj </span><span class="pun">=</span><span class="pln"> </span><span class="pun">{</span><br>2.  <span class="pln">&nbsp; &nbsp; &nbsp; name</span><span class="pun">:</span><span class="pln"> </span><span class="str">‘scarlett’</span><span class="pun">,</span><br>3.  <span class="pln">&nbsp; &nbsp; &nbsp; age</span><span class="pun">:</span><span class="pln"> </span><span class="lit">18</span><span class="pun">,</span><br>4.  <span class="pln">&nbsp; &nbsp; &nbsp; sex</span><span class="pun">:</span><span class="pln"> </span><span class="str">‘female’</span><br>5.  <span class="pun">}</span><br>6.  <span class="kwd">for</span><span class="pun">(</span><span class="kwd">var</span><span class="pln"> prop </span><span class="kwd">in</span><span class="pln"> obj</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><br>7.  <span class="pln">&nbsp; &nbsp; &nbsp; console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">prop </span><span class="pun">+</span><span class="pln"> </span><span class="str">‘: ‘</span><span class="pln"> </span><span class="pun">+</span><span class="pln"> obj</span><span class="pun">[</span><span class="pln">prop</span><span class="pun">]);</span><br>8.  <span class="pun">}</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>我们for-in循环会按照属性的顺序取出属性名然后 赋给prop，所以我们打印的<span style="color: #ff0000;">prop都是属性名，obj[prop]则是相对应的属性的值</span>。</p>
+<p>注意：这里我们不能写成obj.prop的形式，因为在系统底层会转化成obj[‘prop’]的形式，但是我们并没有prop这个属性，它应该是一个变量，所以会打印出来undefined，这里我们<span style="color: #ff0000;">必须使用<strong>obj[prop]</strong>来调用</span>。</p>
+<p>在es3和es5的非严格模式下，for-in循环都会把原型里面的属性一起打印出来，es5的严格模式不会。</p>
+<p>下面我们来介绍三种操作符：</p>
+<p>1.<strong><span style="color: #ff0000;">hasOwnProperty</span></strong></p>
+<p>这个操作符的作用是查看当前这个属性是不是对象自身的属性，<span style="color: #ff0000;">在原型链上的属性则会被过滤掉</span>。如果是自身的，就返回true，否则返回false。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="kwd">function</span><span class="pln"> </span><span class="typ">Person</span><span class="pln"> </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><br>2.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="kwd">this</span><span class="pun">.</span><span class="pln">name </span><span class="pun">=</span><span class="pln"> </span><span class="str">‘scarlett’</span><br>3.  <span class="pun">}</span><br>4.  <span class="typ">Person</span><span class="pun">.</span><span class="pln">prototype </span><span class="pun">=</span><span class="pln"> </span><span class="pun">{</span><br>5.  <span class="pln">&nbsp; &nbsp; &nbsp; age</span><span class="pun">:</span><span class="lit">18</span><br>6.  <span class="pun">}</span><br>7.  <span class="kwd">var</span><span class="pln"> oPerson </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Person</span><span class="pun">();</span><br>8.  <span class="kwd">for</span><span class="pun">(</span><span class="kwd">var</span><span class="pln"> prop </span><span class="kwd">in</span><span class="pln"> oPerson</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><br>9.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">oPerson</span><span class="pun">.</span><span class="pln">hasOwnProperty</span><span class="pun">(</span><span class="pln">prop</span><span class="pun">))</span><span class="pln"> </span><span class="pun">{</span><br>10.  <span class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">oPerson</span><span class="pun">[</span><span class="pln">prop</span><span class="pun">];</span><br>11.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="pun">}</span><br>12.  <span class="pun">}</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>这样，我们的for-in循环就会只打印自身的name属性而不会去打印原型上的age属性。</p>
+<p>2.<strong><span style="color: #ff0000;">in操作符</span></strong></p>
+<p>这个操作符的作用是查看一个属性是不是在这个对象或者它的原型里面。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="str">‘name’</span><span class="pln"> </span><span class="kwd">in</span><span class="pln"> oPerson</span><span class="pun">;</span><span class="pln"> </span><span class="com">// true</span><br>2.  <span class="str">‘age’</span><span class="pln"> </span><span class="kwd">in</span><span class="pln"> oPerson</span><span class="pun">;</span><span class="pln"> </span><span class="com">// true</span><br>3.  <span class="str">‘sex’</span><span class="pln"> </span><span class="kwd">in</span><span class="pln"> oPerson</span><span class="pun">;</span><span class="pln"> </span><span class="com">// false</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>3.<strong><span style="color: #ff0000;">instanceof操作符</span></strong></p>
+<p>这个操作符的作用是查看前面的对象是不是后面的构造函数构造出来的，和constructor挺像的。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">oPerson instanceof </span><span class="typ">Person</span><span class="pun">;</span><span class="pln"> </span><span class="com">// true</span><br>2.  <span class="pln">oPerson instanceof </span><span class="typ">Object</span><span class="pun">;</span><span class="pln"> </span><span class="com">// true</span><br>3.  <span class="pun">{}</span><span class="pln"> instanceof </span><span class="typ">Object</span><span class="pun">;</span><span class="pln"> </span><span class="com">// true</span><br>4.  <span class="pun">{}</span><span class="pln"> instanceof </span><span class="typ">Person</span><span class="pun">;</span><span class="pln"> </span><span class="com">//false</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>也可以理解为：<span style="color: #ff0000;">后面的构造器的原型是否在前面对象的原型链上</span>。</p>
+<h3 id="this"><a href="#this" class="headerlink" title="this"></a><span style="color: #ff0000;">this</span></h3><p>1.预编译过程中 this–&gt;window</p>
+<p>2.全局作用域里面 this–&gt;window</p>
+<p>3.call/apply可以改变this指向</p>
+<p>4.obj.func() func()里面的this指向obj</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="kwd">var</span><span class="pln"> obj </span><span class="pun">=</span><span class="pln"> </span><span class="pun">{</span><br>2.  <span class="pln">&nbsp; &nbsp; &nbsp; height</span><span class="pun">:</span><span class="lit">190</span><span class="pun">,</span><br>3.  <span class="pln">&nbsp; &nbsp; &nbsp; eat</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><br>4.  <span class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="kwd">this</span><span class="pun">.</span><span class="pln">height</span><span class="pun">++;</span><span class="com">//eat在没有执行之前，谁也不知道this指向谁</span><br>5.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="pun">}</span><br>6.  <span class="pun">}</span><br>7.  <span class="pln">obj</span><span class="pun">.</span><span class="pln">eat</span><span class="pun">();</span><span class="com">//后面的方法，谁调用它，里面的this就指向谁。</span><br>8.  <span class="pln">eat</span><span class="pun">.</span><span class="pln">call</span><span class="pun">(</span><span class="pln">obj</span><span class="pun">);</span><span class="com">//eat的this指向obj</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>这一些就是name的全部知识点，当我们能够理解下面这一段样例代码中的this的指向问题了，那么大家应该就掌握了this的所有问题了。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="kwd">var</span><span class="pln"> name </span><span class="pun">=</span><span class="pln"> </span><span class="str">‘222’</span><span class="pun">;</span><br>2.  <span class="kwd">var</span><span class="pln"> a </span><span class="pun">=</span><span class="pln"> </span><span class="pun">{</span><br>3.  <span class="pln">&nbsp; &nbsp; &nbsp; name</span><span class="pun">:‘</span><span class="lit">111</span><span class="pun">’,</span><br>4.  <span class="pln">&nbsp; &nbsp; &nbsp; say</span><span class="pun">:</span><span class="kwd">function</span><span class="pln"> </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><br>5.  <span class="pln">&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="kwd">this</span><span class="pun">.</span><span class="pln">name</span><span class="pun">);</span><br>6.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="pun">}</span><br>7.  <span class="pun">}</span><br>8.  <span class="pln">&nbsp;</span><br>9.  <span class="kwd">var</span><span class="pln"> fun </span><span class="pun">=</span><span class="pln"> a</span><span class="pun">.</span><span class="pln">say</span><span class="pun">;</span><br>10.  <span class="pln">fun</span><span class="pun">();</span><span class="pln">&nbsp;</span><br>11.  <span class="pln">a</span><span class="pun">.</span><span class="pln">say</span><span class="pun">();</span><span class="pln">&nbsp;</span><br>12.  <span class="kwd">var</span><span class="pln"> b </span><span class="pun">=</span><span class="pln"> </span><span class="pun">{</span><br>13.  <span class="pln">name</span><span class="pun">:</span><span class="pln"> </span><span class="str">‘333’</span><span class="pun">,</span><br>14.  <span class="pln">say</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">(</span><span class="pln">fun</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><br>15.  <span class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; fun</span><span class="pun">();</span><br>16.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="pun">}</span><br>17.  <span class="pun">}</span><br>18.  <span class="pln">&nbsp;</span><br>19.  <span class="pln">b</span><span class="pun">.</span><span class="pln">say</span><span class="pun">(</span><span class="pln">a</span><span class="pun">.</span><span class="pln">say</span><span class="pun">);</span><span class="pln">&nbsp;</span><br>20.  <span class="kwd">this</span><span class="pun">–&gt;</span><span class="pln">b</span><span class="pun">;</span><br>21.  <span class="pln">fun</span><span class="pun">();预编译过程</span><span class="pln"> fun</span><span class="pun">里面的</span><span class="kwd">this</span><span class="pun">指向</span><span class="pln">window</span><br>22.  <span class="pln">b</span><span class="pun">.</span><span class="pln">say </span><span class="pun">=</span><span class="pln"> a</span><span class="pun">.</span><span class="pln">say</span><span class="pun">;</span><br>23.  <span class="pln">b</span><span class="pun">.</span><span class="pln">say</span><span class="pun">();</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>第一处打印调用fun()，这里其实就是把a.say这个函数的函数体赋给了fun这个函数，相当于在全局空间下写了一个func函数，里面的代码就是a.say里面的代码，所以此时的this指向window，因此打印222。</p>
+<p>第二处打印调用了a.say()，按照我们前面说的谁调用函数，函数里面的this就指向谁，因此这里的this指向a，所以打印111。</p>
+<p>第三处比较复杂，它调用了b.say(a.say))。这里其实是吧a.say这个函数体替换了原本b中fun的地方，我们在调用b.say()这个方法的时候，里面的this是指向b的，但是这个this并不在fun里面而是在say里面</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">say</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">(</span><span class="pln">fun</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><br>2.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="kwd">this</span><span class="pun">;</span><span class="com">// b</span><br>3.  <span class="pln">&nbsp; &nbsp; &nbsp; fun</span><span class="pun">();</span><br>4.  <span class="pun">}</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>其实的结构应该是这样的，所以fun里面的this和我们所想的指向b的那个this不是一个东西，fun里面的this是在预编译阶段的指向window的，因此这里也打印222。其实和第一种直接在全局调用a.say的函数体方法差不多。</p>
+<p>第四个b.say = a.say; b.say();其实也第二种一模一样的意思，不过此时的this指向b而已，因此打印333。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="kwd">var</span><span class="pln"> name </span><span class="pun">=</span><span class="pln"> </span><span class="str">‘222’</span><span class="pun">;</span><br>2.  <span class="kwd">var</span><span class="pln"> a </span><span class="pun">=</span><span class="pln"> </span><span class="pun">{</span><br>3.  <span class="pln">&nbsp; &nbsp; &nbsp; name</span><span class="pun">:‘</span><span class="lit">111</span><span class="pun">’,</span><br>4.  <span class="pln">&nbsp; &nbsp; &nbsp; say</span><span class="pun">:</span><span class="kwd">function</span><span class="pln"> </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><br>5.  <span class="pln">&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="kwd">this</span><span class="pun">.</span><span class="pln">name</span><span class="pun">);</span><br>6.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="pun">}</span><br>7.  <span class="pun">}</span><br>8.  <span class="kwd">var</span><span class="pln"> fun </span><span class="pun">=</span><span class="pln"> a</span><span class="pun">.</span><span class="pln">say</span><span class="pun">;</span><br>9.  <span class="pln">fun</span><span class="pun">();</span><span class="pln"> &nbsp;</span><span class="com">// 222</span><br>10.  <span class="pln">a</span><span class="pun">.</span><span class="pln">say</span><span class="pun">();</span><span class="pln"> &nbsp;</span><span class="com">// 111</span><br>11.  <span class="kwd">var</span><span class="pln"> b </span><span class="pun">=</span><span class="pln"> </span><span class="pun">{</span><br>12.  <span class="pln">name</span><span class="pun">:</span><span class="pln"> </span><span class="str">‘333’</span><span class="pun">,</span><br>13.  <span class="pln">say</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">(</span><span class="pln">fun</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><br>14.  <span class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; fun</span><span class="pun">();</span><br>15.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="pun">}</span><br>16.  <span class="pun">}</span><br>17.  <span class="pln">b</span><span class="pun">.</span><span class="pln">say</span><span class="pun">(</span><span class="pln">a</span><span class="pun">.</span><span class="pln">say</span><span class="pun">);</span><span class="pln"> &nbsp;</span><span class="com">// 222</span><br>18.  <span class="kwd">this</span><span class="pun">–&gt;</span><span class="pln">b</span><span class="pun">;</span><br>19.  <span class="pln">fun</span><span class="pun">();预编译过程</span><span class="pln"> fun</span><span class="pun">里面的</span><span class="kwd">this</span><span class="pun">指向</span><span class="pln">window</span><br>20.  <span class="pln">b</span><span class="pun">.</span><span class="pln">say </span><span class="pun">=</span><span class="pln"> a</span><span class="pun">.</span><span class="pln">say</span><span class="pun">;</span><br>21.  <span class="pln">b</span><span class="pun">.</span><span class="pln">say</span><span class="pun">();</span><span class="pln"> </span><span class="com">// 333</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/02/JavaScriptSeven/" rel="next" title="Web前端的知识之旅哟——继承">
+                <i class="fa fa-chevron-left"></i> Web前端的知识之旅哟——继承
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/02/JavaScriptNine/" rel="prev" title="Web前端的知识之旅哟——克隆与数组">
+                Web前端的知识之旅哟——克隆与数组 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-name">Artikel</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#命名空间"><span class="nav-number">1.</span> <span class="nav-text">命名空间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对象的枚举"><span class="nav-number">2.</span> <span class="nav-text">对象的枚举</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#this"><span class="nav-number">3.</span> <span class="nav-text">this</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

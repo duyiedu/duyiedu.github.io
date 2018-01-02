@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="这里是总结的一小点的web历史知识，并不知道有没有用： • Mosaic是互联网历史上第一个普遍使用和能够显示图片的网页浏览器，1993年问世。 • 后来由于商标权的转让，原本的开发团队又开发了Netscape Navigator网景浏览器，也是现在很多浏览器的前身。 • js作为Netscape Navigator浏览器的一部分首次出现在1996年，它最初的设计目标是改善网页的用户体验，js的作">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Web前端的知识之旅哟——初识JavaScript">
+<meta property="og:url" content="http://yoursite.com/2018/01/02/JavaScriptOne/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="这里是总结的一小点的web历史知识，并不知道有没有用： • Mosaic是互联网历史上第一个普遍使用和能够显示图片的网页浏览器，1993年问世。 • 后来由于商标权的转让，原本的开发团队又开发了Netscape Navigator网景浏览器，也是现在很多浏览器的前身。 • js作为Netscape Navigator浏览器的一部分首次出现在1996年，它最初的设计目标是改善网页的用户体验，js的作">
+<meta property="og:image" content="http://www.flyingliu.com/wp-content/uploads/2016/09/9Q83CZD7U5I8VXSO.png">
+<meta property="og:updated_time" content="2018-01-02T08:29:34.297Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Web前端的知识之旅哟——初识JavaScript">
+<meta name="twitter:description" content="这里是总结的一小点的web历史知识，并不知道有没有用： • Mosaic是互联网历史上第一个普遍使用和能够显示图片的网页浏览器，1993年问世。 • 后来由于商标权的转让，原本的开发团队又开发了Netscape Navigator网景浏览器，也是现在很多浏览器的前身。 • js作为Netscape Navigator浏览器的一部分首次出现在1996年，它最初的设计目标是改善网页的用户体验，js的作">
+<meta name="twitter:image" content="http://www.flyingliu.com/wp-content/uploads/2016/09/9Q83CZD7U5I8VXSO.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/01/02/JavaScriptOne/"/>
+
+
+
+
+
+  <title>Web前端的知识之旅哟——初识JavaScript | Hexo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/02/JavaScriptOne/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Web前端的知识之旅哟——初识JavaScript</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-02T16:03:48+08:00">
+                2018-01-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>这里是总结的一小点的web历史知识，并不知道有没有用：</p>
+<p>• Mosaic是互联网历史上第一个普遍使用和能够显示图片的网页浏览器，1993年问世。</p>
+<p>• 后来由于商标权的转让，原本的开发团队又开发了Netscape Navigator网景浏览器，也是现在很多浏览器的前身。</p>
+<p>• js作为Netscape Navigator浏览器的一部分首次出现在1996年，它最初的设计目标是改善网页的用户体验，js的作者是Brendan Eich。</p>
+<p>• 起初js被命名为LiveScript，后因为和Sun公司合作，Sun公司的Java很出名，因为市场宣传需要，所以改名为JavaScript，后来Sun公司被Oracle公司收购，因此js的版权现在归Oralcle所有。</p>
+<h3 id="浏览器的组成"><a href="#浏览器的组成" class="headerlink" title="浏览器的组成"></a><span style="color: #ff0000;">浏览器的组成</span></h3><p>前面提到过，浏览器主要有两部分组成：shell外壳部分和内核部分，其实内核还包括了很多东西。</p>
+<p>1.<span style="color: #ff0000;">渲染引擎</span>，内核里的渲染引擎主要作用于html和css部分，定义了语法规则、渲染规则以及渲染路径和速度等等。</p>
+<p>2.<span style="color: #ff0000;">js引擎<span style="color: #000000;">。</span></span></p>
+<p>2001年发布了ie6，首次实现对js引擎的优化。</p>
+<p>2008年Google发布了Chrome，它是采用优化后的js引擎，引擎代号V8，因能把js代码直接转化成机械码0101来执行，进而以速度快而闻名。</p>
+<p>后来Firefox也推出了具有强大功能的js引擎</p>
+<p>Firefox 3.5 TraceMonkey（对频繁执行的代码做了路径优化）</p>
+<p>Firefox 4.0 JeagerMonkey</p>
+<p>3.其他模块。</p>
+<h3 id="JavaScript的特点"><a href="#JavaScript的特点" class="headerlink" title="JavaScript的特点"></a><span style="color: #ff0000;">JavaScript的特点</span></h3><p>1.<strong><span style="color: #ff0000;">解释性语言</span></strong>——不需要编译代码，可以跨平台。</p>
+<p>像php、js、jsp都是解释性语言。</p>
+<p>2.<strong><span style="color: #ff0000;">单线程</span></strong>——js是单线程的语言，同时只能执行一件事情。</p>
+<p>3.<span style="color: #ff0000;">ECMA标准</span>——为了统一js的规则，推出了ECMA标准，因此js也称为ECMAScript。</p>
+<h3 id="JavaScript执行队列"><a href="#JavaScript执行队列" class="headerlink" title="JavaScript执行队列"></a><span style="color: #ff0000;">JavaScript执行队列</span></h3><p>js中有一个重要的概念就是执行队列。</p>
+<p>js只有一个主线程，它是单线程的。</p>
+<p>其他模块把任务分解成好多的小模块，这些小模块排成一个队列，队列最前面的进入主线程执行，执行完之后第二个进入主线程执行，这个队列就是js的执行队列。有点像操作系统里面的轮转时间片。</p>
+<h3 id="JavaScript三大部分：ECMAScript、DOM、BOM"><a href="#JavaScript三大部分：ECMAScript、DOM、BOM" class="headerlink" title="JavaScript三大部分：ECMAScript、DOM、BOM"></a><strong><span style="color: #ff0000;">JavaScript三大部分：ECMAScript、DOM、BOM</span></strong></h3><p>•&nbsp;ECMAScript是符合ECMA标准的基本javascript。</p>
+<p>• DOM是<strong><span style="color: #ff0000;">Document Object Model文档对象模型</span></strong>，可以操作页面的代码，可以操作html和css部分。DOM是非常非常重要的部分。</p>
+<p>• BOM是<strong><span style="color: #ff0000;">Browser Object Model浏览器对象模型</span></strong>，操作浏览器shell的。因为每一个浏览器厂家的不同，导致我们在每一个浏览器操作BOM都不一样，因此这里大概了解一下就可以了。</p>
+<h3 id="如何引入JavaScript代码"><a href="#如何引入JavaScript代码" class="headerlink" title="如何引入JavaScript代码"></a><span style="color: #ff0000;">如何引入JavaScript代码</span></h3><p>到这里我们大概了解javascript是什么东西了，那么我们如何在html页面里面引入js代码呢？</p>
+<p>1.<strong><span style="color: #ff0000;">页面内嵌script标签</span></strong></p>
+<p>我们可以在<span style="color: #ff0000;">&lt;head&gt;</span>标签里面或者<span style="color: #ff0000;">&lt;body&gt;</span>标签里面写一个<strong><span style="color: #ff0000;">&lt;script&gt;&lt;/script&gt;</span></strong><span style="color: #ff0000;"><span style="color: #000000;">，这个标签有一个type属性，如果要写的话就写完整的”text/javascript”，要不然就不写，浏览器会默认是这个type值，如果写还写错的话浏览器就会报错。</span></span></p>
+<p>写完标签之后，我们就可以在这个标签里面写js代码了。</p>
+<p>2.<strong><span style="color: #ff0000;">引入外部js文件</span></strong></p>
+<p>script标签除了可以在里面直接写代码之外，还可以写一个src属性来引入外部的js文件。</p>
+<p>• 有一点值得注意的是，一个script标签只能在里面写代码或者引入外部js文件，不能既引入又在里面写代码。</p>
+<p>• 一个script标签就是一个代码块，一个页面可以引入多个代码块。</p>
+<p>• 为了符合传统页面的<strong><span style="color: #ff0000;">web标准（w3c标准的一项）：结构、样式、行为相分离</span></strong>，我们一般采用第二种引入外部js文件的方法。我们的html、css、js最好放在专门的文件里面，然后在html里面引入外部文件。</p>
+<p>• 浏览器在加载我们的html文件的时候，当遇到link标签的时候会异步加载，但是到script标签的时候并不会异步加载，而是会完全不加载后面的内容，而是去下载这个js文件，并且执行js文件里面的内容，之后下载并且执行完全部的js内容之后，浏览器才会继续执行html后面的代码。</p>
+<p>这样就导致了一个问题，如果js是操作DOM的话，我们页面的DOM还没有出来，js就操作，就会出现错误，而且写在前面如果js文件比较大的话，就会导致页面一直没有内容。</p>
+<p>因此，为了避免这种情况的出现，我们一般<strong><span style="color: #ff0000;">把script标签写在body标签里面的最后一行</span></strong>。</p>
+<h3 id="JavaScript基本语法"><a href="#JavaScript基本语法" class="headerlink" title="JavaScript基本语法"></a><span style="color: #ff0000;">JavaScript基本语法</span></h3><p>• <strong><span style="color: #ff0000;">变量声明</span></strong></p>
+<p>js是一种弱数据类型的语言，任何类型的变量都用关键字var来声明。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br><br>1.  <span class="kwd">var</span><span class="pln"> arr </span><span class="pun">=</span><span class="pln"> </span><span class="pun">[</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">2</span><span class="pun">,</span><span class="pln"> </span><span class="lit">3</span><span class="pun">];</span><br>2.  <span class="kwd">var</span><span class="pln"> num </span><span class="pun">=</span><span class="pln"> </span><span class="lit">123</span><span class="pun">;</span><br>3.  <span class="kwd">var</span><span class="pln"> </span><span class="kwd">string</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="str">“abc”</span><span class="pun">;</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>赋值可以在声明的同时赋值也可以在后面赋值。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br><br>1.  <span class="kwd">var</span><span class="pln"> num </span><span class="pun">=</span><span class="pln"> </span><span class="lit">123</span><span class="pun">;</span><br>2.  <span class="kwd">var</span><span class="pln"> num</span><span class="pun">;</span><br>3.  <span class="pln">num </span><span class="pun">=</span><span class="pln"> </span><span class="lit">123</span><span class="pun">;</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>这两种方法是一样的效果。</p>
+<p>同时，我们有一种<strong><span style="color: #ff0000;">单一var模式</span></strong>，当我们要声明多个变量的时候，为了节省代码量，一般只写一个var：</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br><br>1.  <span class="kwd">var</span><span class="pln"> num1 </span><span class="pun">=</span><span class="pln"> </span><span class="lit">123</span><span class="pun">,</span><br>2.  <span class="pln">&nbsp; &nbsp; &nbsp; num2 </span><span class="pun">=</span><span class="pln"> </span><span class="lit">123</span><span class="pun">,</span><br>3.  <span class="pln">&nbsp; &nbsp; &nbsp; num3 </span><span class="pun">=</span><span class="pln"> </span><span class="lit">123</span><span class="pun">;</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>变量名要上下对齐，这样结构能加清晰，也能节省很多代码。</p>
+<p>• <strong><span style="color: #ff0000;">变量</span><span style="color: #ff0000;">命名规则</span></strong></p>
+<p>1.以英文字母、_、$符号开头。</p>
+<p>2.变量名可以包括数字。</p>
+<p>3.不可以使用系统自带的<span style="color: #ff0000;">关键字</span>、<span style="color: #ff0000;">保留字</span>作为变量名。</p>
+<p>关键字是被系统定义了语法的单词，像var、window、if、else这一类都算作关键字。（关键字在编辑器里面是可以变色的）</p>
+<p>保留字是为以后升级可能会变成关键字做的保留，像java、int、enum、abstract、short、boolean等等都是保留字。</p>
+<h3 id="值类型"><a href="#值类型" class="headerlink" title="值类型"></a><span style="color: #ff0000;">值类型</span></h3><p>js中的数据的值主要分为两大类：</p>
+<p>1.<strong><span style="color: #ff0000;">不可改变的原始值</span></strong></p>
+<p>主要有：<span style="color: #ff0000;">Number、String、Boolean、undefined、null</span></p>
+<p>这些数据一般叫做<span style="color: #ff0000;">栈数据</span></p>
+<p>undefined是未定义的意思，而null是空的意思，他们俩的区别在于，<span style="color: #ff0000;">null有值，不过这个值是空值，而undefined是未定义，完全没有值的意思</span>。null一般用作占位。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="kwd">var</span><span class="pln"> demo </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">null</span><span class="pun">;</span><br>2.  <span class="pln">console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">demo</span><span class="pun">);</span><span class="pln"> </span><span class="com">// null</span><br>3.  <span class="kwd">var</span><span class="pln"> a</span><span class="pun">;</span><br>4.  <span class="pln">console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">a</span><span class="pun">);</span><span class="pln"> </span><span class="com">//undefined</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>我们在浏览器上按F12，打开控制台，就可以看到console.log的结果了。</p>
+<p>2.<strong><span style="color: #ff0000;">引用值</span></strong></p>
+<p>主要有：<span style="color: #ff0000;">数组array、对象object、函数function</span></p>
+<p>这些数据一般叫做堆数据</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="kwd">var</span><span class="pln"> arr </span><span class="pun">=</span><span class="pln"> </span><span class="pun">[</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">2</span><span class="pun">,</span><span class="pln"> </span><span class="lit">3</span><span class="pun">,</span><span class="pln"> </span><span class="lit">4</span><span class="pun">];</span><br>2.  <span class="kwd">var</span><span class="pln"> </span><span class="kwd">object</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="pun">{</span><br>3.  <span class="pln">&nbsp; &nbsp; &nbsp; name</span><span class="pun">:</span><span class="pln"> </span><span class="str">‘demo’</span><span class="pun">,</span><br>4.  <span class="pln">&nbsp; &nbsp; &nbsp; age</span><span class="pun">:</span><span class="pln"> </span><span class="str">‘18’</span><br>5.  <span class="pun">}</span><br>6.  <span class="pln">console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">arr</span><span class="pun">);</span><span class="pln"> </span><span class="com">//1,2,3,4</span><br>7.  <span class="pln">console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="kwd">object</span><span class="pun">);</span><span class="pln"> </span><span class="com">//[Object Object]</span><br>8.  <span class="pln">console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="kwd">object</span><span class="pun">.</span><span class="pln">name</span><span class="pun">);</span><span class="pln"> </span><span class="com">// demo</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p><strong><span style="color: #ff0000;">那么这两种数据类型的区别在哪里呢？</span></strong></p>
+<p>我们举一个例子：</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="kwd">var</span><span class="pln"> num </span><span class="pun">=</span><span class="pln"> </span><span class="lit">123</span><span class="pun">,</span><br>2.  <span class="pln">&nbsp; &nbsp; &nbsp; num1 </span><span class="pun">=</span><span class="pln"> num</span><span class="pun">;</span><br>3.  <span class="pln">num </span><span class="pun">=</span><span class="pln"> </span><span class="lit">234</span><span class="pun">;</span><br>4.  <span class="pln">console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">num</span><span class="pun">);</span><span class="pln"> </span><span class="com">//234</span><br>5.  <span class="pln">console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">num1</span><span class="pun">);</span><span class="pln"> </span><span class="com">//123</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>我们发现num的改变对num1完全没有影响。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="kwd">var</span><span class="pln"> arr </span><span class="pun">=</span><span class="pln"> </span><span class="pun">[</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">2</span><span class="pun">,</span><span class="pln"> </span><span class="lit">3</span><span class="pun">],</span><br>2.  <span class="pln">&nbsp; &nbsp; &nbsp; arr1 </span><span class="pun">=</span><span class="pln"> arr</span><span class="pun">;</span><br>3.  <span class="pln">arr</span><span class="pun">.</span><span class="pln">push</span><span class="pun">(</span><span class="lit">4</span><span class="pun">);</span><br>4.  <span class="pln">arr</span><span class="pun">.</span><span class="pln">push</span><span class="pun">(</span><span class="lit">5</span><span class="pun">);</span><br>5.  <span class="pln">console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">arr</span><span class="pun">);</span><span class="pln"> </span><span class="com">//1,2,3,4,5</span><br>6.  <span class="pln">console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">arr1</span><span class="pun">);</span><span class="pln"> </span><span class="com">//1,2,3,4,5</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>我们发现我们根本没有改变arr1的值，只是改变了arr的值，但是arr1也跟着改变了，这就是二者之间的第一个区别。</p>
+<p>不过，如果我们是给arr重新赋值一个新的数组的话，那么arr1并不是这个新的数组。</p>
+<p><span style="color: #0000ff;">arr = [1, 2, 3, 4, 5];</span></p>
+<p><span style="color: #0000ff;">arr1 –&gt; 1, 2, 3</span></p>
+<p><span style="color: #ff0000;">这是为什么呢？</span></p>
+<p>因为原始值是存放在栈里面的，而引用值是存放在堆里面的，原始值的赋值是把值的内容赋值一份给另一个变量，但是引用值却不是这样。引用值的变量名存在栈里面，但是值却是存在堆里面的，栈里面的变量名只是指向了一个堆空间，这个堆空间存的是我们一开始赋的值，当我们写arr1 = arr的时候，其实是把arr1指向了和arr指向的同一个的堆空间，这样当我们改变arr的内容的时候，其实就是改变了这个堆空间的内容，自然同样指向这个堆空间的arr1的值也随着改变了。</p>
+<p><img src="http://www.flyingliu.com/wp-content/uploads/2016/09/9Q83CZD7U5I8VXSO.png" alt="9q83czd7u5i8vxso"></p>
+<p>• 栈内存一点被赋值了，就不可以改变了，我们即使给num重新赋值为234，也是在栈里面重新开辟了一块空间赋值234，然后把num指向了这个空间，前面那个存放123的空间还存在，只是没有指针指向这里罢了。</p>
+<p>第二点区别则是：原始值不可以被改变，引用值可以被改变。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="kwd">var</span><span class="pln"> arr </span><span class="pun">=</span><span class="pln"> </span><span class="pun">[</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">2</span><span class="pun">,</span><span class="pln"> </span><span class="lit">3</span><span class="pun">,</span><span class="pln"> </span><span class="lit">4</span><span class="pun">];</span><br>2.  <span class="pln">arr</span><span class="pun">.</span><span class="pln">length </span><span class="pun">=</span><span class="pln"> </span><span class="lit">2</span><span class="pun">;</span><br>3.  <span class="pln">console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">arr</span><span class="pun">);</span><span class="pln"> </span><span class="com">// 1,2</span><br>4.  <span class="kwd">var</span><span class="pln"> str </span><span class="pun">=</span><span class="pln"> </span><span class="str">“1234”</span><span class="pun">;</span><br>5.  <span class="pln">str</span><span class="pun">.</span><span class="pln">length </span><span class="pun">=</span><span class="pln"> </span><span class="lit">2</span><span class="pun">;</span><br>6.  <span class="pln">console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">str</span><span class="pun">);</span><span class="pln"> </span><span class="com">// 1234</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>这里涉及了一个包装类的概念，我们后面会提到。</p>
+<h3 id="JavaScript语句基本规则"><a href="#JavaScript语句基本规则" class="headerlink" title="JavaScript语句基本规则"></a><span style="color: #ff0000;">JavaScript语句基本规则</span></h3><p>1.语句后面要用英文分号结束 “;”</p>
+<p>2.js语法错误会引发后面的代码终止，但不会影响其他的js代码块。这里仅限于逻辑错误，低级的语法错误会导致代码全都执行不了。</p>
+<p>3.书写要规范，=、+、-、/、%两边都要留有空格。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">num </span><span class="pun">+</span><span class="pln"> </span><span class="lit">1</span><span class="pun">;</span><br>2.  <span class="pln">&nbsp;</span><br>3.  <span class="pln">num </span><span class="pun">=</span><span class="pln"> num </span><span class="pun">+</span><span class="pln"> </span><span class="lit">2</span><span class="pun">;</span><br>4.  <span class="pln">&nbsp;</span><br>5.  <span class="pln">num </span><span class="pun">=</span><span class="pln"> num </span><span class="pun">/</span><span class="pln"> </span><span class="lit">2</span><span class="pun">;</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>一些公司还会有自己的其他编码规范，比如百度公司就会要求小括号和大括号左右两边留有空格。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="kwd">for</span><span class="pln"> </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{}</span><br>2.  <span class="pln">&nbsp;</span><br>3.  <span class="kwd">if</span><span class="pln"> </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{}</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>这些都是良好的编码习惯，养成这些习惯有助于我们以后的工作。</p>
+<h3 id="JavaScript运算符"><a href="#JavaScript运算符" class="headerlink" title="JavaScript运算符"></a><span style="color: #ff0000;">JavaScript运算符</span></h3><p>•<strong><span style="color: #ff0000;"> 算术运算符</span></strong></p>
+<ol>
+<li>&nbsp;<strong><span style="color: #ff0000;">+ 运算符</span></strong></li>
+</ol>
+<p>• 数学上的相加功能</p>
+<p>• <span style="color: #ff0000;">拼接字符串</span></p>
+<p>字符串和任何数据相加都会变成字符串</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="kwd">var</span><span class="pln"> num </span><span class="pun">=</span><span class="pln"> </span><span class="lit">1</span><span class="pln"> </span><span class="pun">+</span><span class="pln"> </span><span class="lit">2</span><span class="pln"> </span><span class="pun">+</span><span class="pln"> </span><span class="str">‘3’</span><span class="pun">;</span><br>2.  <span class="pln">&nbsp;</span><br>3.  <span class="pln">console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">num</span><span class="pun">);</span><span class="pln"> </span><span class="com">//33</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>算术运算符的优先级是从左到右的。</p>
+<p>2.&nbsp;<strong><span style="color: #ff0000;">– 运算符</span></strong></p>
+<p>• 数学上的相减功能</p>
+<p>3.&nbsp;<strong><span style="color: #ff0000;">* 运算符</span></strong></p>
+<p>• 数学上的相乘功能</p>
+<p>4.&nbsp;<strong><span style="color: #ff0000;">/ 运算符</span></strong></p>
+<p>• 数学上的相除功能</p>
+<ol>
+<li><strong><span style="color: #ff0000;">% 运算符</span></strong></li>
+</ol>
+<p>• 数学上的取余功能</p>
+<ol>
+<li><strong><span style="color: #ff0000;">= 运算符</span></strong></li>
+</ol>
+<p>•&nbsp;赋值运算符，<span style="color: #ff0000;">优先级最低</span></p>
+<p>7.<strong><span style="color: #ff0000;"> == 运算符</span></strong></p>
+<p>•&nbsp;比较运算符中的等于，不过两个等号的等于属于不严格等于，严格等于是“===”三个等号。</p>
+<ol>
+<li><strong><span style="color: #ff0000;">() 运算符</span></strong></li>
+</ol>
+<p>•&nbsp;和数学上一样，加括号的部分优先级最高</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="kwd">var</span><span class="pln"> num </span><span class="pun">=</span><span class="pln"> </span><span class="lit">1</span><span class="pln"> </span><span class="pun">+</span><span class="pln"> </span><span class="str">‘2’</span><span class="pln"> </span><span class="pun">+</span><span class="pln"> </span><span class="pun">(</span><span class="lit">1</span><span class="pln"> </span><span class="pun">+</span><span class="pln"> </span><span class="lit">1</span><span class="pun">);</span><br>2.  <span class="pln">&nbsp;</span><br>3.  <span class="pln">console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">num</span><span class="pun">);</span><span class="pln"> </span><span class="com">// 122</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>9.<strong><span style="color: #ff0000;"> ++ 运算符</span></strong></p>
+<p>• 自加一运算，当写在变量前面的时候是先加1再执行运算，写在变量后面的时候是先运算再加1。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="kwd">var</span><span class="pln"> num </span><span class="pun">=</span><span class="pln"> </span><span class="lit">1</span><span class="pun">;</span><br>2.  <span class="pln">&nbsp;</span><br>3.  <span class="pln">console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">num</span><span class="pun">++);</span><span class="pln"> </span><span class="com">// 1</span><br>4.  <span class="pln">&nbsp;</span><br>5.  <span class="pln">console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">num</span><span class="pun">);</span><span class="pln"> </span><span class="com">//2</span><br>6.  <span class="pln">&nbsp;</span><br>7.  <span class="pln">console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(++</span><span class="pln">num</span><span class="pun">);</span><span class="pln"> </span><span class="com">// 3</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>相类似的运算还有 <span style="color: #ff0000;">—</span> ，用法和 ++ 一样，不过是减法操作。</p>
+<ol>
+<li><strong><span style="color: #ff0000;">+= 运算符</span></strong></li>
+</ol>
+<p>让变量加多少</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="kwd">var</span><span class="pln"> num </span><span class="pun">=</span><span class="pln"> num </span><span class="pun">+</span><span class="pln"> </span><span class="lit">10</span><span class="pun">;</span><br>2.  <span class="pln">&nbsp;</span><br>3.  <span class="kwd">var</span><span class="pln"> num </span><span class="pun">+=</span><span class="pln"> </span><span class="lit">10</span><span class="pun">;</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>这两种操作是一样的效果，第二种是第一种的简写形式。</p>
+<p>相同的还有 <span style="color: #ff0000;">-=、/=、*-、%=&nbsp;</span>等等</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="kwd">var</span><span class="pln"> num </span><span class="pun">=</span><span class="pln"> </span><span class="lit">3</span><span class="pun">;</span><br>2.  <span class="pln">&nbsp;</span><br>3.  <span class="pln">console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">num </span><span class="pun">%=</span><span class="pln"> </span><span class="lit">4</span><span class="pun">);</span><span class="pln"> </span><span class="com">//3</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>•<strong><span style="color: #ff0000;"> 比较运算符</span></strong></p>
+<p>比较运算符有 &gt; 、&lt; 、&gt;= 、&lt;= 、!= 、==<span style="color: #ff0000;"> 不严格等于</span>、===<span style="color: #ff0000;">严格等于</span></p>
+<p>这里介绍一下不严格等于和严格等于的区别</p>
+<p>当我们比较两个数据的时候，是<span style="color: #ff0000;">先转化成同一个类型的数据</span>之后再进行比较的。不严格等于就是说这两个数据<span style="color: #ff0000;">进行了转化</span>之后，他们的值相同，则整两个数据相等。而严格等于则是两个数据<span style="color: #ff0000;">不进行数据转化</span>也相等。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="str">“2”</span><span class="pln"> </span><span class="pun">===</span><span class="pln"> </span><span class="lit">2</span><span class="pln"> </span><span class="com">// false</span><br>2.  <span class="pln">&nbsp;</span><br>3.  <span class="str">“2”</span><span class="pln"> </span><span class="pun">==</span><span class="pln"> </span><span class="lit">2</span><span class="pln"> </span><span class="com">//true</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>同时，NaN不等于任何数据，包括它本身，但是undefined就等于它本身。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="kwd">NaN</span><span class="pln"> </span><span class="pun">==</span><span class="pln"> </span><span class="kwd">NaN</span><span class="pln"> </span><span class="com">// false</span><br>2.  <span class="pln">&nbsp;</span><br>3.  <span class="kwd">undefined</span><span class="pln"> </span><span class="pun">==</span><span class="pln"> </span><span class="kwd">undefined</span><span class="pln"> </span><span class="com">// true</span><br>4.  <span class="pln">&nbsp;</span><br>5.  <span class="kwd">var</span><span class="pln"> demo </span><span class="pun">=</span><span class="pln"> </span><span class="pun">!!</span><span class="str">“abc”</span><span class="pun">;</span><span class="pln"> </span><span class="com">// true</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>这里的demo要进行取反运算，先进行了类型转换为布尔值true，两次取反之后依然是true，这个可以用来作为数据转换成布尔值。</p>
+<p>•<strong><span style="color: #ff0000;">&nbsp;逻辑运算符</span></strong></p>
+<p>逻辑运算符主要是 <strong><span style="color: #ff0000;">&amp;&amp;</span></strong> 和 <strong><span style="color: #ff0000;">||</span></strong> —— 与和或</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br><br>1.  <span class="kwd">var</span><span class="pln"> demo </span><span class="pun">=</span><span class="pln"> </span><span class="lit">1</span><span class="pln"> </span><span class="pun">&lt;</span><span class="pln"> </span><span class="lit">2</span><span class="pln"> </span><span class="pun">&amp;&amp;</span><span class="pln"> </span><span class="lit">3</span><span class="pun">;</span><span class="pln"> </span><span class="com">// 3</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>&amp;&amp;的作用是只有是true的时候，才会继续往后执行，一旦第一个表达式就错了，后面的第二个表达式根本不执行。如果表达式的返回结果都是true的话，那么这里&amp;&amp;的返回结果是最后一个正确的表达式的结果。样例中的demo是3。</p>
+<p>||的作用是只要有一个表达式是true的，那么就结束，后面的就不走了，并且返回的结果是这个正确的表达式的结果，如果都是false的表达式的话，那么返回结果就是false。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br><br>1.  <span class="kwd">var</span><span class="pln"> demo </span><span class="pun">=</span><span class="pln"> </span><span class="lit">2</span><span class="pln"> </span><span class="pun">&lt;</span><span class="pln"> </span><span class="lit">1</span><span class="pln"> </span><span class="pun">||</span><span class="pln"> </span><span class="pun">(</span><span class="lit">1</span><span class="pln"> </span><span class="pun">==</span><span class="pln"> </span><span class="lit">1</span><span class="pun">);</span><span class="pln"> </span><span class="com">// true</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>一般来说，&amp;&amp;有当做短路语句的作用，因为运算符的运算特点，只有第一个条件成立的时候，才会运行第二个表达式，所以我们可以把简单的if语句用&amp;&amp;来表现出来。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="kwd">if</span><span class="pun">(</span><span class="pln">flag</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">‘hello’</span><span class="pun">)};</span><br>2.  <span class="pln">&nbsp;</span><br>3.  <span class="pln">flag </span><span class="pun">&amp;&amp;</span><span class="pln"> console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">‘hello’</span><span class="pun">);</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>这两个语句是同样的含义。</p>
+<p>一般来说，||有当做赋初值的作用，有时候我们希望函数参数有一个初始值，再不使用ECMA6的语法的情况下，最好的做法就是利用或语句。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="kwd">function</span><span class="pln"> demo </span><span class="pun">(</span><span class="pln">example</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><br>2.  <span class="pln">&nbsp;</span><br>3.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="kwd">var</span><span class="pln"> example </span><span class="pun">=</span><span class="pln"> example </span><span class="pun">||</span><span class="pln"> </span><span class="lit">100</span><span class="pun">;</span><br>4.  <span class="pln">&nbsp;</span><br>5.  <span class="pun">}</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>当我们调用demo这个函数并且正确传值的时候，函数内部的变量example就是我们传的值，但是如果由于我们疏忽忘记传值的话，那么里面的example就是我们的默认值100。</p>
+<p>不过这里也有一种缺点，当我们传的参数是一个布尔值的时候，并且传的是false，那么||语句的特点就会忽略掉我们传递的这个参数值而去赋成默认的初始值了，所以为了解决这个弊端，我们就需要利用es6的一些知识了。</p>
+<p>•<strong><span style="color: #ff0000;">&nbsp;默认为false的值</span></strong></p>
+<p>数据中所有的值都可以被转换成true或false，但是true的值实在太多了，因此我们只需要记住false的值，其他的都是true。</p>
+<p>默认为false：<strong><span style="color: #ff0000;">undefined、null、””、NaN、0、false</span></strong>。</p>
+<p>今天总结的知识点就这一些了，希望对大家有帮助哟~</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/02/CssSix/" rel="next" title="Web前端的知识之旅哟——css背景图片和其他">
+                <i class="fa fa-chevron-left"></i> Web前端的知识之旅哟——css背景图片和其他
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/02/JavaScriptTwo/" rel="prev" title="Web前端的知识之旅哟——类型转换">
+                Web前端的知识之旅哟——类型转换 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-name">Artikel</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#浏览器的组成"><span class="nav-number">1.</span> <span class="nav-text">浏览器的组成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JavaScript的特点"><span class="nav-number">2.</span> <span class="nav-text">JavaScript的特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JavaScript执行队列"><span class="nav-number">3.</span> <span class="nav-text">JavaScript执行队列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JavaScript三大部分：ECMAScript、DOM、BOM"><span class="nav-number">4.</span> <span class="nav-text">JavaScript三大部分：ECMAScript、DOM、BOM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何引入JavaScript代码"><span class="nav-number">5.</span> <span class="nav-text">如何引入JavaScript代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JavaScript基本语法"><span class="nav-number">6.</span> <span class="nav-text">JavaScript基本语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#值类型"><span class="nav-number">7.</span> <span class="nav-text">值类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JavaScript语句基本规则"><span class="nav-number">8.</span> <span class="nav-text">JavaScript语句基本规则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JavaScript运算符"><span class="nav-number">9.</span> <span class="nav-text">JavaScript运算符</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="BOMBOM的全称叫做Browser OjbectModel 浏览器对象模型，它定义了操作浏览器的接口。 BOM对象包括：Window、History、Navigator、Screen和Location。但是由于浏览器厂商的不同，BOM对象的兼容性极低，一般情况下，我们只用其中的一部分功能。 具体请参考w3school中的介绍： http://www.w3school.com.cn/jsref/i">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Web前端的知识之旅哟—— BOM与正则表达式">
+<meta property="og:url" content="http://yoursite.com/2018/01/02/JavaScriptTwenty2/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="BOMBOM的全称叫做Browser OjbectModel 浏览器对象模型，它定义了操作浏览器的接口。 BOM对象包括：Window、History、Navigator、Screen和Location。但是由于浏览器厂商的不同，BOM对象的兼容性极低，一般情况下，我们只用其中的一部分功能。 具体请参考w3school中的介绍： http://www.w3school.com.cn/jsref/i">
+<meta property="og:updated_time" content="2018-01-02T09:55:32.801Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Web前端的知识之旅哟—— BOM与正则表达式">
+<meta name="twitter:description" content="BOMBOM的全称叫做Browser OjbectModel 浏览器对象模型，它定义了操作浏览器的接口。 BOM对象包括：Window、History、Navigator、Screen和Location。但是由于浏览器厂商的不同，BOM对象的兼容性极低，一般情况下，我们只用其中的一部分功能。 具体请参考w3school中的介绍： http://www.w3school.com.cn/jsref/i">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/01/02/JavaScriptTwenty2/"/>
+
+
+
+
+
+  <title>Web前端的知识之旅哟—— BOM与正则表达式 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/02/JavaScriptTwenty2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Web前端的知识之旅哟—— BOM与正则表达式</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-02T17:52:46+08:00">
+                2018-01-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="BOM"><a href="#BOM" class="headerlink" title="BOM"></a><span style="color: #ff0000;">BOM</span></h3><p>BOM的全称叫做Browser OjbectModel 浏览器对象模型，它定义了操作浏览器的接口。</p>
+<p>BOM对象包括：Window、History、Navigator、Screen和Location。但是由于浏览器厂商的不同，BOM对象的兼容性极低，一般情况下，我们只用其中的一部分功能。</p>
+<p>具体请参考w3school中的介绍：</p>
+<p><a href="http://www.w3school.com.cn/jsref/index.asp" target="_blank" rel="noopener">http://www.w3school.com.cn/jsref/index.asp</a></p>
+<p><span style="color: #ff0000;"><strong>Navigator</strong></span></p>
+<p>navigator.userAgent是我们经常使用的属性，它可以返回客户端的代理值。用这个我们就可以判断当前用户使用的是pc端还是移动端，是什么浏览器。</p>
+<p><strong><span style="color: #ff0000;">Screen</span></strong></p>
+<p>screen.availHeight/availWidth 可以查看除了window任务栏之外的屏幕的高度和宽度。</p>
+<p>screen.height/width 返回显示器的屏幕的高度和宽度。不过这个兼容的较少。</p>
+<p>screen.deviceXDPI/deviceYDPI返回显示屏幕每英寸的水平/垂直点数，即分辨率。DPI越高，分辨率越高。</p>
+<p><strong><span style="color: #ff0000;">History</span></strong></p>
+<p>history.length 可以返回当前窗口查看过的网页记录的数量，即浏览历史的长度。</p>
+<p>history.back() 可以让浏览器进入到下一个历史页面。</p>
+<p>history.forward() &nbsp;可以让浏览器返回到上一个历史页面。</p>
+<p>history.go() 这个方法有一个参数，当参数是正数的时候，前进到下一个历史页面，当是负数的时候，回退到上一个历史页面。即前两个的综合方法。</p>
+<p><strong><span style="color: #ff0000;">Location</span></strong></p>
+<p>location.host 可以返回当前的主机名和当前的URL端口号。比如百度就返回www.baidu.com</p>
+<p>location.search 设置或返回从问好开始的URL（查询部分）</p>
+<p>location.hash 可以跳转到相应的id的元素的位置，和a标签的锚点功能差不多。可以配合css3的:target一起使用改变元素的样式。</p>
+<p>location.reload() 方法可以重新加载当前页面</p>
+<p>BOM就介绍这么多，大家可以看看文档学习一下其他的东西。</p>
+<h3 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a><span style="color: #ff0000;">正则表达式</span></h3><p>在开始讲解正则表达式之前，我们先了解一下转义字符“\”。</p>
+<p>我们如果想要打印出来双引号，因为双引号本身是一种语法规则，所以正常情况下是打印不出来的，这个时候就需要用到转义字符“/”来把双引号转化成普通的字符而不是语法规则。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="pln">    </span><span class="kwd">var</span><span class="pln"> str </span><span class="pun">=</span><span class="pln"> </span><span class="str">‘\”\”‘</span><span class="pun">;</span><br>3.  <span class="pln">    console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">str</span><span class="pun">);</span><span class="pln"> </span><span class="com">// “”</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>转义字符配合特殊的字母有特殊的意义：</p>
+<p>\n 代表字符串和换行</p>
+<p>\r 代表字符串的回车</p>
+<p>\t 代表制表符tab</p>
+<p>等等</p>
+<p><span style="color: #ff0000;"><strong>多行字符串</strong></span></p>
+<p>1.真正的多行字符串，在每一行最后加一个\n就可以了。</p>
+<p>2.为了让结构看起来清晰，我们在编辑器中人为的换行，但是本身并不是多行字符串，这个时候只需要在每一行末尾加一个“\”就可以了。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="pln">    </span><span class="kwd">var</span><span class="pln"> str </span><span class="pun">=</span><span class="pln"> </span><span class="str">‘\</span><br>3.  <span class="str">        &lt;div class=”demo”&gt;\</span><br>4.  <span class="str">            &lt;span&gt;&lt;/span&gt;\</span><br>5.  <span class="str">            &lt;p&gt;&lt;/p&gt;\</span><br>6.  <span class="str">        &lt;/div&gt;\</span><br>7.  <span class="str">        ‘</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>了解了转义字符之后，下面我们正式进入正则表达式部分。</p>
+<p><strong><span style="color: #ff0000;">正则表达式的作用</span></strong></p>
+<p>正则表达式是进行字符串匹配检测的，当我们为了匹配特殊字符或有特殊匹配原则的字符的时候，正则表达式是最佳的选择。</p>
+<p>正则表达式（RegExp）有两种创建方式：</p>
+<p>1.直接量</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="kwd">var</span><span class="pln"> reg </span><span class="pun">=</span><span class="pln"> </span><span class="str">/abc/</span><span class="pun">;</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>2.构造函数</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="kwd">var</span><span class="pln"> reg </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">RegExp</span><span class="pun">(</span><span class="str">‘abc’</span><span class="pun">);</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>要匹配的字符串放在第一个参数，或者将一个现成的正则表达式放进第一个参数。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="kwd">var</span><span class="pln"> reg </span><span class="pun">=</span><span class="pln"> </span><span class="str">/abc/</span><span class="pun">;</span><br>3.  <span class="kwd">var</span><span class="pln"> reg2 </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">RegExp</span><span class="pun">(</span><span class="pln">reg</span><span class="pun">);</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p><strong><span style="color: #ff0000;">修饰符</span></strong></p>
+<p>一个正则表达式有三个描述的属性g、i、m，表示三种特定的修饰功能。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="kwd">var</span><span class="pln"> reg </span><span class="pun">=</span><span class="pln"> </span><span class="str">/abc/</span><span class="pln">gim</span><span class="pun">;</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>在直接量中直接在后面加上gim就可以了，但是在构造函数中，我们要把修饰符放在第二个参数上。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="kwd">var</span><span class="pln"> reg </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">RegExp</span><span class="pun">(</span><span class="str">‘abc’</span><span class="pun">,</span><span class="pln"> </span><span class="str">‘gim’</span><span class="pun">);</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>这两种写出来的效果是一模一样的，但是由于构造函数书写起来太麻烦而且还需要转义字符，个人推荐用直接量来构造正则表达式。</p>
+<p>正则表达式上面有一个方法test()，可以测试一个字符串符不符合这个匹配规则。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="kwd">var</span><span class="pln"> reg </span><span class="pun">=</span><span class="pln"> </span><span class="str">/abc/</span><span class="pln">g</span><span class="pun">;</span><br>3.  <span class="pln">console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">reg</span><span class="pun">.</span><span class="pln">test</span><span class="pun">(</span><span class="str">‘abcabc’</span><span class="pun">));</span><span class="pln"> </span><span class="com">// true</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>这样就实现了一个最基本的匹配了。</p>
+<p>1.i （ignore） 可以忽略大小写。</p>
+<p>2.g （global） 全局匹配。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="kwd">var</span><span class="pln"> reg </span><span class="pun">=</span><span class="pln"> </span><span class="str">/abc/</span><span class="pun">;</span><br>3.  <span class="kwd">var</span><span class="pln"> str </span><span class="pun">=</span><span class="pln"> </span><span class="str">‘abcabcabc’</span><span class="pun">;</span><br>4.  <span class="pln">console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">str</span><span class="pun">.</span><span class="pln">match</span><span class="pun">(</span><span class="pln">reg</span><span class="pun">));</span><span class="pln"> </span><span class="com">// [“abc”, index: 0, input: “abcabcabc”]</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>不写g的时候会返回一个类数组，写上g会返回一个数组，里面有所有的3个abc。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="kwd">var</span><span class="pln"> reg </span><span class="pun">=</span><span class="pln"> </span><span class="str">/abc/</span><span class="pln">g</span><span class="pun">;</span><br>3.  <span class="kwd">var</span><span class="pln"> str </span><span class="pun">=</span><span class="pln"> </span><span class="str">‘abcabcabc’</span><span class="pun">;</span><br>4.  <span class="pln">console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">str</span><span class="pun">.</span><span class="pln">match</span><span class="pun">(</span><span class="pln">reg</span><span class="pun">));</span><span class="pln"> </span><span class="com">// [“abc”, “abc”, “abc”]</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>3.m （multiline）多行匹配</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="kwd">var</span><span class="pln"> reg </span><span class="pun">=</span><span class="pln"> </span><span class="str">/^e/</span><span class="pln">igm</span><span class="pun">;</span><br>3.  <span class="kwd">var</span><span class="pln"> str </span><span class="pun">=</span><span class="pln"> </span><span class="str">“abc\nebcd”</span><span class="pun">;</span><br>4.  <span class="pln">console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">str</span><span class="pun">.</span><span class="pln">match</span><span class="pun">(</span><span class="pln">reg</span><span class="pun">));</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>这个reg的作用是匹配以e开头的字符串，如果不加m，这个str是无法匹配的，因为\n也算一个字符，它后面的e不算是开头的字符，但是加上m之后，\n就会被正则表达式看成是正常的换行符，因此后面的e会被看做是下一行的开头的字符，因此就可以匹配出来了。</p>
+<p><strong><span style="color: #ff0000;">表达式</span></strong></p>
+<p>1.[abc] 查找方括号之间的任何字符。</p>
+<p>匹配的是一位字符，不过是括号里面的任何一位都可以。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="kwd">var</span><span class="pln"> reg </span><span class="pun">=</span><span class="pln"> </span><span class="str">/[abcd]/</span><span class="pln">g</span><span class="pun">;</span><br>3.  <span class="kwd">var</span><span class="pln"> str </span><span class="pun">=</span><span class="pln"> </span><span class="str">‘code’</span><span class="pun">;</span><br>4.  <span class="pln">console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">str</span><span class="pun">.</span><span class="pln">match</span><span class="pun">(</span><span class="pln">reg</span><span class="pun">));</span><span class="pln"> </span><span class="com">// [“c”, “d”]</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>现在反悔的一个数组，把str中的所有a或者b或者c都返回出来了。</p>
+<p>我们还可以写一个范围，比如[a-zA-Z0-9]，这样就代表所有的英文字母和数字。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="kwd">var</span><span class="pln"> reg </span><span class="pun">=</span><span class="pln"> </span><span class="str">/[a-zA-Z0-9]/</span><span class="pln">g</span><span class="pun">;</span><br>3.  <span class="kwd">var</span><span class="pln"> str </span><span class="pun">=</span><span class="pln"> </span><span class="str">‘code1024’</span><span class="pun">;</span><br>4.  <span class="pln">console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">str</span><span class="pun">.</span><span class="pln">match</span><span class="pun">(</span><span class="pln">reg</span><span class="pun">));</span><span class="pln"> </span><span class="com">// [“c”, “o”, “d”, “e”, “1”, “0”, “2”, “4”]</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>这样匹配出来的就是一个code1024</p>
+<p>2.[^abc] 查找任何不属于方括号里面的字符</p>
+<p>注意这里的“^”是写在方括号里面的，和前面的代表开头的“^”不是一个意思。当这个符号出现在方括号里面的时候，就代表非的意思，除了方括号里面写的，其他的字符都符合。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="kwd">var</span><span class="pln"> reg </span><span class="pun">=</span><span class="pln"> </span><span class="str">/[^a-zA-Z]/</span><span class="pln">g</span><span class="pun">;</span><br>3.  <span class="kwd">var</span><span class="pln"> str </span><span class="pun">=</span><span class="pln"> </span><span class="str">‘code1024’</span><span class="pun">;</span><br>4.  <span class="pln">console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">str</span><span class="pun">.</span><span class="pln">match</span><span class="pun">(</span><span class="pln">reg</span><span class="pun">));</span><span class="pln"> </span><span class="com">// [“1”, “0”, “2”, “4”]</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>这个表达式的意思就是除了字母之外的其他字符都符合要求。</p>
+<p>3.()</p>
+<p>括号的作用是提高优先级和产生子表达式的作用。</p>
+<p>4.|</p>
+<p>或表达式，和[]差不多，可以配合()来使用。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="kwd">var</span><span class="pln"> reg </span><span class="pun">=</span><span class="pln"> </span><span class="str">/a|b/</span><span class="pln">g</span><span class="pun">;</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>这个正则表达式代表ab或者cb都可以。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="kwd">var</span><span class="pln"> reg </span><span class="pun">=</span><span class="pln"> </span><span class="str">/(a|c)b)/</span><span class="pln">g</span><span class="pun">;</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div><br><div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="kwd">var</span><span class="pln"> reg </span><span class="pun">=</span><span class="str">/(blue|red)abc/</span><span class="pun">;</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>如果不加括号的话，就是匹配blue或者redabc，现在加上括号了就是匹配blueabc或者redabc。</p>
+<p><strong><span style="color: #ff0000;">元字符</span></strong></p>
+<p>和表达式差不多，元字符是代表区间的。</p>
+<p>1.“.”</p>
+<p>这个符号可以匹配除了换行符（\n）和行结束符（\r），除了这两个字符之外其他的字符都可以匹配出来。</p>
+<p>2.\w</p>
+<p>这个元字符代表单词字符的意思，即A-Za-z0-9_</p>
+<p>注意这个是可以匹配下划线的。</p>
+<p>3.\W</p>
+<p>除了\w的单词字符之外的其他字符。</p>
+<p>4.\d</p>
+<p>代表数字字符，即0-9</p>
+<p>5\D</p>
+<p>代表除了数字字符之外的其他字符。</p>
+<p>6.\s</p>
+<p>查找空白字符。</p>
+<p>空白字符都包括：空格符、制表符（\t）、回车符（\r），换行符（\n），垂直换行符（\v）、换页符（\f）。</p>
+<p>因此\s = [\n\t\r\v\f];</p>
+<p>7.\S</p>
+<p>查找非空白字符，即除了\s包括的空白字符之外的其他字符。</p>
+<p>我们如果要匹配任意字符的话，就可以搭配起来使用了：</p>
+<p>[\s\S]、[\d\D]、[\w\W]等都可以</p>
+<p>8.\b</p>
+<p>匹配单词边界。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="kwd">var</span><span class="pln"> str </span><span class="pun">=</span><span class="pln"> </span><span class="str">‘accb bdaccd efg’</span><span class="pun">;</span><br>3.  <span class="kwd">var</span><span class="pln"> reg </span><span class="pun">=</span><span class="pln"> </span><span class="str">/\bacc/</span><span class="pun">;</span><br>4.  <span class="pln">console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">str</span><span class="pun">.</span><span class="pln">match</span><span class="pun">(</span><span class="pln">reg</span><span class="pun">));</span><span class="pln"> </span><span class="com">// [“acc”]</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>这样匹配的就是第一个acc，后面的acc前面不是单词边界，因此不符合匹配规则。</p>
+<p>9.\B</p>
+<p>非单词边界</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="kwd">var</span><span class="pln"> str </span><span class="pun">=</span><span class="pln"> </span><span class="str">‘accb bdaccd efg’</span><span class="pun">;</span><br>3.  <span class="kwd">var</span><span class="pln"> reg </span><span class="pun">=</span><span class="pln"> </span><span class="str">/\Bacc/</span><span class="pun">;</span><br>4.  <span class="pln">console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">str</span><span class="pun">.</span><span class="pln">match</span><span class="pun">(</span><span class="pln">reg</span><span class="pun">));</span><span class="pln"> </span><span class="com">// [“acc”]</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>匹配的就是中间的acc。</p>
+<p>注意，一个汉字就是一个单词，每一个汉字的两边都有默认的单词边界。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="kwd">var</span><span class="pln"> str </span><span class="pun">=</span><span class="pln"> </span><span class="str">‘维生素c’</span><span class="pun">;</span><br>3.  <span class="kwd">var</span><span class="pln"> reg </span><span class="pun">=</span><span class="pln"> </span><span class="str">/\bc/</span><span class="pun">;</span><br>4.  <span class="pln">console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">str</span><span class="pun">.</span><span class="pln">match</span><span class="pun">(</span><span class="pln">reg</span><span class="pun">));</span><span class="pln"> </span><span class="com">// [“c”, index: 3, input: “维生素c”]</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p><strong><span style="color: #ff0000;">量词</span></strong></p>
+<p>以下的n代表一个变量，可以是表达式或者元字符。</p>
+<p>1.n+</p>
+<p>匹配至少一个变量n</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="kwd">var</span><span class="pln"> str </span><span class="pun">=</span><span class="pln"> </span><span class="str">‘bcdaaaaagbaaasaaka’</span><span class="pun">;</span><br>3.  <span class="kwd">var</span><span class="pln"> reg </span><span class="pun">=</span><span class="pln"> </span><span class="str">/a+/</span><span class="pln">g</span><span class="pun">;</span><br>4.  <span class="pln">console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">str</span><span class="pun">.</span><span class="pln">match</span><span class="pun">(</span><span class="pln">reg</span><span class="pun">));</span><span class="pln"> </span><span class="com">// [“aaaaa”, “aaa”, “aa”, “a”]</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>可以把全部的a当做一位来匹配出来。</p>
+<p>2.n*</p>
+<p>匹配至少零个变量n</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="kwd">var</span><span class="pln"> reg </span><span class="pun">=</span><span class="pln"> </span><span class="str">/a*c/</span><span class="pln">g</span><span class="pun">;</span><br>3.  <span class="kwd">var</span><span class="pln"> str </span><span class="pun">=</span><span class="pln"> </span><span class="str">‘abc’</span><span class="pun">;</span><span class="pln"> </span><br>4.  <span class="pln">console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">str</span><span class="pun">.</span><span class="pln">match</span><span class="pun">(</span><span class="pln">reg</span><span class="pun">));</span><span class="pln"> </span><span class="com">// [“c”]</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>这种情况下只有前面是a*0才有可能匹配成功。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="kwd">var</span><span class="pln"> reg </span><span class="pun">=</span><span class="pln"> </span><span class="str">/\w*/</span><span class="pln">g</span><span class="pun">;</span><br>3.  <span class="kwd">var</span><span class="pln"> str </span><span class="pun">=</span><span class="pln"> </span><span class="str">‘aabbbccc’</span><span class="pun">;</span><br>4.  <span class="pln">console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">str</span><span class="pun">.</span><span class="pln">match</span><span class="pun">(</span><span class="pln">reg</span><span class="pun">));</span><span class="pln"> </span><span class="com">// [“aabbbccc”, “”]</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>最后有一个空串，因为前面的单词被\w<em>匹配出来，最后还有一个空字符可以被\w</em>0匹配出来。</p>
+<p>两个字符之间都有一个空字符， ab-&gt; [‘a’, ”, ‘b’];</p>
+<p>3.n?</p>
+<p>匹配0-1个变量n</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="kwd">var</span><span class="pln"> reg</span><span class="pun">=</span><span class="str">/(aa|b)?/</span><span class="pln">g</span><span class="pun">;</span><br>3.  <span class="kwd">var</span><span class="pln"> str </span><span class="pun">=</span><span class="pln"> </span><span class="str">‘aaaaacb’</span><span class="pun">;</span><br>4.  <span class="pln">console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">str</span><span class="pun">.</span><span class="pln">match</span><span class="pun">(</span><span class="pln">reg</span><span class="pun">));</span><span class="pln"> </span><span class="com">// [“aa”, “aa”, “”, “”, “b”, “”]</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>中间的空串是因为匹配了空串，?取0的情况。</p>
+<p>4.n{x}</p>
+<p>可以规定匹配x个变量n</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="kwd">var</span><span class="pln"> reg </span><span class="pun">=</span><span class="pln"> </span><span class="str">/a{4}/</span><span class="pun">;</span><br>3.  <span class="kwd">var</span><span class="pln"> str </span><span class="pun">=</span><span class="pln"> </span><span class="str">‘aaaaa’</span><span class="pun">;</span><br>4.  <span class="pln">console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">str</span><span class="pun">.</span><span class="pln">match</span><span class="pun">(</span><span class="pln">reg</span><span class="pun">));</span><span class="pln"> </span><span class="com">// [“aaaa”, index: 0, input: “aaaaa”]</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>并且大括号可以写一个区间，中间用逗号链接。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="kwd">var</span><span class="pln"> reg </span><span class="pun">=</span><span class="pln"> </span><span class="str">/a{1,4}/</span><span class="pln">g</span><span class="pun">;</span><br>3.  <span class="kwd">var</span><span class="pln"> str </span><span class="pun">=</span><span class="pln"> </span><span class="str">‘aaaaa’</span><span class="pun">;</span><br>4.  <span class="pln">console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">str</span><span class="pun">.</span><span class="pln">match</span><span class="pun">(</span><span class="pln">reg</span><span class="pun">));</span><span class="pln"> </span><span class="com">// [“aaaa”, “a”]</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>或者第二个范围不写，这样就代表到无穷的范围。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="kwd">var</span><span class="pln"> reg </span><span class="pun">=</span><span class="pln"> </span><span class="str">/a{1,}/</span><span class="pln">g</span><span class="pun">;</span><br>3.  <span class="kwd">var</span><span class="pln"> str </span><span class="pun">=</span><span class="pln"> </span><span class="str">‘aaaaa’</span><span class="pun">;</span><br>4.  <span class="pln">console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">str</span><span class="pun">.</span><span class="pln">match</span><span class="pun">(</span><span class="pln">reg</span><span class="pun">));</span><span class="pln"> </span><span class="com">// [“aaaaa”]</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>这里默认的是贪婪匹配，即尽可能匹配多个字符。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="kwd">var</span><span class="pln"> reg </span><span class="pun">=</span><span class="pln"> </span><span class="str">/a{1,4}/</span><span class="pln">g</span><span class="pun">;</span><br>3.  <span class="kwd">var</span><span class="pln"> str </span><span class="pun">=</span><span class="pln"> </span><span class="str">‘aaaaaa’</span><span class="pun">;</span><br>4.  <span class="pln">console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">str</span><span class="pun">.</span><span class="pln">match</span><span class="pun">(</span><span class="pln">reg</span><span class="pun">));</span><span class="pln"> </span><span class="com">// [“aaaa”, “aa”]</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>当我们在后面加一个”?”之后，就会变成最小匹配，尽可能匹配少的字符。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="kwd">var</span><span class="pln"> reg </span><span class="pun">=</span><span class="pln"> </span><span class="str">/a{1,4}?/</span><span class="pln">g</span><span class="pun">;</span><br>3.  <span class="kwd">var</span><span class="pln"> str </span><span class="pun">=</span><span class="pln"> </span><span class="str">‘aaaaaa’</span><span class="pun">;</span><br>4.  <span class="pln">console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">str</span><span class="pun">.</span><span class="pln">match</span><span class="pun">(</span><span class="pln">reg</span><span class="pun">));</span><span class="pln"> </span><span class="com">// [“a”, “a”, “a”, “a”, “a”, “a”]</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>当然，不只是{}后面可以加”?”，其他的比如*?、+?等等后面都可以加问号。</p>
+<p>5.n$</p>
+<p>匹配以n结尾的字符</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="kwd">var</span><span class="pln"> reg </span><span class="pun">=</span><span class="pln"> </span><span class="str">/ab$/</span><span class="pun">;</span><br>3.  <span class="kwd">var</span><span class="pln"> str </span><span class="pun">=</span><span class="pln"> </span><span class="str">‘abab’</span><span class="pun">;</span><span class="pln"> </span><br>4.  <span class="pln">console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">str</span><span class="pun">.</span><span class="pln">match</span><span class="pun">(</span><span class="pln">reg</span><span class="pun">));</span><span class="pln"> </span><span class="com">// [“ab”, index: 2, input: “abab”]</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>只能找到最后一组ab</p>
+<p>6.^n</p>
+<p>匹配以n开头的字符，注意不是[]里面的^。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="kwd">var</span><span class="pln"> reg </span><span class="pun">=</span><span class="pln"> </span><span class="str">/^acb/</span><span class="pln">g</span><span class="pun">;</span><br>3.  <span class="kwd">var</span><span class="pln"> str </span><span class="pun">=</span><span class="pln"> </span><span class="str">‘acbacb’</span><span class="pun">;</span><br>4.  <span class="pln">console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">str</span><span class="pun">.</span><span class="pln">match</span><span class="pun">(</span><span class="pln">reg</span><span class="pun">));</span><span class="pln"> </span><span class="com">// [“acb”]</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>只能匹配出来第一个acb。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="kwd">var</span><span class="pln"> reg </span><span class="pun">=</span><span class="pln"> </span><span class="str">/^ab$/</span><span class="pln">g</span><span class="pun">;;</span><br>3.  <span class="kwd">var</span><span class="pln"> str </span><span class="pun">=</span><span class="pln"> </span><span class="str">‘abcabc’</span><span class="pun">;</span><br>4.  <span class="pln">console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">str</span><span class="pun">.</span><span class="pln">match</span><span class="pun">(</span><span class="pln">reg</span><span class="pun">));</span><span class="pln"> </span><span class="com">// null</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>这种写法就要求从a开头，挨着的b是结尾的。”abab“现在就匹配不出来了。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="kwd">var</span><span class="pln"> reg </span><span class="pun">=</span><span class="pln"> </span><span class="str">/^abc$/</span><span class="pln">g</span><span class="pun">;;</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>这种写法可以匹配固定字符串abc。</p>
+<p>小题目：</p>
+<p>写一个正则表达式，检验字符串首尾是否有数字。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="kwd">var</span><span class="pln"> reg </span><span class="pun">=</span><span class="pln"> </span><span class="str">/^\d|\d$/</span><span class="pln">gi</span><span class="pun">;</span><br>3.  <span class="pln">console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">reg</span><span class="pun">.</span><span class="pln">test</span><span class="pun">(</span><span class="str">‘12asdfv’</span><span class="pun">));</span><span class="pln"> </span><span class="com">// true</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>7.n(?=xxx)</p>
+<p>正向预查（正向断言）</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="kwd">var</span><span class="pln"> reg </span><span class="pun">=</span><span class="pln"> </span><span class="str">/x(?=abc)/</span><span class="pln">g</span><span class="pun">;</span><br>3.  <span class="kwd">var</span><span class="pln"> str </span><span class="pun">=</span><span class="pln"> </span><span class="str">‘xabcxbcdaabc’</span><span class="pun">;</span><span class="pln"> </span><br>4.  <span class="pln">console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">str</span><span class="pun">.</span><span class="pln">match</span><span class="pun">(</span><span class="pln">reg</span><span class="pun">));</span><span class="pln"> </span><span class="com">// x</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>后面是abc的那个n，匹配的是n，后面有abc是一种条件。</p>
+<p>如果n是一个空，那么就查找后面是abc的a前面那个空串了。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="kwd">var</span><span class="pln"> reg </span><span class="pun">=</span><span class="pln"> </span><span class="str">/(?=abc)/</span><span class="pln">g</span><span class="pun">;</span><br>3.  <span class="kwd">var</span><span class="pln"> str </span><span class="pun">=</span><span class="pln"> </span><span class="str">‘xabcxbcdaabc’</span><span class="pun">;</span><span class="pln"> </span><br>4.  <span class="pln">console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">str</span><span class="pun">.</span><span class="pln">match</span><span class="pun">(</span><span class="pln">reg</span><span class="pun">));</span><span class="pln"> </span><span class="com">// [“”, “”]</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>8.n(?!xxx)</p>
+<p>非正向预查</p>
+<p>匹配后面不是abc的n。</p>
+<p>• 我们如果要匹配*、?等这些字符的话，就需要在前面加上一个转义字符“/”了。</p>
+<h3 id="RegExp对象"><a href="#RegExp对象" class="headerlink" title="RegExp对象"></a><strong><span style="color: #ff0000;">RegExp对象</span></strong></h3><p><strong><span style="color: #ff0000;">属性</span></strong></p>
+<p>1.global multiline ignoreCase</p>
+<p>这三个属性可以检测是否有gim修饰。</p>
+<p>2.source</p>
+<p>代表正则表达式本身，即两个斜线中间的部分。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="kwd">var</span><span class="pln"> reg </span><span class="pun">=</span><span class="pln"> </span><span class="str">/abc\w\d/</span><span class="pln">gim</span><span class="pun">;</span><br>3.  <span class="pln">console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">reg</span><span class="pun">.</span><span class="pln">source</span><span class="pun">);</span><span class="pln"> </span><span class="com">// abc\w\d</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p><strong><span style="color: #ff0000;">方法</span></strong></p>
+<p>1.exec</p>
+<p>这个方法可以检测字符串中指定的值，返回知道的值并确定其位置。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="kwd">var</span><span class="pln"> reg </span><span class="pun">=</span><span class="pln"> </span><span class="str">/abc/</span><span class="pun">;</span><br>3.  <span class="kwd">var</span><span class="pln"> str </span><span class="pun">=</span><span class="pln"> </span><span class="str">“bcabcdabcda”</span><span class="pun">;</span><br>4.  <span class="pln">console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">reg</span><span class="pun">.</span><span class="kwd">exec</span><span class="pun">(</span><span class="pln">str</span><span class="pun">));</span><span class="pln"> </span><span class="com">// [“abc”, index: 2, input: “bcabcdabcda”]</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>返回的是一个类数组，其中的index是匹配出的字符开始的位置。</p>
+<p>不论执行多少次结果都一样。</p>
+<p>jQuery源码里面就用了很多exec方法。</p>
+<p>我们前面提到()括号除了优先级之外，还可以产生子表达式。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="kwd">var</span><span class="pln"> reg </span><span class="pun">=</span><span class="pln"> </span><span class="str">/(a)(b)(c)/</span><span class="pun">;</span><br>3.  <span class="kwd">var</span><span class="pln"> str </span><span class="pun">=</span><span class="pln"> </span><span class="str">“bcabcdabcda”</span><span class="pun">;</span><br>4.  <span class="pln">console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">reg</span><span class="pun">.</span><span class="kwd">exec</span><span class="pun">(</span><span class="pln">str</span><span class="pun">));</span><span class="pln"> </span><span class="com">// [“abc”, “a”, “b”, “c”, index: 2, input: “bcabcdabcda”]</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>返回的类数组会把三个子表达式匹配的内容也写出来。</p>
+<p>第一个子表达式的a是第一个abc里面的a，子表达式b是abc里面的b，子表达式c是abc里面的c。</p>
+<p>当我们不想让括号匹配出来字符作为子表达式，只充当优先级的作用的时候，那么在()的最前面加上“?:”就可以取消子表达式的作用了。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="kwd">var</span><span class="pln"> reg </span><span class="pun">=</span><span class="pln"> </span><span class="str">/(?:a)(?:b)(c)/</span><span class="pun">;</span><br>3.  <span class="kwd">var</span><span class="pln"> str </span><span class="pun">=</span><span class="pln"> </span><span class="str">“bcabcdabcda”</span><span class="pun">;</span><br>4.  <span class="pln">console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">reg</span><span class="pun">.</span><span class="kwd">exec</span><span class="pun">(</span><span class="pln">str</span><span class="pun">));</span><span class="pln"> </span><span class="com">// [“abc”, “c”, index: 2, input: “bcabcdabcda”]</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>这里的”?:”叫做不记录子表达式。</p>
+<p>而有了子表达式，我们也有相应的可以选择出子表达式的表达式。</p>
+<p>反向引用：</p>
+<p>匹配形如1221形式的字符串，比如abba，deed等。我们可以通过子表达式和反向引用就可以实现。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="kwd">var</span><span class="pln"> reg </span><span class="pun">=</span><span class="pln"> </span><span class="str">/(\w)(\w)\2\1/</span><span class="pln"> </span><span class="pun">;</span><br>3.  <span class="kwd">var</span><span class="pln"> str </span><span class="pun">=</span><span class="pln"> </span><span class="str">“abba”</span><span class="pun">;</span><br>4.  <span class="pln">console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">reg</span><span class="pun">.</span><span class="kwd">exec</span><span class="pun">(</span><span class="pln">str</span><span class="pun">));</span><span class="pln"> </span><span class="com">// [“abba”, “a”, “b”, index: 0, input: “abba”]</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>\1代表和第一个子表达式匹配到的相同的内容，第一个\w匹配到什么这里的\1就是什么，\2同理。</p>
+<p>以上是我们的正则表达式没有写g全局时候的情况，当我们写上g之后情况又会变得不一样了。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="kwd">var</span><span class="pln"> reg </span><span class="pun">=</span><span class="pln"> </span><span class="str">/abc/</span><span class="pln">g</span><span class="pun">;</span><br>3.  <span class="kwd">var</span><span class="pln"> str </span><span class="pun">=</span><span class="pln"> </span><span class="str">“bcabcdabcda”</span><span class="pun">;</span><br>4.  <span class="pln">console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">reg</span><span class="pun">.</span><span class="kwd">exec</span><span class="pun">(</span><span class="pln">str</span><span class="pun">));</span><span class="pln"> </span><span class="com">// [“abc”, index: 2, input: “bcabcdabcda”]</span><br>5.  <span class="pln">console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">reg</span><span class="pun">.</span><span class="kwd">exec</span><span class="pun">(</span><span class="pln">str</span><span class="pun">));</span><span class="pln"> </span><span class="com">// [“abc”, index: 6, input: “bcabcdabcda”]</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>执行第一次的结果和没有全局时候是一样的，但是从第二次开始就不同了。</p>
+<p>第二次index变成了6，匹配的是第二组abc。</p>
+<p>所以加上g之后，后面的匹配开始的位置是从上一次匹配结束的位置开始，而不是从头开始。</p>
+<p>如果走到最后也没有符合的字符串的话，就会返回null。但是下一再执行会回到开头开始匹配。</p>
+<p>这一切不同之处都是因为正则表达式还有一个属性叫做lastIndex，这个属性基本只有全局的时候才有作用。他会记录表达式上一次匹配完了之后的位置，然后让下一次匹配从lastIndex的位置开始。</p>
+<p>如果我们中途改变了lastIndex 的数值，那么我们就可以改变下一次匹配开始的位置了。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="kwd">var</span><span class="pln"> reg </span><span class="pun">=</span><span class="pln"> </span><span class="str">/abc/</span><span class="pln">g</span><span class="pun">;</span><br>3.  <span class="kwd">var</span><span class="pln"> str </span><span class="pun">=</span><span class="pln"> </span><span class="str">“bcabcdabcda”</span><span class="pun">;</span><br>4.  <span class="pln">reg</span><span class="pun">.</span><span class="pln">lastIndex </span><span class="pun">=</span><span class="pln"> </span><span class="lit">4</span><span class="pun">;</span><br>5.  <span class="pln">console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">reg</span><span class="pun">.</span><span class="kwd">exec</span><span class="pun">(</span><span class="pln">str</span><span class="pun">));</span><span class="pln"> </span><span class="com">// [“abc”, index: 6, input: “bcabcdabcda”]</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>现在第一次执行结果匹配的就是第二个abc。</p>
+<h3 id="String上的一些方法"><a href="#String上的一些方法" class="headerlink" title="String上的一些方法"></a><span style="color: #ff0000;">String上的一些方法</span></h3><p>1.search</p>
+<p>检索与正则表达式相匹配的位置，匹配成功即结束，与g无关，匹配失败则会返回-1。</p>
+<p>2.match</p>
+<p>找到一个或多个正则表达式的匹配，当非全局匹配时和exec显示的一样，是一个类数组，但是没有lastIndex，全局匹配时会返回一个数组。</p>
+<p>3.split</p>
+<p>split是以什么为分隔符把字符串分割成一个数组，这里的分隔符可以写一个正则表达式。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="kwd">var</span><span class="pln"> reg </span><span class="pun">=</span><span class="pln"> </span><span class="str">/[-\d]/</span><span class="pln">g</span><span class="pun">;</span><br>3.  <span class="kwd">var</span><span class="pln"> str </span><span class="pun">=</span><span class="pln"> </span><span class="str">‘a-c-d-a0f-e’</span><span class="pun">;</span><br>4.  <span class="pln">console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">str</span><span class="pun">.</span><span class="pln">split</span><span class="pun">(</span><span class="pln">reg</span><span class="pun">));</span><span class="pln"> </span><span class="com">// [“a”, “c”, “d”, “a”, “f”, “e”]</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>4.replace</p>
+<p>替换与正则表达式匹配的字串。</p>
+<p>这个方法非常非常重要，配合正则表达式会变得很灵活。</p>
+<p>str.replace()有两个参数，第一个是目标字符串，可以是一个正则表达式，也可以是一个字符串，第二个参数是替换成的字符串。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="kwd">var</span><span class="pln"> str </span><span class="pun">=</span><span class="pln"> </span><span class="str">‘abcdbcdbcd’</span><span class="pun">;</span><br>3.  <span class="kwd">var</span><span class="pln"> reg </span><span class="pun">=</span><span class="pln"> </span><span class="str">/ab/</span><span class="pln">g</span><span class="pun">;</span><br>4.  <span class="pln">console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">str</span><span class="pun">.</span><span class="pln">replace</span><span class="pun">(</span><span class="str">‘bc’</span><span class="pun">,</span><span class="pln"> </span><span class="str">‘aa’</span><span class="pun">));</span><span class="pln"> </span><span class="com">// aaadbcdbcd</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>只改第一个ab，后面的ab不改。</p>
+<p>变成aaadbcdbcd。</p>
+<p>如果想要全部替换就要写正则表达式。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="kwd">var</span><span class="pln"> str </span><span class="pun">=</span><span class="pln"> </span><span class="str">‘abcdbcdbcd’</span><span class="pun">;</span><br>3.  <span class="kwd">var</span><span class="pln"> reg </span><span class="pun">=</span><span class="pln"> </span><span class="str">/(\w)(\w)/</span><span class="pln">g</span><span class="pun">;</span><br>4.  <span class="pln">console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">str</span><span class="pun">.</span><span class="pln">replace</span><span class="pun">(</span><span class="pln">reg</span><span class="pun">,</span><span class="pln"> </span><span class="str">‘aa’</span><span class="pun">));</span><span class="pln"> </span><span class="com">// aaaaaaaaaa</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>现在有一个字符串“ab”，如果我们想要通过正则表达式来调换两个字母的位置，也需要用这个方法。</p>
+<p>在第二个参数的位置，字符串里面可以写$、$1、$2…等等，其中$代表匹配出来的字符串，$1代表子表达式1，$2代表子表达式2.。</p>
+<p>这样我们通过这种参数就可以实现简单的交换字母了。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="kwd">var</span><span class="pln"> str </span><span class="pun">=</span><span class="pln"> </span><span class="str">‘ab’</span><span class="pun">;</span><br>3.  <span class="kwd">var</span><span class="pln"> reg </span><span class="pun">=</span><span class="pln"> </span><span class="str">/(\w)(\w)/</span><span class="pln">g</span><span class="pun">;</span><br>4.  <span class="pln">console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">str</span><span class="pun">.</span><span class="pln">replace</span><span class="pun">(</span><span class="pln">reg</span><span class="pun">,</span><span class="pln"> </span><span class="str">‘$2$1’</span><span class="pun">));</span><span class="pln"> </span><span class="com">// ba</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>当然这只是第一种用法，还有第二种用法，在第二个参数中可以传一个函数，系统会自动调用这个函数，然后替换成这个函数返回的字符串。</p>
+<p>var str = ‘ab’;</p>
+<p>var reg = /(\w)(\w)/g;</p>
+<p>console.log(str.replace(reg, function () {</p>
+<pre><code>return ‘abc’
+</code></pre><p>})); // abc</p>
+<p>整体被替换成了abc。</p>
+<p>函数可以写形参，从前到后分别代表匹配出来的字符串、第一个子表达式、第二个子表达式等等。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="kwd">var</span><span class="pln"> str </span><span class="pun">=</span><span class="pln"> </span><span class="str">‘ab’</span><span class="pun">;</span><br>3.  <span class="kwd">var</span><span class="pln"> reg </span><span class="pun">=</span><span class="pln"> </span><span class="str">/(\w)(\w)/</span><span class="pln">g</span><span class="pun">;</span><br>4.  <span class="pln">console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">str</span><span class="pun">.</span><span class="pln">replace</span><span class="pun">(</span><span class="pln">reg</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">(</span><span class="pln">$</span><span class="pun">,</span><span class="pln"> $1</span><span class="pun">,</span><span class="pln"> $2</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><br>5.  <span class="pln">    </span><span class="kwd">return</span><span class="pln"> $2 </span><span class="pun">+</span><span class="pln"> $1</span><span class="pun">;</span><br>6.  <span class="pun">}));</span><span class="pln"> </span><span class="com">// ba</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>这个样子同样可以实现交换字母的功能。</p>
+<p>正则表达式的大部分知识点就这么多哟~</p>
+<p>下面我们来做几个题目练习一下正则表达式的使用吧！</p>
+<p>1.将形如aaaabbbb字符串调换成bbbbaaaa形式。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="kwd">var</span><span class="pln"> str </span><span class="pun">=</span><span class="pln"> </span><span class="str">‘aaaabbbb’</span><span class="pun">;</span><br>3.  <span class="kwd">var</span><span class="pln"> reg </span><span class="pun">=</span><span class="pln"> </span><span class="str">/(\w{4})(\w{4})/</span><span class="pln">g</span><span class="pun">;</span><br>4.  <span class="pln">str</span><span class="pun">.</span><span class="pln">replace</span><span class="pun">(</span><span class="pln">reg</span><span class="pun">,</span><span class="pln"> </span><span class="str">‘$2$1’</span><span class="pun">);</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>2.将‘my-fist-name’这样的用‘-’连接字符串变成小驼峰式的写法。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="kwd">var</span><span class="pln"> str </span><span class="pun">=</span><span class="pln"> </span><span class="str">‘my-first-name’</span><span class="pun">;</span><br>3.  <span class="kwd">var</span><span class="pln"> reg </span><span class="pun">=</span><span class="pln"> </span><span class="str">/-(\w)/</span><span class="pln">g</span><span class="pun">;</span><br>4.  <span class="pln">str</span><span class="pun">.</span><span class="pln">replace</span><span class="pun">(</span><span class="pln">reg</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">(</span><span class="pln">$</span><span class="pun">,</span><span class="pln"> $1</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><br>5.  <span class="pln">    </span><span class="kwd">return</span><span class="pln"> $1</span><span class="pun">.</span><span class="pln">toUpperCase</span><span class="pun">();</span><br>6.  <span class="pun">})</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>3.将一串连续的数字，变成如下形式：</p>
+<p>100000000 —&gt; 100,000,000</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="kwd">var</span><span class="pln"> str </span><span class="pun">=</span><span class="pln"> </span><span class="str">‘100000000’</span><span class="pun">;</span><br>3.  <span class="kwd">var</span><span class="pln"> reg </span><span class="pun">=</span><span class="pln"> </span><span class="str">/(?=((\B)\d{3})+$)/</span><span class="pln">g</span><span class="pun">;</span><br>4.  <span class="pln">console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">str</span><span class="pun">.</span><span class="pln">replace</span><span class="pun">(</span><span class="pln">reg</span><span class="pun">,</span><span class="pln"> </span><span class="str">‘,’</span><span class="pun">));</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div><br>                
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/02/JavaScriptTwenty1/" rel="next" title="Web前端的知识之旅哟—— 异步加载JS">
+                <i class="fa fa-chevron-left"></i> Web前端的知识之旅哟—— 异步加载JS
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/02/JavaScriptTwenty3/" rel="prev" title="Web前端的知识之旅哟—— JavaScript终章">
+                Web前端的知识之旅哟—— JavaScript终章 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-name">Artikel</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#BOM"><span class="nav-number">1.</span> <span class="nav-text">BOM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#正则表达式"><span class="nav-number">2.</span> <span class="nav-text">正则表达式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RegExp对象"><span class="nav-number">3.</span> <span class="nav-text">RegExp对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#String上的一些方法"><span class="nav-number">4.</span> <span class="nav-text">String上的一些方法</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

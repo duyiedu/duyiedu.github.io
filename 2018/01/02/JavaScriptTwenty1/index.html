@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="先介绍一下JSON： 我们传输数据就两种格式：xml和json。 xml是以html为模板，自定义标签名作为数据名来传递数据，书写起来很麻烦，现在多用json，很少使用xml。 json是传输数据的另一种格式，它是以对象为模板（本质上就是对象，但是用途有所区别，对象是本地使用，json是用来传输数据）。 不过我们传输数据的时候并不能将一个json对象直接传过去，我们只能传过去json形式的字符串，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Web前端的知识之旅哟—— 异步加载JS">
+<meta property="og:url" content="http://yoursite.com/2018/01/02/JavaScriptTwenty1/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="先介绍一下JSON： 我们传输数据就两种格式：xml和json。 xml是以html为模板，自定义标签名作为数据名来传递数据，书写起来很麻烦，现在多用json，很少使用xml。 json是传输数据的另一种格式，它是以对象为模板（本质上就是对象，但是用途有所区别，对象是本地使用，json是用来传输数据）。 不过我们传输数据的时候并不能将一个json对象直接传过去，我们只能传过去json形式的字符串，">
+<meta property="og:image" content="http://www.flyingliu.com/wp-content/uploads/2016/10/异步js.jpg">
+<meta property="og:updated_time" content="2018-01-02T09:56:01.299Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Web前端的知识之旅哟—— 异步加载JS">
+<meta name="twitter:description" content="先介绍一下JSON： 我们传输数据就两种格式：xml和json。 xml是以html为模板，自定义标签名作为数据名来传递数据，书写起来很麻烦，现在多用json，很少使用xml。 json是传输数据的另一种格式，它是以对象为模板（本质上就是对象，但是用途有所区别，对象是本地使用，json是用来传输数据）。 不过我们传输数据的时候并不能将一个json对象直接传过去，我们只能传过去json形式的字符串，">
+<meta name="twitter:image" content="http://www.flyingliu.com/wp-content/uploads/2016/10/异步js.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/01/02/JavaScriptTwenty1/"/>
+
+
+
+
+
+  <title>Web前端的知识之旅哟—— 异步加载JS | Hexo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/02/JavaScriptTwenty1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Web前端的知识之旅哟—— 异步加载JS</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-02T17:52:41+08:00">
+                2018-01-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>先介绍一下JSON：</p>
+<p>我们传输数据就两种格式：<span style="color: #ff0000;">xml和json</span>。</p>
+<p>xml是以<span style="color: #ff0000;">html</span>为模板，自定义标签名作为数据名来传递数据，书写起来很麻烦，现在多用json，很少使用xml。</p>
+<p>json是传输数据的另一种格式，它是以<span style="color: #ff0000;">对象</span>为模板（本质上就是对象，但是用途有所区别，对象是本地使用，json是用来传输数据）。</p>
+<p>不过我们传输数据的时候并不能将一个json对象直接传过去，我们只能传过去json形式的字符串，这个时候我们就需要用到JSON上的两个方法了。</p>
+<p><span style="color: #ff0000;">JSON.parse() —&gt; string-&gt;json</span></p>
+<p><span style="color: #ff0000;">JSON.stringify() —&gt; json-&gt;string</span></p>
+<p>通过JSON上的这两个方法，我们就可以进行数据传输了。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">    </span><span class="kwd">var</span><span class="pln"> obj </span><span class="pun">=</span><span class="pln"> </span><span class="pun">{</span><br>2.  <span class="pln">        </span><span class="str">‘name’</span><span class="pun">:</span><span class="pln"> </span><span class="str">‘scarlett’</span><span class="pun">,</span><br>3.  <span class="pln">        </span><span class="str">‘age’</span><span class="pun">:</span><span class="pln"> </span><span class="lit">18</span><br>4.  <span class="pln">    </span><span class="pun">};</span><br>5.  <span class="pln">    </span><span class="kwd">var</span><span class="pln"> </span><span class="kwd">string</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> JSON</span><span class="pun">.</span><span class="pln">stringify</span><span class="pun">(</span><span class="pln">obj</span><span class="pun">);</span><br>6.  <span class="pln">    console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="kwd">string</span><span class="pun">);</span><span class="pln"> </span><span class="com">// ‘{“name”:”scarlett”,”age”:18}’</span><br>7.  <span class="pln">    </span><span class="kwd">var</span><span class="pln"> data </span><span class="pun">=</span><span class="pln"> JSON</span><span class="pun">.</span><span class="pln">parse</span><span class="pun">(</span><span class="kwd">string</span><span class="pun">);</span><br>8.  <span class="pln">    console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">data</span><span class="pun">);</span><span class="pln"> </span><span class="com">// Object {name: “scarlett”, age: 18}</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>• 我们的页面有三个树：DOMTree、CSSTree、renderTree。（实际上多于三个），renderTree上有两个规则：repaint和reflow，重绘和重排。</p>
+<p>repaint是元素自身的位置和宽高不变，只改变颜色的之类的属性而不会导致后面的元素位置的变化的时候，renderTree发生的动作。</p>
+<p>reflow是元素自身的位置或者宽高改变了从而导致的整个页面的大范围移动的时候，renderTree发生的动作。</p>
+<p>所以我们在DOM操作的时候，要<span style="color: #ff0000;">尽量避免重排</span>。</p>
+<h3 id="JS异步加载部分"><a href="#JS异步加载部分" class="headerlink" title="JS异步加载部分"></a><span style="color: #ff0000;">JS异步加载部分</span></h3><p>我们前面知道script标签的特点是会阻塞后面的DOM解析，只有当script标签下载完成并且全部执行完之后，浏览器才会继续解析DOM。</p>
+<p>这样就导致了js加载有这样的缺点：加载工具方法本身没有必要阻塞文档，js加载会影响整个页面效率，一旦网速不好，那么整个网站将等待js加载而不进行后续渲染。</p>
+<p>DOMTree就是解析DOM结构的，当我们在解析DOM的时候突然碰到一个script标签，那么这个script标签就会阻断DOMTree和CSSTree，然而我们有一些js的工具库并不操作DOM，这个时候我们就需要让这些工具库进行异步加载或者按需加载了。</p>
+<p>以前有一种写法是将script标签写在body的最后面，等在DOM全部解析完成之后才加载js。</p>
+<p>现在有了html5标准之后，就有了另一套异步加载js的方法了。</p>
+<p>js异步加载的三种方案：</p>
+<p>1.<strong><span style="color: #ff0000;">defer</span></strong>异步加载</p>
+<p>我们在script标签的行间写一个defer=“defer”或者直接写defer，就可以让这个script变成异步加载了。但是这种异步只是针对下载方面，<strong><span style="color: #ff0000;">只有等DOMTree全部解析完成（不包括下载完里面的资源）后才会异步执行</span></strong>。而且这个方法只<span style="color: #ff0000;">有IE和一些高版本的firefox和chrome可以用</span>。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="tag">&lt;script</span><span class="pln"> </span><span class="atn">type</span><span class="pun">=</span><span class="atv">“text/javascript”</span><span class="pln"> </span><span class="atn">defer</span><span class="pun">=</span><span class="atv">“defer”</span><span class="tag">&gt;</span><br>3.  <span class="pln">    console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">‘hello’</span><span class="pun">);</span><br>4.  <span class="tag">&lt;/script&gt;</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>不过这一种方式<span style="color: #ff0000;">可以在script标签里面写代码</span>。</p>
+<p>注意：IE6和IE7的异步加载最多只能有2个，当多余两个的时候必须等前两个加载完才会加载第三个。</p>
+<p>所有defer的js代码都<span style="color: #ff0000;">保证按照顺序执行</span>。</p>
+<p>2.<strong><span style="color: #ff0000;">async</span></strong>异步加载</p>
+<p>async是<strong><span style="color: #ff0000;">asynchronous</span></strong>的缩写，它是html5的标准，<strong><span style="color: #ff0000;">下载完成之后就会立即异步执行</span></strong>，这种方法<span style="color: #ff0000;">除了IE6-IE8其他的浏览器都好用</span>。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="tag">&lt;script</span><span class="pln"> </span><span class="atn">type</span><span class="pun">=</span><span class="atv">“text/javascript”</span><span class="pln"> </span><span class="atn">async</span><span class="pun">=</span><span class="atv">“async”</span><span class="tag">&gt;&lt;/script&gt;</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>不过这种方式<span style="color: #ff0000;">不能把代码写在script标签里面</span>，只能引用。（虽然标准是这么写的，但是现在随着内核升级，async里面也可以写代码了，在没有src的情况下）。</p>
+<p>而且async的js代码<span style="color: #ff0000;">不能保证是顺序执行</span>的。</p>
+<p>• 这两个属性<span style="color: #ff0000;">不能一起使用</span>！</p>
+<p><img src="http://www.flyingliu.com/wp-content/uploads/2016/10/异步js.jpg" alt="%e5%bc%82%e6%ad%a5js"></p>
+<p>图中蓝色部分属于js加载过程，红色部分表示js执行过程，绿色代表DOM解析过程。</p>
+<p>兼容性写法：</p>
+<p>1.直接写两个script标签，一个是defer，一个是async。</p>
+<p>但是这种方法有缺陷：IE高版本会加载两遍引起冲突，有些浏览器两个都没有会一个都加载不出来。</p>
+<p>所以我们就需要用第二种方法了。</p>
+<p>2.通过动态添加script标签。</p>
+<p>“Script-inserted script elements now have async default to true, which can be set to false to make the scripts execute in insertion order.”</p>
+<p>w3c的标准规定：<strong><span style="color: #ff0000;">动态添加的script标签是异步的</span></strong>。</p>
+<p>通过这个特性，我们这里就可以封装一个兼容性的异步加载js的函数了。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="kwd">function</span><span class="pln"> asyncLoaded</span><span class="pun">(</span><span class="pln">url</span><span class="pun">,</span><span class="pln"> callback</span><span class="pun">){</span><br>3.  <span class="pln">    </span><span class="kwd">var</span><span class="pln"> script </span><span class="pun">=</span><span class="pln"> document</span><span class="pun">.</span><span class="pln">createElement</span><span class="pun">(</span><span class="str">‘script’</span><span class="pun">);</span><br>4.  <span class="pln">    script</span><span class="pun">.</span><span class="pln">type </span><span class="pun">=</span><span class="pln"> </span><span class="str">‘text/javascript’</span><span class="pun">;</span><br>5.  <span class="pln">    </span><span class="kwd">if</span><span class="pun">(</span><span class="pln">script</span><span class="pun">.</span><span class="pln">readyState</span><span class="pun">){</span><span class="com">//IE和高版本的chrome、firefox</span><br>6.  <span class="pln">        script</span><span class="pun">.</span><span class="pln">onreadystatechange </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">function</span><span class="pun">(){</span><br>7.  <span class="pln">            </span><span class="kwd">if</span><span class="pun">(</span><span class="pln">script</span><span class="pun">.</span><span class="pln">readyState </span><span class="pun">=</span><span class="pln"> </span><span class="str">‘loaded’</span><span class="pln"> </span><span class="pun">||</span><span class="pln"> script</span><span class="pun">.</span><span class="pln">readyState </span><span class="pun">==</span><span class="pln"> </span><span class="str">‘complete’</span><span class="pun">){</span><br>8.  <span class="pln">                script</span><span class="pun">.</span><span class="pln">onreadystatechange </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">null</span><span class="pun">;</span><br>9.  <span class="pln">                callback </span><span class="pun">&amp;&amp;</span><span class="pln"> callback</span><span class="pun">();</span><br>10.  <span class="pln">            </span><span class="pun">}</span><br>11.  <span class="pln">        </span><span class="pun">}</span><br>12.  <span class="pln">    </span><span class="pun">}</span><span class="kwd">else</span><span class="pun">{</span><br>13.  <span class="pln">    script</span><span class="pun">.</span><span class="pln">onload </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">function</span><span class="pun">(</span><span class="pln">e</span><span class="pun">){</span><span class="com">//Safari Chrome Opera Firefox</span><br>14.  <span class="pln">        callback </span><span class="pun">&amp;&amp;</span><span class="pln"> callback</span><span class="pun">();</span><br>15.  <span class="pln">        </span><span class="pun">}</span><br>16.  <span class="pln">    </span><span class="pun">}</span><br>17.  <span class="pln">    script</span><span class="pun">.</span><span class="pln">src </span><span class="pun">=</span><span class="pln"> url</span><span class="pun">;</span><br>18.  <span class="pln">    document</span><span class="pun">.</span><span class="pln">body</span><span class="pun">.</span><span class="pln">appendChild</span><span class="pun">(</span><span class="pln">script</span><span class="pun">);</span><br>19.  <span class="pun">}</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>需要注意的是：readtState的if-else一定要写在script.src=url和appendChild之前，因为电脑速度可能会很快，刚走到src=url部分就已经加载完毕了，readyState已经变成了loaded，后面就不会触发onreadystatechange事件了。</p>
+<p>这里src部分的下载是异步的，不会阻塞后面的代码的执行，也就是说可以一边把script插入到DOM中一边下载资源。</p>
+<p>还有一点，如果我们的<span style="color: #ff0000;">回调函数是写在需要加载进来的文件里面<span style="color: #000000;">的</span></span>方法的话，我们就需要把这个方法<span style="color: #ff0000;">放到匿名函数里面</span>，这样在语法解析的时候才不会因为函数未声明而报错。</p>
+<p>• 异步加载js<strong><span style="color: #ff0000;">不允许使用document.write</span></strong>这个方法。它会清除文档流，一旦执行就会把全部的标签都清除掉，包括自身的script标签。</p>
+<h3 id="JS加载时间线（performace-timing-line）"><a href="#JS加载时间线（performace-timing-line）" class="headerlink" title="JS加载时间线（performace timing line）"></a><span style="color: #ff0000;">JS加载时间线（performace timing line）</span></h3><p>1、创建Document对象，开始解析web页面。解析HTML元素和他们的文本内容后添加Element对象和Text节点到文档中。这个阶段document.readyState = ‘loading’。</p>
+<p>2、遇到link外部css，创建线程加载，并继续解析文档。</p>
+<p>3、遇到script外部js，并且没有设置async、defer，浏览器加载，并阻塞，等待js加载完成并执行该脚本，然后继续解析文档。</p>
+<p>4、遇到script外部js，并且设置有async、defer，浏览器创建线程加载，并继续解析文档。 对于async属性的脚本，脚本加载完成后立即执行。（异步禁止使用document.write()）</p>
+<p>5、遇到img等，先正常解析dom结构，然后浏览器异步加载src，并继续解析文档。</p>
+<p>6、当文档解析完成，document.readyState = ‘interactive’。</p>
+<p>7、文档解析完成后，所有设置有defer的脚本会按照顺序执行。（注意与async的不同,</p>
+<p>但同样禁止使用document.write()）;</p>
+<p>8、document对象触发DOMContentLoaded事件，这也标志着程序执行从同步脚本执行阶段，</p>
+<p>转化为事件驱动阶段。</p>
+<p>9、当所有async的脚本加载完成并执行后、img等加载完成后，document.readyState = ‘complete’，window</p>
+<p>对象触发load事件。</p>
+<p>10、从此，以异步响应方式处理用户输入、网络事件等。</p>
+<p>JS的时间线是非常重要的知识点，希望大家能背下来这一块哟~</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/02/JavaScriptTwenty/" rel="next" title="Web前端的知识之旅哟—— 鼠标事件与键盘事件">
+                <i class="fa fa-chevron-left"></i> Web前端的知识之旅哟—— 鼠标事件与键盘事件
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/02/JavaScriptTwenty2/" rel="prev" title="Web前端的知识之旅哟—— BOM与正则表达式">
+                Web前端的知识之旅哟—— BOM与正则表达式 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-name">Artikel</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#JS异步加载部分"><span class="nav-number">1.</span> <span class="nav-text">JS异步加载部分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JS加载时间线（performace-timing-line）"><span class="nav-number">2.</span> <span class="nav-text">JS加载时间线（performace timing line）</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

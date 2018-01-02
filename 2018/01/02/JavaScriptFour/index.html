@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="我们前面已经接触过对象这一种数据，这一篇着重介绍一下对象的有关知识哟~ 对象创建方法对象的创建方法有三种： 1.对象字面量 我们前面的对象创建方法都是使用的字面量的方法创建的。 1.  var obj = {};JavaScript; “复制代码”); “查看纯文本代码”); “返回代码高亮”)  这样的方式就叫做字面量，也是我们创建对象最简单最常用的方法。 对象里面有属性，属性之间用逗号分隔，每">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Web前端的知识之旅哟——对象与构造函数与包装类">
+<meta property="og:url" content="http://yoursite.com/2018/01/02/JavaScriptFour/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="我们前面已经接触过对象这一种数据，这一篇着重介绍一下对象的有关知识哟~ 对象创建方法对象的创建方法有三种： 1.对象字面量 我们前面的对象创建方法都是使用的字面量的方法创建的。 1.  var obj = {};JavaScript; “复制代码”); “查看纯文本代码”); “返回代码高亮”)  这样的方式就叫做字面量，也是我们创建对象最简单最常用的方法。 对象里面有属性，属性之间用逗号分隔，每">
+<meta property="og:updated_time" content="2018-01-02T08:50:23.914Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Web前端的知识之旅哟——对象与构造函数与包装类">
+<meta name="twitter:description" content="我们前面已经接触过对象这一种数据，这一篇着重介绍一下对象的有关知识哟~ 对象创建方法对象的创建方法有三种： 1.对象字面量 我们前面的对象创建方法都是使用的字面量的方法创建的。 1.  var obj = {};JavaScript; “复制代码”); “查看纯文本代码”); “返回代码高亮”)  这样的方式就叫做字面量，也是我们创建对象最简单最常用的方法。 对象里面有属性，属性之间用逗号分隔，每">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/01/02/JavaScriptFour/"/>
+
+
+
+
+
+  <title>Web前端的知识之旅哟——对象与构造函数与包装类 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/02/JavaScriptFour/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Web前端的知识之旅哟——对象与构造函数与包装类</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-02T16:09:06+08:00">
+                2018-01-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>我们前面已经接触过对象这一种数据，这一篇着重介绍一下对象的有关知识哟~</p>
+<h3 id="对象创建方法"><a href="#对象创建方法" class="headerlink" title="对象创建方法"></a><span style="color: #ff0000;">对象创建方法</span></h3><p>对象的创建方法有三种：</p>
+<p>1.<strong><span style="color: #ff0000;">对象字面量</span></strong></p>
+<p>我们前面的对象创建方法都是使用的字面量的方法创建的。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="kwd">var</span><span class="pln"> obj </span><span class="pun">=</span><span class="pln"> </span><span class="pun">{};</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>这样的方式就叫做字面量，也是我们<span style="color: #ff0000;">创建对象最简单最常用</span>的方法。</p>
+<p>对象里面有属性，属性之间用逗号分隔，每一条属性都有属性名和属性值，属性名和属性值之间用分号分隔。</p>
+<p>2.<strong><span style="color: #ff0000;">构造函数</span></strong></p>
+<p>构造函数也分两种：<span style="color: #ff0000;">系统自带的构造函数</span>和我们<span style="color: #ff0000;">自定义的构造函数</span>。</p>
+<p>•<span style="color: #ff0000;"> 系统自带的构造函数</span></p>
+<p>创建对象的构造函数是Object()。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="kwd">var</span><span class="pln"> obj </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Object</span><span class="pun">();</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>通过这条语句，我们就创建了一个空对象。</p>
+<p>它的作用和var obj = {};的作用是一样的。</p>
+<p>系统自带的构造函数还有很多，比如Number()、String()、Boolean()、Array()这些都是构造函数。</p>
+<p>• <span style="color: #ff0000;">自定义构造函数</span></p>
+<p>自定义的构造函数是我们平时<span style="color: #ff0000;">最常用的一种构造函数<span style="color: #000000;">。</span></span></p>
+<p>构造函数也是正常的函数，我们为了区分它和别的正常函数，把构造函数的首字母大写。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="kwd">function</span><span class="pln"> </span><span class="typ">Person</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{}</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>上面就声明了一个构造函数Person。</p>
+<p>有了构造函数之后，我们就可以用new操作符来创建对象了。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="kwd">var</span><span class="pln"> oPerson </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Person</span><span class="pun">();</span><br>2.  <span class="kwd">typeof</span><span class="pln"> oPerson</span><span class="pun">;</span><span class="pln"> </span><span class="com">// object</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>这样我们也创建了一个对象oPerson，不过现在这个对象是空对象，因为我们的构造函数什么都没有写，我们也没有给这个对象添加任何属性。</p>
+<p>另外，用new操作符创建出来的对象，尽管都是使用的同一个构造函数，但是之间是没有关联的。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="kwd">var</span><span class="pln"> person1 </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Person</span><span class="pun">();</span><br>2.  <span class="kwd">var</span><span class="pln"> person2 </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Person</span><span class="pun">();</span><br>3.  <span class="pln">person1</span><span class="pun">.</span><span class="pln">name </span><span class="pun">=</span><span class="pln"> </span><span class="str">‘111’</span><span class="pun">;</span><br>4.  <span class="pln">console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">person2</span><span class="pun">.</span><span class="pln">name</span><span class="pun">);</span><span class="pln"> </span><span class="com">// undefined</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>person1 和 person2 之间没有关系，它们两个是单独的对象。</p>
+<p>我们可以在构造函数里面写一些对象天生就有的默认属性。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="kwd">function</span><span class="pln"> </span><span class="typ">Person</span><span class="pln"> </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><br>2.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="kwd">this</span><span class="pun">.</span><span class="pln">name </span><span class="pun">=</span><span class="pln"> </span><span class="str">‘scarlett’</span><span class="pun">,</span><br>3.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="kwd">this</span><span class="pun">.</span><span class="pln">age </span><span class="pun">=</span><span class="pln"> </span><span class="lit">17</span><br>4.  <span class="pun">}</span><br>5.  <span class="kwd">var</span><span class="pln"> person </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Person</span><span class="pun">();</span><br>6.  <span class="pln">person</span><span class="pun">.</span><span class="pln">name</span><span class="pun">;</span><span class="pln"> </span><span class="com">// scarlett</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>当然构造函数既然是函数，那么就可以传参数。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="kwd">function</span><span class="pln"> </span><span class="typ">Person</span><span class="pln"> </span><span class="pun">(</span><span class="pln">name</span><span class="pun">,</span><span class="pln"> age</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><br>2.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="kwd">this</span><span class="pun">.</span><span class="pln">name </span><span class="pun">=</span><span class="pln"> name</span><span class="pun">;</span><br>3.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="kwd">this</span><span class="pun">.</span><span class="pln">age </span><span class="pun">=</span><span class="pln"> age</span><span class="pun">;</span><br>4.  <span class="pun">}</span><br>5.  <span class="kwd">var</span><span class="pln"> person </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Person</span><span class="pln"> </span><span class="pun">(</span><span class="str">‘scarlett’</span><span class="pun">,</span><span class="pln"> </span><span class="lit">18</span><span class="pun">);</span><br>6.  <span class="pln">person</span><span class="pun">.</span><span class="pln">age</span><span class="pun">;</span><span class="pln"> </span><span class="com">// 18</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>创建对象的时候，<span style="color: #ff0000;">只有new才会有this</span>。</p>
+<p>这里有一个重点，<strong><span style="color: #ff0000;">为什么我们通过new操作符可以创建互相独立的对象呢</span></strong>？</p>
+<p>其实，当我们用new操作符的时候，这个new在我们的构造函数里面隐式创建了一个this对象，并且最后返回了这个this对象，这也就是为什么我们通过new可以最后创建一个对象的原因了。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="kwd">function</span><span class="pln"> </span><span class="typ">Person</span><span class="pln"> </span><span class="pun">(</span><span class="pln">name</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><br>2.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="com">//var this = {};</span><br>3.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="kwd">this</span><span class="pun">.</span><span class="pln">name </span><span class="pun">=</span><span class="pln"> name</span><span class="pun">;</span><br>4.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="com">//return this;</span><br>5.  <span class="pun">}</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>如果我们在构造函数首行手动创建一个对象，比如that对象，然后最后返回了that，那么里面的this就没有用了，我么要为属性赋值就要用that了。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="kwd">function</span><span class="pln"> </span><span class="typ">Person</span><span class="pln"> </span><span class="pun">(</span><span class="pln">name</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><br>2.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="kwd">var</span><span class="pln"> that </span><span class="pun">=</span><span class="pln"> </span><span class="pun">{</span><br>3.  <span class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; name</span><span class="pun">:</span><span class="pln"> </span><span class="str">‘scarlett’</span><br>4.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="pun">};</span><span class="pln">&nbsp;</span><br>5.  <span class="pln">&nbsp; &nbsp; &nbsp; that</span><span class="pun">.</span><span class="pln">name </span><span class="pun">=</span><span class="pln"> name</span><span class="pun">;</span><br>6.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="kwd">return</span><span class="pln"> that</span><span class="pun">;</span><br>7.  <span class="pun">}</span><br>8.  <span class="kwd">var</span><span class="pln"> person </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Person</span><span class="pun">(</span><span class="str">‘demo’</span><span class="pun">);</span><br>9.  <span class="pln">person</span><span class="pun">.</span><span class="pln">name</span><span class="pun">;</span><span class="pln"> </span><span class="com">// demo</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>这样默认的name值就是scarlett。</p>
+<p><span style="color: #ff0000;"><strong>重点</strong>：如果我们最后返回的<strong>对象</strong>，那么this就<strong>失效</strong>，但是如果最后显示返回的是<strong>原始值</strong>，那么this还是<strong>有效</strong>的</span>。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="kwd">function</span><span class="pln"> </span><span class="typ">Person</span><span class="pln"> </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><br>2.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="kwd">var</span><span class="pln"> that </span><span class="pun">=</span><span class="pln"> </span><span class="pun">{};</span><br>3.  <span class="pln">&nbsp; &nbsp; &nbsp; that</span><span class="pun">.</span><span class="pln">name </span><span class="pun">=</span><span class="pln"> </span><span class="str">‘that’</span><span class="pun">;</span><br>4.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="kwd">this</span><span class="pun">.</span><span class="pln">name </span><span class="pun">=</span><span class="pln"> </span><span class="str">‘this’</span><span class="pun">;</span><br>5.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="kwd">return</span><span class="pln"> </span><span class="lit">123</span><span class="pun">;</span><br>6.  <span class="pun">}</span><br>7.  <span class="kwd">var</span><span class="pln"> person </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Person</span><span class="pun">();</span><br>8.  <span class="pln">person</span><span class="pun">.</span><span class="pln">name</span><span class="pun">;</span><span class="pln"> </span><span class="com">// this</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>3.<strong><span style="color: #ff0000;">Object.create(原型)</span></strong></p>
+<p>这种方法涉及到原型的知识点了，我们放在后面介绍原型的时候再介绍。</p>
+<h3 id="属性的增删改查"><a href="#属性的增删改查" class="headerlink" title="属性的增删改查"></a><span style="color: #ff0000;">属性的增删改查</span></h3><p>其实属性的修改我们前面也都接触过了。</p>
+<p>1.<strong><span style="color: #ff0000;">增</span></strong></p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="kwd">var</span><span class="pln"> obj </span><span class="pun">=</span><span class="pln"> </span><span class="pun">{};</span><br>2.  <span class="pln">obj</span><span class="pun">.</span><span class="pln">name </span><span class="pun">=</span><span class="pln"> </span><span class="str">‘scarlett’</span><span class="pun">;</span><br>3.  <span class="pln">obj</span><span class="pun">.</span><span class="pln">name</span><span class="pun">;</span><span class="pln"> </span><span class="com">// scarlett</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>我们可以通过对象名+点+属性名的方法来给对象添加新的属性并且赋值。</p>
+<p>这个时候如果我们调用obj.age属性的话，这个属性并不存在，但是obj这个对象是存在的，因此浏览器不会报错，只会打印undefined。</p>
+<p>2.<strong><span style="color: #ff0000;">改</span></strong></p>
+<p>修改的操作和增加的操作其实是一样的，只要调用相同的属性名然后赋一个新的值就可以了。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="kwd">var</span><span class="pln"> obj </span><span class="pun">=</span><span class="pln"> </span><span class="pun">{</span><br>2.  <span class="pln">&nbsp; &nbsp; &nbsp; name</span><span class="pun">:</span><span class="pln"> </span><span class="str">‘scarlett’</span><br>3.  <span class="pun">}</span><br>4.  <span class="pln">obj</span><span class="pun">.</span><span class="pln">name </span><span class="pun">=</span><span class="pln"> </span><span class="str">‘demo’</span><span class="pun">;</span><br>5.  <span class="pln">obj</span><span class="pun">.</span><span class="pln">name</span><span class="pun">;</span><span class="pln"> </span><span class="com">// demo</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>3.<strong><span style="color: #ff0000;">查</span></strong></p>
+<p>其实我们前面一直都在使用查看属性的功能…</p>
+<p>obj.name = ‘demo’;</p>
+<p>console.log(obj.name);//demo</p>
+<p>这就是查看属性的方法。</p>
+<p>4.<strong><span style="color: #ff0000;">删</span></strong></p>
+<p>删除属性的操作我们需要借助<strong><span style="color: #ff0000;">delete</span></strong>操作符，这个操作符的作用就是来删除属性的。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="kwd">var</span><span class="pln"> obj </span><span class="pun">=</span><span class="pln"> </span><span class="pun">{</span><br>2.  <span class="pln">&nbsp; &nbsp; &nbsp; name</span><span class="pun">:</span><span class="pln"> </span><span class="str">‘’</span><span class="pln">scarlett</span><span class="str">‘</span><br>3.  <span class="str">}</span><br>4.  <span class="str">obj.name; // scarlett</span><br>5.  <span class="str">delete obj.name;</span><br>6.  <span class="str">obj.name; // undefined</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<h3 id="包装类"><a href="#包装类" class="headerlink" title="包装类"></a><span style="color: #ff0000;">包装类</span></h3><p>我们前面提到过，原始值是不可以改变的，只有对象才有属性和方法，那么这个又是个什么东西？</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="kwd">var</span><span class="pln"> str </span><span class="pun">=</span><span class="pln"> </span><span class="str">‘abcd’</span><span class="pun">;</span><br>2.  <span class="pln">console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">str</span><span class="pun">.</span><span class="pln">length</span><span class="pun">);</span><span class="pln"> </span><span class="com">// 4</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>按理说这个字符串原始值是没有属性的，但是这里确实可以查看length这个属性。</p>
+<p>这里就涉及到一个叫做包装类的东西了。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">str</span><span class="pun">.</span><span class="pln">length</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>我们在调用执行这一行代码之前，程序会自动把str包装成一个<span style="color: #ff0000;">字符串对象</span>，在这一行代码执行完毕之后再<strong><span style="color: #ff0000;">销毁</span></strong>这个字符串对象。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="kwd">var</span><span class="pln"> str </span><span class="pun">=</span><span class="pln"> </span><span class="str">‘abcd’</span><span class="pun">;</span><br>2.  <span class="com">// var str1 = new String(‘abcd’);</span><br>3.  <span class="pln">str</span><span class="pun">.</span><span class="pln">length</span><span class="pun">;</span><span class="pln"> </span><span class="com">// str1.length</span><br>4.  <span class="com">// 消除str1</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>这里的str.length的str其实是上一句的包装好的str1，str1是对象，上面有属性和方法，然后就可以打印length属性了，在执行完str.length这行代码之后，str1这个对象就被销毁了。</p>
+<p>这也就是为什么我们在执行str.length = 2;这句话之后，再打印str.length;还是4的原因了。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="kwd">var</span><span class="pln"> str </span><span class="pun">=</span><span class="pln"> </span><span class="str">‘abcd’</span><span class="pun">;</span><br>2.  <span class="com">// var str1 = String(‘abcd’);</span><br>3.  <span class="pln">str</span><span class="pun">.</span><span class="pln">length </span><span class="pun">=</span><span class="pln"> </span><span class="lit">2</span><span class="pun">;</span><span class="pln"> </span><span class="com">// str1.length = 2;</span><br>4.  <span class="com">//销毁str1</span><br>5.  <span class="pln">console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">str</span><span class="pun">);</span><span class="pln"> </span><span class="com">// abcd 长度还是4</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>系统在执行str.length = 2这句话的时候，先创建了一个String对象，这个对象的值是‘abcd’，我们改变的length其实是这个隐式创建的对象的length值，并不是改变了我们的原始值str，当str.length = 2;这句代码执行完之后，隐式创建的字符串对象就被销毁了，所以我们后面打印的str.length还是4。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="kwd">var</span><span class="pln"> str </span><span class="pun">=</span><span class="pln"> </span><span class="str">‘abcd’</span><span class="pun">;</span><br>2.  <span class="pln">str</span><span class="pun">.</span><span class="pln">len </span><span class="pun">=</span><span class="pln"> </span><span class="lit">2</span><span class="pun">;</span><br>3.  <span class="pln">console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">str</span><span class="pun">.</span><span class="pln">len</span><span class="pun">);</span><span class="pln"> </span><span class="com">// undefined</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>其他类型的数据也是一样的，当我们给原始值加属性的时候，都是先隐式包装成对象，然后赋完属性值之后再销毁这个对象。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="kwd">var</span><span class="pln"> </span><span class="kwd">bool</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">true</span><span class="pun">;</span><br>2.  <span class="kwd">bool</span><span class="pun">.</span><span class="pln">len </span><span class="pun">=</span><span class="pln"> </span><span class="lit">4</span><span class="pun">;</span><br>3.  <span class="pln">console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="kwd">bool</span><span class="pun">.</span><span class="pln">len</span><span class="pun">);</span><span class="pln"> </span><span class="com">// undefined</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>今天的知识点就介绍到这里哟~</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/02/JavaScriptThree/" rel="next" title="Web前端的知识之旅哟——预编译">
+                <i class="fa fa-chevron-left"></i> Web前端的知识之旅哟——预编译
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/02/JavaScriptFive/" rel="prev" title="Web前端的知识之旅哟——原型与原型链">
+                Web前端的知识之旅哟——原型与原型链 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-name">Artikel</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#对象创建方法"><span class="nav-number">1.</span> <span class="nav-text">对象创建方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#属性的增删改查"><span class="nav-number">2.</span> <span class="nav-text">属性的增删改查</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#包装类"><span class="nav-number">3.</span> <span class="nav-text">包装类</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

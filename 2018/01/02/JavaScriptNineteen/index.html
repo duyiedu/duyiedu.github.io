@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="事件处理模型——事件冒泡、事件捕获上一篇介绍了事件的绑定，我们这里先写一个三层div嵌套的结构并且给每一个div都加一个点击事件。 1.  &amp;nbsp;2.  .wrapper {3.      width: 200px;4.      height: 200px;5.      background-color: red;6.  }7.  .box {8.      width: 100px;9">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Web前端的知识之旅哟—— 事件处理模型与事件委托">
+<meta property="og:url" content="http://yoursite.com/2018/01/02/JavaScriptNineteen/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="事件处理模型——事件冒泡、事件捕获上一篇介绍了事件的绑定，我们这里先写一个三层div嵌套的结构并且给每一个div都加一个点击事件。 1.  &amp;nbsp;2.  .wrapper {3.      width: 200px;4.      height: 200px;5.      background-color: red;6.  }7.  .box {8.      width: 100px;9">
+<meta property="og:image" content="http://www.flyingliu.com/wp-content/uploads/2016/10/1.png">
+<meta property="og:image" content="http://www.flyingliu.com/wp-content/uploads/2016/10/2-298x300.png">
+<meta property="og:updated_time" content="2018-01-02T09:51:00.617Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Web前端的知识之旅哟—— 事件处理模型与事件委托">
+<meta name="twitter:description" content="事件处理模型——事件冒泡、事件捕获上一篇介绍了事件的绑定，我们这里先写一个三层div嵌套的结构并且给每一个div都加一个点击事件。 1.  &amp;nbsp;2.  .wrapper {3.      width: 200px;4.      height: 200px;5.      background-color: red;6.  }7.  .box {8.      width: 100px;9">
+<meta name="twitter:image" content="http://www.flyingliu.com/wp-content/uploads/2016/10/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/01/02/JavaScriptNineteen/"/>
+
+
+
+
+
+  <title>Web前端的知识之旅哟—— 事件处理模型与事件委托 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/02/JavaScriptNineteen/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Web前端的知识之旅哟—— 事件处理模型与事件委托</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-02T17:44:43+08:00">
+                2018-01-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="事件处理模型——事件冒泡、事件捕获"><a href="#事件处理模型——事件冒泡、事件捕获" class="headerlink" title="事件处理模型——事件冒泡、事件捕获"></a><span style="color: #ff0000;">事件处理模型——事件冒泡、事件捕获</span></h3><p>上一篇介绍了事件的绑定，我们这里先写一个三层div嵌套的结构并且给每一个div都加一个点击事件。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-CSS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="pun">.</span><span class="pln">wrapper </span><span class="pun">{</span><br>3.  <span class="pln">    width</span><span class="pun">:</span><span class="pln"> </span><span class="lit">200px</span><span class="pun">;</span><br>4.  <span class="pln">    height</span><span class="pun">:</span><span class="pln"> </span><span class="lit">200px</span><span class="pun">;</span><br>5.  <span class="pln">    background</span><span class="pun">-</span><span class="pln">color</span><span class="pun">:</span><span class="pln"> red</span><span class="pun">;</span><br>6.  <span class="pun">}</span><br>7.  <span class="pun">.</span><span class="pln">box </span><span class="pun">{</span><br>8.  <span class="pln">    width</span><span class="pun">:</span><span class="pln"> </span><span class="lit">100px</span><span class="pun">;</span><br>9.  <span class="pln">    height</span><span class="pun">:</span><span class="pln"> </span><span class="lit">100px</span><span class="pun">;</span><br>10.  <span class="pln">    background</span><span class="pun">-</span><span class="pln">color</span><span class="pun">:</span><span class="pln"> green</span><span class="pun">;</span><br>11.  <span class="pun">}</span><br>12.  <span class="pln">&nbsp;</span><br>13.  <span class="pun">.</span><span class="pln">content </span><span class="pun">{</span><br>14.  <span class="pln">    width</span><span class="pun">:</span><span class="pln"> </span><span class="lit">50px</span><span class="pun">;</span><br>15.  <span class="pln">    height</span><span class="pun">:</span><span class="pln"> </span><span class="lit">50px</span><span class="pun">;</span><br>16.  <span class="pln">    background</span><span class="pun">-</span><span class="pln">color</span><span class="pun">:</span><span class="pln"> black</span><span class="pun">;</span><br>17.  <span class="pun">}</span><br>18.  <span class="pln">&nbsp;</span></pre><div class="code-pretty-toolbar"><span class="title">CSS</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p><img src="http://www.flyingliu.com/wp-content/uploads/2016/10/1.png" alt="1"></p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="kwd">var</span><span class="pln"> wrapper </span><span class="pun">=</span><span class="pln"> document</span><span class="pun">.</span><span class="pln">getElementsByClassName</span><span class="pun">(</span><span class="str">‘wrapper’</span><span class="pun">)[</span><span class="lit">0</span><span class="pun">],</span><br>3.  <span class="pln">    box </span><span class="pun">=</span><span class="pln"> document</span><span class="pun">.</span><span class="pln">getElementsByClassName</span><span class="pun">(</span><span class="str">‘box’</span><span class="pun">)[</span><span class="lit">0</span><span class="pun">],</span><br>4.  <span class="pln">    content </span><span class="pun">=</span><span class="pln"> document</span><span class="pun">.</span><span class="pln">getElementsByClassName</span><span class="pun">(</span><span class="str">‘content’</span><span class="pun">)[</span><span class="lit">0</span><span class="pun">];</span><br>5.  <span class="pln">wrapper</span><span class="pun">.</span><span class="pln">onclick </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><br>6.  <span class="pln">    console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">‘wrapper’</span><span class="pun">);</span><br>7.  <span class="pun">}</span><br>8.  <span class="pln">box</span><span class="pun">.</span><span class="pln">onclick </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><br>9.  <span class="pln">    console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">‘box’</span><span class="pun">);</span><br>10.  <span class="pun">}</span><br>11.  <span class="pln">content</span><span class="pun">.</span><span class="pln">onclick </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><br>12.  <span class="pln">    console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">‘content’</span><span class="pun">);</span><br>13.  <span class="pun">}</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>现在我们点击最外层的wrapper，控制台打印的wrapper。</p>
+<p>点击box，却打印出来box和wrapper</p>
+<p>点击content打印出来content、box、wrapper</p>
+<p>这个现象就是我们所说的事件冒泡。</p>
+<p>什么叫冒泡？</p>
+<p>在<strong><span style="color: #ff0000;">结构上</span></strong>（非视觉上）嵌套关系的元素，会存在事件冒泡的功能，即同一事件，<span style="color: #ff0000;">子元素冒泡向父元素</span>，结构上的自底向上。（这里的底是结构上的底，视觉上是自顶向下）</p>
+<p>大部分事件都有事件冒泡现象，并且<span style="color: #ff0000;">所有的浏览器都有事件冒泡</span>。</p>
+<p>结构上的冒泡，和视觉的位置没有关系，我们看一下三个方块视觉上分开的例子：</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-CSS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="pun">.</span><span class="pln">wrapper </span><span class="pun">{</span><br>3.  <span class="pln">        width</span><span class="pun">:</span><span class="pln"> </span><span class="lit">200px</span><span class="pun">;</span><br>4.  <span class="pln">        height</span><span class="pun">:</span><span class="pln"> </span><span class="lit">200px</span><span class="pun">;</span><br>5.  <span class="pln">        background</span><span class="pun">-</span><span class="pln">color</span><span class="pun">:</span><span class="pln"> red</span><span class="pun">;</span><br>6.  <span class="pln">        position</span><span class="pun">:</span><span class="pln"> absolute</span><span class="pun">;</span><br>7.  <span class="pln">    </span><span class="pun">}</span><br>8.  <span class="pln">    </span><span class="pun">.</span><span class="pln">box </span><span class="pun">{</span><br>9.  <span class="pln">        width</span><span class="pun">:</span><span class="pln"> </span><span class="lit">100px</span><span class="pun">;</span><br>10.  <span class="pln">        height</span><span class="pun">:</span><span class="pln"> </span><span class="lit">100px</span><span class="pun">;</span><br>11.  <span class="pln">        background</span><span class="pun">-</span><span class="pln">color</span><span class="pun">:</span><span class="pln"> green</span><span class="pun">;</span><br>12.  <span class="pln">        position</span><span class="pun">:</span><span class="pln"> absolute</span><span class="pun">;</span><br>13.  <span class="pln">        left</span><span class="pun">:</span><span class="pln"> </span><span class="lit">200px</span><span class="pun">;</span><br>14.  <span class="pln">        top</span><span class="pun">:</span><span class="pln"> </span><span class="lit">200px</span><span class="pun">;</span><br>15.  <span class="pln">    </span><span class="pun">}</span><br>16.  <span class="pln">&nbsp;</span><br>17.  <span class="pln">    </span><span class="pun">.</span><span class="pln">content </span><span class="pun">{</span><br>18.  <span class="pln">        width</span><span class="pun">:</span><span class="pln"> </span><span class="lit">50px</span><span class="pun">;</span><br>19.  <span class="pln">        height</span><span class="pun">:</span><span class="pln"> </span><span class="lit">50px</span><span class="pun">;</span><br>20.  <span class="pln">        background</span><span class="pun">-</span><span class="pln">color</span><span class="pun">:</span><span class="pln"> black</span><span class="pun">;</span><br>21.  <span class="pln">        position</span><span class="pun">:</span><span class="pln"> absolute</span><span class="pun">;</span><br>22.  <span class="pln">        left</span><span class="pun">:</span><span class="pln"> </span><span class="lit">100px</span><span class="pun">;</span><br>23.  <span class="pln">        top</span><span class="pun">:</span><span class="pln"> </span><span class="lit">100px</span><span class="pun">;</span><br>24.  <span class="pln">    </span><span class="pun">}</span></pre><div class="code-pretty-toolbar"><span class="title">CSS</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p><img src="http://www.flyingliu.com/wp-content/uploads/2016/10/2-298x300.png" alt="2"></p>
+<p>我们点击content部分之后依然会把box和wrapper都打印出来。</p>
+<p><span style="color: #ff0000;">并不是所有的事件都有冒泡</span>，focus、blur、change、submit、reset、select等方法就没有事件冒泡现象。</p>
+<p>事件捕获：</p>
+<p><strong><span style="color: #ff0000;">结构上</span></strong>（非视觉上）嵌套关系的元素，会存在事件捕获功能，即同一事件，<span style="color: #ff0000;">自父元素捕获至子元素</span>（事件源元素），结构上的自顶向下。</p>
+<p>addEventListener最后一个参数就是是否开始事件捕获，当我们填true的时候，就代表开启了事件捕获。只要开启了事件捕获，就不会冒泡了，如果不捕获的话，就遵循事件冒泡。</p>
+<p>因为addEventListener只有chrome有，因此<span style="color: #ff0000;">事件捕获也只有chrome浏览器有</span>。</p>
+<p>依然是上面的那个例子：</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="kwd">var</span><span class="pln"> wrapper </span><span class="pun">=</span><span class="pln"> document</span><span class="pun">.</span><span class="pln">getElementsByClassName</span><span class="pun">(</span><span class="str">‘wrapper’</span><span class="pun">)[</span><span class="lit">0</span><span class="pun">],</span><br>3.  <span class="pln">    box </span><span class="pun">=</span><span class="pln"> document</span><span class="pun">.</span><span class="pln">getElementsByClassName</span><span class="pun">(</span><span class="str">‘box’</span><span class="pun">)[</span><span class="lit">0</span><span class="pun">],</span><br>4.  <span class="pln">    content </span><span class="pun">=</span><span class="pln"> document</span><span class="pun">.</span><span class="pln">getElementsByClassName</span><span class="pun">(</span><span class="str">‘content’</span><span class="pun">)[</span><span class="lit">0</span><span class="pun">];</span><br>5.  <span class="pln">wrapper</span><span class="pun">.</span><span class="pln">addEventListener</span><span class="pun">(</span><span class="str">‘click’</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">(</span><span class="pln">e</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><br>6.  <span class="pln">    console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">‘wrapper’</span><span class="pun">);</span><br>7.  <span class="pun">},</span><span class="pln"> </span><span class="kwd">true</span><span class="pun">);</span><br>8.  <span class="pln">box</span><span class="pun">.</span><span class="pln">addEventListener</span><span class="pun">(</span><span class="str">‘click’</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">(</span><span class="pln">e</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><br>9.  <span class="pln">    console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">‘box’</span><span class="pun">);</span><br>10.  <span class="pun">},</span><span class="pln"> </span><span class="kwd">true</span><span class="pun">);</span><br>11.  <span class="pln">content</span><span class="pun">.</span><span class="pln">addEventListener</span><span class="pun">(</span><span class="str">‘click’</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">(</span><span class="pln">e</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><br>12.  <span class="pln">    console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">‘content’</span><span class="pun">);</span><br>13.  <span class="pun">},</span><span class="pln"> </span><span class="kwd">true</span><span class="pun">);</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>现在点击content之后，顺序是wrapper、box、content。</p>
+<p>当事件冒泡和事件捕获同时存在的时候，事件冒泡和事件捕获的触发顺序则为：<strong><span style="color: #ff0000;">先捕获，再冒泡</span></strong>。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="kwd">var</span><span class="pln"> wrapper </span><span class="pun">=</span><span class="pln"> document</span><span class="pun">.</span><span class="pln">getElementsByClassName</span><span class="pun">(</span><span class="str">‘wrapper’</span><span class="pun">)[</span><span class="lit">0</span><span class="pun">],</span><br>3.  <span class="pln">    box </span><span class="pun">=</span><span class="pln"> document</span><span class="pun">.</span><span class="pln">getElementsByClassName</span><span class="pun">(</span><span class="str">‘box’</span><span class="pun">)[</span><span class="lit">0</span><span class="pun">],</span><br>4.  <span class="pln">    content </span><span class="pun">=</span><span class="pln"> document</span><span class="pun">.</span><span class="pln">getElementsByClassName</span><span class="pun">(</span><span class="str">‘content’</span><span class="pun">)[</span><span class="lit">0</span><span class="pun">];</span><br>5.  <span class="pln">wrapper</span><span class="pun">.</span><span class="pln">onclick </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><br>6.  <span class="pln">    console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">‘wrappeBubbler’</span><span class="pun">);</span><br>7.  <span class="pun">}</span><br>8.  <span class="pln">box</span><span class="pun">.</span><span class="pln">onclick </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><br>9.  <span class="pln">    console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">‘boxBubble’</span><span class="pun">);</span><br>10.  <span class="pun">}</span><br>11.  <span class="pln">content</span><span class="pun">.</span><span class="pln">onclick </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><br>12.  <span class="pln">    console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">‘contentBubble’</span><span class="pun">);</span><br>13.  <span class="pun">}</span><br>14.  <span class="pln">wrapper</span><span class="pun">.</span><span class="pln">addEventListener</span><span class="pun">(</span><span class="str">‘click’</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">(</span><span class="pln">e</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><br>15.  <span class="pln">    console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">‘wrapper’</span><span class="pun">);</span><br>16.  <span class="pun">},</span><span class="pln"> </span><span class="kwd">true</span><span class="pun">);</span><br>17.  <span class="pln">box</span><span class="pun">.</span><span class="pln">addEventListener</span><span class="pun">(</span><span class="str">‘click’</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">(</span><span class="pln">e</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><br>18.  <span class="pln">    console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">‘box’</span><span class="pun">);</span><br>19.  <span class="pun">},</span><span class="pln"> </span><span class="kwd">true</span><span class="pun">);</span><br>20.  <span class="pln">content</span><span class="pun">.</span><span class="pln">addEventListener</span><span class="pun">(</span><span class="str">‘click’</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">(</span><span class="pln">e</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><br>21.  <span class="pln">    console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">‘content’</span><span class="pun">);</span><br>22.  <span class="pun">},</span><span class="pln"> </span><span class="kwd">true</span><span class="pun">);</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>结果是先捕获再冒泡。</p>
+<p>但是当我们把捕获写到冒泡前面的时候，顺序好像发生了变化。</p>
+<p>wrapper–&gt;box–&gt;<span style="color: #ff0000;">contentBubble</span>–&gt;content–&gt;boxBubble–&gt;wrapperBubble</p>
+<p>这里是因为点击content，并不属于冒泡，而是属于<span style="color: #ff0000;">事件执行</span>，我们先绑定的boxBubble，所以就先捕获，再事件执行，再冒泡，这与我们的结论没有冲突。</p>
+<h3 id="取消冒泡和阻止默认事件"><a href="#取消冒泡和阻止默认事件" class="headerlink" title="取消冒泡和阻止默认事件"></a><span style="color: #ff0000;">取消冒泡和阻止默认事件</span></h3><p>有时候冒泡或者默认事件会对我们的功能造成影响，因此我们需要适时地取消冒泡和默认事件。</p>
+<p>我们绑定事件的处理函数的时候，可以传递一个形参，代表我们的事件对象，一般是e或者event，<span style="color: #ff0000;">系统会自动帮我们捕获事件源对象并且把事件源对象传入</span>。</p>
+<p><strong><span style="color: #ff0000;">取消冒</span><span style="color: #ff0000;">泡</span><span style="color: #ff0000;">的方法</span></strong></p>
+<p>1.<strong><span style="color: #ff0000;">w3c标准方法：event.stopPropagation()</span></strong></p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="kwd">var</span><span class="pln"> wrapper </span><span class="pun">=</span><span class="pln"> document</span><span class="pun">.</span><span class="pln">getElementsByClassName</span><span class="pun">(</span><span class="str">‘wrapper’</span><span class="pun">)[</span><span class="lit">0</span><span class="pun">],</span><br>3.  <span class="pln">    box </span><span class="pun">=</span><span class="pln"> document</span><span class="pun">.</span><span class="pln">getElementsByClassName</span><span class="pun">(</span><span class="str">‘box’</span><span class="pun">)[</span><span class="lit">0</span><span class="pun">],</span><br>4.  <span class="pln">    content </span><span class="pun">=</span><span class="pln"> document</span><span class="pun">.</span><span class="pln">getElementsByClassName</span><span class="pun">(</span><span class="str">‘content’</span><span class="pun">)[</span><span class="lit">0</span><span class="pun">];</span><br>5.  <span class="pln">content</span><span class="pun">.</span><span class="pln">onclick </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">(</span><span class="pln">e</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><br>6.  <span class="pln">    console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">‘content’</span><span class="pun">);</span><br>7.  <span class="pln">    e</span><span class="pun">.</span><span class="pln">stopPropagation</span><span class="pun">();</span><br>8.  <span class="pun">}</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>现在我们点击content之后就没有冒泡了，但是点击box还是有冒泡的，因为我们没有取消box的冒泡。</p>
+<p>I<strong><span style="color: #ff0000;">E9以及以下的版本不支持这个方法</span></strong>。</p>
+<p>2.<strong><span style="color: #ff0000;">event.cancelBubble = true</span></strong></p>
+<p>这个属性是IE的，不过一些高版本的浏览器也有这个属性，只要让这个属性的值等于true，同样也可以取消事件冒泡。</p>
+<p>封装一个兼容性的取消事件冒泡的方法：</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="pln">&nbsp;</span><br>3.  <span class="kwd">function</span><span class="pln"> stopBubble</span><span class="pun">(</span><span class="kwd">event</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><br>4.  <span class="pln">    </span><span class="kwd">if</span><span class="pun">(</span><span class="kwd">event</span><span class="pun">.</span><span class="pln">stopPropagation</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><br>5.  <span class="pln">        </span><span class="kwd">event</span><span class="pun">.</span><span class="pln">stopPropagation</span><span class="pun">();</span><br>6.  <span class="pln">    </span><span class="pun">}</span><span class="kwd">else</span><span class="pln"> </span><span class="pun">{</span><br>7.  <span class="pln">        </span><span class="kwd">event</span><span class="pun">.</span><span class="pln">cancelBubble </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">true</span><span class="pun">;</span><br>8.  <span class="pln">    </span><span class="pun">}</span><br>9.  <span class="pun">}</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p><strong><span style="color: #ff0000;">默认事件</span></strong></p>
+<p>当我们在浏览器中点击右键，会弹出一个菜单，这就是一个默认事件contextmenu。还有a标签，即使我们不写跳转的页面，也会自动刷新页面，这也是一个默认事件。</p>
+<p>移动端的默认事件更多。</p>
+<p>默认事件有好的也有不好的，这就需要我们把不需要的默认事件阻止掉。</p>
+<p><strong><span style="color: #ff0000;">阻止默认事件</span></strong></p>
+<p>1.<strong><span style="color: #ff0000;">return false</span></strong></p>
+<p>我们只要在处理函数最后写上 return false就可以阻止默认事件了。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="pln">document</span><span class="pun">.</span><span class="pln">oncontextmenu </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><br>3.  <span class="pln">    console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">‘menu’</span><span class="pun">);</span><br>4.  <span class="pln">    </span><span class="kwd">return</span><span class="pln"> </span><span class="kwd">false</span><span class="pun">;</span><br>5.  <span class="pun">}</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>现在我们在页面上右键就不会出现菜单了。</p>
+<p>不过要注意的是，<span style="color: #ff0000;">这种写法只能用在<strong>句柄方式</strong>绑定的事件上</span>。</p>
+<p>2.<strong><span style="color: #ff0000;">e.preventDefault()</span></strong></p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="pln">documet</span><span class="pun">.</span><span class="pln">addEventListener</span><span class="pun">(</span><span class="str">‘contextmenu’</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">(</span><span class="pln">e</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><br>3.  <span class="pln">    console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">‘menu’</span><span class="pun">);</span><br>4.  <span class="pln">    e</span><span class="pun">.</span><span class="pln">preventDefault</span><span class="pun">();</span><br>5.  <span class="pun">},</span><span class="kwd">false</span><span class="pun">);</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>这是w3c标准的阻止默认事件的方法，句柄也同样可以使用。</p>
+<p>不过<strong><span style="color: #ff0000;">IE9以下不兼容</span></strong>。</p>
+<p>3.<strong><span style="color: #ff0000;">e.returnValue = false</span></strong></p>
+<p>这个是<strong><span style="color: #ff0000;">IE</span></strong>的方法，事件源对象上的属性returnValue代表是否有默认事件，直接返回false就可以阻止默认事件了。现在高版本的浏览器也有这个属性。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="pln">document</span><span class="pun">.</span><span class="pln">attachEvent</span><span class="pun">(</span><span class="str">‘oncontextmenu’</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">(</span><span class="pln">e</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><br>3.  <span class="pln">    e</span><span class="pun">.</span><span class="pln">returnValue </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">false</span><span class="pun">;</span><br>4.  <span class="pun">});</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>现在我们也可以封装一个兼容性的阻止默认事件的方法了：</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="kwd">function</span><span class="pln"> cancelHandler</span><span class="pun">(</span><span class="kwd">event</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><br>3.  <span class="pln">    </span><span class="kwd">if</span><span class="pun">(</span><span class="kwd">event</span><span class="pun">.</span><span class="pln">preventDefault</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><br>4.  <span class="pln">        </span><span class="kwd">event</span><span class="pun">.</span><span class="pln">preventDefault</span><span class="pun">();</span><br>5.  <span class="pln">    </span><span class="pun">}</span><span class="kwd">else</span><span class="pun">{</span><br>6.  <span class="pln">        </span><span class="kwd">event</span><span class="pun">.</span><span class="pln">returnValue </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">false</span><span class="pun">;</span><br>7.  <span class="pln">    </span><span class="pun">}</span><br>8.  <span class="pun">}</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>小例子：阻止a标签不跳转</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="kwd">var</span><span class="pln"> a </span><span class="pun">=</span><span class="pln"> document</span><span class="pun">.</span><span class="pln">links</span><span class="pun">[</span><span class="lit">0</span><span class="pun">];</span><br>3.  <span class="pln">a</span><span class="pun">.</span><span class="pln">addEventListener</span><span class="pun">(</span><span class="str">‘click’</span><span class="pun">,</span><span class="pln"> funciton </span><span class="pun">(</span><span class="pln">e</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><br>4.  <span class="pln">    e</span><span class="pun">.</span><span class="pln">cancelHandler</span><span class="pun">(</span><span class="pln">e</span><span class="pun">);</span><br>5.  <span class="pun">},</span><span class="kwd">false</span><span class="pun">);</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>这样a标签就不会跳转了。</p>
+<p>同时我们还可以用a标签的第四个用处，协议限定符来阻止默认事件。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="tag">&lt;a</span><span class="pln"> </span><span class="atn">href</span><span class="pun">=</span><span class="atv">“javascript: void(0); “</span><span class="tag">&gt;</span><span class="pln">www.baidu.com</span><span class="tag">&lt;/a&gt;</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>不仅仅是0，只要填写一个代表false的值，就可以取消掉默认事件。</p>
+<h3 id="事件对象"><a href="#事件对象" class="headerlink" title="事件对象"></a><span style="color: #ff0000;">事件对象</span></h3><p><span style="color: #ff0000;">在IE中，系统不会把事件对象传到方法中，因此我们的参数e或者event在IE中是不好用的，IE会把事件对象传递到window.event上</span>，所以当我们使用事件对象的时候，就要写兼容性的写法：</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="kwd">var</span><span class="pln"> </span><span class="kwd">event</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> e </span><span class="pun">||</span><span class="pln"> window</span><span class="pun">.</span><span class="kwd">event</span><span class="pun">;</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>这样就可以正常地获取到事件对象了。</p>
+<h3 id="事件委托"><a href="#事件委托" class="headerlink" title="事件委托"></a><span style="color: #ff0000;">事件委托</span></h3><p><span style="color: #ff0000;"><strong>事件源对象</strong></span></p>
+<p>我们现在有一个ul，下面有十万个li，当我们给父级的ul添加第一个点击事件之后，由于<strong><span style="color: #ff0000;">事件冒泡</span></strong>的存在，不论我们点击哪一个li都会调用父级的点击事件处理函数，这个时候触发父级ul的点击函数的那个li就被称之为事件源对象。</p>
+<p><strong><span style="color: #ff0000;">event.target</span> </strong>是<span style="color: #ff0000;">火狐</span>的获取事件源对象</p>
+<p><strong><span style="color: #ff0000;">event.srcElement</span> </strong>是<span style="color: #ff0000;">IE</span>的获取事件源对象</p>
+<p>chrome两种都有</p>
+<p>因此我们在获取事件源对象的时候也需要写兼容性写法， 配合刚才的事件对象的兼容性写法就是这个样子的：</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="pln">oUl</span><span class="pun">.</span><span class="pln">addEventListener</span><span class="pun">(</span><span class="str">‘click’</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">(</span><span class="pln">e</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><br>3.  <span class="pln">    </span><span class="kwd">var</span><span class="pln"> </span><span class="kwd">event</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> e </span><span class="pun">||</span><span class="pln"> window</span><span class="pun">.</span><span class="kwd">event</span><span class="pun">;</span><br>4.  <span class="pln">    </span><span class="kwd">var</span><span class="pln"> tar </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">event</span><span class="pun">.</span><span class="pln">target </span><span class="pun">||</span><span class="pln"> </span><span class="kwd">event</span><span class="pun">.</span><span class="pln">srcElement</span><span class="pun">;</span><br>5.  <span class="pln">        console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">tar</span><span class="pun">);</span><br>6.  <span class="pln">    </span><span class="pun">},</span><span class="pln"> </span><span class="kwd">false</span><span class="pun">);</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>我们<span style="color: #ff0000;">利用事件源对象和事件冒泡来处理的方式就叫做事件委托</span>。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="pln">oUl</span><span class="pun">.</span><span class="pln">addEventListener</span><span class="pun">(</span><span class="str">‘click’</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">(</span><span class="pln">e</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><br>3.  <span class="pln">    </span><span class="kwd">var</span><span class="pln"> </span><span class="kwd">event</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> e </span><span class="pun">||</span><span class="pln"> window</span><span class="pun">.</span><span class="kwd">event</span><span class="pun">;</span><br>4.  <span class="pln">    </span><span class="kwd">var</span><span class="pln"> tar </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">event</span><span class="pun">.</span><span class="pln">target </span><span class="pun">||</span><span class="pln"> </span><span class="kwd">event</span><span class="pun">.</span><span class="pln">srcElement</span><span class="pun">;</span><br>5.  <span class="pln">    console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">tar</span><span class="pun">.</span><span class="pln">innerHTML</span><span class="pun">);</span><br>6.  <span class="pln">    </span><span class="pun">},</span><span class="pln"> </span><span class="kwd">false</span><span class="pun">);</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>事件委托的<span style="color: #ff0000;">优点</span>：</p>
+<p>1.<span style="color: #ff0000;">性能</span> 不需要循环所有的子元素一个个绑定事件</p>
+<p>2.<span style="color: #ff0000;">灵活</span> 当有新的子元素被加入的时候不需要重新绑定事件</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/02/JavaScriptEightteen/" rel="next" title="JWeb前端的知识之旅哟—— 事件的绑定与解除">
+                <i class="fa fa-chevron-left"></i> JWeb前端的知识之旅哟—— 事件的绑定与解除
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/02/JavaScriptTwenty/" rel="prev" title="Web前端的知识之旅哟—— 鼠标事件与键盘事件">
+                Web前端的知识之旅哟—— 鼠标事件与键盘事件 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-name">Artikel</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#事件处理模型——事件冒泡、事件捕获"><span class="nav-number">1.</span> <span class="nav-text">事件处理模型——事件冒泡、事件捕获</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#取消冒泡和阻止默认事件"><span class="nav-number">2.</span> <span class="nav-text">取消冒泡和阻止默认事件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#事件对象"><span class="nav-number">3.</span> <span class="nav-text">事件对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#事件委托"><span class="nav-number">4.</span> <span class="nav-text">事件委托</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

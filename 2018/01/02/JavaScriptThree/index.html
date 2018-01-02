@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="• 我们在书写js代码的时候，会发现两点和c/c++语言不同的地方。第一个是当我们在后面定义了一个函数之后，我们在定义函数之前使用这个函数也是可以的。第二个是我们在后面声明的一个变量，但是在前面调用这个变量的时候并不会报错而是undefiend。 这两点不同在js中被称为函数声明提升和变量声明提升，函数声明提升是一种整体提升，它会把函数声明和函数体一起提升到前面。变量声明提升则是一种局部提升，它仅">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Web前端的知识之旅哟——预编译">
+<meta property="og:url" content="http://yoursite.com/2018/01/02/JavaScriptThree/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="• 我们在书写js代码的时候，会发现两点和c/c++语言不同的地方。第一个是当我们在后面定义了一个函数之后，我们在定义函数之前使用这个函数也是可以的。第二个是我们在后面声明的一个变量，但是在前面调用这个变量的时候并不会报错而是undefiend。 这两点不同在js中被称为函数声明提升和变量声明提升，函数声明提升是一种整体提升，它会把函数声明和函数体一起提升到前面。变量声明提升则是一种局部提升，它仅">
+<meta property="og:updated_time" content="2018-01-02T08:47:59.702Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Web前端的知识之旅哟——预编译">
+<meta name="twitter:description" content="• 我们在书写js代码的时候，会发现两点和c/c++语言不同的地方。第一个是当我们在后面定义了一个函数之后，我们在定义函数之前使用这个函数也是可以的。第二个是我们在后面声明的一个变量，但是在前面调用这个变量的时候并不会报错而是undefiend。 这两点不同在js中被称为函数声明提升和变量声明提升，函数声明提升是一种整体提升，它会把函数声明和函数体一起提升到前面。变量声明提升则是一种局部提升，它仅">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/01/02/JavaScriptThree/"/>
+
+
+
+
+
+  <title>Web前端的知识之旅哟——预编译 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/02/JavaScriptThree/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Web前端的知识之旅哟——预编译</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-02T16:08:59+08:00">
+                2018-01-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>• 我们在书写js代码的时候，会发现两点和c/c++语言不同的地方。第一个是当我们在后面定义了一个函数之后，我们在定义函数之前使用这个函数也是可以的。第二个是我们在后面声明的一个变量，但是在前面调用这个变量的时候并不会报错而是undefiend。</p>
+<p>这两点不同在js中被称为<strong><span style="color: #ff0000;">函数声明提升</span></strong>和<strong><span style="color: #ff0000;">变量声明提升</span></strong>，函数声明提升是一种<strong><span style="color: #ff0000;">整体提升</span></strong>，它会把函数声明和函数体一起提升到前面。变量声明提升则是一种<strong><span style="color: #ff0000;">局部提升</span></strong>，它仅仅将变量的声明提前了，但是并没有将赋值也一起提前。</p>
+<p>那么为什么会出现这种提升的现象呢？</p>
+<p>这是因为js运行的时候有一个阶段叫做预编译阶段，而我们的声明提升现象都是发生在预编译的时候哟~</p>
+<h3 id="预编译"><a href="#预编译" class="headerlink" title="预编译"></a><span style="color: #ff0000;">预编译</span></h3><p>• js运行三部曲</p>
+<p>1.语法分析</p>
+<p>2.<strong><span style="color: #ff0000;">预编译</span></strong></p>
+<p>3.解释执行</p>
+<p>语法分析：js引擎在解析js代码之前，会先通篇扫描一下，找出低级的语法错误，比如写错大括号之类的。</p>
+<p>编译执行：我们前面提到js是一种解释型语言，编译一行执行一行，当语法分析没有问题，并且已经完成预编译阶段之后，就开始解释执行代码。</p>
+<p>这里我们着重介绍预编译。</p>
+<p><strong><span style="color: #ff0000;">预编译前奏</span></strong></p>
+<p>在介绍预编译之前，我们有两个重要概念需要掌握。</p>
+<p>1.<span style="color: #ff0000;">imply global 暗示全局变量</span>。</p>
+<p>如果任何变量未经声明就赋值使用，此变量就会为<span style="color: #ff0000;">全局对象window</span>所有，并且成为window对象的一个属性。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">window</span><span class="pun">.</span><span class="pln">a </span><span class="pun">=</span><span class="pln"> </span><span class="lit">123</span><span class="pun">;</span><br>2.  <span class="pln">window</span><span class="pun">.</span><span class="pln">a </span><span class="pun">===</span><span class="pln"> a </span><span class="com">// true;</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>或者</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">a </span><span class="pun">=</span><span class="pln"> </span><span class="lit">123</span><span class="pun">；</span><br>2.  <span class="pln">window</span><span class="pun">.</span><span class="pln">a</span><span class="pun">===</span><span class="pln">a &nbsp;</span><span class="com">// true</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>2.一切<span style="color: #ff0000;">声明</span>的全局变量，都是window的属性。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="kwd">var</span><span class="pln"> a </span><span class="pun">=</span><span class="pln"> </span><span class="lit">123</span><span class="pun">;</span><br>2.  <span class="pln">console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">window</span><span class="pun">.</span><span class="pln">a</span><span class="pun">);</span><span class="pln"> </span><span class="com">// 123</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>• 这样看不论全局变量有没有声明，似乎都会成为全局对象上的属性，那么两者之间有什么区别呢？</p>
+<p>区别在于：<span style="color: #ff0000;">经过声明的全局变量不能通过delete操作来删除，但是未经声明的全局变量可以被删除</span>。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">a </span><span class="pun">=</span><span class="pln"> </span><span class="lit">123</span><span class="pun">;</span><br>2.  <span class="pln">console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">window</span><span class="pun">.</span><span class="pln">a </span><span class="pun">===</span><span class="pln"> a</span><span class="pun">)</span><span class="pln"> &nbsp;</span><span class="com">// true</span><br>3.  <span class="kwd">delete</span><span class="pln"> window</span><span class="pun">.</span><span class="pln">a</span><span class="pun">;</span><br>4.  <span class="pln">console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">window</span><span class="pun">.</span><span class="pln">a</span><span class="pun">);</span><span class="pln"> </span><span class="com">// undefiend</span><br>5.  <span class="kwd">var</span><span class="pln"> b </span><span class="pun">=</span><span class="pln"> </span><span class="lit">123</span><span class="pun">;</span><br>6.  <span class="kwd">delete</span><span class="pln"> window</span><span class="pun">.</span><span class="pln">b</span><span class="pun">;</span><br>7.  <span class="pln">console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">window</span><span class="pun">.</span><span class="pln">b</span><span class="pun">);</span><span class="pln"> </span><span class="com">// 123</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>正是这一种特性，导致es5有一种弊端，我们总会在无形中声明一些全局变量。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="kwd">function</span><span class="pln"> test </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><br>2.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="kwd">var</span><span class="pln"> a </span><span class="pun">=</span><span class="pln"> b </span><span class="pun">=</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span><br>3.  <span class="pun">}</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>这段代码的原意是：在函数体中声明两个变量a、b，然后初始化a、b都是0。但是我们这么写之后，a经过了声明，但是b却没有声明，这时候b就会成为一个全局变量。</p>
+<p>了解这两点之后，我们正式介绍一下预编译的过程。</p>
+<p><span style="color: #ff0000;">预编译的过程我总结为以下<strong>四步</strong></span>：</p>
+<p>1.创建<span style="color: #ff0000;">AO对象</span>。</p>
+<p>2.寻找<span style="color: #ff0000;">形参和变量声明</span>，将变量和形参作为AO对象的属性名添加到对象中，值为<span style="color: #ff0000;">undefined</span>。值得注意的是，函数声明不叫变量。</p>
+<p>3.将<span style="color: #ff0000;">实参值和形参值</span>相统一。</p>
+<p>4.在函数体里面寻找<span style="color: #ff0000;">函数声明</span>，将函数名作为属性名，值为这个函数的函数体。</p>
+<p>函数在执行的前一刻会产生一个<span style="color: #ff0000;">上下文</span>，这个上下文就是Activeaction Object对象，简称AO对象。</p>
+<p>AO = {}</p>
+<p>这个对象是空的，但是里面有一些我们看不到的却存在的隐式属性，比如<span style="color: #ff0000;">this: window</span>属性和<span style="color: #ff0000;">arguments: [];</span>属性</p>
+<p>这个对象用来存放一些属性和方法，这些属性和方法就按照前面的四步来产生。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="kwd">function</span><span class="pln"> test </span><span class="pun">(</span><span class="pln">a</span><span class="pun">,</span><span class="pln"> b</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><br>2.  <span class="pln">&nbsp; &nbsp; &nbsp; console</span><span class="pun">.</span><span class="pln">log a&nbsp;</span><br>3.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="kwd">function</span><span class="pln"> a </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{}</span><br>4.  <span class="pln">&nbsp; &nbsp; &nbsp; a </span><span class="pun">=</span><span class="pln"> </span><span class="lit">222</span><span class="pun">;</span><br>5.  <span class="pln">&nbsp; &nbsp; &nbsp; console</span><span class="pun">.</span><span class="pln">log a</span><br>6.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="kwd">function</span><span class="pln"> b </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{};</span><br>7.  <span class="pln">&nbsp; &nbsp; &nbsp; console</span><span class="pun">.</span><span class="pln">log b&nbsp;</span><br>8.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="kwd">var</span><span class="pln"> b </span><span class="pun">=</span><span class="pln"> </span><span class="lit">111</span><span class="pun">;</span><span class="pln"> </span><br>9.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="kwd">var</span><span class="pln"> a </span><span class="pun">;</span><br>10.  <span class="pun">}</span><br>11.  <span class="pln">test</span><span class="pun">(</span><span class="lit">1</span><span class="pun">)</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>这里我们用这一个样例代码来简单介绍一下预编译的过程。</p>
+<p>首先第一步，创建一个AO对象。</p>
+<p>var AO = {};</p>
+<p>第二步，寻找形参值和变量声明，并且将值赋为undefined。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">AO </span><span class="pun">=</span><span class="pln"> </span><span class="pun">{</span><br>2.  <span class="pln">&nbsp; &nbsp; &nbsp; a</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">undefined</span><span class="pun">,</span><br>3.  <span class="pln">&nbsp; &nbsp; &nbsp; b</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">undefined</span><br>4.  <span class="pun">}</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>3.将实参值和形参值相统一。这里因为属性名都已经存在了，所以直接赋值就可以了。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">AO </span><span class="pun">=</span><span class="pln"> </span><span class="pun">{</span><br>2.  <span class="pln">&nbsp; &nbsp; &nbsp; a</span><span class="pun">:</span><span class="pln"> </span><span class="lit">1</span><span class="pun">,</span><br>3.  <span class="pln">&nbsp; &nbsp; &nbsp; b</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">undefined</span><br>4.  <span class="pun">}</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>4.寻找函数声明，将函数体赋值给属性。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">AO </span><span class="pun">=</span><span class="pln"> </span><span class="pun">{</span><br>2.  <span class="pln">&nbsp; &nbsp; &nbsp; a</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{},</span><br>3.  <span class="pln">&nbsp; &nbsp; &nbsp; b</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{}</span><br>4.  <span class="pun">}</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>这样在编译执行之前，我们预编译阶段创建的AO对象就是这个样子了，这个时候我们再看看分别打印的值是什么。</p>
+<p>第一个console.log a –&gt; function () {}</p>
+<p>第二个console.log a –&gt; 222 因为执行了a = 222这一行代码，所以重新赋值了。</p>
+<p>第三个console.log b –&gt; function () {}</p>
+<p>• <span style="color: #ff0000;">var b = function () {}</span>这种不叫做函数声明，这个函数是赋值给b变量的，b变量是声明。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="kwd">function</span><span class="pln"> fn</span><span class="pun">(</span><span class="pln">a</span><span class="pun">){</span><br>2.  <span class="pln">&nbsp; &nbsp; &nbsp; a</span><span class="com">//function</span><br>3.  <span class="pln">&nbsp; &nbsp; &nbsp; d</span><span class="com">//function</span><br>4.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="kwd">var</span><span class="pln"> a </span><span class="pun">=</span><span class="pln"> </span><span class="lit">123</span><span class="pun">;</span><br>5.  <span class="pln">&nbsp; &nbsp; &nbsp; a</span><span class="com">//123</span><br>6.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="kwd">function</span><span class="pln"> a </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{}</span><br>7.  <span class="pln">&nbsp; &nbsp; &nbsp; b</span><span class="com">//undefined</span><br>8.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="kwd">var</span><span class="pln"> b </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{}</span><br>9.  <span class="pln">&nbsp; &nbsp; &nbsp; b</span><span class="com">//function</span><br>10.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="kwd">function</span><span class="pln"> d </span><span class="pun">(){}</span><br>11.  <span class="pun">}</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>这里的var b = function () {}只是声明了b变量，在第四步寻找函数声明里面并不会把b赋值成function () {}，因为后面的函数并不是声明，当代码开始解释执行之后，执行到这一行之后才把b赋值成这个函数。</p>
+<p>• 寻找变量声明的时候，不会管里面的代码到底会不会执行，执行是后面的事，这里只负责寻找所有变量。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">funciton test</span><span class="pun">(</span><span class="pln">b</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><br>2.  <span class="pln">&nbsp; &nbsp; &nbsp; a&nbsp;</span><span class="com">//undefined&nbsp;</span><br>3.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="kwd">if</span><span class="pun">(</span><span class="lit">1</span><span class="pln"> </span><span class="pun">&gt;</span><span class="pln"> </span><span class="lit">5</span><span class="pun">){</span><br>4.  <span class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="kwd">var</span><span class="pln"> a </span><span class="pun">=</span><span class="pln"> </span><span class="lit">123</span><span class="pun">;</span><br>5.  <span class="pln">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="kwd">function</span><span class="pln"> b </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{}</span><br>6.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="pun">}</span><br>7.  <span class="pln">&nbsp; &nbsp; &nbsp; a</span><span class="com">//undefined</span><br>8.  <span class="pln">&nbsp; &nbsp; &nbsp; b</span><span class="com">//function</span><br>9.  <span class="pln">&nbsp; &nbsp; &nbsp; </span><span class="kwd">var</span><span class="pln"> b </span><span class="pun">=</span><span class="pln"> </span><span class="lit">234</span><span class="pun">;</span><br>10.  <span class="pln">&nbsp; &nbsp; &nbsp; b</span><span class="com">// 234</span><br>11.  <span class="pun">}</span><br>12.  <span class="pln">test</span><span class="pun">(</span><span class="lit">2</span><span class="pun">);</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>打印第一个a的时候并不会报错而是undefined，当a没有声明的时候才会报错，因此这里a是有声明的，只是没有赋值而已，它根本不看有没有if，if的条件是不是真对寻找变量声明都没有关系。</p>
+<p>第二步寻找形参和变量声明时候的AO对象：</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br>1.  <span class="pln">AO </span><span class="pun">=</span><span class="pln"> </span><span class="pun">{</span><br>2.  <span class="pln">&nbsp; &nbsp; &nbsp; a</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">undefined</span><span class="pun">,</span><span class="pln"> &nbsp;</span><span class="com">//这里的a虽然在if里面但是也被声明了</span><br>3.  <span class="pln">&nbsp; &nbsp; &nbsp; b</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">undefined</span><br>4.  <span class="pun">}</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>以上就是我总结的预编译的知识点，希望对大家有帮助哟！~</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/02/JavaScriptTwo/" rel="next" title="Web前端的知识之旅哟——类型转换">
+                <i class="fa fa-chevron-left"></i> Web前端的知识之旅哟——类型转换
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/02/JavaScriptFour/" rel="prev" title="Web前端的知识之旅哟——对象与构造函数与包装类">
+                Web前端的知识之旅哟——对象与构造函数与包装类 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-name">Artikel</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#预编译"><span class="nav-number">1.</span> <span class="nav-text">预编译</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

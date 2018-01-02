@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="事件是交互体验的核心功能，非常非常重要。 事件是每一个浏览器本来就有的，我们只是给相应的事件添加了一个回调函数。 下面先看一个拖拽事件的例子来感受一下事件： 1.  div.addEventListener(‘mousedown’, function (e){2.  var disX = e.clientX - parseInt(getStyle(this, ‘left’)),3.      di">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JWeb前端的知识之旅哟—— 事件的绑定与解除">
+<meta property="og:url" content="http://yoursite.com/2018/01/02/JavaScriptEightteen/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="事件是交互体验的核心功能，非常非常重要。 事件是每一个浏览器本来就有的，我们只是给相应的事件添加了一个回调函数。 下面先看一个拖拽事件的例子来感受一下事件： 1.  div.addEventListener(‘mousedown’, function (e){2.  var disX = e.clientX - parseInt(getStyle(this, ‘left’)),3.      di">
+<meta property="og:updated_time" content="2018-01-02T09:49:02.960Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JWeb前端的知识之旅哟—— 事件的绑定与解除">
+<meta name="twitter:description" content="事件是交互体验的核心功能，非常非常重要。 事件是每一个浏览器本来就有的，我们只是给相应的事件添加了一个回调函数。 下面先看一个拖拽事件的例子来感受一下事件： 1.  div.addEventListener(‘mousedown’, function (e){2.  var disX = e.clientX - parseInt(getStyle(this, ‘left’)),3.      di">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/01/02/JavaScriptEightteen/"/>
+
+
+
+
+
+  <title>JWeb前端的知识之旅哟—— 事件的绑定与解除 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/02/JavaScriptEightteen/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">JWeb前端的知识之旅哟—— 事件的绑定与解除</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-02T17:44:33+08:00">
+                2018-01-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>事件是<span style="color: #ff0000;">交互体验的核心功能</span>，非常非常重要。</p>
+<p>事件是每一个浏览器本来就有的，我们只是给相应的事件添加了一个<span style="color: #ff0000;">回调函数</span>。</p>
+<p>下面先看一个拖拽事件的例子来感受一下事件：</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br><br>1.  <span class="pln">div</span><span class="pun">.</span><span class="pln">addEventListener</span><span class="pun">(</span><span class="str">‘mousedown’</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">(</span><span class="pln">e</span><span class="pun">){</span><br>2.  <span class="kwd">var</span><span class="pln"> disX </span><span class="pun">=</span><span class="pln"> e</span><span class="pun">.</span><span class="pln">clientX </span><span class="pun">-</span><span class="pln"> parseInt</span><span class="pun">(</span><span class="pln">getStyle</span><span class="pun">(</span><span class="kwd">this</span><span class="pun">,</span><span class="pln"> </span><span class="str">‘left’</span><span class="pun">)),</span><br>3.  <span class="pln">    disY </span><span class="pun">=</span><span class="pln"> e</span><span class="pun">.</span><span class="pln">clientY </span><span class="pun">-</span><span class="pln"> parseInt</span><span class="pun">(</span><span class="pln">getStyle</span><span class="pun">(</span><span class="kwd">this</span><span class="pun">,</span><span class="pln"> </span><span class="str">‘top’</span><span class="pun">));</span><br>4.  <span class="pln">document</span><span class="pun">.</span><span class="pln">addEventListener</span><span class="pun">(</span><span class="str">‘mousemove’</span><span class="pun">,</span><span class="pln"> mouseMove</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">false</span><span class="pun">);</span><br>5.  <span class="pln">    div</span><span class="pun">.</span><span class="pln">addEventListener</span><span class="pun">(</span><span class="str">‘mouseup’</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">(</span><span class="pln">e</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><br>6.  <span class="pln">        document</span><span class="pun">.</span><span class="pln">removeEventListener</span><span class="pun">(</span><span class="str">‘mousemove’</span><span class="pun">,</span><span class="pln"> mouseMove</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">false</span><span class="pun">);</span><br>7.  <span class="pln">    </span><span class="pun">},</span><span class="pln"> </span><span class="kwd">false</span><span class="pun">);</span><br>8.  <span class="pun">},</span><span class="pln"> </span><span class="kwd">false</span><span class="pun">);</span><br>9.  <span class="pln">&nbsp;</span><br>10.  <span class="kwd">function</span><span class="pln"> mouseMove</span><span class="pun">(</span><span class="pln">e</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><br>11.  <span class="pln">      div</span><span class="pun">.</span><span class="pln">style</span><span class="pun">.</span><span class="pln">left </span><span class="pun">=</span><span class="pln"> e</span><span class="pun">.</span><span class="pln">clentX </span><span class="pun">-</span><span class="pln"> disX </span><span class="pun">+</span><span class="pln"> </span><span class="str">‘px’</span><span class="pun">;</span><br>12.  <span class="pln">      div</span><span class="pun">.</span><span class="pln">style</span><span class="pun">.</span><span class="pln">top </span><span class="pun">=</span><span class="pln"> e</span><span class="pun">.</span><span class="pln">clientY </span><span class="pun">-</span><span class="pln"> disY </span><span class="pun">+</span><span class="pln"> </span><span class="str">‘px’</span><span class="pun">;</span><br>13.  <span class="pln">&nbsp;</span><br>14.  <span class="pun">}</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>我们首先看一下如何绑定事件，这里我们以点击事件为例。</p>
+<h3 id="绑定事件"><a href="#绑定事件" class="headerlink" title="绑定事件"></a><span style="color: #ff0000;">绑定事件</span></h3><p>1.<strong><span style="color: #ff0000;">句柄方式</span></strong></p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br><br>1.  <span class="kwd">var</span><span class="pln"> div </span><span class="pun">=</span><span class="pln"> document</span><span class="pun">.</span><span class="pln">getElementsByTagName</span><span class="pun">(</span><span class="str">‘div’</span><span class="pun">)[</span><span class="lit">0</span><span class="pun">];</span><br>2.  <span class="pln">div</span><span class="pun">.</span><span class="pln">onclick </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">(</span><span class="pln">e</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><br>3.  <span class="pln">      console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">‘a’</span><span class="pun">);</span><br>4.  <span class="pun">}</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>后面的这个函数就叫做<span style="color: #ff0000;">事件处理函数</span>，也称回调函数，当我们点击事件触发的时候，就会执行后面的处理函数。</p>
+<p>事件可以持续监听，并不是执行完一次就失效，因此这个事件监听部分并不属于js引擎，因为js引擎是单线程的，<span style="color: #ff0000;">事件监听属于内核的其他模块部分</span>，一旦事件触发，事件监听就会把处理函数放入<span style="color: #ff0000;">执行队列</span>，等待js引擎来执行。</p>
+<p><span style="color: #ff0000;">虽然句柄方式的兼容性很好，但是一个元素的一种事件只能绑定一个函数</span>。</p>
+<p>基本等同于写在行间的事件。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br><br>1.  <span class="tag">&lt;div</span><span class="pln"> </span><span class="atn">onclick</span><span class="pun">=</span><span class="atv">“</span><span class="pln">console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">‘a’</span><span class="pun">)</span><span class="atv">“</span><span class="tag">&gt;&lt;/div&gt;</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>这两种写法是一致的。</p>
+<p>一些比较简单的函数可以用这种方式来写。</p>
+<p>2.ele.addEventListener(type, handle, false)方法。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br><br>1.  <span class="pln">div</span><span class="pun">.</span><span class="pln">addEventListener</span><span class="pun">(</span><span class="str">‘click’</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">function</span><span class="pun">(</span><span class="pln">e</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><br>2.  <span class="pln">      console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">‘a’</span><span class="pun">);</span><br>3.  <span class="pun">},</span><span class="pln"> </span><span class="kwd">false</span><span class="pun">);</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>这里面有三个参数，第一个参数是事件类型，第二个参数是处理函数，第三个参数是是否捕获。</p>
+<p>处理函数可以直接在addEventListener方法里面写一个匿名函数，也可以在外面写一个命名函数，然后在放法里面写函数的引用。</p>
+<p>这种方法更加通用常见，而且<span style="color: #ff0000;">一种事件可以绑定多个函数，但是同一个处理函数只能绑定一次</span>。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="kwd">function</span><span class="pln"> test1 </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><br>3.  <span class="pln">      console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">‘a’</span><span class="pun">);</span><br>4.  <span class="pun">}</span><br>5.  <span class="kwd">function</span><span class="pln"> test2</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><br>6.  <span class="pln">      console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">‘a’</span><span class="pun">);</span><br>7.  <span class="pun">}</span><br>8.  <span class="pln">div</span><span class="pun">.</span><span class="pln">addEventListener</span><span class="pun">(</span><span class="str">‘click’</span><span class="pun">,</span><span class="pln"> test1</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">false</span><span class="pun">);</span><br>9.  <span class="pln">div</span><span class="pun">.</span><span class="pln">addEventListener</span><span class="pun">(</span><span class="str">‘click’</span><span class="pun">,</span><span class="pln"> test2</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">false</span><span class="pun">);</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>点击一次同时打印a和b。</p>
+<p>• <strong><span style="color: #ff0000;">这是唯一一个有事件捕获的方法。</span></strong></p>
+<p><span style="color: #ff0000;">注意</span>：即使函数体相同，两个函数也不是一个函数。</p>
+<p>不过很遗憾的是，这种方法在<strong><span style="color: #ff0000;">IE9以下不兼容</span></strong>。</p>
+<p>3.ele.attachEvent(‘on’ + type, handle)</p>
+<p>这个方法是IE独有的方法，<span style="color: #ff0000;">一个事件同样可以绑定多个处理函数</span>。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="pln">div</span><span class="pun">.</span><span class="pln">attachEvent</span><span class="pun">(</span><span class="str">‘onclick’</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">(){</span><br>3.  <span class="pln">      console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">‘a’</span><span class="pun">);</span><br>4.  <span class="pun">});</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>基本和addEventListener差不多，但是有一点区别是，<span style="color: #ff0000;">当同一个函数绑定多次的时候，addEventListener是只执行一次，但是attachEvent会绑定几次执行几次</span>。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="kwd">function</span><span class="pln"> test </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><br>3.  <span class="pln">      console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">‘a’</span><span class="pun">);</span><br>4.  <span class="pun">}</span><br>5.  <span class="pln">div</span><span class="pun">.</span><span class="pln">attachEvent</span><span class="pun">(</span><span class="str">‘onclick’</span><span class="pun">,</span><span class="pln"> test</span><span class="pun">);</span><br>6.  <span class="pln">div</span><span class="pun">.</span><span class="pln">attachEvent</span><span class="pun">(</span><span class="str">‘onclick’</span><span class="pun">,</span><span class="pln"> test</span><span class="pun">);</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>现在点击一次会打印两个a。</p>
+<p>现在这里有一个笔试常考的绑定事件的题：使用原生js，addEventListener，为每一个li绑定一个点击事件，输出他们的顺序。</p>
+<p>这里就要注意这个题考察的不仅仅是绑定事件，更多的是<span style="color: #ff0000;">闭包</span>的运用。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="pln">    </span><span class="kwd">var</span><span class="pln"> $Li </span><span class="pun">=</span><span class="pln"> document</span><span class="pun">.</span><span class="pln">getElementsByTagName</span><span class="pun">(</span><span class="str">‘li’</span><span class="pun">);</span><br>3.  <span class="pln">    </span><span class="kwd">for</span><span class="pln"> </span><span class="pun">(</span><span class="kwd">var</span><span class="pln"> i </span><span class="pun">=</span><span class="pln"> </span><span class="lit">0</span><span class="pun">,</span><span class="pln"> len </span><span class="pun">=</span><span class="pln"> $Li</span><span class="pun">.</span><span class="pln">length</span><span class="pun">;</span><span class="pln"> i </span><span class="pun">&lt;</span><span class="pln"> len</span><span class="pun">;</span><span class="pln"> i</span><span class="pun">++)</span><span class="pln"> </span><span class="pun">{</span><br>4.  <span class="pln">    </span><span class="pun">(</span><span class="kwd">function</span><span class="pln"> </span><span class="pun">(</span><span class="pln">n</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><br>5.  <span class="pln">          $Li</span><span class="pun">[</span><span class="pln">n</span><span class="pun">].</span><span class="pln">addEventListener</span><span class="pun">(</span><span class="str">‘click’</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><br>6.  <span class="pln">                console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">n</span><span class="pun">);</span><br>7.  <span class="pln">          </span><span class="pun">},</span><span class="kwd">false</span><span class="pun">);</span><br>8.  <span class="pln">    </span><span class="pun">}</span><span class="pln"> </span><span class="pun">(</span><span class="pln">i</span><span class="pun">))</span><br>9.  <span class="pun">}</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<h3 id="事件处理程序的运行环境"><a href="#事件处理程序的运行环境" class="headerlink" title="事件处理程序的运行环境"></a><span style="color: #ff0000;">事件处理程序的运行环境</span></h3><p>1.句柄绑定方式中，函数里面的<span style="color: #ff0000;">this指向元素本身</span>。</p>
+<p>2.addEventListener方式中，函数里面的<span style="color: #ff0000;">this也是指向元素本身</span>。</p>
+<p>3.attachEvent中，函数里面的<span style="color: #ff0000;">this指向的是<strong>window</strong>而不是元素本身</span>，这算是IE的一个BUG。针对这种情况，我们就需要把函数提取出来，然后在attachEvent的时候用<span style="color: #ff0000;">call</span>来改变函数内部this的指向。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br><br>1.  <span class="pln">div</span><span class="pun">.</span><span class="pln">attachEvent</span><span class="pun">(</span><span class="str">‘onclick’</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><br>2.  <span class="pln">      test</span><span class="pun">.</span><span class="pln">call</span><span class="pun">(</span><span class="pln">div</span><span class="pun">);</span><br>3.  <span class="pun">},</span><span class="pln"> </span><span class="kwd">false</span><span class="pun">);</span><br>4.  <span class="pln">&nbsp;</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>有了以上的知识，我们就可以封装一个兼容性的事件绑定函数了。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="pln">    </span><span class="kwd">function</span><span class="pln"> attachEvent</span><span class="pun">(</span><span class="pln">ele</span><span class="pun">,</span><span class="pln"> type</span><span class="pun">,</span><span class="pln"> handle</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><br>3.  <span class="pln">        </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">ele</span><span class="pun">.</span><span class="pln">addEventListener</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><br>4.  <span class="pln">            ele</span><span class="pun">.</span><span class="pln">addEventListener</span><span class="pun">(</span><span class="pln">type</span><span class="pun">,</span><span class="pln"> handle</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">null</span><span class="pun">);</span><br>5.  <span class="pln">        </span><span class="pun">}</span><span class="kwd">else</span><span class="pln"> </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">ele</span><span class="pun">.</span><span class="pln">attachEvent</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><br>6.  <span class="pln">            ele</span><span class="pun">.</span><span class="pln">attachEvent</span><span class="pun">(</span><span class="str">‘on’</span><span class="pln"> </span><span class="pun">+</span><span class="pln"> type</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><br>7.  <span class="pln">                handle</span><span class="pun">.</span><span class="pln">call</span><span class="pun">(</span><span class="pln">ele</span><span class="pun">);</span><br>8.  <span class="pln">            </span><span class="pun">});</span><br>9.  <span class="pln">        </span><span class="pun">}</span><span class="kwd">else</span><span class="pln"> </span><span class="pun">{</span><br>10.  <span class="pln">            ele</span><span class="pun">[</span><span class="str">‘on’</span><span class="pln"> </span><span class="pun">+</span><span class="pln"> type</span><span class="pun">]</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> handle</span><span class="pun">;</span><br>11.  <span class="pln">        </span><span class="pun">}</span><br>12.  <span class="pln">    </span><span class="pun">}</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>这样事件绑定基本就完成了，但是还可以优化一下，在第二个IE的方法中我们用了一个匿名函数，这样这个函数就无法解除绑定了，因此可以优化成命名函数。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="pln">    </span><span class="kwd">function</span><span class="pln"> attachEvent</span><span class="pun">(</span><span class="pln">ele</span><span class="pun">,</span><span class="pln"> type</span><span class="pun">,</span><span class="pln"> handle</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><br>3.  <span class="pln">        </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">ele</span><span class="pun">.</span><span class="pln">addEventListener</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><br>4.  <span class="pln">            ele</span><span class="pun">.</span><span class="pln">addEventListener</span><span class="pun">(</span><span class="pln">type</span><span class="pun">,</span><span class="pln"> handle</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">null</span><span class="pun">);</span><br>5.  <span class="pln">        </span><span class="pun">}</span><span class="kwd">else</span><span class="pln"> </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">ele</span><span class="pun">.</span><span class="pln">attachEvent</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><br>6.  <span class="pln">            ele</span><span class="pun">[</span><span class="str">‘temp’</span><span class="pln"> </span><span class="pun">+</span><span class="pln"> type </span><span class="pun">+</span><span class="pln"> handle</span><span class="pun">]</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> handle</span><span class="pun">;</span><br>7.  <span class="pln">            ele</span><span class="pun">[</span><span class="pln">type </span><span class="pun">+</span><span class="pln"> handle</span><span class="pun">]</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><br>8.  <span class="pln">                ele</span><span class="pun">[</span><span class="str">‘temp’</span><span class="pln"> </span><span class="pun">+</span><span class="pln"> type </span><span class="pun">+</span><span class="pln"> handle</span><span class="pun">].</span><span class="pln">call</span><span class="pun">(</span><span class="pln">ele</span><span class="pun">);</span><br>9.  <span class="pln">            </span><span class="pun">};</span><br>10.  <span class="pln">            ele</span><span class="pun">.</span><span class="pln">attachEvent</span><span class="pun">(</span><span class="str">‘on’</span><span class="pln"> </span><span class="pun">+</span><span class="pln"> type</span><span class="pun">,</span><span class="pln"> ele</span><span class="pun">[</span><span class="pln">type </span><span class="pun">+</span><span class="pln"> handle</span><span class="pun">]);</span><br>11.  <span class="pln">        </span><span class="pun">}</span><span class="kwd">else</span><span class="pln"> </span><span class="pun">{</span><br>12.  <span class="pln">            ele</span><span class="pun">[</span><span class="str">‘on’</span><span class="pln"> </span><span class="pun">+</span><span class="pln"> type</span><span class="pun">]</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> handle</span><span class="pun">;</span><br>13.  <span class="pln">        </span><span class="pun">}</span><br>14.  <span class="pln">    </span><span class="pun">}</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>这种写法应该是业内公认的事件绑定方式。这里专门处理了IE方法中的匿名函数问题，我们用元素自身的一个属性来保存了这个处理函数。</p>
+<h3 id="解除事件处理程序"><a href="#解除事件处理程序" class="headerlink" title="解除事件处理程序"></a><span style="color: #ff0000;">解除事件处理程序</span></h3><p>1.句柄方式</p>
+<p><strong><span style="color: #ff0000;">ele.onclick=null</span></strong></p>
+<p>这样很简单的就可以解除绑定的事件处理函数了。</p>
+<p>2.<strong><span style="color: #ff0000;">ele.removeEventListener(type, handle, false)</span></strong></p>
+<p>针对的addEventListener的解除绑定。</p>
+<p>但是这里要注意，只有命名函数才可以解除绑定，当绑定的函数是匿名函数的时候，是没有办法解除绑定的。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="pln">div</span><span class="pun">.</span><span class="pln">addEventListener</span><span class="pun">(</span><span class="str">‘click’</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">()｛</span><span class="pln">console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">‘a’</span><span class="pun">);｝,</span><span class="pln"> </span><span class="kwd">false</span><span class="pun">);</span><br>3.  <span class="pln">div</span><span class="pun">.</span><span class="pln">removeEventListener</span><span class="pun">(</span><span class="str">‘click’</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">function</span><span class="pln"> </span><span class="pun">()｛</span><span class="pln">console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">‘a’</span><span class="pun">);｝,</span><span class="pln"> </span><span class="kwd">false</span><span class="pun">);</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>这是没有办法解除绑定的，因为这是两个匿名函数。</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="kwd">function</span><span class="pln"> test</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><br>3.  <span class="pln">      console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">‘a’</span><span class="pun">);</span><br>4.  <span class="pun">}</span><br>5.  <span class="pln">div</span><span class="pun">.</span><span class="pln">addEventListener</span><span class="pun">(</span><span class="str">‘click’</span><span class="pun">,</span><span class="pln"> test</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">false</span><span class="pun">);</span><br>6.  <span class="pln">div</span><span class="pun">.</span><span class="pln">removeEventListener</span><span class="pun">(</span><span class="str">‘click’</span><span class="pun">,</span><span class="pln"> test</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">false</span><span class="pun">);</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>必须改成这种方式才可以解除绑定。</p>
+<p>3.<strong><span style="color: #ff0000;">ele.detachEvent(‘on’ + type, handle)</span></strong></p>
+<p>针对IE的attachEvent的解除绑定。</p>
+<p><span style="color: #ff0000;">也是同一个函数才可以解除绑定，匿名函数无法解除绑定</span>。</p>
+<p>封装兼容性的解除绑定函数：</p>
+<div class="code-pretty-container"><pre class="prettyprint linenums lang-JS prettyprinted" style=""><br><br>1.  <span class="pln">&nbsp;</span><br>2.  <span class="kwd">function</span><span class="pln"> remvoeEvent</span><span class="pun">(</span><span class="pln">ele</span><span class="pun">,</span><span class="pln"> type</span><span class="pun">,</span><span class="pln"> handle</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><br>3.  <span class="pln">      </span><span class="kwd">if</span><span class="pun">(</span><span class="pln">ele</span><span class="pun">.</span><span class="pln">removeEventListener</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><br>4.  <span class="pln">            ele</span><span class="pun">.</span><span class="pln">removeEventListener</span><span class="pun">(</span><span class="pln">type</span><span class="pun">,</span><span class="pln"> handle</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">false</span><span class="pun">);</span><br>5.  <span class="pln">      </span><span class="pun">}</span><span class="kwd">else</span><span class="pln"> </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">ele</span><span class="pun">.</span><span class="pln">detachEvent</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><br>6.  <span class="pln">            ele</span><span class="pun">.</span><span class="pln">detachEvent</span><span class="pun">(</span><span class="str">‘on’</span><span class="pln"> </span><span class="pun">+</span><span class="pln"> type</span><span class="pun">,</span><span class="pln"> handle</span><span class="pun">);</span><br>7.  <span class="pln">      </span><span class="pun">}</span><span class="kwd">else</span><span class="pln"> </span><span class="pun">{</span><br>8.  <span class="pln">            ele</span><span class="pun">[</span><span class="str">‘on’</span><span class="pln"> </span><span class="pun">+</span><span class="pln"> type</span><span class="pun">]</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">null</span><span class="pun">;</span><br>9.  <span class="pln">      </span><span class="pun">}</span><br>10.  <span class="pun">}</span></pre><div class="code-pretty-toolbar"><span class="title">JavaScript</span><a href="javascript:void(0" target="_blank" rel="noopener"></a>; “复制代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “查看纯文本代码”)<a href="javascript:void(0" target="_blank" rel="noopener"></a>; “返回代码高亮”)<span class="msg"></span></div></div>
+
+<p>今天的事件只是就到这里哟~</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/02/JavaScriptSeventeen/" rel="next" title="Web前端的知识之旅哟——脚本化CSS">
+                <i class="fa fa-chevron-left"></i> Web前端的知识之旅哟——脚本化CSS
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/02/JavaScriptNineteen/" rel="prev" title="Web前端的知识之旅哟—— 事件处理模型与事件委托">
+                Web前端的知识之旅哟—— 事件处理模型与事件委托 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-name">Artikel</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#绑定事件"><span class="nav-number">1.</span> <span class="nav-text">绑定事件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#事件处理程序的运行环境"><span class="nav-number">2.</span> <span class="nav-text">事件处理程序的运行环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解除事件处理程序"><span class="nav-number">3.</span> <span class="nav-text">解除事件处理程序</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
