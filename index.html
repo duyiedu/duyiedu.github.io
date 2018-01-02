@@ -343,9 +343,41 @@
 <p>[id] {} 这样有id属性的标签就都会被选择出来。</p>
 <p>我经过测试发现：</p>
 <p>优先级<span style="color: #ff0000;"> !important &gt; 行间样式 &gt; id &gt; class|属性 &gt; 标签 &gt; *&nbsp;</span></p>
-<p>但是我们不必背这些东西，我们只需要记住他们每一种<span style="color: #ff0000;">选择器的权重值</span>就可以了。</p>
-<table border="1px" cellpadding="3px" cellspacing="0px" style="color:red"><tbody><tr align="center"><br><td>CSS选择器</td><br><td>权重值</td><br></tr><br><tr align="center"><br><td>!important</td><br><td>无穷大</td><br></tr><br><tr align="center"><br><td>行间样式</td><br><td>1000</td><br></tr><br><tr align="center"><br><td>id</td><br><td>100</td><br></tr><br><tr align="center"><br><td>class、属性、伪类</td><br><td>10</td><br></tr><br><tr align="center"><br><td>标签、伪元素</td><br><td>1</td><br></tr><br><tr align="center"><br><td>通配符</td><br><td>0</td><br></tr></tbody></table>
-
+<p>但是我们不必背这些东西，我们只需要记住他们每一种<span style="color: #ff0000;">选择器的权重值</span>就可以了。 </p>
+<table>
+<thead>
+<tr>
+<th>CSS选择器</th>
+<th>权重值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>!important</td>
+<td>无穷大</td>
+</tr>
+<tr>
+<td>行间样式</td>
+<td>1000</td>
+</tr>
+<tr>
+<td>id</td>
+<td>100</td>
+</tr>
+<tr>
+<td>class、属性、伪类</td>
+<td>10</td>
+</tr>
+<tr>
+<td>标签、伪元素</td>
+<td>1</td>
+</tr>
+<tr>
+<td>通配符</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
 <p>• 值得一提的是，在数学中无穷大+1依然是无穷大，但是在css选择器的权重值里面，<span style="color: #ff0000;">无穷大+1 &gt; 无穷大</span>。</p>
 <h3 id="有了权重值-nbsp-我们就可以了解父子选择器了"><a href="#有了权重值-nbsp-我们就可以了解父子选择器了" class="headerlink" title="有了权重值 &nbsp;我们就可以了解父子选择器了"></a><span style="color: #ff0000;">有了权重值 &nbsp;我们就可以了解父子选择器了</span></h3><p>6.<span style="color: #ff0000;">父子选择器 &nbsp;（派生选择器）</span></p>
 <p>div p {}</p>
